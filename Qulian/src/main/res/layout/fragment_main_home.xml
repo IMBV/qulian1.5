@@ -26,15 +26,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_margin="15dp"
-                        android:gravity="center"
-                        android:text="推荐玩法"
-                        android:textColor="@color/app_main_title_text"
-                        android:textSize="14sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="15dp"
+                    android:gravity="center"
+                    android:text="推荐玩法"
+                    android:textColor="@color/app_main_title_text"
+                    android:textSize="14sp" />
 
                 <com.quliantrip.qulian.view.MyListView
                     android:id="@+id/iv_home_recommend"
@@ -62,69 +62,72 @@
     <RelativeLayout
         android:id="@+id/ll_home_title"
         android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="30dp"
         android:background="@android:color/transparent"
         android:gravity="center_horizontal">
-
+        <!--背景的颜色-->
         <ImageView
             android:id="@+id/iv_home_title_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/app_main_collor" />
 
-        <ImageView
-            android:id="@+id/iv_home_title_wifi"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toLeftOf="@+id/iv_home_title_search"
-            android:src="@mipmap/ic_erweima_nor" />
+        <!--定位地区的图片-->
+        <RelativeLayout
+            android:id="@+id/rl_city_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp">
+
+            <TextView
+                android:id="@+id/iv_home_title_location"
+                style="@style/home_localtion_text"
+                android:text="北京" />
+
+            <ImageView
+                android:id="@+id/iv_home_title_arrow"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/iv_home_title_location"
+                android:src="@mipmap/up_jiantou" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/iv_home_title_search"
-            android:layout_width="240dp"
+            android:layout_width="233dp"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="74dp"
             android:background="@drawable/shape_oval_corner"
-            android:gravity="center">
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/ic_sousuo_nor" />
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/search" />
 
             <TextView
                 android:id="@+id/tv_home_shoushou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="优惠尽在您掌握" />
-
+                android:layout_marginLeft="10dp"
+                android:text="搜索景点、玩法、当地产品"
+                android:textColor="#aaaaaa"
+                android:textSize="12sp" />
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_city_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/iv_home_title_search">
+        <!--扫码的图片-->
+        <ImageView
+            android:id="@+id/iv_home_title_wifi"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/iv_home_title_search"
+            android:src="@mipmap/scan_code" />
 
-            <TextView
-                android:id="@+id/iv_home_title_location"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="北京"
-                android:textColor="@color/home_searck_backcolor" />
-
-            <ImageView
-                android:id="@+id/iv_home_title_arrow"
-                android:layout_width="50dp"
-                android:layout_height="29dp"
-                android:layout_toRightOf="@+id/iv_home_title_location"
-                android:src="@mipmap/ic_zhankaijiantou_nor" />
-        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

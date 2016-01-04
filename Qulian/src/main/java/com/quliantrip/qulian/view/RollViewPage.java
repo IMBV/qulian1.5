@@ -49,9 +49,9 @@ public class RollViewPage extends ViewPager {
                 for (int i = 0; i < dotList.size(); i++) {
                     View view = dotList.get(i);
                     if (position%imageList.size() == i) {
-                        view.setBackgroundResource(R.drawable.shape_point_red);
+                        view.setBackgroundResource(R.drawable.shape_point_all_white);
                     } else {
-                        view.setBackgroundResource(R.drawable.shape_point_gray);
+                        view.setBackgroundResource(R.drawable.shape_point_half_white);
                     }
                 }
             }

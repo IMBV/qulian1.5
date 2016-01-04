@@ -22,7 +22,7 @@
     <!-- <item name="android:background">@drawable/transparent</item>-->
     <style name="main_tab_bottom">
         <item name="android:textSize">@dimen/bottom_tab_font_size</item>
-        <item name="android:textColor">@color/bottom_text_color</item>
+        <item name="android:textColor">@color/selector_mian_tab_collor</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:gravity">center</item>
 
@@ -34,11 +34,6 @@
         <item name="android:singleLine">true</item>
         <item name="android:drawablePadding">@dimen/bottom_tab_padding_drawable</item>
         <item name="android:layout_weight">1.0</item>
-    </style>
-
-    <!--首页推荐玩法字体样式-->
-    <style name="home_recommend_paly_text">
-
     </style>
 
     <!-- viewpage文本  滑动标签标题 -->
@@ -125,10 +120,19 @@
         <item name="android:textColor">@color/app_main_title_text</item>
     </style>
 
+    <!--首页样式-->
     <!--首页导航导航栏的内容的样式-->
     <style name="home_main_function_fragment">
         <item name="android:layout_width">73dp</item>
         <item name="android:layout_height">73dp</item>
     </style>
+    <!--定位字体样式-->
+    <style name="home_localtion_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#ffffff</item>
 
+    </style>
 </resources>

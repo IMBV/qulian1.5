@@ -51,7 +51,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:src="@mipmap/ic_sousuo_nor" />
+            android:src="@mipmap/search" />
 
     </RelativeLayout>
 
@@ -68,7 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:src="@mipmap/ic_sousuo_nor" />
+            android:src="@mipmap/search" />
     </RelativeLayout>
 
     <FrameLayout

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/main_radio"
-        android:layout_weight="1"
-      />
+        android:layout_weight="1" />
 
     <RadioGroup
         android:id="@+id/main_radio"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="#FFFFFF"
@@ -26,30 +24,25 @@
         <RadioButton
             android:id="@+id/rb_home_page"
             style="@style/main_tab_bottom"
-            android:drawableTop="@drawable/selector_shouye"
+            android:drawableTop="@drawable/selector_tab_home"
             android:text="@string/tab_home_function" />
 
         <RadioButton
             android:id="@+id/rb_choiceness_page"
             style="@style/main_tab_bottom"
-            android:drawableTop="@drawable/selector_play"
+            android:drawableTop="@drawable/selector_tab_jingxuan"
             android:text="@string/tab_home_choiceness" />
-       <!-- <RadioButton
-            android:id="@+id/rb_happiness_page"
-            style="@style/main_tab_bottom"
-            android:drawableTop="@drawable/selector_shouye"
-            android:text="@string/tab_home_happiness" />
 
-        <RadioButton
-            android:id="@+id/rb_find_page"
-            style="@style/main_tab_bottom"
-            android:drawableTop="@drawable/selector_shouye"
-            android:text="@string/tab_home_find" />-->
+         <RadioButton
+             android:id="@+id/rb_find_page"
+             style="@style/main_tab_bottom"
+             android:drawableTop="@drawable/selector_tab_faxian"
+             android:text="@string/tab_home_find" />
 
         <RadioButton
             android:id="@+id/rb_myinfo_page"
             style="@style/main_tab_bottom"
-            android:drawableTop="@drawable/selector_me"
+            android:drawableTop="@drawable/selector_tab_wode"
             android:text="@string/tab_home_me" />
     </RadioGroup>
 

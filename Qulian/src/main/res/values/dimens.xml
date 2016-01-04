@@ -4,8 +4,8 @@
 
     <!--主界面下面的大小-->
     <dimen name="bottom_tab_padding_drawable">2.0dip</dimen>
-    <dimen name="bottom_tab_padding_up">2.0dip</dimen>
-    <dimen name="bottom_tab_font_size">14.0sp</dimen>
+    <dimen name="bottom_tab_padding_up">3.0dip</dimen>
+    <dimen name="bottom_tab_font_size">12.0sp</dimen>
 
     <dimen name="stellarmap_padding">15dp</dimen>
     <dimen name="flowlayout_padding">15dp</dimen>

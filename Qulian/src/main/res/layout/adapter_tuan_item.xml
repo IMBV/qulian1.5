@@ -15,7 +15,7 @@
             android:id="@+id/iv_tuan_quality_icon"
             android:layout_width="125dp"
             android:layout_height="100dp"
-            android:src="@mipmap/ic_erweima_nor"
+            android:src="@mipmap/bg_default_min"
             />
 
         <RelativeLayout
