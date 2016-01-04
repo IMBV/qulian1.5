@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_systembar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="精选列表"
+        android:textSize="18sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#8F8F8F" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_consume_list_sort"
+            style="@style/choiceness_condition_every_page">
+
+            <TextView
+                android:id="@+id/tv_consume_list_sort_name"
+                style="@style/choiceness_condition_title"
+                android:text="全部分类" />
+
+            <ImageView
+                android:id="@+id/iv_consume_list_sort_arrow"
+                style="@style/choiceness_condition_Image"
+                android:background="@mipmap/down" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="#8F8F8F" />
+
+        <LinearLayout
+            android:id="@+id/ll_consume_list_city"
+            style="@style/choiceness_condition_every_page">
+
+            <TextView
+                android:id="@+id/tv_consume_list_city_name"
+                style="@style/choiceness_condition_title"
+                android:text="城市" />
+
+            <ImageView
+                android:id="@+id/iv_consume_list_city_arrow"
+                style="@style/choiceness_condition_Image"
+                android:background="@mipmap/down" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="#8F8F8F" />
+
+        <LinearLayout
+            android:id="@+id/ll_consume_list_default"
+            style="@style/choiceness_condition_every_page">
+
+            <TextView
+                android:id="@+id/tv_consume_list_default_name"
+                style="@style/choiceness_condition_title"
+                android:text="默认" />
+
+            <ImageView
+                android:id="@+id/iv_consume_list_default_arrow"
+                style="@style/choiceness_condition_Image"
+                android:background="@mipmap/down" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_consume_list_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#8F8F8F" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+        <com.quliantrip.qulian.view.MyListMoreView
+            android:id="@+id/lv_consime_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/group_item_bg"
+            android:divider="@color/group_item_pressed_bg"
+            android:dividerHeight="@null"
+            android:scrollbars="none"
+            android:scrollingCache="true" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>
