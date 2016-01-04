@@ -13,7 +13,9 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="right|bottom"
         android:orientation="horizontal">
         <!-- 放置图片中选中点的位置 -->
         <LinearLayout

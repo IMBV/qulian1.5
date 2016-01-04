@@ -22,57 +22,61 @@
             android:scaleType="fitXY"
             RatioImageView:ratioscale="2.0286" />
 
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_home_deal_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="shoasd"
-            android:textColor="#646464"
-            android:textSize="16sp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_home_deal_currentprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="￥60"
-                android:textColor="#FFAA00"
-                android:textSize="22sp" />
+                android:shadowColor="#4c000000"
+                android:shadowDx="0"
+                android:shadowDy="15"
+                android:shadowRadius="1"
+                android:text="上野公园-熊猫咖啡-演歌表演-江户川定食"
+                android:textSize="14sp"
+                android:textColor="#ffffff" />
 
-            <FrameLayout
-                android:layout_width="50dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="15dp">
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_gravity="center"
-                    android:background="#999999" />
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:background="#ffffff" />
+
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:layout_marginLeft="12dp"
+                    android:src="@mipmap/like" />
 
                 <TextView
-                    android:id="@+id/tv_home_deal_oldprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:text="￥60"
-                    android:textSize="14sp" />
-            </FrameLayout>
+                    android:layout_marginLeft="5dp"
+                    android:shadowColor="#4c000000"
+                    android:textSize="12sp"
+                    android:shadowDx="0"
+                    android:shadowDy="15"
+                    android:shadowRadius="1"
+                    android:text="有1000人这样玩"
+                    android:textColor="#ffffff" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="#ffffff" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/grid_item_bg_normal"
     android:orientation="vertical"
     android:padding="8dp">
     <!-- 第一行 -->
@@ -15,8 +14,7 @@
             android:id="@+id/iv_tuan_quality_icon"
             android:layout_width="125dp"
             android:layout_height="100dp"
-            android:src="@mipmap/bg_default_min"
-            />
+            android:src="@mipmap/bg_default_min" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,11 +22,13 @@
             android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/iv_tuan_quality_name"
                     android:layout_width="wrap_content"
@@ -38,6 +38,7 @@
                     android:text="为了部落,一起加油！"
                     android:textColor="@color/app_main_title"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/iv_tuan_quality_subNname"
                     android:layout_width="wrap_content"
@@ -51,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,21 +82,22 @@
                             android:id="@+id/tv_tuan_deal_oldprice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_gravity="center"
-                            android:textColor="@color/app_main_sub_title_text"
+                            android:gravity="center"
                             android:text="￥60"
+                            android:textColor="@color/app_main_sub_title_text"
                             android:textSize="12sp" />
                     </FrameLayout>
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_tuan_sale_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="nisafd"
                     android:layout_alignParentRight="true"
+                    android:text="nisafd"
                     android:textColor="@color/app_main_title_text"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

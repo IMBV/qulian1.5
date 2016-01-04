@@ -30,10 +30,7 @@ public class HomeChoicenessMode extends BaseMode<HomeBean.QualityGoodsEntity> {
     ImageView icon;
     @Bind(R.id.iv_home_quality_name)
     TextView name;
-    @Bind(R.id.iv_home_quality_price)
-    TextView price;
-    @Bind(R.id.iv_home_quality_salenumber)
-    TextView saleNumber;
+
     private String goodId;
     private Context mContext;
 
@@ -49,11 +46,11 @@ public class HomeChoicenessMode extends BaseMode<HomeBean.QualityGoodsEntity> {
 
     @Override
     public void setData(HomeBean.QualityGoodsEntity bean) {
-        goodId = bean.getId();
-        ImageLoader.getInstance().displayImage(bean.getIcon(), icon, ImageLoaderOptions.options);
-        name.setText(bean.getName());
-        price.setText("￥" + bean.getCurrent_price());
-        saleNumber.setText("已售:" + bean.getBuy_count());
+//        goodId = bean.getId();
+//        ImageLoader.getInstance().displayImage(bean.getIcon(), icon, ImageLoaderOptions.options);
+//        name.setText(bean.getName());
+//        price.setText("￥" + bean.getCurrent_price());
+//        saleNumber.setText("已售:" + bean.getBuy_count());
     }
 
     public void setContext(Context context) {
@@ -62,11 +59,8 @@ public class HomeChoicenessMode extends BaseMode<HomeBean.QualityGoodsEntity> {
 
     @OnClick(R.id.ll_quality_goods)
     void initDetail() {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=deal&data_id=" + goodId);
-        mContext.startActivity(intent);
 //        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-//        intent.putExtra("goodId","http://www.quliantrip.com/wap/index.php?ctl=deal&data_id="+goodId);
+//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=deal&data_id=" + goodId);
 //        mContext.startActivity(intent);
 
     }

@@ -1,18 +1,12 @@
 package com.quliantrip.qulian.mode.homeMode;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.HomeBean;
-import com.quliantrip.qulian.domain.HomePageBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
 import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.RollViewPage;
 
 import java.util.ArrayList;
@@ -95,12 +89,12 @@ public class HomeSlideImageMode extends BaseMode<List<String>>{
         for (int i = 0; i < imageList.size(); i++) {
             View view = new View(QulianApplication.getContext());
             if (i == 0) {
-                view.setBackgroundResource(R.drawable.shape_point_red);
+                view.setBackgroundResource(R.drawable.shape_point_all_white);
             } else {
-                view.setBackgroundResource(R.drawable.shape_point_gray);
+                view.setBackgroundResource(R.drawable.shape_point_half_white);
             }
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonHelp.dip2px(QulianApplication.getContext(), 5), CommonHelp.dip2px(QulianApplication.getContext(), 5));
-            params.setMargins(CommonHelp.dip2px(QulianApplication.getContext(), 5), 0, 0, 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonHelp.dip2px(QulianApplication.getContext(), 6), CommonHelp.dip2px(QulianApplication.getContext(), 5));
+            params.setMargins(CommonHelp.dip2px(QulianApplication.getContext(), 10), 0, 0, 0);
             dots_ll.addView(view, params);
             dotList.add(view);
         }

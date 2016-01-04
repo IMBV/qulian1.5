@@ -15,7 +15,6 @@ import com.quliantrip.qulian.adapter.HomeRecommendAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.ChangeCityBean;
-import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.mode.homeMode.HomeChoicenessMode;
 import com.quliantrip.qulian.mode.homeMode.HomeFunctionMode;
@@ -51,7 +50,6 @@ import butterknife.OnClick;
 public class HomeFragment extends BasePageCheckFragment implements ScrollViewListener {
     @Bind(R.id.iv_home_title_location)
     TextView homeTitle;//首页的城市
-
     @Bind(R.id.iv_home_title_back)
     ImageView titleBackgroud;//标题的背景
     @Bind(R.id.sv_scroll)
@@ -60,6 +58,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     LinearLayout modelContainer;
     @Bind(R.id.iv_home_recommend)
     MyListView listView;
+
     //定义的model
     private HomeSlideImageMode homeSlideImageMode;
     HomeFunctionMode homeFunctionMode;
@@ -84,11 +83,12 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     private void initModel() {
         homeSlideImageMode = new HomeSlideImageMode();
         modelContainer.addView(homeSlideImageMode.getModelView());
+
         homeFunctionMode = new HomeFunctionMode(activity);
         modelContainer.addView(homeFunctionMode.getModelView());
+
         homeChoicenessMode = new HomeChoicenessMode();
         homeChoicenessMode.setContext(mContext);
-
     }
 
     @Override
@@ -102,7 +102,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
 
     @Override
     public void onEventMainThread(BaseJson bean) {
-        System.out.println(bean.getTag());
         if (bean != null && HomeFragment.this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
             homeSlideImageMode.setData(null);
@@ -114,9 +113,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             }else{
                 modelContainer.removeView(homeChoicenessMode.getModelView());
             }
-//            homeFunctionMode.setData(((HomeBean) bean).getIndexs());
             homeTitle.setText(((HomeBean) bean).getCity_name());
-            System.out.println("asdf");
             initListIView(((HomeBean) bean).getDeal_list());
         }
         if (bean != null && (this.getClass().getName()+"changeCity").equals(bean.getTag())) {
@@ -126,7 +123,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             map.put("act", "app");
             map.put("sess_id", beanCity.getSess_id());
             map.put("r_type", "1");
-            System.out.println("asdf");
             new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new HomeBean().setTag(HomeFragment.this.getClass().getName()), map, null);
         }
         bean = null;

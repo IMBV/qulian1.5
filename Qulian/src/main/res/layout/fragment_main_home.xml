@@ -25,21 +25,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="#dcdcdc"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="15dp"
-                    android:gravity="center"
-                    android:text="推荐玩法"
-                    android:textColor="@color/app_main_title_text"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="推荐玩法"
+                        android:textColor="@color/app_main_title_text"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13sp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/more" />
+                </LinearLayout>
 
                 <com.quliantrip.qulian.view.MyListView
                     android:id="@+id/iv_home_recommend"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:footerDividersEnabled="false" />
 
                 <TextView
                     android:id="@+id/tv_loading_more"
