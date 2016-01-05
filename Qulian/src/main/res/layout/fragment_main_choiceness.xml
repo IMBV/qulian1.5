@@ -2,106 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <include layout="@layout/view_systembar" />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:gravity="center"
-        android:text="精选列表"
-        android:textSize="18sp" />
-    <View
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/tv_choiceness_title_loaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="北京"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/tv_choiceness_title_loaction"
+            android:src="@mipmap/up_jiantou" />
+
+        <RelativeLayout
+            android:id="@+id/myTab"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:id="@+id/bt_recommend_route"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/choiceness_title_text"
+                    android:text="推荐线路" />
+
+                <View style="@style/choiceness_title_down_line" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bt_hot_good"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="45dp"
+                android:layout_toRightOf="@id/bt_recommend_route"
+                android:orientation="vertical">
+
+                <TextView
+
+                    style="@style/choiceness_title_text"
+                    android:text="推荐线路" />
+
+                <View style="@style/choiceness_title_down_line" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/search" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_happiness_container"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#8F8F8F" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/ll_consume_list_sort"
-            style="@style/choiceness_condition_every_page">
-
-            <TextView
-                android:id="@+id/tv_consume_list_sort_name"
-                style="@style/choiceness_condition_title"
-                android:text="全部分类" />
-
-            <ImageView
-                android:id="@+id/iv_consume_list_sort_arrow"
-                style="@style/choiceness_condition_Image"
-                android:background="@mipmap/down" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="fill_parent"
-            android:background="#8F8F8F" />
-
-        <LinearLayout
-            android:id="@+id/ll_consume_list_city"
-            style="@style/choiceness_condition_every_page">
-
-            <TextView
-                android:id="@+id/tv_consume_list_city_name"
-                style="@style/choiceness_condition_title"
-                android:text="城市" />
-
-            <ImageView
-                android:id="@+id/iv_consume_list_city_arrow"
-                style="@style/choiceness_condition_Image"
-                android:background="@mipmap/down" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="fill_parent"
-            android:background="#8F8F8F" />
-
-        <LinearLayout
-            android:id="@+id/ll_consume_list_default"
-            style="@style/choiceness_condition_every_page">
-
-            <TextView
-                android:id="@+id/tv_consume_list_default_name"
-                style="@style/choiceness_condition_title"
-                android:text="默认" />
-
-            <ImageView
-                android:id="@+id/iv_consume_list_default_arrow"
-                style="@style/choiceness_condition_Image"
-                android:background="@mipmap/down" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:id="@+id/v_consume_list_bottom_line"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#8F8F8F" />
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefreshlayout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="visible">
-
-        <com.quliantrip.qulian.view.MyListMoreView
-            android:id="@+id/lv_consime_listview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/group_item_bg"
-            android:divider="@color/group_item_pressed_bg"
-            android:dividerHeight="@null"
-            android:scrollbars="none"
-            android:scrollingCache="true" />
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
+        android:layout_height="match_parent"></FrameLayout>
 </LinearLayout>

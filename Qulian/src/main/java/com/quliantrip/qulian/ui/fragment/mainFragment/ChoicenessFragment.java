@@ -58,7 +58,7 @@ public class ChoicenessFragment extends BasePageCheckFragment {
 
     @Override
     protected View getSuccessView() {
-        view = View.inflate(mContext, R.layout.fragment_main_happiness, null);
+        view = View.inflate(mContext, R.layout.fragment_main_choiceness, null);
         ButterKnife.bind(this, view);
         mFragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
         recommendRouteFragment = new RecommendRouteFragment();

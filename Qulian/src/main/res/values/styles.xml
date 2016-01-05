@@ -144,4 +144,22 @@
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:orientation">vertical</item>
     </style>
+
+    <!--精选样式-->
+    <!--选项条的样式字体-->
+    <style name="choiceness_title_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/app_main_title_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!--选项条下面的小黄线的样式-->
+    <style name="choiceness_title_down_line">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:background">@color/app_main_collor</item>
+    </style>
 </resources>

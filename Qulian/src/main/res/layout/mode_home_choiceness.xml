@@ -99,8 +99,8 @@
                 android:layout_marginLeft="-10dp"
                 android:layout_toRightOf="@id/iv_home_quality_icon"
                 android:background="@mipmap/yishou"
-                android:gravity="center"
                 android:textSize="12sp"
+                android:paddingLeft="3dp"
                 android:textColor="#ffffff"
                 android:text="已售：100" />
         </RelativeLayout>
