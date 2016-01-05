@@ -31,7 +31,7 @@
                 android:id="@+id/iv_home_quality_icon"
                 android:layout_width="150dp"
                 android:layout_height="135dp"
-                android:src="@mipmap/bg_default_min" />
+                android:src="@mipmap/img_fujin" />
 
             <ImageView
                 android:layout_width="13dp"
@@ -64,7 +64,7 @@
                         android:maxLines="2"
                         android:text="趣连、消灭一切没有准备的旅行。"
                         android:textColor="@color/app_main_title"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -92,14 +92,16 @@
             </RelativeLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="69dp"
                 android:layout_height="18dp"
                 android:layout_alignBottom="@id/iv_home_quality_icon"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="-10dp"
                 android:layout_toRightOf="@id/iv_home_quality_icon"
                 android:background="@mipmap/yishou"
-                android:paddingRight="10dp"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
                 android:text="已售：100" />
         </RelativeLayout>
 

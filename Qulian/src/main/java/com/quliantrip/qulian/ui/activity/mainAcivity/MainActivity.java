@@ -248,10 +248,10 @@ public class MainActivity extends FragmentActivity {
                 switch (checkedId) {
                     case R.id.rb_home_page:
                         index = 0;
-                        if(listFragment.get(index).isAdded()){
-                            choicenessFragment.setAllNot();
-                        }
-                        choicenessFragment.hidePopupWindow();
+//                        if(listFragment.get(index).isAdded()){
+//                            choicenessFragment.setAllNot();
+//                        }
+//                        choicenessFragment.hidePopupWindow();
                         break;
                     case R.id.rb_choiceness_page:
                         index = 1;
@@ -261,10 +261,10 @@ public class MainActivity extends FragmentActivity {
 //                        break;
                     case R.id.rb_myinfo_page:
                         index = 2;
-                        if(listFragment.get(index).isAdded()){
-                            choicenessFragment.setAllNot();
-                        }
-                        choicenessFragment.hidePopupWindow();
+//                        if(listFragment.get(index).isAdded()){
+//                            choicenessFragment.setAllNot();
+//                        }
+//                        choicenessFragment.hidePopupWindow();
                         break;
                 }
                 switchFragment(listFragment.get(index));
@@ -382,13 +382,13 @@ public class MainActivity extends FragmentActivity {
         if(choicenessFragment == null){
             choicenessFragment = new ChoicenessFragment();
         }
-        if(!choicenessFragment.isAdded()){
-            choicenessFragment.changeBigSortNoFragemnt(name,id);
-            switchFragment(choicenessFragment);
-        }else{
-            switchFragment(choicenessFragment);
-            choicenessFragment.changeBigSort(name,id);
-        }
+//        if(!choicenessFragment.isAdded()){
+//            choicenessFragment.changeBigSortNoFragemnt(name,id);
+//            switchFragment(choicenessFragment);
+//        }else{
+//            switchFragment(choicenessFragment);
+//            choicenessFragment.changeBigSort(name,id);
+//        }
 //        radioGroup.check(R.id.rb_choiceness_page);
         ((RadioButton)findViewById(R.id.rb_choiceness_page)).setChecked(true);
     }

@@ -93,8 +93,10 @@ public class HomeSlideImageMode extends BaseMode<List<String>>{
             } else {
                 view.setBackgroundResource(R.drawable.shape_point_half_white);
             }
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonHelp.dip2px(QulianApplication.getContext(), 6), CommonHelp.dip2px(QulianApplication.getContext(), 5));
-            params.setMargins(CommonHelp.dip2px(QulianApplication.getContext(), 10), 0, 0, 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    CommonHelp.dip2px(QulianApplication.getContext(), 6),
+                    CommonHelp.dip2px(QulianApplication.getContext(), 6));
+            params.setMargins(CommonHelp.dip2px(QulianApplication.getContext(), 5), 0, 0, 0);
             dots_ll.addView(view, params);
             dotList.add(view);
         }

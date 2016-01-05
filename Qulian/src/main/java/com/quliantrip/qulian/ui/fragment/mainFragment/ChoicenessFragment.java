@@ -1,42 +1,36 @@
+
+
 package com.quliantrip.qulian.ui.fragment.mainFragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.QuanItemAdapter;
-import com.quliantrip.qulian.adapter.popAdapter.CityChildAdapter;
-import com.quliantrip.qulian.adapter.popAdapter.CityGroupAdapter;
-import com.quliantrip.qulian.adapter.popAdapter.NavsGroupAdapter;
-import com.quliantrip.qulian.adapter.popAdapter.SortChildAdapter;
-import com.quliantrip.qulian.adapter.popAdapter.SortGroupAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
-import com.quliantrip.qulian.base.ListBaseAdapter;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.TuanBean;
+import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
-import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
-import com.quliantrip.qulian.util.ToastUtil;
-import com.quliantrip.qulian.view.MyListMoreView;
+import com.quliantrip.qulian.ui.fragment.happinessFragment.HotGoodsFragment;
+import com.quliantrip.qulian.ui.fragment.happinessFragment.RecommendRouteFragment;
+import com.quliantrip.qulian.view.RangeSeekBar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -44,507 +38,151 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Yuly on 2015/12/15.
- * www.quliantrip.com
+ * Created by yuly on 2015/11/9.
  */
-public class ChoicenessFragment extends BasePageCheckFragment implements
-        SwipeRefreshLayout.OnRefreshListener,
-        AdapterView.OnItemClickListener,
-        MyListMoreView.OnloadMoreListener {
-    private PopupWindow sortPopupWindow;
-    private PopupWindow cityPopupWindow;
+
+
+public class ChoicenessFragment extends BasePageCheckFragment {
+    private Fragment currentFragment = new RecommendRouteFragment();
+    private FragmentManager mFragmentManager;
+
+    private PopupWindow popupWindow;
     private View view;
+    @Bind(R.id.rl_find_condition)
+    RelativeLayout condition;
+    @Bind(R.id.bt_recommend_route)Button bt_left;
+    @Bind(R.id.bt_hot_goods) Button bt_right;
 
-    @Bind(R.id.ll_consume_list_sort)
-    LinearLayout sort;
-    @Bind(R.id.ll_consume_list_city)
-    LinearLayout city;
-    @Bind(R.id.ll_consume_list_default)
-    LinearLayout defaultor;
-
-    @Bind(R.id.tv_consume_list_sort_name)
-    TextView shortName;
-    @Bind(R.id.tv_consume_list_city_name)
-    TextView cityName;
-    @Bind(R.id.tv_consume_list_default_name)
-    TextView defaultorName;
-
-    @Bind(R.id.iv_consume_list_sort_arrow)
-    ImageView sortArrow;
-    @Bind(R.id.iv_consume_list_city_arrow)
-    ImageView cityArrow;
-    @Bind(R.id.iv_consume_list_default_arrow)
-    ImageView defaultArrow;
-
-    @Bind(R.id.v_consume_list_bottom_line)
-    View bottomLine;
-    @Bind(R.id.swiperefreshlayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
-    @Bind(R.id.lv_consime_listview)
-    MyListMoreView listView;
-
-    List<TuanBean.ItemEntity> item;
-    QuanItemAdapter quanItemAdapter;
-    private int page;//当前的页码数
-    private boolean[] tabStateArr = new boolean[3];
-
-    //定义一个数据请求的对象
-    private QuestBean questBean;
-    private String sortName;//大分类的名称
+    private RecommendRouteFragment recommendRouteFragment;
+    private HotGoodsFragment hotGoodsFragment;
 
     @Override
     protected View getSuccessView() {
-        view = View.inflate(mContext, R.layout.fragment_main_choiceness, null);
+        view = View.inflate(mContext, R.layout.fragment_main_happiness, null);
         ButterKnife.bind(this, view);
-
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeResources(
-                R.color.swiperefresh_color1, R.color.swiperefresh_color2,
-                R.color.swiperefresh_color3, R.color.swiperefresh_color4);
-        listView.setOnItemClickListener(this);
-        listView.setOnloadMoreListener(this);
-
+        mFragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
+        recommendRouteFragment = new RecommendRouteFragment();
+        hotGoodsFragment = new HotGoodsFragment();
+        mFragmentManager.beginTransaction().add(R.id.fl_happiness_container,recommendRouteFragment).commit();
+        setButtonColor(true);
         return view;
     }
 
     @Override
     protected QuestBean requestData() {
-
-        if (questBean == null) {
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("ctl", "tuan");
-            map.put("r_type", "1");
-            return new QuestBean(map, new TuanBean().setTag(getClass().getName()), HttpConstants.HOST_ADDR_ROOT_NET);
-        } else {
-            return questBean;
-        }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("ctl", "index");
+        map.put("act", "app");
+        map.put("r_type", "1");
+        return new QuestBean(map, new HomeBean().setTag(getClass().getName()), HttpConstants.HOST_ADDR_ROOT_NET);
     }
 
     @Override
     public void onEventMainThread(BaseJson bean) {
-        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            if (sortName != null) {
-                shortName.setText(sortName);
+
+    }
+
+    @OnClick(R.id.bt_recommend_route) void showRecommendRoute(){
+        gotoSubFragmennt(recommendRouteFragment);
+        setButtonColor(true);
+
+    }
+    @OnClick(R.id.bt_hot_goods) void showHotGoods(){
+        gotoSubFragmennt(hotGoodsFragment);
+        setButtonColor(false);
+
+    }
+
+    private void setButtonColor(Boolean starte){
+        if(starte){
+            bt_left.setTextColor(0x7f040001);
+            bt_right.setTextColor(Color.rgb(127, 216, 249));
+        }else{
+            bt_right.setTextColor(0x7f040001);
+            bt_left.setTextColor(Color.rgb(127, 216, 249));
+        }
+    }
+    private void gotoSubFragmennt(Fragment fragment) {
+        if(currentFragment != fragment){
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            if(fragment.isAdded()){
+                transaction.show(fragment);
+            }else{
+                transaction.add(R.id.fl_happiness_container,fragment);
             }
-            sortName = null;
-            //想mode添加数据
-            TuanBean tuanbean = (TuanBean) bean;
-            quanArray = tuanbean.getQuan_list();
-            bcate_list = tuanbean.getBcate_list();
-            navs = tuanbean.getNavs();
-            page = tuanbean.getPage().getPage();
-            initListView(tuanbean);
-
+            transaction.hide(currentFragment);
+            transaction.commit();
+            currentFragment = fragment;
         }
     }
 
-    private void initListView(TuanBean tuanbean) {
-        item = tuanbean.getItem();
 
-        if (page >= 2) {
-            quanItemAdapter.addList((ArrayList<TuanBean.ItemEntity>) tuanbean.getItem());
-        } else {
-            quanItemAdapter = new QuanItemAdapter((ArrayList<TuanBean.ItemEntity>) item);
-            listView.setAdapter(quanItemAdapter);
-        }
-        setSwipeRefreshLoadedState();
-        listView.LoadMoreFinish();
+    @OnClick(R.id.iv_happiness_find)
+    void findCondition() {
+        showPopuWindow();
     }
 
-    @OnClick(R.id.ll_consume_list_sort)
-    void showSort() {
-        tabStateArr[1] = false;
-        setTabState(cityArrow, cityName, tabStateArr[1]);
-        tabStateArr[2] = false;
-        setTabState(defaultArrow, defaultorName, tabStateArr[2]);
-        tabStateArr[0] = !tabStateArr[0];
-        setTabState(sortArrow, shortName, tabStateArr[0]);
-        hidePopupWindow();
-        if (tabStateArr[0]) {// 判断是否需要关闭弹出层
-            showSortPopuWindow();
-        } else {
-            hidePopupWindow();
-        }
-    }
+    //显示popupWindow的内容
+    public void showPopuWindow() {
+        //记载布局并为其设置点击事件
+        final View popView = View.inflate(mContext, R.layout.popupwindow_sift_condition, null);
 
-    @OnClick(R.id.ll_consume_list_city)
-    void showCity() {
-        tabStateArr[0] = false;
-        setTabState(sortArrow, shortName, tabStateArr[0]);
-        tabStateArr[2] = false;
-        setTabState(defaultArrow, defaultorName, tabStateArr[2]);
-        tabStateArr[1] = !tabStateArr[1];
-        setTabState(cityArrow, cityName, tabStateArr[1]);
-        hidePopupWindow();
-        if (tabStateArr[1]) {// 判断是否需要关闭弹出层
-            showCityPopuWindow();
-        } else {
-            hidePopupWindow();
-        }
-    }
-
-    @OnClick(R.id.ll_consume_list_default)
-    void showDefaultor() {
-        tabStateArr[0] = false;
-        setTabState(sortArrow, shortName, tabStateArr[0]);
-        tabStateArr[1] = false;
-        setTabState(cityArrow, cityName, tabStateArr[1]);
-        tabStateArr[2] = !tabStateArr[2];
-        setTabState(defaultArrow, defaultorName, tabStateArr[2]);
-        hidePopupWindow();
-        if (tabStateArr[2]) {// 判断是否需要关闭弹出层
-            showNavsPopuWindow();
-        } else {
-            hidePopupWindow();
-        }
-    }
-
-    public void setAllNot() {
-        tabStateArr[0] = false;
-        setTabState(sortArrow, shortName, tabStateArr[0]);
-        tabStateArr[1] = false;
-        setTabState(cityArrow, cityName, tabStateArr[1]);
-        tabStateArr[2] = false;
-        setTabState(defaultArrow, defaultorName, tabStateArr[2]);
-    }
-
-    private void setTabState(ImageView img, TextView textView, boolean state) {
-        if (state) {// 选中状态
-            if (img != null)
-                img.setBackgroundResource(R.mipmap.up);
-            if (textView != null)
-                textView.setTextColor(getResources().getColor(
-                        R.color.consume_list_tab_pressed));
-        } else {
-            if (img != null)
-                img.setBackgroundResource(R.mipmap.down);
-            if (textView != null)
-                textView.setTextColor(getResources().getColor(
-                        R.color.consume_list_tab));
-        }
-    }
-
-    ListView groupListView = null;
-    ListView childListView = null;
-    CityGroupAdapter groupAdapter = null;
-    CityChildAdapter childAdapter = null;
-    SortGroupAdapter sortGroupAdapter = null;
-    SortChildAdapter sortChildAdapter = null;
-    NavsGroupAdapter navsGroupAdapter = null;
-    List<TuanBean.QuanListEntity> quanArray;
-    List<TuanBean.BcateListEntity> bcate_list;
-    List<TuanBean.NavsEntity> navs;
-
-    private String qid;
-
-    //城市的显示列表
-    public void showCityPopuWindow() {
-
-        View popView = null;
-        if (cityPopupWindow == null) {
-            popView = View.inflate(mContext, R.layout.popupwindow_sift_consume_city, null);
-
-            groupListView = (ListView) popView.findViewById(R.id.lv_group);
-            childListView = (ListView) popView.findViewById(R.id.lv_child);
-
-            groupAdapter = new CityGroupAdapter(mContext, quanArray);
-            groupListView.setAdapter(groupAdapter);
-        }
-
-        groupListView.setOnItemClickListener(new MyItemClick());
-
-        childListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        RangeSeekBar<Integer> seekBar = new RangeSeekBar<Integer>(0, 100, mContext);
+        seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                TuanBean.QuanListEntity.QuanSubEntity bean =
-                        (TuanBean.QuanListEntity.QuanSubEntity) parent.getAdapter().getItem(position);
-                cityName.setText(bean.getName());
-                qid = bean.getId() + "";
-                checkLogin();
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar,
+                                                    Integer minValue, Integer maxValue) {
+//                // handle changed range values
+//                mMinText.setText(String.valueOf(minValue));
+//                mMaxText.setText(String.valueOf(maxValue));
             }
         });
 
-        sortPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        sortPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//设置可以使用动画popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        // add RangeSeekBar to pre-defined layout
+        ViewGroup layout = (ViewGroup) popView.findViewById(R.id.SeekBarlayout);
+        layout.addView(seekBar);
 
-        //popupwindow显示的坐标的位置
-        int[] location = new int[2];
-        bottomLine.getLocationInWindow(location);
-        int x = location[0];
-        int y = location[1];
-        sortPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 5);
-    }
+//        LinearLayout ll_popsoft_uninstall = (LinearLayout) popView.findViewById(R.id.ll_popsoft_uninstall);
 
-    private String tid;
-
-    //显示分类的信息
-    public void showSortPopuWindow() {
-
-        View popView = null;
-        if (sortPopupWindow == null) {
-            popView = View.inflate(mContext, R.layout.popupwindow_sift_consume_city, null);
-
-            groupListView = (ListView) popView.findViewById(R.id.lv_group);
-            childListView = (ListView) popView.findViewById(R.id.lv_child);
-
-            sortGroupAdapter = new SortGroupAdapter(mContext, bcate_list);
-            groupListView.setAdapter(sortGroupAdapter);
-        }
-
-        groupListView.setOnItemClickListener(new MySortItemClick());
-
-        childListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        popupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//设置可以使用动画
+//        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);//设置点击外部进行隐藏。
+        ((Button) popView.findViewById(R.id.bt_comment_popupwindow)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                TuanBean.BcateListEntity.BcateTypeEntity bean =
-                        (TuanBean.BcateListEntity.BcateTypeEntity) parent.getAdapter().getItem(position);
-                shortName.setText(bean.getName());
-                tid = bean.getId() + "";
-                checkLogin();
-            }
-        });
-        sortPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        sortPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//设置可以使用动画popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-        //popupwindow显示的坐标的位置
-        int[] location = new int[2];
-        bottomLine.getLocationInWindow(location);
-        int x = location[0];
-        int y = location[1];
-        sortPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 5);
-    }
-
-    //默认的筛选条件
-    private String order_type;
-
-    public void showNavsPopuWindow() {
-
-        View popView = null;
-        if (sortPopupWindow == null) {
-            popView = View.inflate(mContext, R.layout.popupwindow_sift_consume_navs, null);
-
-            groupListView = (ListView) popView.findViewById(R.id.lv_group_navs);
-
-            navsGroupAdapter = new NavsGroupAdapter(mContext, navs);
-            groupListView.setAdapter(navsGroupAdapter);
-        }
-
-        groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                TuanBean.NavsEntity bean = (TuanBean.NavsEntity) parent.getAdapter().getItem(position);
-                defaultorName.setText(bean.getName());
-                order_type = bean.getCode();
-                setAllNot();
+            public void onClick(View v) {
                 hidePopupWindow();
-                checkLogin();
             }
         });
-
-
-        sortPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        sortPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//设置可以使用动画popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-        //popupwindow显示的坐标的位置
-        int[] location = new int[2];
-        bottomLine.getLocationInWindow(location);
+        //获取条目的坐标
+        int[] location = new int[2];//空的xy的坐标
+        condition.getLocationInWindow(location);
         int x = location[0];
         int y = location[1];
-        sortPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 5);
-    }
+        //popupwindow定义显示的位置
+        popupWindow.showAtLocation(condition, Gravity.LEFT | Gravity.TOP, x, y);
 
-    private void checkLogin() {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("ctl", "tuan");
-        if (cate_id != null)
-            map.put("cate_id", cate_id);
-        if (tid != null)
-            map.put("tid", tid);
-        map.put("r_type", "1");
-        if (qid != null)
-            map.put("qid", qid);
-        if (order_type != null)
-            map.put("order_type", order_type);
-        setAllNot();
-        hidePopupWindow();
-        new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new TuanBean().setTag(ChoicenessFragment.this.getClass().getName()), map, null);
-        page = 1;
+        //前四个参数表示，xy方向的缩放的比例，后四个表示从哪里开始缩放和缩放的样式从自身左边的中间开始
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1f, 0, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+        scaleAnimation.setDuration(200);
+        //1.0f表示全部显示。从0。4开始显示
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.4f, 1.0f);
+        alphaAnimation.setDuration(200);
+        //建立动画的集合
+        AnimationSet animationSet = new AnimationSet(false);//参数表示是否有动画插入器
+        animationSet.addAnimation(scaleAnimation);
+        animationSet.addAnimation(alphaAnimation);
+        popView.startAnimation(animationSet);//动画的开始依附于背景进行显示，内有背景是不显示的，所以给popupwindow添加一个透明的背景
+        popupWindow.setOutsideTouchable(true);
     }
 
     //隐藏pouwindow
-    public void hidePopupWindow() {
+    private void hidePopupWindow() {
         //在onsrcll中的方法在oncreate会调用,所以判断是否为空
-        if (sortPopupWindow != null) {
-            sortPopupWindow.dismiss();
-            sortPopupWindow = null;
+        if (popupWindow != null) {
+            popupWindow.dismiss();
+            popupWindow = null;
         }
     }
-
-
-    Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case 20:
-                    childAdapter.setChildData(quanArray.get(msg.arg1).getQuan_sub());
-                    childAdapter.notifyDataSetChanged();
-                    groupAdapter.notifyDataSetChanged();
-                    break;
-                case 21:
-                    sortChildAdapter.setChildData(bcate_list.get(msg.arg1).getBcate_type());
-                    sortChildAdapter.notifyDataSetChanged();
-                    sortGroupAdapter.notifyDataSetChanged();
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-        ;
-    };
-
-
-
-    class MyItemClick implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-
-            groupAdapter.setSelectedPosition(position);
-
-            if (childAdapter == null) {
-                childAdapter = new CityChildAdapter(mContext);
-                childListView.setAdapter(childAdapter);
-            } else {
-                childListView.setAdapter(childAdapter);
-            }
-
-
-            Message msg = new Message();
-            msg.what = 20;
-            msg.arg1 = position;
-            handler.sendMessage(msg);
-        }
-
-    }
-
-    private String cate_id;
-
-    class MySortItemClick implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            cate_id = ((TuanBean.BcateListEntity) parent.getAdapter().getItem(position)).getId() + "";
-
-            sortGroupAdapter.setSelectedPosition(position);
-
-            if (sortChildAdapter == null) {
-                sortChildAdapter = new SortChildAdapter(mContext);
-                childListView.setAdapter(sortChildAdapter);
-            } else {
-                childListView.setAdapter(sortChildAdapter);
-            }
-
-            Message msg = new Message();
-            msg.what = 21;
-            msg.arg1 = position;
-            handler.sendMessage(msg);
-        }
-
-    }
-
-    @Override
-    public void onPause() {
-        setAllNot();
-        hidePopupWindow();
-        super.onPause();
-    }
-
-    //这里进行的条目的点击事件
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=deal&data_id=" + ((TuanBean.ItemEntity) parent.getAdapter().getItem(position)).getId());
-        mContext.startActivity(intent);
-    }
-
-    @Override
-    public void onRefresh() {
-        // 设置顶部正在刷新
-        listView.setSelection(0);
-        setSwipeRefreshLoadingState();
-        Map<String, String> map = new HashMap<String, String>();
-        checkLogin();
-    }
-
-    @Override
-    public void loadMore() {
-        page = page + 1;
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("ctl", "tuan");
-        if (cate_id != null)
-            map.put("cate_id", cate_id);
-        if (tid != null)
-            map.put("tid", tid);
-        map.put("r_type", "1");
-        if (qid != null)
-            map.put("qid", qid);
-        if (order_type != null)
-            map.put("order_type", order_type);
-        map.put("page", page + "");
-        new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new TuanBean().setTag(ChoicenessFragment.this.getClass().getName()), map, null);
-    }
-
-    /**
-     * 设置顶部正在加载的状态
-     */
-    private void setSwipeRefreshLoadingState() {
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setRefreshing(true);
-            // 防止多次重复刷新
-            mSwipeRefreshLayout.setEnabled(false);
-        }
-    }
-
-    /**
-     * 设置顶部加载完毕的状态
-     */
-    private void setSwipeRefreshLoadedState() {
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setRefreshing(false);
-            mSwipeRefreshLayout.setEnabled(true);
-        }
-    }
-
-    //进行切换大的分类的数据的显示,外部数据进行调用
-    public void changeBigSortNoFragemnt(String sortName, String id) {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("ctl", "tuan");
-        map.put("cate_id", id);
-        map.put("r_type", "1");
-        questBean = new QuestBean(map, new TuanBean().setTag(getClass().getName()), HttpConstants.HOST_ADDR_ROOT_NET);
-        this.sortName = sortName;
-    }
-
-    public void changeBigSort(String sortName, String id) {
-        shortName.setText(sortName);
-        cityName.setText("城市");
-        defaultorName.setText("默认");
-        cate_id = id;
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("ctl", "tuan");
-        map.put("cate_id", id);
-        map.put("r_type", "1");
-        new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new TuanBean().setTag(ChoicenessFragment.this.getClass().getName()), map, null);
-
-    }
-
 }
+

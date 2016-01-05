@@ -39,7 +39,7 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeBean.DealListEntity> 
         }
         Holder holder = Holder.getHolder(convertView);
         HomeBean.DealListEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getIcon(), holder.pic, ImageLoaderOptions.options_big);
+        ImageLoader.getInstance().displayImage(bean.getIcon(), holder.pic, ImageLoaderOptions.pager_options_big);
         return convertView;
     }
 

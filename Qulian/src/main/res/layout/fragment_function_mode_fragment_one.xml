@@ -5,93 +5,80 @@
     android:gravity="center">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginBottom="17dp"
-        android:orientation="vertical">
+        style="@style/home_function_every">
 
         <ImageView
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_wanfa"/>
+            android:src="@mipmap/fenlei_wanfa" />
+
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="玩法"
             android:textColor="#323232"
-            android:textSize="12sp"
-            android:text="玩法"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginBottom="17dp"
         android:layout_marginLeft="45dp"
-        android:orientation="vertical">
+        style="@style/home_function_every"
+        >
 
         <ImageView
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_meishi"/>
+            android:src="@mipmap/fenlei_meishi" />
+
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="特色美食"
             android:textColor="#323232"
-            android:textSize="12sp"
-            android:text="特色美食"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginBottom="17dp"
         android:layout_marginLeft="45dp"
-        android:orientation="vertical">
+        style="@style/home_function_every"
+        >
 
         <ImageView
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_menpiao"/>
+            android:src="@mipmap/fenlei_menpiao" />
+
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="景点门票"
             android:textColor="#323232"
-            android:textSize="12sp"
-            android:text="景点门票"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginBottom="17dp"
         android:layout_marginLeft="45dp"
-        android:orientation="vertical">
+        style="@style/home_function_every"
+        >
 
         <ImageView
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_jiaotong"/>
+            android:src="@mipmap/fenlei_jiaotong" />
+
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="交通"
             android:textColor="#323232"
-            android:textSize="12sp"
-            android:text="交通"/>
+            android:textSize="12sp" />
     </LinearLayout>
-
-
-
-
 </LinearLayout>

@@ -14,5 +14,4 @@ public class HttpConstants {
     /**加载webView的连接路径*/
     public static final String WEBVIEW_ROOT = "http://www.quliantrip.com/wap/index.php";
 
-
 }

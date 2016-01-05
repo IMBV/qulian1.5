@@ -44,7 +44,7 @@
         <item name="android:textColor">@color/viewpage_selector_slide_title</item>
         <item name="android:textSize">17sp</item>
     </style>
-   <!--填充满整个屏幕的宽度-->
+    <!--填充满整个屏幕的宽度-->
     <style name="fill_fill">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
@@ -131,8 +131,17 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">#ffffff</item>
+    </style>
 
+    android:orientation="vertical"
+    <!--首页功能导航样式-->
+    <style name="home_function_every">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">31dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:orientation">vertical</item>
     </style>
 </resources>
