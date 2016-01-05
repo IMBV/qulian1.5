@@ -54,6 +54,7 @@ public class CommonHelp {
         return getResources().getDrawable(id);
     }
 
+
     public static float getDimens(int id) {
         return getResources().getDimension(id);
     }

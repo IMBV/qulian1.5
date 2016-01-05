@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/app_main_tag_dec_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/app_main_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rb_home_page"
+                style="@style/choiceness_btn_selector"
+                android:layout_marginLeft="10dp"
+                android:text="@string/tab_home_function" />
+
+            <RadioButton
+                style="@style/choiceness_btn_selector"
+                android:layout_marginLeft="15dp"
+                android:text="@string/tab_home_function" />
+
+            <RadioButton
+                style="@style/choiceness_btn_selector"
+                android:layout_marginLeft="15dp"
+                android:text="@string/tab_home_function" />
+
+            <RadioButton
+                style="@style/choiceness_btn_selector"
+                android:layout_marginLeft="15dp"
+                android:text="@string/tab_home_function" />
+
+            <RadioButton
+                style="@style/choiceness_btn_selector"
+                android:layout_marginLeft="15dp"
+                android:text="@string/tab_home_function" />
+
+        </RadioGroup>
+        <LinearLayout
+            android:id="@+id/ll_route_sift"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_recommend_route_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="筛选"
+                android:textSize="14sp"
+                android:textColor="@color/selector_choiceness_btn_collor"/>
+            <ImageView
+                android:id="@+id/iv_recommend_route_img"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@mipmap/nav_shaixuan_normal"/>
+
+
+        </LinearLayout>
+        <RadioButton
+            android:id="@+id/rb_choiceness_page"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/selector_tab_jingxuan"
+            android:text="@string/tab_home_choiceness" />
+    </RelativeLayout>
+
+
+</LinearLayout>

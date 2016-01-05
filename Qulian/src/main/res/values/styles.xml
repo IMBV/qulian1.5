@@ -41,6 +41,21 @@
         <item name="android:layout_weight">1.0</item>
     </style>
 
+    <!--精选筛选的按钮-->
+    <style name="choiceness_btn_selector">
+        <item name="android:layout_width">57dp</item>
+        <item name="android:layout_height">27dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/selector_choiceness_btn_collor</item>
+        <item name="android:background">@drawable/selector_btn_choieness</item>
+        <item name="android:gravity">center</item>
+
+        <!-- 去按钮立体效果 -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
     <!-- viewpage文本  滑动标签标题 -->
     <style name="viewpage_slidingTabTitle">
         <item name="android:layout_width">wrap_content</item>

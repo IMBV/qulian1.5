@@ -3,7 +3,7 @@
     <!--应用的主要颜色-->
     <color name="app_main_bg">#F8F4F1</color>
     <color name="app_main_dev_line">#DCDCDC</color>
-    <color name="app_main_tag_dec_line">#CBCBCB</color>
+    <color name="app_main_tag_dec_line">#C8C8C8</color>
     <color name="app_main_sub_title_text">#969696</color>
     <color name="app_main_title_text">#646464</color>
     <color name="app_main_title">#323232</color>
