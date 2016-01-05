@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical">
+        android:layout_marginRight="10dp">
 
         <com.quliantrip.qulian.view.RatioImageView
             android:id="@+id/iv_home_recommend_pic"
@@ -20,6 +19,11 @@
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             RatioImageView:ratioscale="2.0286" />
+        <View
+            android:id="@+id/v_image_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#4c000000"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -52,6 +56,7 @@
                     android:layout_height="11dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/like" />
 
                 <TextView

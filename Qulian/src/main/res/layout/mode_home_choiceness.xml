@@ -6,7 +6,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:layout_marginLeft="10dp"
         android:background="#dcdcdc" />
 
@@ -17,7 +17,6 @@
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
-
 
         <!-- 第一行 -->
         <RelativeLayout
@@ -99,10 +98,10 @@
                 android:layout_marginLeft="-10dp"
                 android:layout_toRightOf="@id/iv_home_quality_icon"
                 android:background="@mipmap/yishou"
-                android:textSize="12sp"
                 android:paddingLeft="3dp"
+                android:text="￥：100"
                 android:textColor="#ffffff"
-                android:text="已售：100" />
+                android:textSize="12sp" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -125,7 +125,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             map.put("r_type", "1");
             new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new HomeBean().setTag(HomeFragment.this.getClass().getName()), map, null);
         }
-        bean = null;
     }
     private HomeRecommendAdapter homeRecommendAdapter;
     private void initListIView(List<HomeBean.DealListEntity> dealList) {

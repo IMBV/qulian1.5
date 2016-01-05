@@ -7,8 +7,7 @@
     <include layout="@layout/view_systembar" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        style="@style/app_title"
         android:background="#ffffff">
 
         <TextView
@@ -26,42 +25,46 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/tv_choiceness_title_loaction"
-            android:src="@mipmap/up_jiantou" />
+            android:src="@mipmap/nav_up_h" />
 
         <RelativeLayout
-            android:id="@+id/myTab"
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_height="44dp"
             android:layout_centerInParent="true"
             android:gravity="center_vertical">
 
             <RelativeLayout
-                android:id="@+id/bt_recommend_route"
+                android:id="@+id/rl_recommend_route"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_recommend_route_text"
                     style="@style/choiceness_title_text"
                     android:text="推荐线路" />
 
-                <View style="@style/choiceness_title_down_line" />
+                <View
+                    android:id="@+id/v_hot_recommend_route_line"
+                    style="@style/choiceness_title_down_line" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/bt_hot_good"
+                android:id="@+id/rl_hot_goods"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
-                android:layout_toRightOf="@id/bt_recommend_route"
+                android:layout_toRightOf="@id/rl_recommend_route"
                 android:orientation="vertical">
 
                 <TextView
-
+                    android:id="@+id/tv_hot_goods_text"
                     style="@style/choiceness_title_text"
-                    android:text="推荐线路" />
+                    android:text="热门商品" />
 
-                <View style="@style/choiceness_title_down_line" />
+                <View
+                    android:id="@+id/v_hot_goods_line"
+                    style="@style/choiceness_title_down_line" />
             </RelativeLayout>
 
 

@@ -2,17 +2,8 @@ package com.quliantrip.qulian.ui.activity.mainAcivity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
@@ -24,12 +15,12 @@ import android.widget.RadioGroup;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.ui.fragment.mainFragment.ChoicenessFragment;
+import com.quliantrip.qulian.ui.fragment.mainFragment.FindFragment;
 import com.quliantrip.qulian.ui.fragment.mainFragment.HomeFragment;
 import com.quliantrip.qulian.ui.fragment.mainFragment.MyFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -222,22 +213,18 @@ public class MainActivity extends FragmentActivity {
         listFragment.clear();
         HomeFragment homeFragment = new HomeFragment();
         mTempFragment = homeFragment;
-
-
         getSupportFragmentManager().beginTransaction().add(R.id.fl_content, homeFragment)
                 .commit();
 
 //        HappinessFragment happinessFragment = new HappinessFragment();
-//        FindFragment findFragment = new FindFragment();
-        if(choicenessFragment == null){
-            choicenessFragment = new ChoicenessFragment();
-        }
+        FindFragment findFragment = new FindFragment();
+        choicenessFragment = new ChoicenessFragment();
         MyFragment myFragment = new MyFragment();
 
         listFragment.add(homeFragment);
-//        listFragment.add(happinessFragment);
-//        listFragment.add(findFragment);
         listFragment.add(choicenessFragment);
+        listFragment.add(findFragment);
+
         listFragment.add(myFragment);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -256,11 +243,11 @@ public class MainActivity extends FragmentActivity {
                     case R.id.rb_choiceness_page:
                         index = 1;
                         break;
-//                    case R.id.rb_find_page:
-//                        index = 2;
-//                        break;
-                    case R.id.rb_myinfo_page:
+                    case R.id.rb_find_page:
                         index = 2;
+                        break;
+                    case R.id.rb_myinfo_page:
+                        index = 3;
 //                        if(listFragment.get(index).isAdded()){
 //                            choicenessFragment.setAllNot();
 //                        }
@@ -362,7 +349,7 @@ public class MainActivity extends FragmentActivity {
         Timer tExit = null;
         if (isExit == false) {
             isExit = true; // 准备退出
-            ToastUtil.showToast(this, "再按一次退出程序");
+            ToastUtil.showToast(this, "再按一次退出趣连旅行");
             tExit = new Timer();
             tExit.schedule(new TimerTask() {
                 @Override
@@ -378,8 +365,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     //加载选着大分类的消费列表并显示
-    public void changeChoicenessContion(String name,String id){
-        if(choicenessFragment == null){
+    public void changeChoicenessContion(String name, String id) {
+        if (choicenessFragment == null) {
             choicenessFragment = new ChoicenessFragment();
         }
 //        if(!choicenessFragment.isAdded()){
@@ -390,6 +377,6 @@ public class MainActivity extends FragmentActivity {
 //            choicenessFragment.changeBigSort(name,id);
 //        }
 //        radioGroup.check(R.id.rb_choiceness_page);
-        ((RadioButton)findViewById(R.id.rb_choiceness_page)).setChecked(true);
+        ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
     }
 }

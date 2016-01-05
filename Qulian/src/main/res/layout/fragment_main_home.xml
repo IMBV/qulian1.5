@@ -27,7 +27,7 @@
                     android:orientation="vertical" />
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="1px"
                     android:layout_marginLeft="10dp"
                     android:background="#dcdcdc"/>
 
@@ -96,12 +96,12 @@
             android:id="@+id/rl_city_choose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp">
+            android:layout_marginLeft="8dp">
 
             <TextView
                 android:id="@+id/iv_home_title_location"
                 style="@style/home_localtion_text"
-                android:text="北京" />
+                android:text="北京人" />
 
             <ImageView
                 android:id="@+id/iv_home_title_arrow"
