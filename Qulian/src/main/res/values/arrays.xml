@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-
+    <!--订单的详情显示的集合-->
     <string-array name="order_viewpage_arrays">
         <item>全部订单</item>
         <item>待付款</item>
@@ -8,4 +8,10 @@
         <item>待评价</item>
     </string-array>
 
+    <!--景点、玩法、当地游-->
+    <string-array name="home_secnic_play_local">
+        <item>景点</item>
+        <item>玩法</item>
+        <item>当地游</item>
+    </string-array>
 </resources>

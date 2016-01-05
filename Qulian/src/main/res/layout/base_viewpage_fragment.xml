@@ -6,7 +6,6 @@
     android:orientation="vertical" >
 
     <!-- 导航标题栏 -->
-
     <com.quliantrip.qulian.lib.PagerSlidingTabStrip
         android:id="@+id/pager_tabstrip"
         android:layout_width="match_parent"
@@ -23,9 +22,5 @@
         android:layout_below="@id/pager_tabstrip">
     </android.support.v4.view.ViewPager>
 
-    <com.quliantrip.qulian.ui.widget.EmptyLayout
-        android:id="@+id/error_layout"
-        style="@style/fill_fill"
-        android:visibility="gone" />
 
 </RelativeLayout>

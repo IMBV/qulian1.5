@@ -202,9 +202,12 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         startActivityForResult(openCameraIntent, 0);
     }
 
+    private Bundle bundle = new Bundle();
     //点击景点、玩法、当地游的筛选
     @OnClick(R.id.iv_home_secnic_play_search) void gotoSecnicPaly(){
         Intent intent =  new Intent(mContext,SecnicPlayConditionActivity.class);
         mContext.startActivity(intent);
+//        bundle.putInt("orderState", 3);
+//        UIHelper.showOrderList(mContext, bundle);
     }
 }

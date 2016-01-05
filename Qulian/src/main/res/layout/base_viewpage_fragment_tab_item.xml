@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/space_16"
         android:paddingRight="@dimen/space_16"
         android:paddingTop="@dimen/space_10"
-        android:text="最新资讯" />
+        android:text="趣连旅行" />
 
     <TextView
         android:id="@+id/tab_mes"

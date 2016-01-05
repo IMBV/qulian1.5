@@ -52,7 +52,6 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
         if (info == null) {
             return;
         }
-
         // 加入tab title
         View v = LayoutInflater.from(mContext).inflate(
                 R.layout.base_viewpage_fragment_tab_item, null, false);
