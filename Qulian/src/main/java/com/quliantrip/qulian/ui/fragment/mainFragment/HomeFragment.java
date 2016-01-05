@@ -25,6 +25,7 @@ import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.scanner.activity.CaptureActivity;
 import com.quliantrip.qulian.scanner.activity.OpenWifiActivity;
 import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.activity.HomeActivity.SecnicPlayConditionActivity;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.EvaluateUtil;
@@ -191,7 +192,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
 
     //点击加载更多
     @OnClick(R.id.tv_loading_more) void loadMore(){
-        activity.changeChoicenessContion("全部分类","0");
+        activity.changeChoicenessContion("全部分类", "0");
     }
 
     //连接wifi
@@ -199,5 +200,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     void connectWifi() {
         Intent openCameraIntent = new Intent(mContext, CaptureActivity.class);
         startActivityForResult(openCameraIntent, 0);
+    }
+
+    //点击景点、玩法、当地游的筛选
+    @OnClick(R.id.iv_home_secnic_play_search) void gotoSecnicPaly(){
+        Intent intent =  new Intent(mContext,SecnicPlayConditionActivity.class);
+        mContext.startActivity(intent);
     }
 }

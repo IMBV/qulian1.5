@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout style="@style/app_title">
+
+        <ImageView
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/nav_back" />
+
+        <com.quliantrip.qulian.view.ClearEditText
+            android:layout_width="270dp"
+            android:layout_height="28dip"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_edittext"
+            android:hint="请输入商品名、地名"
+            android:drawableLeft="@mipmap/search"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:textSize="15dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

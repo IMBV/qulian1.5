@@ -103,6 +103,13 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
+
+        <!--首页玩法、景点、当地游条件-->
+        <activity
+            android:name=".ui.activity.HomeActivity.SecnicPlayConditionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SwipeBackActivity" />
     </application>
 
 </manifest>
