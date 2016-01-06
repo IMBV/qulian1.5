@@ -70,8 +70,8 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     }
     public void setSelector(boolean b){
         if (b){
-//            siftText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-//            siftImg.setBackground(CommonHelp.get);
+            siftText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+            siftImg.setImageResource(R.mipmap.nav_shaixuan_press);
         }else {
 
         }
