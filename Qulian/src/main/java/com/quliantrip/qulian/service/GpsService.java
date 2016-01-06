@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 
-
 public class GpsService extends Service {
     private SharedPreferences sp;
     private LocationManager lm;
@@ -85,5 +84,4 @@ public class GpsService extends Service {
         }
         lm.removeUpdates(listener);
     }
-
 }

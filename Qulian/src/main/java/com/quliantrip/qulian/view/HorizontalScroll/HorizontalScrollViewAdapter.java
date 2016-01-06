@@ -4,7 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,6 +15,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.ImageBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.ArrayList;
 
@@ -21,12 +25,14 @@ import butterknife.ButterKnife;
 /**
  * Created by yuly on 2015/12/1.
  */
-public class HorizontalScrollViewAdapter {
+public class HorizontalScrollViewAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<ImageBean> mDatas;
+    private ArrayList<String> mDatas;
 
-    public HorizontalScrollViewAdapter(Context context, ArrayList<ImageBean> mDatas) {
+    int mPosition = 0;// 选中的位置
+
+    public HorizontalScrollViewAdapter(Context context, ArrayList<String> mDatas) {
         this.mContext = context;
         mInflater = LayoutInflater.from(context);
         this.mDatas = null;
@@ -50,27 +56,32 @@ public class HorizontalScrollViewAdapter {
             convertView = mInflater.inflate(R.layout.view_horizontalscrollview_item, parent, false);
         }
         Holder holder = Holder.getHolder(convertView);
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.pic.getLayoutParams();
-
 //        if (position == 0) {
 //
 //        } else {
 //            params.leftMargin = CommonHelp.dip2px(mContext, 5);
 //        }
+        if (mPosition == position) {
+            System.out.println("dianji");
+//            convertView.setBackgroundColor(mContext.getResources().getColor(
+//                    R.color.colorPrimary));
+//            holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+            holder.name.setSelected(true);
+        } else {
+            System.out.println("dianji2");
+//            convertView.setBackgroundColor(mContext.getResources().getColor(
+//                    R.color.app_main_sub_bg));
+//            holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));
+            holder.name.setSelected(false);
+        }
 
-        holder.pic.setLayoutParams(params);
-        ImageBean bean = mDatas.get(position);
-        ImageLoader.getInstance().displayImage(bean.url, holder.pic, ImageLoaderOptions.options);
-        holder.name.setText(bean.name);
+        holder.name.setText(mDatas.get(position));
         return convertView;
     }
 
     static class Holder {
-        @Bind(R.id.iv_home_horizontalscroll_pic)
-        ImageView pic;
-        @Bind(R.id.tv_home_function_name)
-        TextView name;
+        @Bind(R.id.rb_home_page)
+        Button name;
 
         public Holder(View convertView) {
             super();
@@ -89,4 +100,13 @@ public class HorizontalScrollViewAdapter {
 
     }
 
+    /**
+     * 设置选择的位置
+     *
+     * @param position
+     */
+    public void setSelectedPosition(int position) {
+        this.mPosition = position;
+        this.notifyDataSetChanged();
+    }
 }

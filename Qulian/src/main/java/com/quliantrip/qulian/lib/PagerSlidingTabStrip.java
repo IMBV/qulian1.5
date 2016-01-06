@@ -17,13 +17,12 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 
 
 /**
- * 专为ViewPager定制的滑动选项卡 HOME
- * 
- * @version 1.3.0
- * @author Peng fei Pan
+ * 专为ViewPager定制的滑动选项卡
  */
 public class PagerSlidingTabStrip extends HorizontalScrollView implements
 		View.OnClickListener {
@@ -226,8 +225,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 								* slidingBlockRight);
 					}
 				}
-				slidingBlockDrawable.setBounds((int) slidingBlockLeft, 0,
-						(int) slidingBlockRight, getHeight());
+				int middleLocal = ((int) slidingBlockLeft+(int) slidingBlockRight)/2;
+				slidingBlockDrawable.setBounds(middleLocal- CommonHelp.dip2px(QulianApplication.getContext(),18), 0,
+						middleLocal+CommonHelp.dip2px(QulianApplication.getContext(),18), getHeight());
 				slidingBlockDrawable.draw(canvas);
 			}
 		}

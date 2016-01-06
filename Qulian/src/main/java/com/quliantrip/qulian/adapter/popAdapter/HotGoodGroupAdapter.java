@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.TuanBean;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.List;
 
@@ -19,14 +20,14 @@ import java.util.List;
  * @author zihao
  * 
  */
-public class CityGroupAdapter extends BaseAdapter {
+public class HotGoodGroupAdapter extends BaseAdapter {
 
 	Context mContext;// 上下文对象
 	List<TuanBean.QuanListEntity> mGroupNameArr;
 	int mPosition = 0;// 选中的位置
 
 
-	public CityGroupAdapter(Context context, List<TuanBean.QuanListEntity> groupArr) {
+	public HotGoodGroupAdapter(Context context, List<TuanBean.QuanListEntity> groupArr) {
 		this.mContext = context;
 		this.mGroupNameArr = groupArr;
 	}
@@ -51,10 +52,12 @@ public class CityGroupAdapter extends BaseAdapter {
 		holder.groupName.setText(mGroupNameArr.get(position).getName());
 		if (mPosition == position) {
 			convertView.setBackgroundColor(mContext.getResources().getColor(
-					R.color.group_item_pressed_bg));
+					R.color.colorPrimary));
+			holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
 		} else {
 			convertView.setBackgroundColor(mContext.getResources().getColor(
-					R.color.group_item_bg));
+					R.color.app_main_sub_bg));
+			holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));
 		}
 
 		return convertView;

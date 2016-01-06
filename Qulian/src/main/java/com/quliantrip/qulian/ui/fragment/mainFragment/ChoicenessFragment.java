@@ -11,12 +11,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.ui.fragment.happinessFragment.HotGoodsFragment;
-import com.quliantrip.qulian.ui.fragment.happinessFragment.RecommendRouteFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.HotGoodsFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.RecommendRouteFragment;
 import com.quliantrip.qulian.util.CommonHelp;
 
 import butterknife.Bind;
@@ -88,6 +87,7 @@ public class ChoicenessFragment extends Fragment {
             routeLine.setVisibility(View.GONE);
             hotGoodLine.setVisibility(View.VISIBLE);
         }
+        hidePopwindow();
     }
 
     //切换要显示的fragment的样式
@@ -102,6 +102,13 @@ public class ChoicenessFragment extends Fragment {
             transaction.hide(currentFragment);
             transaction.commit();
             currentFragment = fragment;
+        }
+    }
+
+    //隐藏精选的popupwindow
+    public void hidePopwindow(){
+        if (hotGoodsFragment != null){
+            hotGoodsFragment.hidePopupWindow();
         }
     }
 }

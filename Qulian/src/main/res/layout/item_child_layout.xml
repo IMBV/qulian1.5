@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="@color/group_item_pressed_bg"
-    android:orientation="horizontal" >
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/child_textView"
-        style="@style/choiceness_condition_every_page_context" />
 
+        <TextView
+            android:id="@+id/child_textView"
+            style="@style/choiceness_hot_good_second_sift" />
 </LinearLayout>

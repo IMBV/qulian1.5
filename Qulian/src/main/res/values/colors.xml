@@ -10,6 +10,7 @@
     <color name="app_main_price_text">#f83c3a</color>
     <color name="app_main_collor">#f4a51b</color>
     <color name="app_main_sub_collor">#f7c05f</color>
+    <color name="app_main_sub_bg">#fbf9f8</color>
 
 
     <color name="main_gray">#9A9A9A</color>

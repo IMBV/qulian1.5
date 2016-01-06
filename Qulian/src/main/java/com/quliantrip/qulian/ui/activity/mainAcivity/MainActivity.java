@@ -213,14 +213,10 @@ public class MainActivity extends FragmentActivity {
         listFragment.clear();
         HomeFragment homeFragment = new HomeFragment();
         mTempFragment = homeFragment;
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_content, homeFragment)
-                .commit();
-
-//        HappinessFragment happinessFragment = new HappinessFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_content, homeFragment).commit();
         FindFragment findFragment = new FindFragment();
-        choicenessFragment = new ChoicenessFragment();
         MyFragment myFragment = new MyFragment();
-
+        choicenessFragment = new ChoicenessFragment();
         listFragment.add(homeFragment);
         listFragment.add(choicenessFragment);
         listFragment.add(findFragment);
@@ -235,23 +231,24 @@ public class MainActivity extends FragmentActivity {
                 switch (checkedId) {
                     case R.id.rb_home_page:
                         index = 0;
-//                        if(listFragment.get(index).isAdded()){
-//                            choicenessFragment.setAllNot();
-//                        }
-//                        choicenessFragment.hidePopupWindow();
+                        if (choicenessFragment != null) {
+                            choicenessFragment.hidePopwindow();
+                        }
                         break;
                     case R.id.rb_choiceness_page:
                         index = 1;
                         break;
                     case R.id.rb_find_page:
                         index = 2;
+                        if (choicenessFragment != null) {
+                            choicenessFragment.hidePopwindow();
+                        }
                         break;
                     case R.id.rb_myinfo_page:
                         index = 3;
-//                        if(listFragment.get(index).isAdded()){
-//                            choicenessFragment.setAllNot();
-//                        }
-//                        choicenessFragment.hidePopupWindow();
+                        if (choicenessFragment != null) {
+                            choicenessFragment.hidePopwindow();
+                        }
                         break;
                 }
                 switchFragment(listFragment.get(index));

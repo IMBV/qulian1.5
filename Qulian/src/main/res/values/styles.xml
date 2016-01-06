@@ -78,8 +78,8 @@
     </style>
     <!--我的设置-->
     <style name="me_icon_style_shang">
-        <item name="android:layout_width">18dp</item>
-        <item name="android:layout_height">18dp</item>
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginRight">5dp</item>
     </style>
@@ -87,15 +87,31 @@
     <style name="me_icon_style_xia">
         <item name="android:layout_width">17dp</item>
         <item name="android:layout_height">17dp</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="me_text_style_shang">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/app_main_collor</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
     <style name="me_text_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#f4a51b</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/app_main_title_text</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="me_next_img">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">15dp</item>
     </style>
 
     <!--精选样式-->
@@ -133,7 +149,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">40dp</item>
 
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">14sp</item>
@@ -181,5 +197,16 @@
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:background">@color/app_main_collor</item>
+    </style>
+    <!--精选二级筛选的样式-->
+    <style name="choiceness_hot_good_second_sift">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/selector_hot_good_sift_child_text</item>
     </style>
 </resources>

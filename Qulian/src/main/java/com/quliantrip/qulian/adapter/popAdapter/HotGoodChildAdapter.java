@@ -14,7 +14,7 @@ import com.quliantrip.qulian.domain.TuanBean;
 import java.util.List;
 
 
-public class CityChildAdapter extends BaseAdapter {
+public class HotGoodChildAdapter extends BaseAdapter {
 
 	Context mContext;
 	List<TuanBean.QuanListEntity.QuanSubEntity> mChildArr;// 子item标题数组
@@ -24,7 +24,7 @@ public class CityChildAdapter extends BaseAdapter {
 	 * 
 	 * @param context
 	 */
-	public CityChildAdapter(Context context) {
+	public HotGoodChildAdapter(Context context) {
 		mContext = context;
 	}
 

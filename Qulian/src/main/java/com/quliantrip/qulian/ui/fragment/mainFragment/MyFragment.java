@@ -36,12 +36,6 @@ public class MyFragment extends BaseFragment {
     CircleImageView userImage;
     @Bind(R.id.tv_me_username)
     TextView userName;
-    @Bind(R.id.tv_me_loading)
-    Button loading;
-    @Bind(R.id.tv_me_loadout)
-    Button loadout;
-    @Bind(R.id.wb_login_info)
-    WebView checkLoginWebView;
 
     private Bundle bundle = new Bundle();
     private View view;
@@ -51,44 +45,11 @@ public class MyFragment extends BaseFragment {
         view = View.inflate(mContext, R.layout.fragment_main_me, null);
         ButterKnife.bind(this, view);
 //        checkLogin();
-        initLogin();
         return view;
     }
 
-    //检查是否登录
-    public void initLogin() {
-        checkLoginWebView.loadUrl(HttpConstants.WEBVIEW_ROOT + "?ctl=user_center");
-        checkLoginWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        checkLoginWebView.getSettings().setJavaScriptEnabled(true);
 
-        checkLoginWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                if (!checkLoginWebView.getUrl().endsWith("ctl=user&act=login")) {
-                    loading.setVisibility(View.GONE);
-                    loadout.setVisibility(View.VISIBLE);
-                } else {
-                    loading.setVisibility(View.VISIBLE);
-                    loadout.setVisibility(View.GONE);
-                }
-            }
 
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                loading.setVisibility(View.GONE);
-                loadout.setVisibility(View.GONE);
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        checkLogin();
-        initLogin();
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -96,8 +57,8 @@ public class MyFragment extends BaseFragment {
             return;
         }
         if (requestCode == 2) {
-            loading.setVisibility(View.GONE);
-            loadout.setVisibility(View.VISIBLE);
+//            loading.setVisibility(View.GONE);
+//            loadout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -111,26 +72,25 @@ public class MyFragment extends BaseFragment {
 
     }
 
-    //点击登录
-    @OnClick(R.id.tv_me_loading)
-    void loading() {
-        //使用借口登录
-//        UIHelper.showMyActive(mContext);
-        //使用web进行登录
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=login");
-        startActivityForResult(intent, 2);
-        initLogin();
-    }
-
-    //点击退出
-    @OnClick(R.id.tv_me_loadout)
-    void loadout() {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("isFinish", "finish");
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=loginout");
-        mContext.startActivity(intent);
-    }
+//    //点击登录
+//    @OnClick(R.id.tv_me_loading)
+//    void loading() {
+//        //使用借口登录
+////        UIHelper.showMyActive(mContext);
+//        //使用web进行登录
+//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=login");
+//        startActivityForResult(intent, 2);
+//    }
+//
+//    //点击退出
+//    @OnClick(R.id.tv_me_loadout)
+//    void loadout() {
+//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+//        intent.putExtra("isFinish", "finish");
+//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=loginout");
+//        mContext.startActivity(intent);
+//    }
 
     //我的积分
     @OnClick(R.id.ll_me_integral)
@@ -156,13 +116,13 @@ public class MyFragment extends BaseFragment {
         mContext.startActivity(intent);
     }
 
-    //设置
-    @OnClick(R.id.ll_me_setting_out)
-    void goOutLogin() {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=getpassword");
-        mContext.startActivity(intent);
-    }
+//    //设置
+//    @OnClick(R.id.ll_me_setting_out)
+//    void goOutLogin() {
+//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=getpassword");
+//        mContext.startActivity(intent);
+//    }
 
 
     //    public void checkLogin(){

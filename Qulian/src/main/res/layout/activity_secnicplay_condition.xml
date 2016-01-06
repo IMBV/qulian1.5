@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout style="@style/app_title">
+    <RelativeLayout style="@style/app_title"
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:layout_width="21dp"
