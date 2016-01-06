@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.ui.fragment.findFragment.FragmentFindFactory;
 import com.quliantrip.qulian.ui.fragment.orderFragment.FragmentOrderFactory;
 import com.quliantrip.qulian.util.CommonHelp;
 

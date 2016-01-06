@@ -6,13 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.MainFindAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.lib.PagerSlidingTab;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.fragment.findFragment.FindContentFragment;
+import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,19 +28,13 @@ import butterknife.ButterKnife;
 
 public class FindFragment extends BasePageCheckFragment {
     private View view;
-    @Bind(R.id.vp_main_container)
-    ViewPager container;
-    @Bind(R.id.pt_main_pagerIndicator)
-    PagerSlidingTab pagerSlidingTab;
+
 
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_main_find, null);
         ButterKnife.bind(this, view);
-        MainFindAdapter mainFindAdapter = new MainFindAdapter(((FragmentActivity)mContext).getSupportFragmentManager());
-
-        container.setAdapter(mainFindAdapter);
-        pagerSlidingTab.setViewPager(container);
+        ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, new FindContentFragment()).commit();
         return view;
     }
 
