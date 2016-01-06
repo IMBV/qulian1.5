@@ -49,8 +49,6 @@ public class MyFragment extends BaseFragment {
     }
 
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
@@ -62,10 +60,6 @@ public class MyFragment extends BaseFragment {
         }
     }
 
-    @OnClick(R.id.ll_user_loading)
-    void setAllInfo() {
-        UIHelper.showMeSetting(mContext);
-    }
 
     @Override
     public void initDate() {
@@ -200,5 +194,17 @@ public class MyFragment extends BaseFragment {
 //                super.onPageStarted(view, url, favicon);
 //            }
 //        });
+    }
+
+    //设置
+    @OnClick(R.id.iv_me_seeting)
+    void showMySetting() {
+        UIHelper.showMeSetting(mContext);
+    }
+
+    //登录界面
+    @OnClick(R.id.ll_user_loading)
+    void showMylogin() {
+        UIHelper.showMyLogin(mContext);
     }
 }

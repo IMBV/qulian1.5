@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.backSimpleFragment;
+package com.quliantrip.qulian.ui.fragment.meFragment;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -53,12 +53,12 @@ public class LoginFragment extends BaseFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             UserInfoBean userInfoBean = (UserInfoBean) bean;
-            if(userInfoBean.getStatus() == 1){
+            if (userInfoBean.getStatus() == 1) {
                 QulianApplication.getInstance().saveUserInfo(userInfoBean);
-                ((SimpleBackActivity)mContext).finish();
-                ToastUtil.showToast(mContext,userInfoBean.getInfo());
-            }else if(userInfoBean.getStatus() == 0){
-                ToastUtil.showToast(mContext,userInfoBean.getInfo());
+                ((SimpleBackActivity) mContext).finish();
+                ToastUtil.showToast(mContext, userInfoBean.getInfo());
+            } else if (userInfoBean.getStatus() == 0) {
+                ToastUtil.showToast(mContext, userInfoBean.getInfo());
             }
         }
     }
@@ -85,7 +85,7 @@ public class LoginFragment extends BaseFragment {
         map.put("act", "dologin");
         map.put("user_key", inName);
         map.put("user_pwd", inPassword);
-        map.put("r_type","1");
+        map.put("r_type", "1");
 
         new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET,
                 new UserInfoBean().setTag(getClass().getName()), map, null);

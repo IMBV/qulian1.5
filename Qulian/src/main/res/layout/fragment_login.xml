@@ -1,56 +1,115 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.quliantrip.qulian.view.ClearEditText
-        android:id="@+id/ct_userinfo_name"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="50dp"
-        android:hint="请输入用户名" />
-
-    <com.quliantrip.qulian.view.ClearEditText
-        android:id="@+id/ct_userinfo_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:inputType="textPassword"
-        android:hint="请输入密码" />
-    <Button
-        android:id="@+id/bt_user_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="登录"/>
-
-   <!-- <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="还可以使用其他账号登录" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/iv_third_qq"
-            android:layout_margin="15dp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@mipmap/ic_qq"/>
-        <ImageView
-            android:id="@+id/iv_third_weixi"
-            android:layout_margin="15dp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@mipmap/weixin"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/app_main_dev_line" />
+
+        <com.quliantrip.qulian.view.ClearEditText
+            android:id="@+id/ct_userinfo_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="邮箱 / 手机号" />
+
+        <com.quliantrip.qulian.view.ClearEditText
+            android:id="@+id/ct_userinfo_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="找回密码"
+            android:textColor="@color/app_main_sub_title_text"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/bt_user_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="44dp"
+            android:text="登录" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:text="注册趣连账号"
+            android:textColor="@color/app_main_collor"
+            android:textSize="16sp" />
     </LinearLayout>
--->
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:layout_width="81dp"
+                android:layout_height="1dp"
+                android:layout_marginRight="40dp"
+                android:background="@color/app_main_dev_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第三方登录"
+                android:textColor="@color/app_main_sub_title_text"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="81dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="40dp"
+                android:background="@color/app_main_dev_line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_third_qq"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/login_qq" />
+
+            <ImageView
+                android:id="@+id/iv_third_weixi"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="48dp"
+                android:src="@mipmap/login_weixin" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

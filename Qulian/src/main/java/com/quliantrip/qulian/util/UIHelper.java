@@ -245,8 +245,8 @@ public class UIHelper {
 //    }
 
 
-    public static void showMyActive(Context context) {
-        showSimpleBack(context, SimpleBackPage.MY_ACTIVE);
+    public static void showMyLogin(Context context) {
+        showSimpleBack(context, SimpleBackPage.MY_LOGIN);
     }
     public static void showMeSetting(Context context){
         showSimpleBack(context,SimpleBackPage.MY_SETTING);
