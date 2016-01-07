@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
@@ -52,8 +54,10 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     @Bind(R.id.v_consume_list_bottom_line)
     View bottomLine;
 
-    @Bind(R.id.id_horizontalScrollView)
-    MyHorizontalScrollView mHorizontalScrollView;
+    @Bind(R.id.rg_hot_good_classfy)
+    RadioGroup radioGroup;
+//    @Bind(R.id.id_horizontalScrollView)
+//    MyHorizontalScrollView mHorizontalScrollView;
     private HorizontalScrollViewAdapter mAdapter;
 
 
@@ -72,8 +76,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     groupAdapter.notifyDataSetChanged();
                     break;
                 default:
-                    break;
-            }
+            break;
+        }
 
         }
 
@@ -84,6 +88,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_choiceness_recommend_route, null);
         ButterKnife.bind(this, view);
+//        radioGroup.check(R.id.rb_hot_good_all);
+        ((RadioButton)radioGroup.getChildAt(2)).setChecked(true);
         return view;
     }
 
@@ -102,27 +108,30 @@ public class HotGoodsFragment extends BasePageCheckFragment {
 
     @Override
     public void onEventMainThread(BaseJson bean) {
+//        radioGroup.addView();
 
-        final ArrayList<String> list = new ArrayList<String>();
-
-        list.add("全部");
-        list.add("akfha");
-        list.add("全部2");
-        list.add("全部3");
-        list.add("全部");
-        list.add("akfha6");
-        list.add("全部7");
-        list.add("");
-        mAdapter = new HorizontalScrollViewAdapter(QulianApplication.getContext(), list);
-        mHorizontalScrollView.initDatas(mAdapter);
-        mHorizontalScrollView.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
-            @Override
-            public void onClick(View view, int pos) {
-                mAdapter.setSelectedPosition(pos);
-                mAdapter.notifyDataSetChanged();
-
-            }
-        });
+//        final ArrayList<String> list = new ArrayList<String>();
+//
+//        list.add("全部");
+//        list.add("akfha");
+//        list.add("全部2");
+//        list.add("全部3");
+//        list.add("全部");
+//        list.add("akfha6");
+//        list.add("全部7");
+//        list.add("");
+//        mAdapter = new HorizontalScrollViewAdapter(QulianApplication.getContext(), list);
+//
+//        mHorizontalScrollView.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
+//            @Override
+//            public void onClick(View view, int pos) {
+//                mAdapter.setSelectedPosition(pos);
+//                mAdapter.notifyDataSetChanged();
+//                ToastUtil.showToast(mContext,list.get(pos));
+//
+//            }
+//        });
+//        mHorizontalScrollView.initDatas(mAdapter);
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
             TuanBean tuanbean = (TuanBean) bean;

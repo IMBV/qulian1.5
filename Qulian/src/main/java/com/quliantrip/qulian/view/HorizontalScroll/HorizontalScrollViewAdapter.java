@@ -52,6 +52,7 @@ public class HorizontalScrollViewAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+        System.out.println("dianji");
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.view_horizontalscrollview_item, parent, false);
         }
@@ -107,6 +108,5 @@ public class HorizontalScrollViewAdapter extends BaseAdapter {
      */
     public void setSelectedPosition(int position) {
         this.mPosition = position;
-        this.notifyDataSetChanged();
     }
 }

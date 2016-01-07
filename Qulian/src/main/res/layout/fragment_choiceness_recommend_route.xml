@@ -14,62 +14,102 @@
         android:layout_height="44dp"
         android:background="@color/app_main_bg">
 
-        <com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView
-            android:id="@+id/id_horizontalScrollView"
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_gravity="bottom"
-            android:background="@color/app_main_bg"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:id="@+id/id_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/app_main_bg"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal"
-                ></LinearLayout>
-        </com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView>
-
-
-        <!-- <RadioGroup
-             android:layout_width="fill_parent"
+        <!-- <com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView
+             android:id="@+id/id_horizontalScrollView"
+             android:layout_width="wrap_content"
              android:layout_height="44dp"
-             android:layout_alignParentBottom="true"
              android:layout_gravity="bottom"
              android:background="@color/app_main_bg"
-             android:gravity="center_vertical"
-             android:orientation="horizontal">
+             android:scrollbars="none">
+
+             <LinearLayout
+                 android:id="@+id/id_gallery"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:background="@color/app_main_bg"
+                 android:layout_gravity="center_vertical"
+                 android:orientation="horizontal"
+                 ></LinearLayout>
+         </com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView>-->
 
 
-             <RadioButton
-                 android:id="@+id/rb_home_page"
-                 style="@style/choiceness_btn_selector"
-                 android:layout_marginLeft="10dp"
-                 android:text="@string/tab_home_function" />
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
-             <RadioButton
-                 style="@style/choiceness_btn_selector"
-                 android:layout_marginLeft="15dp"
-                 android:text="@string/tab_home_function" />
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
 
-             <RadioButton
-                 style="@style/choiceness_btn_selector"
-                 android:layout_marginLeft="15dp"
-                 android:text="@string/tab_home_function" />
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
 
-             <RadioButton
-                 style="@style/choiceness_btn_selector"
-                 android:layout_marginLeft="15dp"
-                 android:text="@string/tab_home_function" />
+                    <RadioGroup
+                        android:id="@+id/rg_hot_good_classfy"
+                        android:layout_width="fill_parent"
+                        android:layout_height="44dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:background="@color/app_main_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-             <RadioButton
-                 style="@style/choiceness_btn_selector"
-                 android:layout_marginLeft="15dp"
-                 android:text="@string/tab_home_function" />
 
-         </RadioGroup>-->
+                        <RadioButton
+                            android:id="@+id/rb_hot_good_all"
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="全部" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/tab_home_function" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+
 
         <LinearLayout
             android:id="@+id/ll_route_sift"
@@ -97,6 +137,7 @@
                 android:background="@mipmap/nav_shaixuan_normal" />
         </LinearLayout>
     </RelativeLayout>
+
     <View
         android:id="@+id/v_consume_list_bottom_line"
         android:layout_width="match_parent"
