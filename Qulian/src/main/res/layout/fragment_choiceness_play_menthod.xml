@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_consume_list_sort"
+            style="@style/choiceness_condition_every_page">
+
+            <TextView
+                android:id="@+id/tv_consume_list_sort_name"
+                style="@style/choiceness_condition_title"
+                android:text="特设主题" />
+
+            <ImageView
+                android:id="@+id/iv_consume_list_sort_arrow"
+                style="@style/choiceness_condition_Image"
+                android:background="@mipmap/nav_shaixuan_normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="#8F8F8F" />
+
+        <LinearLayout
+            android:id="@+id/ll_consume_list_city"
+            style="@style/choiceness_condition_every_page">
+
+            <TextView
+                android:id="@+id/tv_consume_list_city_name"
+                style="@style/choiceness_condition_title"
+                android:text="预约时间" />
+
+            <ImageView
+                android:id="@+id/iv_consume_list_city_arrow"
+                style="@style/choiceness_condition_Image"
+                android:background="@mipmap/nav_shaixuan_normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="#8F8F8F" />
+
+        <LinearLayout
+            android:id="@+id/ll_consume_list_default"
+            style="@style/choiceness_condition_every_page">
+
+            <TextView
+                android:id="@+id/tv_consume_list_default_name"
+                style="@style/choiceness_condition_title"
+                android:text="使用人数" />
+
+            <ImageView
+                android:id="@+id/iv_consume_list_default_arrow"
+                style="@style/choiceness_condition_Image"
+                android:background="@mipmap/nav_shaixuan_normal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/adapter_play_method_item"/>
+
+
+
+</LinearLayout>

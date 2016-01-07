@@ -1,8 +1,10 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.HomePageBean;
@@ -13,6 +15,8 @@ import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Yuly on 2015/12/7.
  * www.quliantrip.com
@@ -21,9 +25,9 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
     @Override
     protected View getSuccessView() {
-        TextView textView = new TextView(mContext);
-        textView.setText("热门商品");
-        return textView;
+        View view = View.inflate(mContext, R.layout.fragment_choiceness_play_menthod, null);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override

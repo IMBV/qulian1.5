@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:RatioImageView="http://schemas.android.com/apk/res/com.quliantrip.qulian"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:ignore="ResAuto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.quliantrip.qulian.view.RatioImageView
+            android:id="@+id/iv_choice_paly_method_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@mipmap/bg_default_big"
+            RatioImageView:ratioscale="2.1428" />
+
+        <View
+            android:id="@+id/tl_play_method_all_img"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/iv_choice_paly_method_pic"
+            android:background="@color/colorPrimary" />
+
+        <com.quliantrip.qulian.view.CircleImageView
+            android:id="@+id/civ_expert_author_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/tl_play_method_all_img"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:src="@mipmap/icon_photo"
+            app:border_color="#b2FFFFFF"
+            app:border_width="1.5dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_choice_paly_method_pic"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_play_method_like_img"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:src="@mipmap/like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_play_method_like_img"
+                android:text="有250这样玩"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_expert_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:text="上野浅草情侣半日休闲吃饱喝足游"
+        android:textColor="@color/app_main_title"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_expert_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:maxLines="2"
+        android:text="上野浅草情侣半日休闲吃饱喝足游,日休闲吃饱喝足游,日休闲吃饱喝足游"
+        android:textColor="@color/app_main_sub_title_text"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <ImageView
+            android:id="@+id/iv_play_method_location_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:src="@mipmap/icon_location" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_play_method_location_img"
+            android:text="上野浅草 700m"
+            android:textColor="@color/app_main_sub_title_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="￥:200"
+            android:textColor="#ff0000"
+            android:textSize="14sp" />
+    </RelativeLayout>
+</LinearLayout>

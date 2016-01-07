@@ -35,7 +35,7 @@
                 android:layout_height="68dp"
                 android:src="@mipmap/icon_photo"
                 app:border_color="#b2FFFFFF"
-                app:border_width="2dp"></com.quliantrip.qulian.view.CircleImageView>
+                app:border_width="2dp"/>
 
             <TextView
                 android:id="@+id/tv_me_username"
