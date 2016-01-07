@@ -1,4 +1,10 @@
 <resources>
+    <!--充满品屏幕的的分割线-->
+    <style name="dev_all_line">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/app_main_dev_line</item>
+    </style>
     <!--标题栏有样式-->
     <style name="app_title">
         <item name="android:layout_width">match_parent</item>
@@ -62,7 +68,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/viewpage_selector_slide_title</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <!--填充满整个屏幕的宽度-->
     <style name="fill_fill">

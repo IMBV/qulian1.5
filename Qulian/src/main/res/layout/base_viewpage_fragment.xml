@@ -9,7 +9,7 @@
     <com.quliantrip.qulian.lib.PagerSlidingTabStrip
         android:id="@+id/pager_tabstrip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:background="@drawable/sliding_tab_strip_background"
         app:allowWidthFull="true"
         app:slidingBlock="@drawable/image_sliding_block" >

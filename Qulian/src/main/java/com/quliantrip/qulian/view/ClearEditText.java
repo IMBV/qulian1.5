@@ -14,6 +14,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 
 
 public class ClearEditText extends EditText implements OnFocusChangeListener,
@@ -41,7 +43,8 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
 			mClearDrawable = getResources().getDrawable(R.mipmap.icon_close);
 		}
 
-		mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(),
+		mClearDrawable.setBounds(0 - CommonHelp.dip2px(QulianApplication.getContext(),5), 0,
+				mClearDrawable.getIntrinsicWidth() -  CommonHelp.dip2px(QulianApplication.getContext(),5),
 				mClearDrawable.getIntrinsicHeight());
 		// 默认设置隐藏图标
 		setClearIconVisible(false);

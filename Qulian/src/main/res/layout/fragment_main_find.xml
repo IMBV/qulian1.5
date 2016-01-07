@@ -24,14 +24,12 @@
             android:src="@mipmap/nav_up_h" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/app_main_dev_line" />
+    <View style="@style/dev_all_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="103dp"
+        android:background="@color/colorPrimary"
         android:padding="10dp">
 
         <RelativeLayout
@@ -42,9 +40,9 @@
                 android:layout_width="83dp"
                 android:layout_height="83dp"
                 android:gravity="center_vertical"
+                android:src="@mipmap/bg_default_min"
                 android:text="日历天气和聊天"
-                android:textSize="20sp"
-                android:src="@mipmap/bg_default_min"/>
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -56,18 +54,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center"
-                android:text="不知道怎么写"/>
+                android:text="不知道怎么写" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
+                android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_btn_yellow"
                 android:text="进入群"
-                android:textSize="12sp"
-                android:layout_alignParentBottom="true"/>
+                android:textSize="12sp" />
         </RelativeLayout>
 
     </LinearLayout>
+
+    <View style="@style/dev_all_line" />
 
     <FrameLayout
         android:id="@+id/fl_find_content_container"

@@ -3,37 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <RelativeLayout style="@style/app_title"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/nav_back" />
-
-        <com.quliantrip.qulian.view.ClearEditText
-            android:layout_width="270dp"
-            android:layout_height="28dip"
-            android:layout_centerInParent="true"
-            android:background="@drawable/bg_edittext"
-            android:drawableLeft="@mipmap/search"
-            android:hint="请输入商品名、地名"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textColorHint="#AAAAAA"
-            android:textSize="15dip" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:text="取消" />
-    </RelativeLayout>
+    <include layout="@layout/layout_home_search"/>
 
     <FrameLayout
         android:id="@+id/fl_secnic_container"
