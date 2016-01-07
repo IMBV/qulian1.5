@@ -31,6 +31,7 @@
             android:layout_height="285dp"
             android:background="@color/colorPrimary"
             android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
             android:dividerHeight="0dp"
             android:scrollbars="none" />
     </ScrollView>

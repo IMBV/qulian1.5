@@ -9,60 +9,56 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.TuanBean;
+import com.quliantrip.qulian.domain.SingleListBean;
 
 import java.util.List;
 
-
-public class HotGoodChildAdapter extends BaseAdapter {
-
+public class SingleListAdapter extends BaseAdapter {
     Context mContext;
-    List<TuanBean.QuanListEntity.QuanSubEntity> mChildArr;// 子item标题数组
+    List<SingleListBean> singleList;
 
-    public HotGoodChildAdapter(Context context) {
-        mContext = context;
-    }
-
-    public void setChildData(List<TuanBean.QuanListEntity.QuanSubEntity> childArr) {
-        this.mChildArr = childArr;
+    public SingleListAdapter(Context context, List<SingleListBean> singleList) {
+        this.mContext = context;
+        this.singleList = singleList;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
+
+        // 初始化布局控件
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(
-                    R.layout.item_child_layout, null);
-            holder.childText = (TextView) convertView
-                    .findViewById(R.id.child_textView);
+                    R.layout.item_single_list_layout, null);
+            holder.groupName = (TextView) convertView
+                    .findViewById(R.id.tv_single_list);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.childText.setText(mChildArr.get(position).getName());
-        return convertView;
-    }
 
-    static class ViewHolder {
-        TextView childText;
+        holder.groupName.setText(singleList.get(position).getDes());
+        return convertView;
     }
 
     @Override
     public int getCount() {
-        if (mChildArr == null) {
-            return 0;
-        }
-        return mChildArr.size();
+        return singleList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mChildArr.get(position);
+        return singleList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    static class ViewHolder {
+
+        TextView groupName;
     }
 }

@@ -3,14 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/app_main_tag_dec_line" />
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/ll_consume_list_sort"
+            android:id="@+id/ll_paly_method_specialty_theme"
             style="@style/choiceness_condition_every_page">
 
             <TextView
@@ -26,8 +30,9 @@
 
         <View
             android:layout_width="1px"
-            android:layout_height="fill_parent"
-            android:background="#8F8F8F" />
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@color/app_main_dev_line" />
 
         <LinearLayout
             android:id="@+id/ll_consume_list_city"
@@ -46,8 +51,9 @@
 
         <View
             android:layout_width="1px"
-            android:layout_height="fill_parent"
-            android:background="#8F8F8F" />
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@color/app_main_dev_line" />
 
         <LinearLayout
             android:id="@+id/ll_consume_list_default"
@@ -64,9 +70,12 @@
                 android:background="@mipmap/nav_shaixuan_normal" />
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:id="@+id/v_consume_list_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/app_main_tag_dec_line" />
 
     <include layout="@layout/adapter_play_method_item"/>
-
-
 
 </LinearLayout>

@@ -177,7 +177,6 @@
         <item name="android:textColor">#ffffff</item>
     </style>
 
-    android:orientation="vertical"
     <!--首页功能导航样式-->
     <style name="home_function_every">
         <item name="android:layout_width">wrap_content</item>
@@ -196,6 +195,7 @@
         <item name="android:textColor">@color/app_main_title_text</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <!--选项条下面的小黄线的样式-->
     <style name="choiceness_title_down_line">
         <item name="android:layout_width">35dp</item>
@@ -204,6 +204,7 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:background">@color/app_main_collor</item>
     </style>
+
     <!--精选二级筛选的样式-->
     <style name="choiceness_hot_good_second_sift">
         <item name="android:layout_width">match_parent</item>
@@ -211,6 +212,15 @@
         <item name="android:paddingLeft">30dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/selector_hot_good_sift_child_text</item>
+    </style>
+
+    <!--精选简单列表-->
+    <style name="popupwindow_single_listView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/selector_hot_good_sift_child_text</item>
     </style>
