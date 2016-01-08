@@ -13,6 +13,15 @@ import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.SecnicFragment;
  * Created by Qulian5 on 2016/1/5.
  */
 public class SecnicPlayFragment extends BaseViewPagerFragment {
+
+    private static SecnicPlayFragment secnicPlayFragment = new SecnicPlayFragment();
+
+    public static SecnicPlayFragment getInstance() {
+        if (secnicPlayFragment == null)
+            secnicPlayFragment = new SecnicPlayFragment();
+        return secnicPlayFragment;
+    }
+
     @Override
     protected void onSetupTabAdapter(ViewPageFragmentAdapter adapter) {
         String[] title = getResources().getStringArray(

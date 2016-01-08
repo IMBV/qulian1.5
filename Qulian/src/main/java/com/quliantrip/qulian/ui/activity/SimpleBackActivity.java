@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -35,7 +36,7 @@ public class SimpleBackActivity extends BaseSwipeBackActivity {
 
     @Override
     public void initFindView() {
-        ((ImageView)findViewById(R.id.iv_simple_back)).setOnClickListener(new View.OnClickListener() {
+        ((RelativeLayout)findViewById(R.id.iv_simple_back)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

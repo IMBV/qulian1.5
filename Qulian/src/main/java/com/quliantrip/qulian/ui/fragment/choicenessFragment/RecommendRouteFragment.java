@@ -5,8 +5,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.popAdapter.SingleListAdapter;
@@ -33,6 +35,20 @@ import butterknife.OnClick;
  * www.quliantrip.com
  */
 public class RecommendRouteFragment extends BasePageCheckFragment {
+    //筛选条的字体和箭头
+    @Bind(R.id.tv_paly_method_theme_text)
+    TextView siftThemeText;
+    @Bind(R.id.iv_paly_method_theme_img)
+    ImageView siftThemeImg;
+    @Bind(R.id.tv_paly_method_pretime_text)
+    TextView siftTimeText;
+    @Bind(R.id.iv_paly_method_pre_time_img)
+    ImageView siftTimeImg;
+    @Bind(R.id.tv_paly_method_person_number_text)
+    TextView siftPnumText;
+    @Bind(R.id.iv_paly_method_person_number_img)
+    ImageView siftPnumImg;
+
     @Bind(R.id.v_consume_list_bottom_line)
     View bottomLine;
 
@@ -57,7 +73,9 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     }
 
     private boolean isShowTheme = true;
-
+    private boolean isPreTime = true;
+    private boolean isPersonNumber = true;
+    //点击选择主题
     @OnClick(R.id.ll_paly_method_specialty_theme)
     void showSpacialtyTheme() {
         List<SingleListBean> list = new ArrayList<SingleListBean>();
@@ -75,9 +93,89 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             showSingleListPopuWindow(list);
         else
             hidePopupWindow();
+        setSelectCollor(siftThemeText,siftThemeImg,isShowTheme);
         isShowTheme = !isShowTheme;
     }
+    //点击选择预约时间
+    @OnClick(R.id.ll_paly_method_pre_time)
+    void showPreviewTime() {
+        List<SingleListBean> list = new ArrayList<SingleListBean>();
+        list.add(new SingleListBean("1", "nihasdfh"));
+        list.add(new SingleListBean("2", "nihasdfh2"));
+        list.add(new SingleListBean("3", "nihasdfh3"));
+        list.add(new SingleListBean("4", "nihasdfh4"));
+        list.add(new SingleListBean("5", "nihasdfh5"));
+        list.add(new SingleListBean("1", "nihasdfh"));
+        list.add(new SingleListBean("2", "nihasdfh2"));
+        list.add(new SingleListBean("3", "nihasdfh3"));
+        list.add(new SingleListBean("4", "nihasdfh4"));
+        list.add(new SingleListBean("5", "nihasdfh5"));
+        if (isPreTime)
+            showSingleListPopuWindow(list);
+        else
+            hidePopupWindow();
+        setSelectCollor(siftTimeText,siftTimeImg,isPreTime);
+        isPreTime = !isPreTime;
+    }
+    //点击选着适合人数
+    @OnClick(R.id.tv_paly_method_person_number_text)
+    void showPersonNumber() {
+        List<SingleListBean> list = new ArrayList<SingleListBean>();
+        list.add(new SingleListBean("1", "nihasdfh"));
+        list.add(new SingleListBean("2", "nihasdfh2"));
+        list.add(new SingleListBean("3", "nihasdfh3"));
+        list.add(new SingleListBean("4", "nihasdfh4"));
+        list.add(new SingleListBean("5", "nihasdfh5"));
+        list.add(new SingleListBean("1", "nihasdfh"));
+        list.add(new SingleListBean("2", "nihasdfh2"));
+        list.add(new SingleListBean("3", "nihasdfh3"));
+        list.add(new SingleListBean("4", "nihasdfh4"));
+        list.add(new SingleListBean("5", "nihasdfh5"));
+        if (isPersonNumber)
+            showSingleListPopuWindow(list);
+        else
+            hidePopupWindow();
+        setSelectCollor(siftPnumText,siftPnumImg,isPersonNumber);
+        isPersonNumber = !isPersonNumber;
+    }
 
+    //设置选着的颜色
+    public void setSelectCollor(TextView textView,ImageView imageView,boolean b){
+        if (b){
+            textView.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+            imageView.setImageResource(R.mipmap.nav_shaixuan_press);
+        }else{
+            textView.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+            imageView.setImageResource(R.mipmap.nav_shaixuan_normal);
+        }
+    }
+
+
+
+    //隐藏pouwindow
+    public void hidePopupWindow() {
+        //在onsrcll中的方法在oncreate会调用,所以判断是否为空
+        if (singlePopupWindow != null) {
+            singlePopupWindow.dismiss();
+            singlePopupWindow = null;
+        }
+//        if(siftPnumText!=null){
+//            hideAllInfo();
+//        }
+
+    }
+
+
+    private void hideAllInfo() {
+        isShowTheme = true;
+        isPreTime = true;
+        isPersonNumber = true;
+        setSelectCollor(siftPnumText,siftPnumImg,isPersonNumber);
+        setSelectCollor(siftThemeText,siftThemeImg,isShowTheme);
+        setSelectCollor(siftTimeText,siftTimeImg,isPreTime);
+    }
+
+    //显示弹框
     private PopupWindow singlePopupWindow;
     MyListView singleListView = null;
     SingleListAdapter singleListAdapter = null;
@@ -110,15 +208,6 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         int x = location[0];
         int y = location[1];
         singlePopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 1);
-    }
-
-    //隐藏pouwindow
-    public void hidePopupWindow() {
-        //在onsrcll中的方法在oncreate会调用,所以判断是否为空
-        if (singlePopupWindow != null) {
-            singlePopupWindow.dismiss();
-            singlePopupWindow = null;
-        }
     }
 }
 

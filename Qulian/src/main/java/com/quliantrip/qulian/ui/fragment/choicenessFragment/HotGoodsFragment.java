@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -21,15 +20,11 @@ import com.quliantrip.qulian.adapter.popAdapter.HotGoodGroupAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.TuanBean;
-import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.HorizontalScroll.HorizontalScrollViewAdapter;
-import com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,20 +80,20 @@ public class HotGoodsFragment extends BasePageCheckFragment {
 
     @Override
     protected View getSuccessView() {
-        View view = View.inflate(mContext, R.layout.fragment_choiceness_recommend_route, null);
+        View view = View.inflate(mContext, R.layout.fragment_choiceness_hot_good, null);
         ButterKnife.bind(this, view);
 //        radioGroup.check(R.id.rb_hot_good_all);
-        ((RadioButton)radioGroup.getChildAt(2)).setChecked(true);
-        initRadioButton();
+//        ((RadioButton)radioGroup.getChildAt(0)).setChecked(true);
+//        initRadioButton();
         return view;
     }
 
-    //添加选着条件按钮
-    private void initRadioButton() {
-        RadioButton radioButton = new RadioButton(mContext);
-
-
-    }
+//    //添加选着条件按钮
+//    private void initRadioButton() {
+//        RadioButton radioButton = new RadioButton(mContext);
+//
+//
+//    }
 
     private QuestBean questBean;
     @Override

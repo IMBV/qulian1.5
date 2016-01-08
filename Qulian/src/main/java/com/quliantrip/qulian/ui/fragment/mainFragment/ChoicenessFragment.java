@@ -110,5 +110,8 @@ public class ChoicenessFragment extends Fragment {
         if (hotGoodsFragment != null){
             hotGoodsFragment.hidePopupWindow();
         }
+        if (recommendRouteFragment !=null){
+            recommendRouteFragment.hidePopupWindow();
+        }
     }
 }

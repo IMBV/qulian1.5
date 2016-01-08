@@ -56,10 +56,6 @@
                         android:background="@color/app_main_bg"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <ListView
-                            android:layout_width="200dp"
-                            android:layout_height="match_parent"></ListView>
-
 
                         <RadioButton
                             android:id="@+id/rb_hot_good_all"
@@ -67,14 +63,26 @@
                             android:layout_marginLeft="10dp"
                             android:text="全部" />
 
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="门票" />
 
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="美食" />
+
+                        <RadioButton
+                            style="@style/choiceness_btn_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="交通" />
 
                     </RadioGroup>
 
                 </RelativeLayout>
             </HorizontalScrollView>
         </ScrollView>
-
 
         <LinearLayout
             android:id="@+id/ll_route_sift"
@@ -108,9 +116,12 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/app_main_tag_dec_line" />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
 
+
+<include layout="@layout/adapter_play_method_detail_good_item"/>
+    <!--<ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"></ListView>-->
 
 </LinearLayout>

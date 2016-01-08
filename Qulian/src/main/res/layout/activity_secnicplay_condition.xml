@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/layout_home_search"/>
+
+    <include layout="@layout/layout_home_search" />
 
     <FrameLayout
         android:id="@+id/fl_secnic_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary" />
 </LinearLayout>
