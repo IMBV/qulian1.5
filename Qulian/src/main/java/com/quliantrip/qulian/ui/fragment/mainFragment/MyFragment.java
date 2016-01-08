@@ -44,7 +44,6 @@ public class MyFragment extends BaseFragment {
     public View initView() {
         view = View.inflate(mContext, R.layout.fragment_main_me, null);
         ButterKnife.bind(this, view);
-//        checkLogin();
         return view;
     }
 
@@ -132,7 +131,6 @@ public class MyFragment extends BaseFragment {
 
 //    @OnClick(R.id.bt_map)
 //    void enterMap() {
-//        Intent intent = new Intent(mContext,MapActivity.class);
 //        startActivity(intent);
 //
 //    }

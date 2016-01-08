@@ -52,6 +52,5 @@ public class HotCityListAdapter extends BasicAdapter<CityListBean.HotCityEntity>
             }
             return holder;
         }
-
     }
 }

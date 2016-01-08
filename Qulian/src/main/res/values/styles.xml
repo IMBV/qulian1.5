@@ -1,4 +1,18 @@
 <resources>
+    <!--清单文件样式-->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--在拖拽时的背景样式的透明的有样式-->
+    <style name="SwipeBackActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--应用主要样式-->
     <!--充满品屏幕的的分割线-->
     <style name="dev_all_line">
         <item name="android:layout_width">wrap_content</item>
@@ -10,27 +24,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">44dp</item>
     </style>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
-    <!--在拖拽时的背景样式的透明的有样式-->
-    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
-    <!-- SwipeBackActivity -->
-    <style name="SwipeBackActivity" parent="@style/AppBaseTheme"></style>
-    <!--状态栏通明的样式-->
-    <style name="FullBleedTheme" parent="android:Theme.Light.NoTitleBar">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-
-    <!-- <item name="android:background">@drawable/transparent</item>-->
+    <!--首页底部tab样式-->
     <style name="main_tab_bottom">
         <item name="android:textSize">@dimen/bottom_tab_font_size</item>
         <item name="android:textColor">@color/selector_mian_tab_collor</item>
