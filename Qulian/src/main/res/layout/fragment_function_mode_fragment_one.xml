@@ -4,8 +4,7 @@
     android:background="#ffffff"
     android:gravity="center">
 
-    <LinearLayout
-        style="@style/home_function_every">
+    <LinearLayout style="@style/home_function_every">
 
         <ImageView
             android:layout_width="46dp"
@@ -23,9 +22,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="45dp"
         style="@style/home_function_every"
-        >
+        android:layout_marginLeft="45dp">
 
         <ImageView
             android:layout_width="46dp"
@@ -43,9 +41,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="45dp"
         style="@style/home_function_every"
-        >
+        android:layout_marginLeft="45dp">
 
         <ImageView
             android:layout_width="46dp"
@@ -63,9 +60,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="45dp"
         style="@style/home_function_every"
-        >
+        android:layout_marginLeft="45dp">
 
         <ImageView
             android:layout_width="46dp"

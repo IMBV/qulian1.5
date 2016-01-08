@@ -76,6 +76,6 @@
         android:layout_height="1px"
         android:background="@color/app_main_tag_dec_line" />
 
-    <include layout="@layout/adapter_play_method_item"/>
+    <include layout="@layout/adapter_play_list_item"/>
 
 </LinearLayout>

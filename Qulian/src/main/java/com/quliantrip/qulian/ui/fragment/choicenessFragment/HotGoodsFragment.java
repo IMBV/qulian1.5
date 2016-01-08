@@ -44,7 +44,6 @@ import butterknife.OnClick;
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
 
-
     @Bind(R.id.ll_route_sift)
     LinearLayout siftCondition;
     @Bind(R.id.tv_recommend_route_text)
@@ -90,7 +89,15 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         ButterKnife.bind(this, view);
 //        radioGroup.check(R.id.rb_hot_good_all);
         ((RadioButton)radioGroup.getChildAt(2)).setChecked(true);
+        initRadioButton();
         return view;
+    }
+
+    //添加选着条件按钮
+    private void initRadioButton() {
+        RadioButton radioButton = new RadioButton(mContext);
+
+
     }
 
     private QuestBean questBean;

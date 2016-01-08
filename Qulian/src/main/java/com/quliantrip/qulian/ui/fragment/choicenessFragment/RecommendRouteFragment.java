@@ -6,17 +6,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.popAdapter.NavsGroupAdapter;
 import com.quliantrip.qulian.adapter.popAdapter.SingleListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.HomePageBean;
 import com.quliantrip.qulian.domain.SingleListBean;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
