@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/iv_order_check_number"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/icon_people" />
+
+        <TextView
+            style="@style/order_condition_condition_text"
+            android:layout_toRightOf="@id/iv_order_check_number"
+            android:text="选择人数" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_good_person_number_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@color/app_main_collor" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="36dp"
+                    android:layout_height="1dp"
+                    android:background="@color/app_main_dev_line" />
+
+                <TextView
+                    android:id="@+id/tv_good_check_person_number"
+                    android:layout_width="36dp"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="1" />
+
+                <View
+                    android:layout_width="36dp"
+                    android:layout_height="1dp"
+                    android:background="@color/app_main_dev_line" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_good_person_number_add"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@color/app_main_collor" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/iv_order_check_store"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/icon_mendian" />
+
+        <TextView
+            android:id="@+id/tv_order_store_text"
+            style="@style/order_condition_condition_text"
+            android:layout_toRightOf="@id/iv_order_check_store"
+            android:text="选择门店" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/tv_order_store_text"
+            android:text="二条本店"
+            android:textColor="@color/app_main_collor"
+            android:textSize="14sp" />
+
+        <ImageView
+            style="@style/me_next_img"
+            android:src="@mipmap/icon_next" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/iv_order_check_data"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/icon_mendian" />
+
+        <TextView
+            android:id="@+id/tv_order_data_text"
+            style="@style/order_condition_condition_text"
+            android:layout_toRightOf="@id/iv_order_check_data"
+            android:text="预约日期" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/tv_order_data_text"
+            android:text="2015-12-25"
+            android:textColor="@color/app_main_collor"
+            android:textSize="14sp" />
+
+        <ImageView
+            style="@style/me_next_img"
+            android:src="@mipmap/icon_next" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:id="@+id/iv_order_check_time"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/icon_x_time" />
+
+        <TextView
+            android:id="@+id/tv_order_time_text"
+            style="@style/order_condition_condition_text"
+            android:layout_toRightOf="@id/iv_order_check_time"
+            android:text="服务时间" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/tv_order_time_text"
+            android:text="11:20"
+            android:textColor="@color/app_main_collor"
+            android:textSize="14sp" />
+
+        <ImageView
+            style="@style/me_next_img"
+            android:src="@mipmap/icon_next" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
