@@ -21,6 +21,7 @@ import com.quliantrip.qulian.domain.SingleListBean;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.view.MyListView;
 
 import java.util.ArrayList;
@@ -60,14 +61,26 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
     }
 
-    @OnClick(R.id.ll_paly_method_specialty_theme) void showSpacialtyTheme(){
+    private boolean isShowTheme = true;
+
+    @OnClick(R.id.ll_paly_method_specialty_theme)
+    void showSpacialtyTheme() {
         List<SingleListBean> list = new ArrayList<SingleListBean>();
-        list.add(new SingleListBean("1","nihasdfh"));
-        list.add(new SingleListBean("2","nihasdfh2"));
-        list.add(new SingleListBean("3","nihasdfh3"));
-        list.add(new SingleListBean("4","nihasdfh4"));
-        list.add(new SingleListBean("5","nihasdfh5"));
-        showSingleListPopuWindow(list);
+        list.add(new SingleListBean("1", "nihasdfh"));
+        list.add(new SingleListBean("2", "nihasdfh2"));
+        list.add(new SingleListBean("3", "nihasdfh3"));
+        list.add(new SingleListBean("4", "nihasdfh4"));
+        list.add(new SingleListBean("5", "nihasdfh5"));
+        list.add(new SingleListBean("1", "nihasdfh"));
+        list.add(new SingleListBean("2", "nihasdfh2"));
+        list.add(new SingleListBean("3", "nihasdfh3"));
+        list.add(new SingleListBean("4", "nihasdfh4"));
+        list.add(new SingleListBean("5", "nihasdfh5"));
+        if (isShowTheme)
+            showSingleListPopuWindow(list);
+        else
+            hidePopupWindow();
+        isShowTheme = !isShowTheme;
     }
 
     private PopupWindow singlePopupWindow;
@@ -94,7 +107,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
                 SingleListBean bean = (SingleListBean) parent.getAdapter().getItem(position);
             }
         });
-        singlePopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        singlePopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext,285));
         singlePopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //popupwindow显示的坐标的位置
         int[] location = new int[2];
@@ -102,6 +115,15 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         int x = location[0];
         int y = location[1];
         singlePopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 1);
+    }
+
+    //隐藏pouwindow
+    public void hidePopupWindow() {
+        //在onsrcll中的方法在oncreate会调用,所以判断是否为空
+        if (singlePopupWindow != null) {
+            singlePopupWindow.dismiss();
+            singlePopupWindow = null;
+        }
     }
 }
 
