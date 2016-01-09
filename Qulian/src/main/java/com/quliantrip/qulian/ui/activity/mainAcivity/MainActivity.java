@@ -361,11 +361,11 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    //加载选着大分类的消费列表并显示
-    public void changeChoicenessContion(String name, String id) {
-        if (choicenessFragment == null) {
-            choicenessFragment = new ChoicenessFragment();
-        }
+    //加载选着大分类的消费列表并显示，这里进行传递对象
+//    public void changeChoicenessContion(String name, String id) {
+//        if (choicenessFragment == null) {
+//            choicenessFragment = new ChoicenessFragment();
+//        }
 //        if(!choicenessFragment.isAdded()){
 //            choicenessFragment.changeBigSortNoFragemnt(name,id);
 //            switchFragment(choicenessFragment);
@@ -373,7 +373,7 @@ public class MainActivity extends FragmentActivity {
 //            switchFragment(choicenessFragment);
 //            choicenessFragment.changeBigSort(name,id);
 //        }
-//        radioGroup.check(R.id.rb_choiceness_page);
-        ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
-    }
+//
+//        ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
+//    }
 }

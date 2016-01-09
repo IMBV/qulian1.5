@@ -106,12 +106,21 @@ public class ChoicenessFragment extends Fragment {
     }
 
     //隐藏精选的popupwindow
-    public void hidePopwindow(){
-        if (hotGoodsFragment != null){
+    public void hidePopwindow() {
+        if (hotGoodsFragment != null) {
             hotGoodsFragment.hidePopupWindow();
         }
-        if (recommendRouteFragment !=null){
+        if (recommendRouteFragment != null) {
             recommendRouteFragment.hidePopupWindow();
         }
+    }
+
+
+    public void changeHotGoodFragment(){
+        if (hotGoodsFragment == null){
+            hotGoodsFragment = new HotGoodsFragment();
+        }
+        gotoSubFragmennt(hotGoodsFragment);
+//        hotGoodsFragment.changeClassfy();
     }
 }

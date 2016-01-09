@@ -190,11 +190,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         UIHelper.showCityChoose(this, 1);
     }
 
-    //点击加载更多
-    @OnClick(R.id.tv_loading_more) void loadMore(){
-        activity.changeChoicenessContion("全部分类", "0");
-    }
-
     //连接wifi
     @OnClick(R.id.iv_home_title_wifi)
     void connectWifi() {

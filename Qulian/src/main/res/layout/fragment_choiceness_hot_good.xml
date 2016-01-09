@@ -14,25 +14,6 @@
         android:layout_height="44dp"
         android:background="@color/app_main_bg">
 
-        <!-- <com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView
-             android:id="@+id/id_horizontalScrollView"
-             android:layout_width="wrap_content"
-             android:layout_height="44dp"
-             android:layout_gravity="bottom"
-             android:background="@color/app_main_bg"
-             android:scrollbars="none">
-
-             <LinearLayout
-                 android:id="@+id/id_gallery"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:background="@color/app_main_bg"
-                 android:layout_gravity="center_vertical"
-                 android:orientation="horizontal"
-                 ></LinearLayout>
-         </com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView>-->
-
-
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -58,28 +39,11 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rb_hot_good_all"
                             style="@style/choiceness_btn_selector"
                             android:layout_marginLeft="10dp"
                             android:text="全部" />
 
-                        <RadioButton
-                            style="@style/choiceness_btn_selector"
-                            android:layout_marginLeft="10dp"
-                            android:text="门票" />
-
-                        <RadioButton
-                            style="@style/choiceness_btn_selector"
-                            android:layout_marginLeft="10dp"
-                            android:text="美食" />
-
-                        <RadioButton
-                            style="@style/choiceness_btn_selector"
-                            android:layout_marginLeft="10dp"
-                            android:text="交通" />
-
                     </RadioGroup>
-
                 </RelativeLayout>
             </HorizontalScrollView>
         </ScrollView>
@@ -118,7 +82,7 @@
         android:background="@color/app_main_tag_dec_line" />
 
 
-<include layout="@layout/adapter_play_method_detail_good_item"/>
+    <include layout="@layout/adapter_play_method_detail_good_item" />
     <!--<ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

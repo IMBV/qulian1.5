@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rb_home_page"
-    style="@style/choiceness_btn_selector"
-    android:layout_marginLeft="15dp"
-    android:text="@string/tab_home_function" />
-

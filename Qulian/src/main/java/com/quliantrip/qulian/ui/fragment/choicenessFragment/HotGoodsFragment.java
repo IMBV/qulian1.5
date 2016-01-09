@@ -6,11 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -23,7 +25,7 @@ import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.view.HorizontalScroll.HorizontalScrollViewAdapter;
+import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -50,16 +52,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
 
     @Bind(R.id.rg_hot_good_classfy)
     RadioGroup radioGroup;
-//    @Bind(R.id.id_horizontalScrollView)
-//    MyHorizontalScrollView mHorizontalScrollView;
-    private HorizontalScrollViewAdapter mAdapter;
-
-
-    private static RecommendRouteFragment recommendRouteFragment = new RecommendRouteFragment();
-
-    public static RecommendRouteFragment getRecommendRouteFragment(QuestBean questBean) {
-        return recommendRouteFragment;
-    }
+    //这构造函数中赋值
 
     Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -70,8 +63,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     groupAdapter.notifyDataSetChanged();
                     break;
                 default:
-            break;
-        }
+                    break;
+            }
 
         }
 
@@ -82,20 +75,36 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_choiceness_hot_good, null);
         ButterKnife.bind(this, view);
-//        radioGroup.check(R.id.rb_hot_good_all);
-//        ((RadioButton)radioGroup.getChildAt(0)).setChecked(true);
-//        initRadioButton();
+        ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
+        initRadioButton();
         return view;
     }
 
-//    //添加选着条件按钮
-//    private void initRadioButton() {
-//        RadioButton radioButton = new RadioButton(mContext);
-//
-//
-//    }
+    //添加选着条件按钮
+    private void initRadioButton() {
+        View view = View.inflate(mContext, R.layout.view_hot_good_classfy_item, null);
+        RadioButton radioButton = (RadioButton) view.findViewById(R.id.rb_hot_good_classfy_item);
+        radioButton.setText("美食");
+        radioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showToast(mContext, "我被点击了");
+            }
+        });
+        //设置被点击了
+        radioButton.setChecked(true);
+
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext,57),CommonHelp.dip2px(mContext,27));
+        view.setLayoutParams(params);
+        ViewGroup.LayoutParams params2 = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext,15),CommonHelp.dip2px(mContext,27));
+        View view2 = new View(mContext);
+        view2.setLayoutParams(params2);
+        radioGroup.addView(view2);
+        radioGroup.addView(view);
+    }
 
     private QuestBean questBean;
+
     @Override
     protected QuestBean requestData() {
         if (questBean == null) {
@@ -110,30 +119,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
 
     @Override
     public void onEventMainThread(BaseJson bean) {
-//        radioGroup.addView();
-
-//        final ArrayList<String> list = new ArrayList<String>();
-//
-//        list.add("全部");
-//        list.add("akfha");
-//        list.add("全部2");
-//        list.add("全部3");
-//        list.add("全部");
-//        list.add("akfha6");
-//        list.add("全部7");
-//        list.add("");
-//        mAdapter = new HorizontalScrollViewAdapter(QulianApplication.getContext(), list);
-//
-//        mHorizontalScrollView.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
-//            @Override
-//            public void onClick(View view, int pos) {
-//                mAdapter.setSelectedPosition(pos);
-//                mAdapter.notifyDataSetChanged();
-//                ToastUtil.showToast(mContext,list.get(pos));
-//
-//            }
-//        });
-//        mHorizontalScrollView.initDatas(mAdapter);
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
             TuanBean tuanbean = (TuanBean) bean;
@@ -142,32 +127,27 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     }
 
 
-
-
-
-
-
-
-
-
     private boolean isShowSift = true;
-    @OnClick(R.id.ll_route_sift) void showSiftRoute(){
+
+    @OnClick(R.id.ll_route_sift)
+    void showSiftRoute() {
         setSelector(isShowSift);
     }
 
     //显示和隐藏筛选条件
-    public void setSelector(boolean b){
-        if (b){
+    public void setSelector(boolean b) {
+        if (b) {
             siftText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
             siftImg.setImageResource(R.mipmap.nav_shaixuan_press);
             showSiftCondition();
-        }else {
+        } else {
             siftText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
             siftImg.setImageResource(R.mipmap.nav_shaixuan_normal);
             hidePopupWindow();
         }
         isShowSift = !isShowSift;
     }
+
     List<TuanBean.QuanListEntity> quanArray;
     private PopupWindow siftConditionPop;
     ListView groupListView = null;
@@ -175,6 +155,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     HotGoodGroupAdapter groupAdapter = null;
     HotGoodChildAdapter childAdapter = null;
     private PopupWindow siftPopupWindow;
+
     //显示筛选条件
     public void showSiftCondition() {
         View popView = null;
@@ -196,10 +177,12 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                                     int position, long id) {
                 TuanBean.QuanListEntity.QuanSubEntity bean =
                         (TuanBean.QuanListEntity.QuanSubEntity) parent.getAdapter().getItem(position);
+                ToastUtil.showToast(mContext, bean.getName());
+                //请求数据后发送给主线程中
             }
         });
 
-        siftPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext,285));
+        siftPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext, 285));
         siftPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //显示的筛选popupwinsow的坐标位置
         int[] location = new int[2];

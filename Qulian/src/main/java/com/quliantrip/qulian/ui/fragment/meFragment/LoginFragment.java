@@ -14,6 +14,9 @@ import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.ClearEditText;
 import com.tencent.connect.UserInfo;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -28,8 +31,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
-
 public class LoginFragment extends BaseFragment {
+    private static final String WEIXIN_APP_ID = "WX API KEY";
+    private IWXAPI mWeixinAPI;
 
     @Bind(R.id.ct_userinfo_name)
     ClearEditText name;
@@ -102,20 +106,36 @@ public class LoginFragment extends BaseFragment {
 
     @OnClick(R.id.iv_third_qq)
     void qqLogin() {
-        qqLoginAction();
-    }
-
-    @OnClick(R.id.iv_third_weixi)
-    void weixinLogin() {
-
-    }
-
-    private void qqLoginAction() {
         //如果session无效，就开始登录
         if (!mTencent.isSessionValid()) {
             //开始qq授权登录
             mTencent.login((SimpleBackActivity) mContext, "all", loginListener);
         }
+    }
+
+    @OnClick(R.id.iv_third_weixi)
+    void weixinLogin() {
+        if (mWeixinAPI == null) {
+            mWeixinAPI = WXAPIFactory.createWXAPI(mContext, WEIXIN_APP_ID, false);
+        }
+
+        if (!mWeixinAPI.isWXAppInstalled()) {
+            //提醒用户没有按照微信
+            ToastUtil.showToast(mContext, "你没有安装微信");
+            return;
+        }
+
+        if (!mWeixinAPI.isWXAppSupportAPI()) {
+            ToastUtil.showToast(mContext, "请先更新微信应用");
+            return;
+        }
+        mWeixinAPI.registerApp(WEIXIN_APP_ID);
+
+        SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";//"snsapi_base"
+        req.state = "req.state";
+        mWeixinAPI.sendReq(req);
+
     }
 
     @Override
@@ -193,8 +213,6 @@ public class LoginFragment extends BaseFragment {
 
             @Override
             public void onError(UiError arg0) {
-                // TODO Auto-generated method stub
-
             }
 
             /**
@@ -226,14 +244,9 @@ public class LoginFragment extends BaseFragment {
                     String gender = jo.getString("gender");
 
                     ToastUtil.showToast(mContext, "你好，" + nickName);
-//                    Toast.makeText(MainActivity.this, "你好，" + nickName,
-//                            Toast.LENGTH_LONG).show();
 
                 } catch (Exception e) {
-                    // TODO: handle exception
                 }
-
-
             }
 
             @Override

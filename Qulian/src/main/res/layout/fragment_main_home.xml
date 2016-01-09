@@ -61,16 +61,6 @@
                     android:dividerHeight="10dp"
                     android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:id="@+id/tv_loading_more"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/txt_small"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="加载更多"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
             </LinearLayout>
         </com.quliantrip.qulian.view.ObservableScroll.ObservableScrollView>
     </LinearLayout>
