@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.global.QulianApplication;
 

@@ -30,9 +30,11 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEnt
     public CountryCityListAdapter(ArrayList<CityListBean.AreaArrEntity> list) {
         super(list);
     }
-    public void setmContext(Context context){
+
+    public void setmContext(Context context) {
         this.mContext = context;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -41,14 +43,14 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEnt
         Holder holder = Holder.getHolder(convertView);
         CityListBean.AreaArrEntity bean = list.get(position);
         holder.countryName.setText(bean.getName());
-        holder.gridView.setAdapter(new ClassifyCityListAdapter((ArrayList<CityListBean.AreaArrEntity.ListEntity>)bean.getList()));
+        holder.gridView.setAdapter(new ClassifyCityListAdapter((ArrayList<CityListBean.AreaArrEntity.ListEntity>) bean.getList()));
         holder.gridView.setFocusable(false);
         holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CityListBean.AreaArrEntity.ListEntity bean = ((CityListBean.AreaArrEntity.ListEntity) parent.getAdapter().getItem(position));
                 Intent intent = new Intent(mContext, MainActivity.class);
-                intent.putExtra("cityId",bean.getId());
+                intent.putExtra("cityId", bean.getId());
                 ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
                 ((SimpleBackActivity) mContext).finish();
             }
@@ -75,6 +77,5 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEnt
             }
             return holder;
         }
-
     }
 }

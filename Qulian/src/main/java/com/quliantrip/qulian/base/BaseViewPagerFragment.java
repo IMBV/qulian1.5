@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.ViewPageFragmentAdapter;
 import com.quliantrip.qulian.lib.PagerSlidingTabStrip;
-import com.quliantrip.qulian.ui.widget.EmptyLayout;
 
 /**
  * 带有导航条的基类
@@ -26,7 +25,6 @@ public abstract class BaseViewPagerFragment extends Fragment {
     protected PagerSlidingTabStrip mTabStrip; // ViewPager顶部的导航条
     protected ViewPager mViewPager; // 展示内容用的滚动布局ViewPager
     protected ViewPageFragmentAdapter mTabsAdapter; // 封装了数据集合的ViewPager适配器
-    protected EmptyLayout mErrorLayout; // 布局加载异常时, 显示的空布局.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +41,7 @@ public abstract class BaseViewPagerFragment extends Fragment {
         // 可以滑动的ViewPager
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
 
-       // 封装adapter, 注意这里是继承的FragmentStatePagerAdapter, 并且传入的是getChildFragmentManager()
+        // 封装adapter, 注意这里是继承的FragmentStatePagerAdapter, 并且传入的是getChildFragmentManager()
         // 此处封装了PagerSlidingTabStrip, ViewPager, 在Adapter内部进行一系列的初始化.
         mTabsAdapter = new ViewPageFragmentAdapter(getChildFragmentManager(), mTabStrip, mViewPager);
 
