@@ -2,20 +2,13 @@ package com.quliantrip.qulian.ui.fragment.mainFragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
-import com.quliantrip.qulian.net.constant.HttpConstants;
-import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.CircleImageView;
 
@@ -28,12 +21,10 @@ import butterknife.OnClick;
  */
 
 public class MyFragment extends BaseFragment {
-    //    @Bind(R.id.rg_order_state)
-//    RadioGroup orderRadioGroup;
-    @Bind(R.id.ll_user_loading)
-    LinearLayout userLoading;
+    //用户的头像
     @Bind(R.id.tv_me_userImage)
     CircleImageView userImage;
+    //用户的名称
     @Bind(R.id.tv_me_username)
     TextView userName;
 
@@ -54,144 +45,13 @@ public class MyFragment extends BaseFragment {
             return;
         }
         if (requestCode == 2) {
-//            loading.setVisibility(View.GONE);
-//            loadout.setVisibility(View.VISIBLE);
         }
     }
 
-
+    //加载显示数据
     @Override
     public void initDate() {
 
-    }
-
-//    //点击登录
-//    @OnClick(R.id.tv_me_loading)
-//    void loading() {
-//        //使用借口登录
-////        UIHelper.showMyActive(mContext);
-//        //使用web进行登录
-//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=login");
-//        startActivityForResult(intent, 2);
-//    }
-//
-//    //点击退出
-//    @OnClick(R.id.tv_me_loadout)
-//    void loadout() {
-//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-//        intent.putExtra("isFinish", "finish");
-//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=loginout");
-//        mContext.startActivity(intent);
-//    }
-
-    //我的积分
-    @OnClick(R.id.ll_me_integral)
-    void showIntegral() {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=uc_ecv&act=exchange");
-        mContext.startActivity(intent);
-    }
-
-    //我的收藏
-    @OnClick(R.id.ll_me_collect)
-    void showCollect() {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=uc_collect");
-        mContext.startActivity(intent);
-    }
-
-    //我的订单
-    @OnClick(R.id.ll_me_orderList)
-    void showOrderList() {
-        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=uc_order");
-        mContext.startActivity(intent);
-    }
-
-//    //设置
-//    @OnClick(R.id.ll_me_setting_out)
-//    void goOutLogin() {
-//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=user&act=getpassword");
-//        mContext.startActivity(intent);
-//    }
-
-
-    //    public void checkLogin(){
-//        if (QulianApplication.getInstance().isLogin()) {
-//            userLoading.setVisibility(View.VISIBLE);
-//            loading.setVisibility(View.GONE);
-//            userName.setText(QulianApplication.getInstance().getLoginUser().getUser_name());
-//        } else {
-//            userLoading.setVisibility(View.GONE);
-//            loading.setVisibility(View.VISIBLE);
-//        }
-//    }
-
-//    @OnClick(R.id.bt_map)
-//    void enterMap() {
-//        startActivity(intent);
-//
-//    }
-    //    @OnClick(R.id.rb_order_all)
-//    void orderAll() {
-//        bundle.putInt("orderState", 0);
-//        UIHelper.showOrderList(mContext, bundle);
-//    }
-//
-//    @OnClick(R.id.rb_order_nor)
-//    void ordernor() {
-//        bundle.putInt("orderState", 1);
-//        UIHelper.showOrderList(mContext, bundle);
-//    }
-//
-//    @OnClick(R.id.rb_order_norUser)
-//    void ordernorUser() {
-//        bundle.putInt("orderState", 2);
-//        UIHelper.showOrderList(mContext, bundle);
-//    }
-//
-//    @OnClick(R.id.rb_order_norAssess)
-//    void orderNorAssess() {
-//        bundle.putInt("orderState", 3);
-//        UIHelper.showOrderList(mContext, bundle);
-//    }
-
-    private void initMap() {
-
-//        WebSettings settings = map.getSettings();
-//        map.loadUrl("http://www.quliantrip.com/index.php?ctl=deal&act=188");
-//        settings.setJavaScriptEnabled(true);
-//        map.loadUrl("http://www.quliantrip.com/wap/index.php?ctl=deal&act=map&id=192");
-//        WebSettings ws = map.getSettings();
-//        ws.setAllowFileAccess(true);
-//        ws.setJavaScriptEnabled(true);
-//        map.setWebViewClient(new WebViewClient() {
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                //  重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
-//
-//                return true;
-//            }
-//        });
-
-
-//        这里使用的是加载完成后的回调监听
-//        map.setWebViewClient(new WebViewClient() {
-//            //    ؽ     ɵ
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-////                loading.setVisibility(View.GONE);
-//                map.setVisibility(View.VISIBLE);
-//                super.onPageFinished(view, url);
-//            }
-//
-//            @Override
-//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//
-//                super.onPageStarted(view, url, favicon);
-//            }
-//        });
     }
 
     //设置
@@ -204,5 +64,41 @@ public class MyFragment extends BaseFragment {
     @OnClick(R.id.ll_user_loading)
     void showMylogin() {
         UIHelper.showMyLogin(mContext);
+    }
+
+    //我的收藏
+    @OnClick(R.id.ll_me_collect)
+    void showCollect() {
+        ToastUtil.showToast(mContext, "我的收藏");
+    }
+
+    //我的积分
+    @OnClick(R.id.ll_me_integral)
+    void showIntegral() {
+        ToastUtil.showToast(mContext, "我的积分");
+    }
+
+    //我的订单
+    @OnClick(R.id.ll_me_orderList)
+    void showOrderList() {
+        ToastUtil.showToast(mContext, "我的订单");
+    }
+
+    //常用联系人
+    @OnClick(R.id.ll_me_offen_lianxiren)
+    void showOffLianxiren() {
+        ToastUtil.showToast(mContext, "常用联系人");
+    }
+
+    //我的优惠券
+    @OnClick(R.id.ll_me_youhuijuan)
+    void showYouhuijuan() {
+        ToastUtil.showToast(mContext, "我的优惠券");
+    }
+
+    //我的优惠券
+    @OnClick(R.id.ll_me_fankui)
+    void showFankui() {
+        ToastUtil.showToast(mContext, "意见反馈");
     }
 }

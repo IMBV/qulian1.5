@@ -11,21 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="182dp"
         android:background="@mipmap/bg_wode">
-        
+
         <RelativeLayout
+            android:id="@+id/iv_me_seeting"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
-            android:layout_marginRight="15dp"
-            android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
             <ImageView
-                android:id="@+id/iv_me_seeting"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
                 android:src="@mipmap/icon_wode_setting" />
         </RelativeLayout>
-
 
         <LinearLayout
             android:id="@+id/ll_user_loading"
@@ -41,7 +41,7 @@
                 android:layout_height="68dp"
                 android:src="@mipmap/icon_photo"
                 app:border_color="#b2FFFFFF"
-                app:border_width="2dp"/>
+                app:border_width="2dp" />
 
             <TextView
                 android:id="@+id/tv_me_username"
@@ -66,6 +66,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:background="@drawable/selector_bg_while_gray"
             android:gravity="center">
 
             <ImageView
@@ -90,6 +91,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:background="@drawable/selector_bg_while_gray"
             android:gravity="center">
 
             <ImageView
@@ -112,7 +114,8 @@
     <RelativeLayout
         android:id="@+id/ll_me_orderList"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_me_shoucang"
@@ -138,9 +141,10 @@
         android:background="@color/app_main_dev_line" />
 
     <RelativeLayout
-        android:id="@+id/ll_me_lianxiren"
+        android:id="@+id/ll_me_offen_lianxiren"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_me_lianxiren"
@@ -166,7 +170,8 @@
     <RelativeLayout
         android:id="@+id/ll_me_youhuijuan"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_me_youhuijuan"
@@ -192,7 +197,8 @@
     <RelativeLayout
         android:id="@+id/ll_me_fankui"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_me_fankui"
