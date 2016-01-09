@@ -12,6 +12,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.ClearEditText;
 import com.tencent.connect.UserInfo;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
@@ -52,7 +53,7 @@ public class LoginFragment extends BaseFragment {
     @Override
     public View initView() {
         EventBus.getDefault().register(this);
-        View view = View.inflate(mContext, R.layout.fragment_login, null);
+        View view = View.inflate(mContext, R.layout.fragment_me_login, null);
         ButterKnife.bind(this, view);
         initData();
         return view;
@@ -98,6 +99,11 @@ public class LoginFragment extends BaseFragment {
         new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET,
                 new UserInfoBean().setTag(getClass().getName()), map, null);
 
+    }
+
+    @OnClick(R.id.tv_btn_register_account)
+    void registerAccount(){
+        UIHelper.showRegister(mContext,null);
     }
 
     /**

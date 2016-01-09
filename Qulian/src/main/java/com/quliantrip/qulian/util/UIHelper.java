@@ -24,11 +24,16 @@ public class UIHelper {
         showSimpleBack(context,SimpleBackPage.MY_SETTING);
     }
     public static void showCityChoose(Fragment fragment,int requestCode){
-        showSimpleBackForResult(fragment,requestCode,SimpleBackPage.CITY_CHOOSE);
+        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.CITY_CHOOSE);
     }
     public static void showOrderList(Context context,Bundle bundle){
-        showSimpleBack(context,SimpleBackPage.ORDER_LIST,bundle);
+        showSimpleBack(context, SimpleBackPage.ORDER_LIST, bundle);
     }
+    public static void showRegister(Context context,Bundle bundle){
+        showSimpleBack(context,SimpleBackPage.MY_REGISTER,bundle);
+    }
+
+
 
     public static void showSimpleBackForResult(Fragment fragment,int requestCode, SimpleBackPage page) {
         Intent intent = new Intent(fragment.getActivity(),

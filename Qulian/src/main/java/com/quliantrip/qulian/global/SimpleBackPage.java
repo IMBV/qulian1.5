@@ -6,12 +6,16 @@ import com.quliantrip.qulian.ui.fragment.backSimpleFragment.CityChooseFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.MySetting;
 import com.quliantrip.qulian.ui.fragment.backSimpleFragment.OrderFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.RegisterFragment;
 
 public enum SimpleBackPage {
     MY_LOGIN(1, R.string.actionbar_title_active, LoginFragment.class),
     MY_SETTING(2,R.string.actionbar_title_setting,MySetting.class),
+
     CITY_CHOOSE(3,R.string.actionbar_city_choose, CityChooseFragment.class),
-    ORDER_LIST(4,R.string.actionbar_order_list, OrderFragment.class);
+    ORDER_LIST(4,R.string.actionbar_order_list, OrderFragment.class),
+    MY_REGISTER(5,R.string.actionbar_me_register, RegisterFragment.class);
+
 
     private int title;
     private Class<?> clz;

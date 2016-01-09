@@ -12,6 +12,8 @@
     <string name="actionbar_city_choose">城市切换</string>
     <string name="actionbar_order_list">我的订单</string>
     <string name="actionbar_order_detail">商品详情</string>
+    <string name="actionbar_me_register">注册</string>
+
 
     <string name="load_error">加载失败,点击重试</string>
 
