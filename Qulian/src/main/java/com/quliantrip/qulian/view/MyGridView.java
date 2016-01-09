@@ -3,7 +3,6 @@ package com.quliantrip.qulian.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
-import android.widget.ListView;
 
 /**
  * Created by Yuly on 2015/12/10.
