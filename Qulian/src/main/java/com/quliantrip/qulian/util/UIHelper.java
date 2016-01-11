@@ -41,6 +41,14 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.MY_REGISTER, bundle);
     }
 
+    public static void showGoodOrder(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.GOOD_ORDER, bundle);
+    }
+
+    public static void showPayMethod(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.PAY_METHOD, bundle);
+    }
+
     //下面是有返回值得简单返回的activity的操作
     public static void showSimpleBackForResult(Fragment fragment, int requestCode, SimpleBackPage page) {
         Intent intent = new Intent(fragment.getActivity(),

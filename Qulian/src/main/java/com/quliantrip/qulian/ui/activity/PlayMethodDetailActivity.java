@@ -21,4 +21,7 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
         ButterKnife.bind(this);
         mContext = this;
     }
+
+
+
 }

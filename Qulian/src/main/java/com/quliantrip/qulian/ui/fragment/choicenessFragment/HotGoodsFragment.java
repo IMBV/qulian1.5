@@ -1,5 +1,7 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
@@ -24,6 +26,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 
@@ -223,4 +226,10 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         }
     }
 
+    @OnClick(R.id.ll_hot_good_best_item)
+    void showBestHotGoodDetail(){
+        Intent intent = new Intent(mContext,GoodDetailActivity.class);
+        mContext.startActivity(intent);
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
 }

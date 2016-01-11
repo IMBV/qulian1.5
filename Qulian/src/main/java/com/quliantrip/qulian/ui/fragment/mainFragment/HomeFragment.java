@@ -26,6 +26,7 @@ import com.quliantrip.qulian.scanner.activity.CaptureActivity;
 import com.quliantrip.qulian.scanner.activity.OpenWifiActivity;
 import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.HomeActivity.SecnicPlayConditionActivity;
+import com.quliantrip.qulian.ui.activity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.EvaluateUtil;
@@ -140,8 +141,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, GoodDetailActivity.class);
-                intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT+"?ctl=deal&data_id="+((HomeBean.DealListEntity) parent.getAdapter().getItem(position)).getId());
+                Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
                 mContext.startActivity(intent);
             }
         });

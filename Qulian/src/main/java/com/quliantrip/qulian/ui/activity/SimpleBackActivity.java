@@ -40,6 +40,7 @@ public class SimpleBackActivity extends BaseSwipeBackActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
             }
         });
         if (mPageValue == -1) {

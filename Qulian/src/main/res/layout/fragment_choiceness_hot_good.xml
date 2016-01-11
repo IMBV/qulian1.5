@@ -83,6 +83,7 @@
         android:background="@color/app_main_tag_dec_line" />
 
     <include layout="@layout/layout_hot_good_best_to_me" />
+
     <View android:layout_width="match_parent"
         android:layout_height="25dp"
         android:background="@color/colorPrimary"/>

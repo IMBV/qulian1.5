@@ -58,24 +58,28 @@ public class MyFragment extends BaseFragment {
     @OnClick(R.id.iv_me_seeting)
     void showMySetting() {
         UIHelper.showMeSetting(mContext);
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //登录界面
     @OnClick(R.id.ll_user_loading)
     void showMylogin() {
         UIHelper.showMyLogin(mContext);
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的收藏
     @OnClick(R.id.ll_me_collect)
     void showCollect() {
         ToastUtil.showToast(mContext, "我的收藏");
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的积分
     @OnClick(R.id.ll_me_integral)
     void showIntegral() {
         UIHelper.showIntegral(mContext,null);
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的订单

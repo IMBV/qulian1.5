@@ -4,6 +4,8 @@ package com.quliantrip.qulian.global;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.ui.fragment.backSimpleFragment.CityChooseFragment;
 import com.quliantrip.qulian.ui.fragment.backSimpleFragment.OrderFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.SubmitOrderGoodFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.IntegralFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.MySetting;
@@ -16,7 +18,10 @@ public enum SimpleBackPage {
     CITY_CHOOSE(3, R.string.actionbar_city_choose, CityChooseFragment.class),
     ORDER_LIST(4, R.string.actionbar_order_list, OrderFragment.class),
     MY_REGISTER(5, R.string.actionbar_me_register, RegisterFragment.class),
-    MY_INTEGRAL(6, R.string.actionbar_me_integral, IntegralFragment.class);
+    MY_INTEGRAL(6, R.string.actionbar_me_integral, IntegralFragment.class),
+
+    GOOD_ORDER(7,R.string.actionbar_good_order,SubmitOrderGoodFragment.class),
+    PAY_METHOD(8,R.string.actionbar_pay_method,PayCheckstandFragment.class);
 
     private int title;
     private Class<?> clz;

@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.meFragment;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -104,6 +105,7 @@ public class LoginFragment extends BaseFragment {
     @OnClick(R.id.tv_btn_register_account)
     void registerAccount(){
         UIHelper.showRegister(mContext,null);
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     /**

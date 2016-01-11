@@ -1,185 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_order_check_number"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@mipmap/icon_people" />
-
-        <TextView
-            style="@style/order_condition_condition_text"
-            android:layout_toRightOf="@id/iv_order_check_number"
-            android:text="选择人数" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
 
             <ImageView
-                android:id="@+id/iv_good_person_number_down"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/selector_mipmap_order_minus"
-                android:background="@drawable/selector_bg_yellow_gray" />
+                android:id="@+id/iv_order_check_number"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/icon_people" />
+
+            <TextView
+                style="@style/order_condition_condition_text"
+                android:layout_toRightOf="@id/iv_order_check_number"
+                android:text="选择人数" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:gravity="center">
 
-                <View
-                    android:layout_width="36dp"
-                    android:layout_height="1dp"
-                    android:background="@color/app_main_dev_line" />
+                <RelativeLayout
+                    android:id="@+id/iv_good_person_number_down"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_bg_yellow_gray">
 
-                <TextView
-                    android:id="@+id/tv_good_check_person_number"
-                    android:layout_width="36dp"
-                    android:layout_height="22dp"
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/selector_mipmap_order_minus" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="1" />
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_width="36dp"
-                    android:layout_height="1dp"
-                    android:background="@color/app_main_dev_line" />
+                    <View
+                        android:layout_width="36dp"
+                        android:layout_height="1dp"
+                        android:background="@color/app_main_dev_line" />
+
+                    <TextView
+                        android:id="@+id/tv_good_check_person_number"
+                        android:layout_width="36dp"
+                        android:layout_height="22dp"
+                        android:gravity="center"
+                        android:text="1" />
+
+                    <View
+                        android:layout_width="36dp"
+                        android:layout_height="1dp"
+                        android:background="@color/app_main_dev_line" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/iv_good_person_number_add"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_bg_yellow_gray">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/selector_mipmap_order_add" />
+                </RelativeLayout>
             </LinearLayout>
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_check_store_setting"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/selector_bg_while_gray">
+
             <ImageView
-                android:id="@+id/iv_good_person_number_add"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/selector_mipmap_order_add"
-                android:background="@drawable/selector_bg_yellow_gray" />
+                android:id="@+id/iv_order_check_store"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/icon_mendian" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_order_store_text"
+                style="@style/order_condition_condition_text"
+                android:layout_toRightOf="@id/iv_order_check_store"
+                android:text="选择门店" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_check_store_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tv_order_store_text"
+                android:text="二条本店"
+                android:textColor="@color/app_main_collor"
+                android:textSize="14sp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_check_store_setting"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="@drawable/selector_bg_while_gray">
+            <ImageView
+                style="@style/me_next_img"
+                android:src="@mipmap/icon_next" />
 
-        <ImageView
-            android:id="@+id/iv_order_check_store"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@mipmap/icon_mendian" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_order_store_text"
-            style="@style/order_condition_condition_text"
-            android:layout_toRightOf="@id/iv_order_check_store"
-            android:text="选择门店" />
+        <RelativeLayout
+            android:id="@+id/rl_preview_time_data_setting"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/selector_bg_while_gray">
 
-        <TextView
-            android:id="@+id/tv_check_store_result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@+id/tv_order_store_text"
-            android:text="二条本店"
-            android:textColor="@color/app_main_collor"
-            android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/iv_order_check_data"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/icon_x_riqi" />
 
-        <ImageView
-            style="@style/me_next_img"
-            android:src="@mipmap/icon_next" />
+            <TextView
+                android:id="@+id/tv_order_data_text"
+                style="@style/order_condition_condition_text"
+                android:layout_toRightOf="@id/iv_order_check_data"
+                android:text="预约日期" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_preview_time_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tv_order_data_text"
+                android:text="2015-12-25"
+                android:textColor="@color/app_main_collor"
+                android:textSize="14sp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_preview_time_data_setting"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="@drawable/selector_bg_while_gray">
+            <ImageView
+                style="@style/me_next_img"
+                android:src="@mipmap/icon_next" />
 
-        <ImageView
-            android:id="@+id/iv_order_check_data"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@mipmap/icon_mendian" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_order_data_text"
-            style="@style/order_condition_condition_text"
-            android:layout_toRightOf="@id/iv_order_check_data"
-            android:text="预约日期" />
+        <RelativeLayout
+            android:id="@+id/rl_serve_time_setting"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/selector_bg_while_gray">
 
-        <TextView
-            android:id="@+id/tv_preview_time_data_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@+id/tv_order_data_text"
-            android:text="2015-12-25"
-            android:textColor="@color/app_main_collor"
-            android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/iv_order_check_time"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/icon_x_time" />
 
-        <ImageView
-            style="@style/me_next_img"
-            android:src="@mipmap/icon_next" />
+            <TextView
+                android:id="@+id/tv_order_time_text"
+                style="@style/order_condition_condition_text"
+                android:layout_toRightOf="@id/iv_order_check_time"
+                android:text="服务时间" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_serve_time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tv_order_time_text"
+                android:text="11:20"
+                android:textColor="@color/app_main_collor"
+                android:textSize="14sp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_serve_time_setting"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="@drawable/selector_bg_while_gray">
+            <ImageView
+                style="@style/me_next_img"
+                android:src="@mipmap/icon_next" />
 
-        <ImageView
-            android:id="@+id/iv_order_check_time"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@mipmap/icon_x_time" />
-
-        <TextView
-            android:id="@+id/tv_order_time_text"
-            style="@style/order_condition_condition_text"
-            android:layout_toRightOf="@id/iv_order_check_time"
-            android:text="服务时间" />
-
-        <TextView
-            android:id="@+id/tv_serve_time_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@+id/tv_order_time_text"
-            android:text="11:20"
-            android:textColor="@color/app_main_collor"
-            android:textSize="14sp" />
-
-        <ImageView
-            style="@style/me_next_img"
-            android:src="@mipmap/icon_next" />
-
-    </RelativeLayout>
+        </RelativeLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_all_order_foot_submit" />
+</RelativeLayout>
