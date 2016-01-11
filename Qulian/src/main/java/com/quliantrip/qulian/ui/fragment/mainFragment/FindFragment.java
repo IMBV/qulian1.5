@@ -29,12 +29,11 @@ import butterknife.ButterKnife;
 public class FindFragment extends BasePageCheckFragment {
     private View view;
 
-
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_main_find, null);
         ButterKnife.bind(this, view);
-        ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, new FindContentFragment()).commit();
+        ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, new FindContentFragment()).commit();
         return view;
     }
 

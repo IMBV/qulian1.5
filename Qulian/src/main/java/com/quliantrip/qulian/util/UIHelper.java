@@ -16,40 +16,47 @@ import com.quliantrip.qulian.global.SimpleBackPage;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 
 public class UIHelper {
-    //显示的fragment类
+    //显示的fragment类,bundule表示fragment的argument的参数，用来进行传递参数
     public static void showMyLogin(Context context) {
         showSimpleBack(context, SimpleBackPage.MY_LOGIN);
     }
-    public static void showMeSetting(Context context){
-        showSimpleBack(context,SimpleBackPage.MY_SETTING);
+
+    public static void showMeSetting(Context context) {
+        showSimpleBack(context, SimpleBackPage.MY_SETTING);
     }
-    public static void showCityChoose(Fragment fragment,int requestCode){
+
+    public static void showCityChoose(Fragment fragment, int requestCode) {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.CITY_CHOOSE);
     }
-    public static void showOrderList(Context context,Bundle bundle){
+
+    public static void showOrderList(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.ORDER_LIST, bundle);
     }
-    public static void showRegister(Context context,Bundle bundle){
-        showSimpleBack(context,SimpleBackPage.MY_REGISTER,bundle);
+
+    public static void showIntegral(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.MY_INTEGRAL, bundle);
     }
 
+    public static void showRegister(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.MY_REGISTER, bundle);
+    }
 
-
-    public static void showSimpleBackForResult(Fragment fragment,int requestCode, SimpleBackPage page) {
+    //下面是有返回值得简单返回的activity的操作
+    public static void showSimpleBackForResult(Fragment fragment, int requestCode, SimpleBackPage page) {
         Intent intent = new Intent(fragment.getActivity(),
                 SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
         fragment.startActivityForResult(intent, requestCode);
     }
 
-    public static void showSimpleBackForResult(Activity context,int requestCode, SimpleBackPage page, Bundle args) {
+    public static void showSimpleBackForResult(Activity context, int requestCode, SimpleBackPage page, Bundle args) {
         Intent intent = new Intent(context, SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_ARGS, args);
         context.startActivityForResult(intent, requestCode);
     }
 
-    public static void showSimpleBackForResult(Activity context,int requestCode, SimpleBackPage page) {
+    public static void showSimpleBackForResult(Activity context, int requestCode, SimpleBackPage page) {
         Intent intent = new Intent(context, SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
         context.startActivityForResult(intent, requestCode);
@@ -62,7 +69,7 @@ public class UIHelper {
     }
 
     public static void showSimpleBack(Context context, SimpleBackPage page,
-            Bundle args) {
+                                      Bundle args) {
         Intent intent = new Intent(context, SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_ARGS, args);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
@@ -70,9 +77,9 @@ public class UIHelper {
     }
 
     /**
-     返回富文本要显示的文字
+     * 返回富文本要显示的文字
      */
-    public static SpannableStringBuilder parseActiveReply(String name,String body) {
+    public static SpannableStringBuilder parseActiveReply(String name, String body) {
         Spanned span = Html.fromHtml(body.trim());
         SpannableStringBuilder sp = new SpannableStringBuilder(name + "：");
         sp.append(span);
@@ -117,11 +124,11 @@ public class UIHelper {
 //    }
 
 //        /**
-     //     * 发送App异常崩溃报告
-     //     *
-     //     * @param cont
-     //     * @param crashReport
-     //     */
+    //     * 发送App异常崩溃报告
+    //     *
+    //     * @param cont
+    //     * @param crashReport
+    //     */
 //    public static void sendAppCrashReport(final Context context,
 //            final String crashReport) {
 //        CommonDialog dialog = new CommonDialog(context);

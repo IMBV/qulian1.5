@@ -32,7 +32,7 @@
                 android:id="@+id/iv_good_person_number_down"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/selector_mipmap_order_add"
+                android:src="@drawable/selector_mipmap_order_minus"
                 android:background="@drawable/selector_bg_yellow_gray" />
 
             <LinearLayout
@@ -63,7 +63,9 @@
                 android:id="@+id/iv_good_person_number_add"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@color/app_main_collor" />
+                android:src="@drawable/selector_mipmap_order_add"
+                android:background="@drawable/selector_bg_yellow_gray" />
+
         </LinearLayout>
 
     </RelativeLayout>

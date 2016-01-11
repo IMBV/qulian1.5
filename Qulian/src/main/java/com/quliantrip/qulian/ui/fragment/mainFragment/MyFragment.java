@@ -75,7 +75,7 @@ public class MyFragment extends BaseFragment {
     //我的积分
     @OnClick(R.id.ll_me_integral)
     void showIntegral() {
-        ToastUtil.showToast(mContext, "我的积分");
+        UIHelper.showIntegral(mContext,null);
     }
 
     //我的订单

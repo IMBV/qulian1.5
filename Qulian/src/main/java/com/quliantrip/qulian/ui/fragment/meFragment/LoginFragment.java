@@ -261,4 +261,32 @@ public class LoginFragment extends BaseFragment {
             }
         };
     }
+
+//    private LoadingDialog progressDialog;
+//    /**
+//     * 显示提示框
+//     *
+//     * @param title
+//     */
+//    public void showDialog(String title) {
+//        cancelDialog();
+//        progressDialog = new LoadingDialog(mContext, title);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setCanceledOnTouchOutside(false);
+//        progressDialog.show();
+//    }
+//
+//    public void showDialog_cancel(String title) {
+//        cancelDialog();
+//        progressDialog = new LoadingDialog(mContext, title);
+//        progressDialog.setCanceledOnTouchOutside(true);
+//        progressDialog.show();
+//    }
+//
+//    public void cancelDialog() {
+//        if (progressDialog != null) {
+//            progressDialog.cancel();
+//        }
+//    }
+
 }
