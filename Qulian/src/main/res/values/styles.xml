@@ -19,6 +19,24 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">@color/app_main_dev_line</item>
     </style>
+
+    <!---->
+    <style name="all_wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!--标题文字的颜色-->
+    <style name="text_title_style" parent="@style/all_wrap_content">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/app_main_title</item>
+    </style>
+    <!--副标题的颜色-->
+    <style name="text_sub_title_style" parent="@style/all_wrap_content">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/app_main_sub_title_text</item>
+    </style>
+
     <!--标题栏有样式-->
     <style name="app_title">
         <item name="android:layout_width">match_parent</item>

@@ -32,7 +32,8 @@
                 android:id="@+id/iv_good_person_number_down"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@color/app_main_collor" />
+                android:src="@drawable/selector_mipmap_order_add"
+                android:background="@drawable/selector_bg_yellow_gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -70,7 +71,8 @@
     <RelativeLayout
         android:id="@+id/rl_check_store_setting"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_order_check_store"
@@ -106,7 +108,8 @@
     <RelativeLayout
         android:id="@+id/rl_preview_time_data_setting"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_order_check_data"
@@ -142,7 +145,8 @@
     <RelativeLayout
         android:id="@+id/rl_serve_time_setting"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="44dp"
+        android:background="@drawable/selector_bg_while_gray">
 
         <ImageView
             android:id="@+id/iv_order_check_time"

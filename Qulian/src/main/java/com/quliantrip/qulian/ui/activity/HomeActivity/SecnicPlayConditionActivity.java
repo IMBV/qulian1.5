@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayConditionFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.ClearEditText;
@@ -32,14 +33,15 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
 
     //显示结果的fragment
     private SecnicPlayFragment secnicPlayFragment;
+    private SecnicPlayConditionFragment secnicPlayConditionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secnicplay_condition);
         ButterKnife.bind(this);
-        secnicPlayFragment = SecnicPlayFragment.getInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayFragment).commit();
+        secnicPlayConditionFragment = new SecnicPlayConditionFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayConditionFragment).commit();
         initTextListener();
     }
 
@@ -71,19 +73,32 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
 
     }
 
+    //切换fragment
+    private void changeResultFragment() {
+        if (secnicPlayFragment == null) {
+            secnicPlayFragment = new SecnicPlayFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("keyWord", "nihao");
+            secnicPlayFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayFragment).commit();
+        } else {
+
+        }
+    }
+
     //搜索点击事件
     @OnClick(R.id.tv_home_search_hint)
     void searckResult() {
         if (TextUtils.isEmpty(searchText.getText())) {
-            ToastUtil.showToast(getApplicationContext(), "为空点击了");
+            finish();
         } else {
-            ToastUtil.showToast(getApplicationContext(), "为有值击了");
+            changeResultFragment();
         }
     }
 
     //点击返回显示
     @OnClick(R.id.iv_home_result_searck_back)
-    void backFinish(){
+    void backFinish() {
         finish();
     }
 

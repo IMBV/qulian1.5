@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.ViewPageFragmentAdapter;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.lib.PagerSlidingTabStrip;
+import com.quliantrip.qulian.util.ToastUtil;
 
 /**
  * 带有导航条的基类

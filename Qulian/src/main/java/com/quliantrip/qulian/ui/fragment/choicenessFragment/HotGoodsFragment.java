@@ -94,9 +94,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         //设置被点击了
         radioButton.setChecked(true);
 
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext,57),CommonHelp.dip2px(mContext,27));
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext, 57), CommonHelp.dip2px(mContext, 27));
         view.setLayoutParams(params);
-        ViewGroup.LayoutParams params2 = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext,15),CommonHelp.dip2px(mContext,27));
+        ViewGroup.LayoutParams params2 = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext, 15), CommonHelp.dip2px(mContext, 27));
         View view2 = new View(mContext);
         view2.setLayoutParams(params2);
         radioGroup.addView(view2);

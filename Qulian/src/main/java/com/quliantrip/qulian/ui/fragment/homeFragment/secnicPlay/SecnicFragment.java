@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.ToastUtil;
+
+import java.lang.annotation.Target;
 
 /**
  *
@@ -19,6 +22,7 @@ public class SecnicFragment extends Fragment{
                              Bundle savedInstanceState) {
         TextView textView = new TextView(QulianApplication.getContext());
         textView.setText("景区");
+        ToastUtil.showToast(QulianApplication.getContext(),getArguments().getString("sadfsadf"));
         return textView;
     }
 }

@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:RatioImageView="http://schemas.android.com/apk/res/com.quliantrip.qulian"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="ResAuto">
+
+    <com.quliantrip.qulian.view.RatioImageView
+        android:id="@+id/iv_choice_hot_good_best_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_default_big"
+        RatioImageView:ratioscale="2.1428" />
+
+    <TextView
+        style="@style/text_title_style"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="趣连/消灭一起没有准备的旅行" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/icon_location" />
+
+            <TextView
+                style="@style/text_sub_title_style"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="蟹道乐·200m" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/all_wrap_content"
+            android:layout_alignParentRight="true">
+
+            <FrameLayout
+                style="@style/all_wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp">
+
+                <View
+                    android:layout_width="45dp"
+                    android:layout_height="1px"
+                    android:layout_gravity="center"
+                    android:background="@color/app_main_sub_title_text" />
+
+                <TextView
+                    android:id="@+id/tv_tuan_deal_oldprice"
+                    style="@style/text_sub_title_style"
+                    android:layout_gravity="center"
+                    android:text="￥60"
+                    android:textSize="14sp" />
+            </FrameLayout>
+
+            <TextView
+                style="@style/all_wrap_content"
+                android:text="￥60"
+                android:textColor="@color/app_main_price_text"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </LinearLayout>
