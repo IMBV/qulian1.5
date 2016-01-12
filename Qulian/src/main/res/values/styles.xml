@@ -260,4 +260,12 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <!--字体样式-->
+    <style name="text_title_12">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_title_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

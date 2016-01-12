@@ -1,7 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--商品界面的展示图片-->
+    <RelativeLayout
+        android:id="@+id/rl_detail_adv"
+        android:layout_width="match_parent"
+        android:layout_height="185dp">
+
+        <LinearLayout
+            android:id="@+id/top_news_viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="185dp"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:gravity="right|bottom"
+            android:orientation="horizontal">
+            <!-- 放置图片中选中点的位置 -->
+            <LinearLayout
+                android:id="@+id/dots_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/iv_detail_back"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/icon_back_w" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_detail_adv"
+        android:layout_marginBottom="49.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.quliantrip.qulian.view.CircleImageView
+                android:id="@+id/tv_play_method_author_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="19dp"
+                android:src="@mipmap/icon_photo"
+                app:border_color="#b2FFFFFF"
+                app:border_width="2dp" />
+
+            <TextView
+                style="@style/text_title_12"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:text="作者" />
+
+            <TextView
+                android:id="@+id/tv_play_method_author_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="阿福卡四季度会罚款了书法卡手机的话费卡拉斯加合法快乐是减肥哈看手机的防护，
+                阿斯顿发回复了if按开机速度发货快乐和房价快速拉横幅dfjkalhskjf阿斯顿发好了看是否"
+                android:maxLines="2"
+                android:textColor="@color/app_main_title"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/tv_play_method_author_introduce_more"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/more_xiangqing" />
+
+            <com.quliantrip.qulian.view.MyListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#00000000"
+                android:dividerHeight="10dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <include layout="@layout/layout_all_detail_foot_buy" />
 </RelativeLayout>

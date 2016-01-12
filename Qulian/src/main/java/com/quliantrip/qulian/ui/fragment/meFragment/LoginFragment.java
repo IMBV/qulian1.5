@@ -1,6 +1,7 @@
 package com.quliantrip.qulian.ui.fragment.meFragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -22,6 +23,7 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+import com.tencent.connect.common.Constants;
 
 import org.json.JSONObject;
 
@@ -187,8 +189,7 @@ public class LoginFragment extends BaseFragment {
              */
             @Override
             public void onComplete(Object value) {
-                // TODO Auto-generated method stub
-                ToastUtil.showToast(mContext, "登录成功");
+                ToastUtil.showToast(mContext, "登录成功010");
                 System.out.println("有数据返回..");
                 if (value == null) {
                     return;
@@ -242,7 +243,7 @@ public class LoginFragment extends BaseFragment {
              */
             @Override
             public void onComplete(Object arg0) {
-                // TODO Auto-generated method stub
+                ToastUtil.showToast(mContext, "登录成功020");
                 if (arg0 == null) {
                     return;
                 }
@@ -266,5 +267,13 @@ public class LoginFragment extends BaseFragment {
         };
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_API) {
+            if (resultCode == Constants.REQUEST_LOGIN) {
+                Tencent.handleResultData(data, loginListener);
+            }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
 }

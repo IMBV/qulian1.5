@@ -1,5 +1,7 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -19,6 +21,8 @@ import com.quliantrip.qulian.domain.SingleListBean;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.activity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.MyListView;
@@ -73,6 +77,15 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     public void onEventMainThread(BaseJson bean) {
 
     }
+
+    //玩法条目点击事件
+    @OnClick(R.id.ll_paly_method_item)
+    void intoPlayMethodDetail(){
+        Intent intent = new Intent(mContext,PlayMethodDetailActivity.class);
+        mContext.startActivity(intent);
+        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
 
     private boolean isShowTheme = true;
     private boolean isPreTime = true;
