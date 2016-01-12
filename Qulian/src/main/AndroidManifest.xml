@@ -79,6 +79,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
 
+        <!--语音导航的或景区详情-->
+        <activity
+            android:name="com.quliantrip.qulian.ui.activity.VoiceNavigationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SwipeBackActivity" />
+
         <!--这里只有简单返回activity-->
         <activity
             android:name=".ui.activity.SimpleBackActivity"

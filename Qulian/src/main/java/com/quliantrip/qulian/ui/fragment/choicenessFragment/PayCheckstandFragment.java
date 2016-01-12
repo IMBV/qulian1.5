@@ -50,20 +50,19 @@ public class PayCheckstandFragment extends BaseFragment {
     void commentPay() {
         switch (mCurrentPayWay) {
             case 0:
-                ToastUtil.showToast(mContext, "微信支付");
+                showDialog_cancel("微信支付中");
                 break;
             case 1:
-                ToastUtil.showToast(mContext, "支付宝支付");
+                showDialog_cancel("支付宝支付中");
                 break;
         }
-
     }
 
     //进行选择图片的切换
     private void changePayWay(int id) {
         int oldPayWay = mCurrentPayWay;
         int newCheckId = oldCheckId;
-        switch (id) {
+            switch (id) {
             case R.id.iv_pay_method_weixin:
                 mCurrentPayWay = 0;
                 newCheckId = R.id.iv_pay_method_weixin;

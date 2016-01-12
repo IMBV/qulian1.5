@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/ll_hot_good_best_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:RatioImageView="http://schemas.android.com/apk/res/com.quliantrip.qulian"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_hot_good_best_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selector_bg_while_gray"

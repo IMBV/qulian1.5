@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.quliantrip.qulian.view.LoadingDialog;
+
 import de.greenrobot.event.EventBus;
 
 /**
@@ -55,5 +57,33 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private LoadingDialog progressDialog;
+
+    /**
+     * 显示提示框
+     *
+     * @param title
+     */
+    public void showDialog(String title) {
+        cancelDialog();
+        progressDialog = new LoadingDialog(mContext, title);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+    }
+
+    public void showDialog_cancel(String title) {
+        cancelDialog();
+        progressDialog = new LoadingDialog(mContext, title);
+        progressDialog.setCanceledOnTouchOutside(true);
+        progressDialog.show();
+    }
+
+    public void cancelDialog() {
+        if (progressDialog != null) {
+            progressDialog.cancel();
+        }
     }
 }

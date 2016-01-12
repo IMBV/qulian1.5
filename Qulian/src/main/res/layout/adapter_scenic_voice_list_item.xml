@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:RatioImageView="http://schemas.android.com/apk/res/com.quliantrip.qulian"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_weight="1"
+    tools:ignore="ResAuto">
+
+    <com.quliantrip.qulian.view.RatioImageView
+        android:id="@+id/tiv_scenic_voice_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_default_min"
+        RatioImageView:ratioscale="1.5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@id/tiv_scenic_voice_item_img"
+        android:background="@drawable/shape_bg_transparency"
+        android:gravity="center"
+        android:text="浅草寺"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+</RelativeLayout>

@@ -103,9 +103,9 @@ public class LoginFragment extends BaseFragment {
     }
 
     @OnClick(R.id.tv_btn_register_account)
-    void registerAccount(){
-        UIHelper.showRegister(mContext,null);
-        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    void registerAccount() {
+        UIHelper.showRegister(mContext, null);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     /**
@@ -114,6 +114,7 @@ public class LoginFragment extends BaseFragment {
 
     @OnClick(R.id.iv_third_qq)
     void qqLogin() {
+        showDialog_cancel("qq登录中");
         //如果session无效，就开始登录
         if (!mTencent.isSessionValid()) {
             //开始qq授权登录
@@ -123,6 +124,7 @@ public class LoginFragment extends BaseFragment {
 
     @OnClick(R.id.iv_third_weixi)
     void weixinLogin() {
+        showDialog_cancel("微信登录中");
         if (mWeixinAPI == null) {
             mWeixinAPI = WXAPIFactory.createWXAPI(mContext, WEIXIN_APP_ID, false);
         }
@@ -264,31 +266,5 @@ public class LoginFragment extends BaseFragment {
         };
     }
 
-//    private LoadingDialog progressDialog;
-//    /**
-//     * 显示提示框
-//     *
-//     * @param title
-//     */
-//    public void showDialog(String title) {
-//        cancelDialog();
-//        progressDialog = new LoadingDialog(mContext, title);
-//        progressDialog.setCancelable(false);
-//        progressDialog.setCanceledOnTouchOutside(false);
-//        progressDialog.show();
-//    }
-//
-//    public void showDialog_cancel(String title) {
-//        cancelDialog();
-//        progressDialog = new LoadingDialog(mContext, title);
-//        progressDialog.setCanceledOnTouchOutside(true);
-//        progressDialog.show();
-//    }
-//
-//    public void cancelDialog() {
-//        if (progressDialog != null) {
-//            progressDialog.cancel();
-//        }
-//    }
 
 }

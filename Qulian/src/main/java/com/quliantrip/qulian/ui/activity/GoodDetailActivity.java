@@ -33,7 +33,7 @@ public class GoodDetailActivity extends SwipeBackActivity {
     ImageView collectImg;
     @Bind(R.id.iv_good_collect_text)
     TextView collectText;
-
+    private boolean isCollect = false;//收藏的状态
 
     private RollViewPage rollViewPage;
     @Bind(R.id.top_news_viewpager)
@@ -69,14 +69,16 @@ public class GoodDetailActivity extends SwipeBackActivity {
     }
 
     //点击收藏
-    private boolean isCollect = false;
     @OnClick(R.id.ll_good_collect)
     void collectGood() {
-        if (isCollect){
-
-        }else{
-
+        if (!isCollect) {
+            collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+            collectText.setText("已收藏");
+        } else {
+            collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+            collectText.setText("收藏");
         }
+        isCollect = !isCollect;
     }
 
     //初始化轮播图
@@ -97,8 +99,6 @@ public class GoodDetailActivity extends SwipeBackActivity {
 
                 @Override
                 public void touchImage(String url) {
-                    //这里是进行点击图片是的操作
-//                    ToastUtil.showToast(QulianApplication.getContext(),url);
                 }
             });
             top_news_viewpager.removeAllViews();

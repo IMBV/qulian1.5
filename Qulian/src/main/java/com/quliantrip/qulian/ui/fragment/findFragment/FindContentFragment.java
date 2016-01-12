@@ -9,9 +9,6 @@ import com.quliantrip.qulian.ui.fragment.findFragment.content.DiscountFragment;
 import com.quliantrip.qulian.ui.fragment.findFragment.content.PrintSquareFragment;
 import com.quliantrip.qulian.ui.fragment.findFragment.content.VoiceSquareFragment;
 import com.quliantrip.qulian.ui.fragment.findFragment.content.YellowBookFragment;
-import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.LocalPlayFragment;
-import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.PlayMethodFragment;
-import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.SecnicFragment;
 
 /**
  * Created by Qulian5 on 2016/1/5.
@@ -19,8 +16,7 @@ import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.SecnicFragment;
 public class FindContentFragment extends BaseViewPagerFragment {
     @Override
     protected void onSetupTabAdapter(ViewPageFragmentAdapter adapter) {
-        String[] title = getResources().getStringArray(
-                R.array.find_content_tab);
+        String[] title = getResources().getStringArray(R.array.find_content_tab);
         // 优惠券
         adapter.addTab(title[0], "descount", DiscountFragment.class,
                 getBundle());

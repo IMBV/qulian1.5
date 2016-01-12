@@ -28,6 +28,7 @@ public abstract class BasePageCheckFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mContext = (Context) getActivity();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,4 +61,14 @@ public abstract class BasePageCheckFragment extends Fragment {
     protected abstract QuestBean requestData();
 
     public abstract void onEventMainThread(BaseJson bean);
+
+    // 设置fragment的适配的内容显示当前的
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        // getView()该视图的fragment对象
+        if (getView() != null) {
+            getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
+        }
+        super.setMenuVisibility(menuVisible);
+    }
 }
