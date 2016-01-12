@@ -104,6 +104,7 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
     @OnClick(R.id.iv_home_result_searck_back)
     void backFinish() {
         finish();
+        overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
 
 }

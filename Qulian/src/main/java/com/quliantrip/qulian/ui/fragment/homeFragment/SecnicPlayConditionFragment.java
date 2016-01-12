@@ -23,16 +23,9 @@ import butterknife.ButterKnife;
  * Created by Qulian5 on 2016/1/11.
  */
 public class SecnicPlayConditionFragment extends BasePageCheckFragment {
-    //进行数据适配的对象
-    private CityListBean cityListBean;
-    @Bind(R.id.tv_city_location)
-    TextView locationCountry;
-    @Bind(R.id.mlv_contry_city_list)
-    MyListView countryListView;
-
     @Override
     protected View getSuccessView() {
-        View view = View.inflate(mContext, R.layout.fragment_city_choose, null);
+        View view = View.inflate(mContext, R.layout.fragment_home_secnic_condition, null);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -47,15 +40,7 @@ public class SecnicPlayConditionFragment extends BasePageCheckFragment {
 
     @Override
     public void onEventMainThread(BaseJson bean) {
-        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            cityListBean = (CityListBean) bean;
-            //全部景区的国家的列表显示
-            CountryCityListAdapter countryCityListAdapter = new CountryCityListAdapter((ArrayList<CityListBean.AreaArrEntity>) ((CityListBean) bean).getArea_arr());
-            countryCityListAdapter.setmContext(mContext);
-            countryListView.setAdapter(countryCityListAdapter);
-            countryListView.setFocusable(false);
-            locationCountry.setText("当前城市：" + cityListBean.getCity_name());
-        }
+
     }
 
 }
