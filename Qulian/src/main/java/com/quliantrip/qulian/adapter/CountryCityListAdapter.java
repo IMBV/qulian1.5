@@ -42,9 +42,12 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEnt
         }
         Holder holder = Holder.getHolder(convertView);
         CityListBean.AreaArrEntity bean = list.get(position);
+        //设置国家名
         holder.countryName.setText(bean.getName());
+        //设置国家内城市的显示
         holder.gridView.setAdapter(new ClassifyCityListAdapter((ArrayList<CityListBean.AreaArrEntity.ListEntity>) bean.getList()));
         holder.gridView.setFocusable(false);
+        //添加城市列表的点击事件
         holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,6 +58,7 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEnt
                 ((SimpleBackActivity) mContext).finish();
             }
         });
+
         return convertView;
     }
 

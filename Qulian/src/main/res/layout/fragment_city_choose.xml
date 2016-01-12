@@ -6,55 +6,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ECECEC"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
+        <View
+            style="@style/dev_all_line"
+            android:layout_marginLeft="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="15dp"
-            android:background="@drawable/shape_oval_corner"
+            android:layout_height="49dp"
             android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/icon_location_now" />
 
             <TextView
                 android:id="@+id/tv_city_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:text="当前城市：东京"
-                android:textSize="18sp" />
+                android:textColor="@color/app_main_title_text"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="热门城市"
-            android:textSize="18sp" />
+        <View
+            style="@style/dev_all_line"
+            android:layout_marginLeft="10dp" />
 
-
-        <com.quliantrip.qulian.view.MyGridView
-            android:layout_marginTop="5dp"
-            android:id="@+id/mgv_city_hot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="3"
-            android:verticalSpacing="15dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="全部景区"
-            android:textSize="18sp" />
         <com.quliantrip.qulian.view.MyListView
             android:id="@+id/mlv_contry_city_list"
             android:layout_width="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
     </LinearLayout>
 </ScrollView>

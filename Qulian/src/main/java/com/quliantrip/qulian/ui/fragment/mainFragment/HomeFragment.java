@@ -24,7 +24,6 @@ import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.scanner.activity.CaptureActivity;
 import com.quliantrip.qulian.scanner.activity.OpenWifiActivity;
-import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.HomeActivity.SecnicPlayConditionActivity;
 import com.quliantrip.qulian.ui.activity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
@@ -47,6 +46,7 @@ import butterknife.OnClick;
 
 /**
  * Created by yuly on 2015/11/9.
+ * 首页界面
  */
 
 public class HomeFragment extends BasePageCheckFragment implements ScrollViewListener {
@@ -66,7 +66,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     HomeFunctionMode homeFunctionMode;
     HomeChoicenessMode homeChoicenessMode;
 
-    private MainActivity activity ;
+    private MainActivity activity;
 
     @Override
     protected View getSuccessView() {
@@ -112,14 +112,14 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
                 modelContainer.removeView(homeChoicenessMode.getModelView());
                 modelContainer.addView(homeChoicenessMode.getModelView());
                 homeChoicenessMode.setData(((HomeBean) bean).getQuality_goods());
-            }else{
+            } else {
                 modelContainer.removeView(homeChoicenessMode.getModelView());
             }
             homeTitle.setText(((HomeBean) bean).getCity_name());
             initListIView(((HomeBean) bean).getDeal_list());
         }
-        if (bean != null && (this.getClass().getName()+"changeCity").equals(bean.getTag())) {
-            ChangeCityBean beanCity = (ChangeCityBean)bean;
+        if (bean != null && (this.getClass().getName() + "changeCity").equals(bean.getTag())) {
+            ChangeCityBean beanCity = (ChangeCityBean) bean;
             Map<String, String> map = new HashMap<String, String>();
             map.put("ctl", "index");
             map.put("act", "app");
@@ -128,11 +128,13 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new HomeBean().setTag(HomeFragment.this.getClass().getName()), map, null);
         }
     }
+
     private HomeRecommendAdapter homeRecommendAdapter;
+
     private void initListIView(List<HomeBean.DealListEntity> dealList) {
-        if(homeRecommendAdapter == null){
+        if (homeRecommendAdapter == null) {
             homeRecommendAdapter = new HomeRecommendAdapter((ArrayList<HomeBean.DealListEntity>) dealList);
-        }else{
+        } else {
             homeRecommendAdapter.upDataItem((ArrayList<HomeBean.DealListEntity>) dealList);
         }
 
@@ -170,11 +172,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             }
         } else if (requestCode == 1) {
             Map<String, String> map = new HashMap<String, String>();
-            map.put("ctl","city");
+            map.put("ctl", "city");
             map.put("act", "city_change");
             map.put("area_id", data.getStringExtra("cityId"));
             map.put("r_type", "1");
-            new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new ChangeCityBean().setTag(HomeFragment.this.getClass().getName()+"changeCity"), map, null);
+            new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new ChangeCityBean().setTag(HomeFragment.this.getClass().getName() + "changeCity"), map, null);
         }
     }
 
@@ -188,6 +190,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     @OnClick(R.id.rl_city_choose)
     void chooseSity() {
         UIHelper.showCityChoose(this, 1);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //连接wifi
@@ -195,14 +198,16 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     void connectWifi() {
         Intent openCameraIntent = new Intent(mContext, CaptureActivity.class);
         startActivityForResult(openCameraIntent, 0);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     private Bundle bundle = new Bundle();
+
     //点击景点、玩法、当地游的筛选
-    @OnClick(R.id.iv_home_secnic_play_search) void gotoSecnicPaly(){
-        Intent intent =  new Intent(mContext,SecnicPlayConditionActivity.class);
+    @OnClick(R.id.iv_home_secnic_play_search)
+    void gotoSecnicPaly() {
+        Intent intent = new Intent(mContext, SecnicPlayConditionActivity.class);
         mContext.startActivity(intent);
-//        bundle.putInt("orderState", 3);
-//        UIHelper.showOrderList(mContext, bundle);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 }

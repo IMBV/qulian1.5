@@ -1,21 +1,15 @@
 package com.quliantrip.qulian.ui.fragment.homeFragment;
 
-import android.content.Intent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.CountryCityListAdapter;
-import com.quliantrip.qulian.adapter.HotCityListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
-import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
-import com.quliantrip.qulian.view.MyGridView;
 import com.quliantrip.qulian.view.MyListView;
 
 import java.util.ArrayList;
@@ -33,8 +27,6 @@ public class SecnicPlayConditionFragment extends BasePageCheckFragment {
     private CityListBean cityListBean;
     @Bind(R.id.tv_city_location)
     TextView locationCountry;
-    @Bind(R.id.mgv_city_hot)
-    MyGridView hotCity;
     @Bind(R.id.mlv_contry_city_list)
     MyListView countryListView;
 
@@ -57,25 +49,12 @@ public class SecnicPlayConditionFragment extends BasePageCheckFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             cityListBean = (CityListBean) bean;
-            //热门城市的条目的数据显示
-            ArrayList<CityListBean.HotCityEntity> hotCityList = (ArrayList<CityListBean.HotCityEntity>) cityListBean.getHot_city();
-            hotCity.setAdapter(new HotCityListAdapter(hotCityList));
-            hotCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    CityListBean.HotCityEntity hotCityEntity = ((CityListBean.HotCityEntity) parent.getAdapter().getItem(position));
-                    Intent intent = new Intent(mContext, MainActivity.class);
-                    intent.putExtra("cityId",hotCityEntity.getId());
-                    ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
-                    ((SimpleBackActivity) mContext).finish();
-                }
-            });
             //全部景区的国家的列表显示
-            CountryCityListAdapter countryCityListAdapter =new CountryCityListAdapter((ArrayList<CityListBean.AreaArrEntity>) ((CityListBean) bean).getArea_arr());
+            CountryCityListAdapter countryCityListAdapter = new CountryCityListAdapter((ArrayList<CityListBean.AreaArrEntity>) ((CityListBean) bean).getArea_arr());
             countryCityListAdapter.setmContext(mContext);
             countryListView.setAdapter(countryCityListAdapter);
             countryListView.setFocusable(false);
-            locationCountry.setText("当前城市："+cityListBean.getCity_name());
+            locationCountry.setText("当前城市：" + cityListBean.getCity_name());
         }
     }
 

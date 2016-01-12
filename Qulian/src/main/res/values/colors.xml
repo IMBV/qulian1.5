@@ -50,9 +50,6 @@
     <color name="swiperefresh_color3">#ffff4444</color>
     <color name="swiperefresh_color4">#ffaa66cc</color>
 
-    <!--城市列表的背景颜色-->
-    <color name="city_list_collor">#ECECEC</color>
-
     <!--listview的选择是的背景颜色-->
     <color name="list_item_background_normal">@color/group_item_bg</color>
     <color name="teamlist_item_background_normal">#ffffff</color>
