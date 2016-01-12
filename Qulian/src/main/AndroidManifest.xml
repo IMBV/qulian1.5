@@ -86,6 +86,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
 
+        <!--我的收藏-->
+        <activity
+            android:name="com.quliantrip.qulian.ui.activity.MyCollectActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SwipeBackActivity" />
+
         <!--这里只有简单返回activity-->
         <activity
             android:name=".ui.activity.SimpleBackActivity"
@@ -101,10 +108,8 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="1104937113" />
             </intent-filter>
         </activity>

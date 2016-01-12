@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/selector_bg_while_gray"
     android:orientation="vertical"
     tools:ignore="ResAuto">
 
@@ -52,6 +52,7 @@
                 android:id="@+id/iv_play_method_like_img"
                 android:layout_width="11dp"
                 android:layout_height="11dp"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/like" />
 
             <TextView

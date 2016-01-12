@@ -9,7 +9,7 @@ import com.quliantrip.qulian.ui.fragment.choicenessFragment.SubmitOrderGoodFragm
 import com.quliantrip.qulian.ui.fragment.meFragment.IntegralFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.MySetting;
-import com.quliantrip.qulian.ui.fragment.meFragment.RegisterFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.register.RegisterFragment;
 
 public enum SimpleBackPage {
     MY_LOGIN(1, R.string.actionbar_title_active, LoginFragment.class),

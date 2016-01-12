@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <LinearLayout
@@ -8,29 +9,71 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <View style="@style/dev_all_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账号"
+                android:textColor="@color/app_main_title_text"
+                android:textSize="16sp" />
+
+            <com.quliantrip.qulian.view.ClearEditText
+                android:id="@+id/ct_userinfo_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@color/colorPrimary"
+                android:hint="邮箱 / 手机号"
+                android:textColorHint="@color/app_main_tag_dec_line"
+                android:textSize="14sp" />
+        </LinearLayout>
+
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/app_main_dev_line" />
+            style="@style/dev_all_line"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
-        <com.quliantrip.qulian.view.ClearEditText
-            android:id="@+id/ct_userinfo_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="邮箱 / 手机号" />
+            android:gravity="center_vertical">
 
-        <com.quliantrip.qulian.view.ClearEditText
-            android:id="@+id/ct_userinfo_password"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textColor="@color/app_main_title_text"
+                android:textSize="16sp" />
+
+            <com.quliantrip.qulian.view.ClearEditText
+                android:id="@+id/ct_userinfo_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@color/colorPrimary"
+                android:hint="请输入密码"
+                android:textColor="@color/black"
+                android:textColorHint="@color/app_main_tag_dec_line"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/dev_all_line"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="请输入密码"
-            android:inputType="textPassword" />
+            android:layout_marginRight="20dp" />
 
         <TextView
+            android:id="@+id/tv_me_search_back_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -47,6 +90,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="44dp"
+            android:background="@drawable/selector_bg_yellow_gray"
             android:text="登录" />
 
         <TextView

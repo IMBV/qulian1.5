@@ -69,7 +69,6 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
 
             }
         });
-
     }
 
     //切换fragment
