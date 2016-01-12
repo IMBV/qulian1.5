@@ -28,6 +28,8 @@ public class SecnicPlayFragment extends BaseViewPagerFragment {
     protected void onSetupTabAdapter(ViewPageFragmentAdapter adapter) {
         String[] title = getResources().getStringArray(
                 R.array.home_secnic_play_local);
+        //测试传递的数据
+        ToastUtil.showToast(QulianApplication.getContext(),getArguments().getString("keyWord"));
         // 景点
         adapter.addTab(title[0], "secnic", SecnicFragment.class,
                 getBundle());

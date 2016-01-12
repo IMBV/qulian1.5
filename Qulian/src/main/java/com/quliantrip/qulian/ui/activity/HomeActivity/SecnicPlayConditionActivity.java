@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -76,6 +77,9 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
     //切换fragment
     private void changeResultFragment() {
         if (secnicPlayFragment == null) {
+            //这里是隐藏输入键盘的操作
+            InputMethodManager imm = (InputMethodManager)getSystemService(SecnicPlayConditionActivity.this.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
             secnicPlayFragment = new SecnicPlayFragment();
             Bundle bundle = new Bundle();
             bundle.putString("keyWord", "nihao");
