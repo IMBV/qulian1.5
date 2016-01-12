@@ -69,9 +69,14 @@ public class GoodDetailActivity extends SwipeBackActivity {
     }
 
     //点击收藏
+    private boolean isCollect = false;
     @OnClick(R.id.ll_good_collect)
     void collectGood() {
+        if (isCollect){
 
+        }else{
+
+        }
     }
 
     //初始化轮播图

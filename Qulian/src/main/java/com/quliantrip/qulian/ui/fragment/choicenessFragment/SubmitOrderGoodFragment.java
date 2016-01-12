@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.text.format.Time;
@@ -10,7 +11,6 @@ import android.widget.TimePicker;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
-import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
@@ -57,8 +57,10 @@ public class SubmitOrderGoodFragment extends BaseFragment {
     }
 
     //进去支付界面
-    @OnClick(R.id.bt_order_submi_topay) void toPay(){
-        UIHelper.showPayMethod(mContext,null);
+    @OnClick(R.id.bt_order_submi_topay)
+    void toPay() {
+        UIHelper.showPayMethod(mContext, null);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     @Bind(R.id.tv_preview_time_data_text)
@@ -96,19 +98,21 @@ public class SubmitOrderGoodFragment extends BaseFragment {
 
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if(minute < 10){
+                if (minute < 10) {
                     serveTime.setText(hourOfDay + " : 0" + minute);
-                }else{
+                } else {
                     serveTime.setText(hourOfDay + " : " + minute);
                 }
             }
         }, hour, minute, true);
         timeDialog.show();
     }
+
     @Bind(R.id.tv_check_store_result_text)
     TextView checkSrore;
+
     @OnClick(R.id.rl_check_store_setting)
-    void checkStore(){
-        ToastUtil.showToast(mContext,"请选择门店");
+    void checkStore() {
+        ToastUtil.showToast(mContext, "请选择门店");
     }
 }
