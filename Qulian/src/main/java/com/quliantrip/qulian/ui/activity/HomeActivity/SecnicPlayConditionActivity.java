@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayConditionFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
-import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.ClearEditText;
 
 import butterknife.Bind;
@@ -61,8 +60,7 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count,int after) {
 
             }
 
@@ -78,7 +76,7 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
     private void changeResultFragment() {
         if (secnicPlayFragment == null) {
             //这里是隐藏输入键盘的操作
-            InputMethodManager imm = (InputMethodManager)getSystemService(SecnicPlayConditionActivity.this.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(SecnicPlayConditionActivity.this.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
             secnicPlayFragment = new SecnicPlayFragment();
             Bundle bundle = new Bundle();
@@ -106,5 +104,4 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         finish();
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
-
 }
