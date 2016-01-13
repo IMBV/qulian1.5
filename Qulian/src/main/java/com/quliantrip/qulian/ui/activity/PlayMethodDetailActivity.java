@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
@@ -29,10 +31,17 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  */
 public class PlayMethodDetailActivity extends SwipeBackActivity {
     private Context mContext;
+    //滑动的scrollView
+    @Bind(R.id.sv_author_play_method_des)
+    ScrollView scrollView;
     //作者简介
     @Bind(R.id.tv_play_method_author_introduce)
     TextView authorIntroduce;
-    private int minHeight,maxHeight;
+    private int minHeight, maxHeight;
+    //下拉的箭头
+    @Bind(R.id.tv_play_method_author_introduce_more)
+    ImageView moreArrow;
+
     //收藏
     @Bind(R.id.iv_good_collect_img)
     ImageView collectImg;
@@ -45,11 +54,9 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
     LinearLayout top_news_viewpager;//轮播的viewpage
     @Bind(R.id.dots_ll)
     LinearLayout dots_ll;//下面的小点
-
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
     private List<View> dotList = new ArrayList<View>();
-
     //mode兑现的显示
     private HomeSlideImageMode homeSlideImageMode;
 
@@ -60,15 +67,15 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
         ButterKnife.bind(this);
         mContext = this;
         initSlideImage();
+
+        //获取viewtreeobject的观察者进行数据的设置
         authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @Override
             public void onGlobalLayout() {
-
                 maxHeight = authorIntroduce.getHeight();
-                authorIntroduce.setMaxLines(5);
+                authorIntroduce.setMaxLines(2);
                 authorIntroduce.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-
                 authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
                     @Override
@@ -76,27 +83,31 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
                         authorIntroduce.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                         minHeight = authorIntroduce.getHeight();
                         authorIntroduce.setMaxLines(Integer.MAX_VALUE);
-                        //杩涜閲嶆柊鐨勭粯鍒�
+                        //进行重新的绘制
                         authorIntroduce.getLayoutParams().height = minHeight;
                         authorIntroduce.requestLayout();
-
                     }
                 });
             }
         });
     }
+
+    //初始化广告的条目
     private void initSlideImage() {
         initRollView();
     }
 
-    private boolean isShow = false;
     //作者介绍更多
-    @OnClick(R.id.tv_play_method_author_introduce_more) void moreAuthoeIntroduce(){
+    private boolean isShow = false;
+
+    @OnClick(R.id.rl_play_method_author_introduce_more)
+    void moreAuthoeIntroduce() {
+        //进行缩放的显示
         ValueAnimator animator;
-        if(isShow)
-            animator = ValueAnimator.ofInt(maxHeight,minHeight);
+        if (isShow)
+            animator = ValueAnimator.ofInt(maxHeight, minHeight);
         else
-            animator = ValueAnimator.ofInt(minHeight,maxHeight);
+            animator = ValueAnimator.ofInt(minHeight, maxHeight);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override
@@ -104,18 +115,19 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
                 int currentValue = (Integer) animator.getAnimatedValue();
                 authorIntroduce.getLayoutParams().height = currentValue;
                 authorIntroduce.requestLayout();
-                if(isShow){
-//                    scrollView.scrol？lBy(0, maxHeight-minHeight);
+                if (isShow) {
+//                   这里是实现的向上移动的显示的内容
+//                    scrollView.scrollBy(0, maxHeight-minHeight);
                 }
             }
         });
-        animator.setDuration(350);
+        animator.setDuration(100);
         animator.start();
-        //缁欑澶存坊鍔犲姩鐢�
-//        ViewPropertyAnimator.animate(iv_des_arrow).rotationBy(180).setDuration(350).start();
+        //给箭头添加动画
+        ViewPropertyAnimator.animate(moreArrow).rotationBy(180).setDuration(0).start();
         isShow = !isShow;
-
     }
+
     //点击购买
     @OnClick(R.id.bt_detail_order_buy)
     void intoOrder() {

@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/text_main_title_16"
+        android:layout_margin="15dp"
+        android:singleLine="true"
+        android:text="趣连消灭一切没有准备的旅行" />
+
+    <TextView
+        style="@style/text_sub_title_16"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/cnb_taocan"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:text="经典双人下午茶套餐" />
+
+    <TextView
+        style="@style/text_sub_title_16"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_text_right_angle"
+        android:textColor="@color/app_main_sub_title_text"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:text="经典双人下午茶套餐" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -17,7 +53,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
                 android:src="@mipmap/icon_people" />
 
             <TextView
@@ -29,7 +64,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
                 android:gravity="center">
 
                 <RelativeLayout
@@ -44,6 +78,7 @@
                         android:layout_centerInParent="true"
                         android:src="@drawable/selector_mipmap_order_minus" />
                 </RelativeLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -73,6 +108,7 @@
                     android:id="@+id/iv_good_person_number_add"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginRight="15dp"
                     android:background="@drawable/selector_bg_yellow_gray">
 
                     <ImageView
@@ -85,6 +121,8 @@
 
         </RelativeLayout>
 
+        <View style="@style/dev_all_line" />
+
         <RelativeLayout
             android:id="@+id/rl_check_store_setting"
             android:layout_width="match_parent"
@@ -96,7 +134,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
                 android:src="@mipmap/icon_mendian" />
 
             <TextView
@@ -122,6 +159,8 @@
 
         </RelativeLayout>
 
+        <View style="@style/dev_all_line" />
+
         <RelativeLayout
             android:id="@+id/rl_preview_time_data_setting"
             android:layout_width="match_parent"
@@ -133,7 +172,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
                 android:src="@mipmap/icon_x_riqi" />
 
             <TextView
@@ -159,6 +197,8 @@
 
         </RelativeLayout>
 
+        <View style="@style/dev_all_line" />
+
         <RelativeLayout
             android:id="@+id/rl_serve_time_setting"
             android:layout_width="match_parent"
@@ -170,7 +210,6 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
                 android:src="@mipmap/icon_x_time" />
 
             <TextView
@@ -196,8 +235,8 @@
 
         </RelativeLayout>
 
-
+        <View style="@style/dev_all_line" />
     </LinearLayout>
 
     <include layout="@layout/layout_all_order_foot_submit" />
-</RelativeLayout>
+</LinearLayout>

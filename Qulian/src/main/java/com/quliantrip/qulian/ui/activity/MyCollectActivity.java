@@ -1,6 +1,5 @@
 package com.quliantrip.qulian.ui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -11,12 +10,13 @@ import com.quliantrip.qulian.util.ToastUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
- * Created by Qulian5 on 2016/1/12.
+ * Created by Yuly on 2016/1/12.
  * 我的收藏
  */
-public class MyCollectActivity extends Activity {
+public class MyCollectActivity extends SwipeBackActivity {
     private Context mContext;
     @Bind(R.id.tv_mycolloct_edit)
     TextView editText;

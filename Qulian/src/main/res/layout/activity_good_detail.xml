@@ -49,10 +49,14 @@
     </RelativeLayout>
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:id="@+id/sv_author_play_method_des"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_detail_adv"
-        android:layout_marginBottom="49.5dp">
+        android:layout_marginBottom="49.5dp"
+        android:layout_marginLeft="10dp"
+        android:scrollbars="none"
+        android:layout_marginRight="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"

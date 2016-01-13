@@ -1,7 +1,5 @@
 package com.quliantrip.qulian.view;
 
-import java.util.List;
-
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
@@ -15,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 
+import java.util.List;
 
 public class RollViewPage extends ViewPager {
     // viewpage要一起改变的数据
@@ -48,7 +47,7 @@ public class RollViewPage extends ViewPager {
 
                 for (int i = 0; i < dotList.size(); i++) {
                     View view = dotList.get(i);
-                    if (position%imageList.size() == i) {
+                    if (position % imageList.size() == i) {
                         view.setBackgroundResource(R.drawable.shape_point_all_white);
                     } else {
                         view.setBackgroundResource(R.drawable.shape_point_half_white);
@@ -92,7 +91,7 @@ public class RollViewPage extends ViewPager {
 
         @Override
         public int getCount() {
-            return imageList.size()*100;
+            return imageList.size() * 100;
         }
 
         @Override
@@ -104,7 +103,7 @@ public class RollViewPage extends ViewPager {
         public Object instantiateItem(ViewGroup container, final int position) {
             View view = View.inflate(getContext(), R.layout.viewpager_item, null);
             ImageView image = (ImageView) view.findViewById(R.id.image);
-            ImageLoader.getInstance().displayImage(imageList.get(position%imageList.size()), image, ImageLoaderOptions.pager_options_big);
+            ImageLoader.getInstance().displayImage(imageList.get(position % imageList.size()), image, ImageLoaderOptions.pager_options_big);
             // 点击图片的和进行回调函数的使用
             image.setOnTouchListener(new OnTouchListener() {
 
@@ -130,7 +129,7 @@ public class RollViewPage extends ViewPager {
                             if ((endTime - startTime) < 500 && downX == upX
                                     && downY == upY) {
                                 if (onTouchImage != null) {
-                                    onTouchImage.touchImage(imageList.get(position%imageList.size()));
+                                    onTouchImage.touchImage(imageList.get(position % imageList.size()));
                                 }
                             }
                             break;
