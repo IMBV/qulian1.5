@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
-import com.quliantrip.qulian.ui.activity.MyCollectActivity;
+import com.quliantrip.qulian.ui.activity.meActivity.MyCollectActivity;
+import com.quliantrip.qulian.ui.activity.meActivity.MyOrderActivity;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.CircleImageView;
@@ -87,7 +88,9 @@ public class MyFragment extends BaseFragment {
     //我的订单
     @OnClick(R.id.ll_me_orderList)
     void showOrderList() {
-        ToastUtil.showToast(mContext, "我的订单");
+        Intent intent = new Intent(mContext, MyOrderActivity.class);
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //常用联系人

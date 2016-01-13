@@ -60,14 +60,14 @@
 
         <!--单品详情-->
         <activity
-            android:name="com.quliantrip.qulian.ui.activity.GoodDetailActivity"
+            android:name=".ui.activity.choiceActivity.GoodDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
 
         <!--玩法详情-->
         <activity
-            android:name="com.quliantrip.qulian.ui.activity.PlayMethodDetailActivity"
+            android:name=".ui.activity.choiceActivity.PlayMethodDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
@@ -81,14 +81,21 @@
 
         <!--语音导航的或景区详情-->
         <activity
-            android:name="com.quliantrip.qulian.ui.activity.VoiceNavigationActivity"
+            android:name=".ui.activity.findActivity.VoiceNavigationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
 
         <!--我的收藏-->
         <activity
-            android:name="com.quliantrip.qulian.ui.activity.MyCollectActivity"
+            android:name=".ui.activity.meActivity.MyCollectActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SwipeBackActivity" />
+
+        <!--我的订单-->
+        <activity
+            android:name="com.quliantrip.qulian.ui.activity.meActivity.MyOrderActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
@@ -108,8 +115,10 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="1104937113" />
             </intent-filter>
         </activity>

@@ -29,10 +29,6 @@ public class UIHelper {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.CITY_CHOOSE);
     }
 
-    public static void showOrderList(Context context, Bundle bundle) {
-        showSimpleBack(context, SimpleBackPage.ORDER_LIST, bundle);
-    }
-
     public static void showIntegral(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.MY_INTEGRAL, bundle);
     }

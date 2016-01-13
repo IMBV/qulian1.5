@@ -1,19 +1,14 @@
 package com.quliantrip.qulian.mode.homeMode;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.HomeBean;
-import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
-import com.quliantrip.qulian.net.constant.HttpConstants;
-import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

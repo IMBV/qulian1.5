@@ -5,71 +5,61 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="44dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
-            <RelativeLayout
-                android:id="@+id/rl_register_style_phone"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+        <RelativeLayout
+            android:id="@+id/rl_register_style_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tv_register_style_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="手机注册"
-                    android:textColor="@color/app_main_title_text"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_register_style_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="手机注册"
+                android:textColor="@color/app_main_title_text"
+                android:textSize="16sp" />
 
-                <View
-                    android:id="@+id/v_register_phone_indicate_line"
-                    android:layout_width="35dp"
-                    android:layout_height="3dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/app_main_collor" />
-            </RelativeLayout>
+            <View
+                android:id="@+id/v_register_phone_indicate_line"
+                android:layout_width="35dp"
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/app_main_collor" />
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_register_style_email"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+        <RelativeLayout
+            android:id="@+id/rl_register_style_email"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tv_register_style_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="邮箱注册"
-                    android:textColor="@color/app_main_title_text"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_register_style_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="邮箱注册"
+                android:textColor="@color/app_main_title_text"
+                android:textSize="16sp" />
 
-                <View
-                    android:id="@+id/v_register_email_indicate_line"
-                    android:layout_width="35dp"
-                    android:layout_height="3dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="gone"
-                    android:background="@color/app_main_collor" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
+            <View
+                android:id="@+id/v_register_email_indicate_line"
+                android:layout_width="35dp"
+                android:layout_height="3dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/app_main_collor"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <View style="@style/dev_all_line" />
 

@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
@@ -21,8 +20,7 @@ import com.quliantrip.qulian.domain.SingleListBean;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
-import com.quliantrip.qulian.ui.activity.PlayMethodDetailActivity;
+import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.MyListView;

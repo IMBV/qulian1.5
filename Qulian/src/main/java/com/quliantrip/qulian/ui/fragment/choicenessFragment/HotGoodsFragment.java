@@ -26,7 +26,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.ui.activity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 

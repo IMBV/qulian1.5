@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.backSimpleFragment;
+package com.quliantrip.qulian.ui.fragment.homeFragment;
 
 import android.view.View;
 import android.widget.TextView;

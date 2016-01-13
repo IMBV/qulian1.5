@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.activity;
+package com.quliantrip.qulian.ui.activity.findActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
