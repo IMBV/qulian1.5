@@ -43,5 +43,4 @@ public class SplashActivity extends Activity {
         Intent intent = new Intent(this, GuideActivity.class);
         startActivity(intent);
     }
-
 }

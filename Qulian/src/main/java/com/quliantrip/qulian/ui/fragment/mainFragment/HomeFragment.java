@@ -29,6 +29,7 @@ import com.quliantrip.qulian.ui.activity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.EvaluateUtil;
+import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.MyListView;
@@ -179,12 +180,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new ChangeCityBean().setTag(HomeFragment.this.getClass().getName() + "changeCity"), map, null);
         }
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        homeSlideImageMode.restarteRoll();
-//    }
 
     //点击切换城市
     @OnClick(R.id.rl_city_choose)

@@ -16,14 +16,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by yuly on 2015/12/2.
- */
-
-
-/**
  * 首页的图片的滑动模块
  */
-public class HomeSlideImageMode extends BaseMode<List<String>>{
+public class HomeSlideImageMode extends BaseMode<List<String>> {
 
     private View view;
     private RollViewPage rollViewPage;
@@ -53,7 +48,6 @@ public class HomeSlideImageMode extends BaseMode<List<String>>{
     }
 
     private void initRollView() {
-
         imageList.clear();
         dotList.clear();
 //        for (HomeBean.AdvsEntity adv:advs) {
@@ -68,13 +62,12 @@ public class HomeSlideImageMode extends BaseMode<List<String>>{
             //添加之定义的viewPage带有滚动效果的
             rollViewPage = new RollViewPage(QulianApplication.getContext(), imageList, dotList);
             rollViewPage.roll();
-            rollViewPage.setCurrentItem(imageList.size()*50);
+            rollViewPage.setCurrentItem(imageList.size() * 50);
             rollViewPage.setOnTouchImage(new RollViewPage.OnTouchImage() {
 
                 @Override
                 public void touchImage(String url) {
                     //这里是进行点击图片是的操作
-//                    ToastUtil.showToast(QulianApplication.getContext(),url);
                 }
             });
             top_news_viewpager.removeAllViews();
@@ -101,12 +94,4 @@ public class HomeSlideImageMode extends BaseMode<List<String>>{
             dotList.add(view);
         }
     }
-
-    //重新开始滚动
-    public void restarteRoll(){
-        if(rollViewPage != null){
-            rollViewPage.roll();
-        }
-    }
-
 }

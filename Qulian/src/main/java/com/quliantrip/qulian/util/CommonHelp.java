@@ -122,5 +122,10 @@ public class CommonHelp {
         return defValue;
     }
 
+    public static SharedPreferences getPreferences() {
+        SharedPreferences pre = QulianApplication.getContext().getSharedPreferences("creativelocker.pref",
+                Context.MODE_MULTI_PROCESS);
+        return pre;
+    }
 
 }

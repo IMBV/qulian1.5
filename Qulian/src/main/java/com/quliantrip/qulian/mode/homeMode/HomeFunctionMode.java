@@ -39,7 +39,7 @@ public class HomeFunctionMode extends BaseMode<List<String>> {
     View deep_gray;
     private int mPointWidth;
     private ArrayList<Fragment> list;
-
+    //这里是进行模块切换的调用
     private MainActivity mMainActivity;
 
     public HomeFunctionMode(MainActivity activity) {
@@ -115,6 +115,7 @@ public class HomeFunctionMode extends BaseMode<List<String>> {
         }
     }
 
+    //小点滑动滑动的操作
     private class MyPageChangedListtener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset,

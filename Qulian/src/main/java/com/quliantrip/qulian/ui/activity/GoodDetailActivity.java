@@ -11,6 +11,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.RollViewPage;
 
