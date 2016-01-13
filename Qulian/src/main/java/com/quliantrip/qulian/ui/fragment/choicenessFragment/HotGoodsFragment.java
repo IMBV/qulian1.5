@@ -68,7 +68,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 default:
                     break;
             }
-
         }
 
         ;

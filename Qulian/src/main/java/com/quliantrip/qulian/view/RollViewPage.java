@@ -19,7 +19,6 @@ public class RollViewPage extends ViewPager {
     // viewpage要一起改变的数据
     private List<String> imageList;
     private List<View> dotList;
-
     private MyRunnable myRunnable;
     private int currentItem = 0;
     private MyPageAdapter myPageAdapter;
@@ -39,7 +38,6 @@ public class RollViewPage extends ViewPager {
         super(context);
         this.imageList = iList;
         this.dotList = dList;
-
         setOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
@@ -56,8 +54,7 @@ public class RollViewPage extends ViewPager {
             }
 
             @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset,int positionOffsetPixels) {
 
             }
 
@@ -75,16 +72,14 @@ public class RollViewPage extends ViewPager {
         } else {
             myPageAdapter.notifyDataSetChanged();
         }
-        handler.postDelayed(myRunnable, 6000);
+        handler.postDelayed(myRunnable, 5000);
     }
 
     private class MyRunnable implements Runnable {
-
         @Override
         public void run() {
             handler.obtainMessage().sendToTarget();
         }
-
     }
 
     class MyPageAdapter extends PagerAdapter {
@@ -106,7 +101,6 @@ public class RollViewPage extends ViewPager {
             ImageLoader.getInstance().displayImage(imageList.get(position % imageList.size()), image, ImageLoaderOptions.pager_options_big);
             // 点击图片的和进行回调函数的使用
             image.setOnTouchListener(new OnTouchListener() {
-
                 private int downX;
                 private int downY;
                 private int startTime;
@@ -152,7 +146,6 @@ public class RollViewPage extends ViewPager {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
-
     }
 
     // 定义一个接口实现当点击图片是进行调用
@@ -171,5 +164,4 @@ public class RollViewPage extends ViewPager {
         handler.removeCallbacksAndMessages(null);
         super.onDetachedFromWindow();
     }
-
 }

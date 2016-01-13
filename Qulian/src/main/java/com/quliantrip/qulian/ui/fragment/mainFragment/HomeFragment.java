@@ -180,11 +180,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        homeSlideImageMode.restarteRoll();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        homeSlideImageMode.restarteRoll();
+//    }
 
     //点击切换城市
     @OnClick(R.id.rl_city_choose)
