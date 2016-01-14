@@ -14,6 +14,8 @@ import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.RollViewPage;
+import com.quliantrip.qulian.view.dialog.CollectDialog;
+import com.quliantrip.qulian.view.dialog.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,9 @@ public class GoodDetailActivity extends SwipeBackActivity {
         if (!isCollect) {
             collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
             collectText.setText("已收藏");
+            CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
+            collectDialog.setCanceledOnTouchOutside(true);
+            collectDialog.show();
         } else {
             collectImg.setImageResource(R.mipmap.icon_x_shoucang);
             collectText.setText("收藏");

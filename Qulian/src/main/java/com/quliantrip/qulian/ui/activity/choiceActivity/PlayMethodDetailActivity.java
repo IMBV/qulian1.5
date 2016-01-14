@@ -17,6 +17,7 @@ import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.RollViewPage;
+import com.quliantrip.qulian.view.dialog.CollectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +142,9 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
         if (!isCollect) {
             collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
             collectText.setText("已收藏");
+            CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
+            collectDialog.setCanceledOnTouchOutside(true);
+            collectDialog.show();
         } else {
             collectImg.setImageResource(R.mipmap.icon_x_shoucang);
             collectText.setText("收藏");
@@ -206,4 +210,6 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
         finish();
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
+
+
 }

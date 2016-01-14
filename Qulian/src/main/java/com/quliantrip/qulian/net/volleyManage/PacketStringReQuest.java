@@ -10,6 +10,10 @@ import java.util.Map;
 public class PacketStringReQuest extends StringRequest {
     private Map map;
 
+    public PacketStringReQuest(String url, BaseJson object, Map map){
+        this(url,object,map,null);
+    }
+
     public PacketStringReQuest(String url, BaseJson object, Map map, ResponseListenner.OnLoadFinishListener onLoadFinishListener) {
         super(Method.POST, url, new ResponseListenner(object, onLoadFinishListener), new ResponseErrorListener(onLoadFinishListener, object));
         this.map = map;

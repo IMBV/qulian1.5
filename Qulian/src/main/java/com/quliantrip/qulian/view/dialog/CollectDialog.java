@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.view;
+package com.quliantrip.qulian.view.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,11 +12,11 @@ import com.quliantrip.qulian.R;
 /**
  * Created by Yuly on 2016/1/12.
  */
-public class LoadingDialog extends Dialog {
+public class CollectDialog extends Dialog {
     // 定义回调事件，用于dialog的点击事件
-    public LoadingDialog(Context context, String strMessage) {
+    public CollectDialog(Context context, String strMessage) {
         super(context, R.style.dialog);
-        this.setContentView(R.layout.loading_dialog);
+        this.setContentView(R.layout.collect_dialog);
         this.getWindow().getAttributes().gravity = Gravity.CENTER;
         TextView tvMsg = (TextView) this.findViewById(R.id.txt);
 

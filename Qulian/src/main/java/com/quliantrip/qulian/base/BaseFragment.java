@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.quliantrip.qulian.view.LoadingDialog;
+import com.quliantrip.qulian.view.dialog.LoadingDialog;
 
 import de.greenrobot.event.EventBus;
 
