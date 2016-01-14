@@ -20,8 +20,8 @@ import butterknife.ButterKnife;
 public class GoodOrderFragment extends Fragment {
     private Context mContext;
     private View view;
-    @Bind(R.id.ll_line)
-    LinearLayout line;
+//    @Bind(R.id.ll_line)
+//    LinearLayout line;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class GoodOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_me_see_consumer, null);
         ButterKnife.bind(this, view);
-        line.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+//        line.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         return view;
     }
 }

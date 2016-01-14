@@ -8,17 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 
 import butterknife.ButterKnife;
 
 public class FunctionModeFragmentOne extends Fragment {
 
-    protected Context mContext;
+    protected MainActivity mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = (Context) getActivity();
+        mContext = (MainActivity) getActivity();
     }
 
     @Override
@@ -26,6 +27,7 @@ public class FunctionModeFragmentOne extends Fragment {
                              Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.fragment_function_mode_fragment_one, null);
         ButterKnife.bind(this, view);
+        mContext.test();
         return view;
     }
 

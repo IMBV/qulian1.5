@@ -60,18 +60,17 @@ public class HomeFunctionMode extends BaseMode<List<String>> {
     public void setData(final List<String> list) {
 
     }
+
     private void initDrawe() {
         list = new ArrayList<Fragment>();
         list.add(new FunctionModeFragmentOne());
         list.add(new FunctionModeFragmentSecond());
         for (int i = 0; i < list.size(); i++) {
             View view = new View(QulianApplication.getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    CommonHelp.dip2px(QulianApplication.getContext(), 6),
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonHelp.dip2px(QulianApplication.getContext(), 6),
                     CommonHelp.dip2px(QulianApplication.getContext(), 6));
             if (i > 0)
-                params.leftMargin = CommonHelp.dip2px(QulianApplication.getContext(),
-                        10);
+                params.leftMargin = CommonHelp.dip2px(QulianApplication.getContext(), 10);
             view.setLayoutParams(params);
             view.setBackgroundResource(R.drawable.shape_point_gray);
             point_gray.addView(view);
@@ -81,10 +80,8 @@ public class HomeFunctionMode extends BaseMode<List<String>> {
 
                     @Override
                     public void onGlobalLayout() {
-                        point_gray.getViewTreeObserver()
-                                .removeGlobalOnLayoutListener(this);
-                        mPointWidth = point_gray.getChildAt(1).getLeft()
-                                - point_gray.getChildAt(0).getLeft();
+                        point_gray.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        mPointWidth = point_gray.getChildAt(1).getLeft() - point_gray.getChildAt(0).getLeft();
                     }
                 });
     }

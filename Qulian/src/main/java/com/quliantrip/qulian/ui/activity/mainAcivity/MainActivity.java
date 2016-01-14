@@ -376,4 +376,7 @@ public class MainActivity extends FragmentActivity {
 //
 //        ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
 //    }
+    public void test(){
+        ToastUtil.showToast(getApplicationContext(),"测试方法调用");
+    }
 }
