@@ -2,17 +2,18 @@
 <com.quliantrip.qulian.view.SlipRihtLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/srl_play_method_collect_item"
     android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/ll_is_checked_delect"
         android:layout_width="44dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/selector_bg_while_gray"
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iv_collect_Img_style"
+            android:id="@+id/iv_collect_Img_state"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_gravity="center"
@@ -23,13 +24,13 @@
         android:id="@+id/isopen"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical">
+        android:background="@color/app_main_collor"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="条目asdfafasdfasdfasdfasfsadfsadfsadfsadfasdfasf" />
+            android:text="条目内容" />
     </LinearLayout>
 </com.quliantrip.qulian.view.SlipRihtLayout>

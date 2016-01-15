@@ -46,8 +46,7 @@ public class PlayMethodOrderFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_me_play_method_order, null);
         ButterKnife.bind(this, view);
         initRefreshListView();
@@ -98,7 +97,6 @@ public class PlayMethodOrderFragment extends Fragment {
             }
         });
     }
-
 }
 
 class Test extends BasicAdapter<String> {
