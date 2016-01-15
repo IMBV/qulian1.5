@@ -96,7 +96,7 @@ public class MyFragment extends BaseFragment {
     //常用联系人
     @OnClick(R.id.ll_me_offen_lianxiren)
     void showOffLianxiren() {
-        ToastUtil.showToast(mContext, "常用联系人");
+        UIHelper.showMyCommonInfo(mContext,null);
     }
 
     //我的优惠券

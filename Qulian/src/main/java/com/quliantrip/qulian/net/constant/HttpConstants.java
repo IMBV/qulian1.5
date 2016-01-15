@@ -28,6 +28,8 @@ public class HttpConstants {
      * 手机号重复验证
      */
     public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1+"user/mobile";
+    //手机号注册
+    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1+"user/mobile";
 
 
 }

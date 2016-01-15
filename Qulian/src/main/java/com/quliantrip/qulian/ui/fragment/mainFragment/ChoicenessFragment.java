@@ -57,7 +57,8 @@ public class ChoicenessFragment extends Fragment {
         mFragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
         recommendRouteFragment = new RecommendRouteFragment();
         hotGoodsFragment = new HotGoodsFragment();
-        mFragmentManager.beginTransaction().add(R.id.fl_happiness_container, recommendRouteFragment).commit();
+        gotoSubFragmennt(recommendRouteFragment);
+//        mFragmentManager.beginTransaction().add(R.id.fl_happiness_container, recommendRouteFragment).commit();
         setTextColor(true);
         return view;
     }

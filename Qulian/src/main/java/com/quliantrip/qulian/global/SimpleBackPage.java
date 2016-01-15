@@ -7,6 +7,7 @@ import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragmen
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.SubmitOrderGoodFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.IntegralFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.MyCommenInfo;
 import com.quliantrip.qulian.ui.fragment.meFragment.MySetting;
 import com.quliantrip.qulian.ui.fragment.meFragment.register.RegisterFragment;
 
@@ -15,6 +16,7 @@ public enum SimpleBackPage {
     MY_SETTING(2, R.string.actionbar_title_setting, MySetting.class),
 
     CITY_CHOOSE(3, R.string.actionbar_city_choose, CityChooseFragment.class),
+    MY_COMMON_INFO(4, R.string.actionbar_city_choose, MyCommenInfo.class),
     MY_REGISTER(5, R.string.actionbar_me_register, RegisterFragment.class),
     MY_INTEGRAL(6, R.string.actionbar_me_integral, IntegralFragment.class),
 
