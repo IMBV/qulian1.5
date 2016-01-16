@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
+import com.quliantrip.qulian.ui.activity.meActivity.FeedbackActivity;
 import com.quliantrip.qulian.ui.activity.meActivity.MyCollectActivity;
 import com.quliantrip.qulian.ui.activity.meActivity.MyOrderActivity;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -96,20 +97,22 @@ public class MyFragment extends BaseFragment {
     //常用联系人
     @OnClick(R.id.ll_me_offen_lianxiren)
     void showOffLianxiren() {
-        UIHelper.showMyCommonInfo(mContext,null);
+        UIHelper.showMyCommonInfo(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的优惠券
     @OnClick(R.id.ll_me_youhuijuan)
     void showYouhuijuan() {
-        UIHelper.showMyDisCount(mContext,null);
+        UIHelper.showMyDisCount(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的优惠券
     @OnClick(R.id.ll_me_fankui)
     void showFankui() {
-        ToastUtil.showToast(mContext, "意见反馈");
+        Intent intent = new Intent(mContext,FeedbackActivity.class);
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 }

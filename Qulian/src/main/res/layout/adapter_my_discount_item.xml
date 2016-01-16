@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_discount_bg"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@mipmap/bg_youhuiquan">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="33dp"
+            android:text="￥"
+            android:textColor="@color/app_main_collor"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/tv_discount_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="5dp"
+            android:text="10"
+            android:textColor="@color/app_main_collor"
+            android:textSize="60sp" />
+
+        <ImageView
+            android:id="@+id/tv_user_state_img"
+            android:layout_width="77.5dp"
+            android:layout_height="72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_discount_user_condition"
+                style="@style/text_sub_title_16"
+                android:layout_gravity="right"
+                android:text="满99可用" />
+
+            <TextView
+                android:id="@+id/tv_discount_user_direction"
+                style="@style/text_main_title_tytle_14"
+                android:layout_gravity="right"
+                android:layout_marginTop="5dp"
+                android:text="所有趣连产品均可使用" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_start_end_time_user"
+            style="@style/text_sub_title_style"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="30dp"
+            android:text="2016.04.28-2016.08.28" />
+    </RelativeLayout>
+</LinearLayout>
