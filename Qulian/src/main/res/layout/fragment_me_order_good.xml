@@ -2,8 +2,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_main_bg"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/app_main_bg">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/rg_hot_good_classfy"
+                        android:layout_width="fill_parent"
+                        android:layout_height="44dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:background="@color/app_main_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_me_order_good_all"
+                            style="@style/order_btn_function_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="全部" />
+                        <RadioButton
+                            android:id="@+id/rb_me_order_good_to_pay"
+                            style="@style/order_btn_function_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="未付款" />
+                        <RadioButton
+                            android:id="@+id/rb_me_order_good_to_confirmed"
+                            style="@style/order_btn_function_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="待确认" />
+                        <RadioButton
+                            android:id="@+id/rb_me_order_good_confirmed"
+                            style="@style/order_btn_function_selector"
+                            android:layout_marginLeft="10dp"
+                            android:text="已确认" />
+                        <RadioButton
+                            android:id="@+id/rb_me_order_good_user"
+                            style="@style/order_btn_function_selector"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="已使用" />
+
+                    </RadioGroup>
+                </RelativeLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -53,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="asdfasfjl" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,6 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="asdfasfjl" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

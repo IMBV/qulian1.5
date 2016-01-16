@@ -64,7 +64,23 @@
     <style name="choiceness_btn_selector">
         <item name="android:layout_width">57dp</item>
         <item name="android:layout_height">27dp</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/selector_choiceness_btn_collor</item>
+        <item name="android:background">@drawable/selector_btn_choieness</item>
+        <item name="android:gravity">center</item>
+
+        <!-- 去按钮立体效果 -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="order_btn_function_selector">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">27dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/selector_choiceness_btn_collor</item>
         <item name="android:background">@drawable/selector_btn_choieness</item>
         <item name="android:gravity">center</item>
@@ -283,7 +299,34 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="text_main_title_14">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_title</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 
+    <style name="text_main_title_tytle_14">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_title_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 
+    <style name="text_yellow_title_14">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_collor</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--商品订单的后面数量显示的字体颜色-->
+    <style name="text_end_yellow">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/app_main_collor</item>
+        <!--这里表示的是斜体-->
+        <!--<item name="android:textStyle">italic</item>-->
+    </style>
 
 </resources>

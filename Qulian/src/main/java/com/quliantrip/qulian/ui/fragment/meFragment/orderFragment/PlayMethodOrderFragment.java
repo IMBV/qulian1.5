@@ -8,25 +8,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.util.ToastUtil;
-import com.quliantrip.qulian.view.SlipRihtLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Qulian5 on 2016/1/5.
@@ -46,7 +43,7 @@ public class PlayMethodOrderFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_me_play_method_order, null);
         ButterKnife.bind(this, view);
         initRefreshListView();
@@ -61,10 +58,16 @@ public class PlayMethodOrderFragment extends Fragment {
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
         final ArrayList<String> list = new ArrayList<String>();
         int i;
-        for(i = 0;i <= 30;i++)
+        for (i = 0; i <= 30; i++)
             list.add("asdf" + i);
         final Test test = new Test(list);
         listView.setAdapter(test);
+        listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
+        listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) refreshViewList.getLayoutParams();
+        params.topMargin = CommonHelp.dip2px(mContext, 10);
+        refreshViewList.setLayoutParams(params);
 
         // 进行数据时的适配和是上啦还是下拉的操作
         refreshViewList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
@@ -105,24 +108,25 @@ class Test extends BasicAdapter<String> {
     public Test(ArrayList<String> list) {
         super(list);
     }
-    public void addItem(String s){
+
+    public void addItem(String s) {
         list.add(s);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_city_item, null);
+            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_play_order_list_item, null);
         }
-        Holder holder = Holder.getHolder(convertView);
-        String name = list.get(position);
-        holder.city.setText(name);
+//        Holder holder = Holder.getHolder(convertView);
+//        String name = list.get(position);
+//        holder.city.setText(name);
         return convertView;
     }
 
     static class Holder {
-        @Bind(R.id.tv_city)
-        TextView city;
+//        @Bind(R.id.tv_city)
+//        TextView city;
 
         public Holder(View convertView) {
             super();
