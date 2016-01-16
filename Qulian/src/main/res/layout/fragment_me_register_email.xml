@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱"
+            android:textColor="@color/app_main_title_text"
+            android:textSize="16sp" />
+
+        <com.quliantrip.qulian.view.ClearEditText
+            android:id="@+id/ct_user_email_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorPrimary"
+            android:hint="输入邮箱号"
+            android:textColorHint="@color/app_main_tag_dec_line"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textColor="@color/app_main_title_text"
+            android:textSize="16sp" />
+
+        <com.quliantrip.qulian.view.ClearEditText
+            android:id="@+id/ct_user_email_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorPrimary"
+            android:hint="6-20位数字或字母"
+            android:textColor="@color/black"
+            android:textColorHint="@color/app_main_tag_dec_line"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="10sp"
+        android:textColor="@color/app_main_title_text"
+        android:text="点击完成即同意"/>
+
+    <Button
+        android:id="@+id/bt_user_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/selector_bg_yellow_gray"
+        android:text="点击注册" />
+</LinearLayout>

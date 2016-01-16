@@ -49,6 +49,10 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.MY_COMMON_INFO, bundle);
     }
 
+    public static void showMyDisCount(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.MY_DISCOUNT, bundle);
+    }
+
     //下面是有返回值得简单返回的activity的操作
     public static void showSimpleBackForResult(Fragment fragment, int requestCode, SimpleBackPage page) {
         Intent intent = new Intent(fragment.getActivity(),

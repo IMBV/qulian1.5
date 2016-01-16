@@ -97,12 +97,14 @@ public class MyFragment extends BaseFragment {
     @OnClick(R.id.ll_me_offen_lianxiren)
     void showOffLianxiren() {
         UIHelper.showMyCommonInfo(mContext,null);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的优惠券
     @OnClick(R.id.ll_me_youhuijuan)
     void showYouhuijuan() {
-        ToastUtil.showToast(mContext, "我的优惠券");
+        UIHelper.showMyDisCount(mContext,null);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //我的优惠券

@@ -17,7 +17,7 @@ import butterknife.OnClick;
  * www.quliantrip.com
  * 设置界面
  */
-public class MySetting extends BaseFragment {
+public class MySettingFragment extends BaseFragment {
     @Bind(R.id.tv_app_versionCode)
     TextView versionCode;//新版的编号
 

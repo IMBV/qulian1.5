@@ -17,6 +17,7 @@
     <string name="actionbar_me_integral">我的积分</string>
     <string name="actionbar_good_order">提交订单</string>
     <string name="actionbar_pay_method">支付收银台</string>
+    <string name="actionbar_me_discount">优惠券</string>
 
 
     <string name="load_error">加载失败,点击重试</string>

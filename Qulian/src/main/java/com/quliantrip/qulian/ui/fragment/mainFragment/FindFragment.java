@@ -51,6 +51,7 @@ public class FindFragment extends BasePageCheckFragment {
 
     }
 
+//这里是播放视频的操作
 //    private PopupWindow popupWindow;
 //    private View view;
 //    private VideoView videoView;
