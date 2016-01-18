@@ -329,4 +329,12 @@
         <!--<item name="android:textStyle">italic</item>-->
     </style>
 
+    <!--按钮的颜色-->
+    <style name="btn_yellow_grat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/selector_bg_gray_yellow</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

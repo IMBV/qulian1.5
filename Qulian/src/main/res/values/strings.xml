@@ -7,6 +7,7 @@
     <string name="tab_home_find">发现</string>
     <string name="tab_home_me">我</string>
 
+    <!--简单返回的activity标题的名称-->
     <string name="actionbar_title_active">登录</string>
     <string name="actionbar_title_setting">设置</string>
     <string name="actionbar_city_choose">城市切换</string>
@@ -18,7 +19,7 @@
     <string name="actionbar_good_order">提交订单</string>
     <string name="actionbar_pay_method">支付收银台</string>
     <string name="actionbar_me_discount">优惠券</string>
-
+    <string name="actionbar_me_change_password">修改密码</string>
 
     <string name="load_error">加载失败,点击重试</string>
 

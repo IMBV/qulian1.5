@@ -12,6 +12,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 
+import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.global.SimpleBackPage;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 
@@ -51,6 +52,11 @@ public class UIHelper {
 
     public static void showMyDisCount(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.MY_DISCOUNT, bundle);
+    }
+
+    public static void showChangePassword(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.MY_CHANGE_PASSWORD, bundle);
+        ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //下面是有返回值得简单返回的activity的操作

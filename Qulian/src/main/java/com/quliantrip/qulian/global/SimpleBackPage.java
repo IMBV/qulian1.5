@@ -5,6 +5,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.ui.fragment.homeFragment.CityChooseFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.SubmitOrderGoodFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.ChangePasswordFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.IntegralFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.MyCommenInfoFragment;
@@ -23,7 +24,8 @@ public enum SimpleBackPage {
 
     GOOD_ORDER(7,R.string.actionbar_good_order,SubmitOrderGoodFragment.class),
     PAY_METHOD(8,R.string.actionbar_pay_method,PayCheckstandFragment.class),
-    MY_DISCOUNT(9,R.string.actionbar_me_discount,MyDiscountFragment.class);
+    MY_DISCOUNT(9,R.string.actionbar_me_discount,MyDiscountFragment.class),
+    MY_CHANGE_PASSWORD(11,R.string.actionbar_me_change_password,ChangePasswordFragment.class);
 
     private int title;
     private Class<?> clz;

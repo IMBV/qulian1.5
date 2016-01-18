@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.meFragment;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -7,6 +8,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.util.UIHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,7 +38,7 @@ public class MySettingFragment extends BaseFragment {
     //修改密码
     @OnClick(R.id.tv_my_setting_updatePasword)
     void updataPasword() {
-        ToastUtil.showToast(QulianApplication.getContext(), "暂时还没有实现");
+        UIHelper.showChangePassword(mContext, null);
     }
 
     //关于我们

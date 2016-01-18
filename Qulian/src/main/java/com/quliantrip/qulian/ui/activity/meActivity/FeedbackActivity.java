@@ -9,11 +9,12 @@ import com.quliantrip.qulian.util.ToastUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * 意见反馈
  */
-public class FeedbackActivity extends Activity {
+public class FeedbackActivity extends SwipeBackActivity {
     private Context mContext;
 
     @Override

@@ -33,14 +33,19 @@
             android:textColor="@color/app_main_title"
             android:textSize="18sp" />
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/iv_feed_call_me"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:src="@mipmap/icon_tel" />
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/icon_tel" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <EditText
@@ -54,7 +59,8 @@
         android:inputType="textMultiLine"
         android:maxLines="10"
         android:minLines="8"
-        android:scrollbars="vertical"></EditText>
+        android:scrollbars="vertical"
+        android:textColorHint="@color/app_main_tag_dec_line"></EditText>
 
     <EditText
         android:layout_width="match_parent"
@@ -62,7 +68,18 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/shape_bg_ovel_line"
-        android:text="手机号码或邮箱" />
+        android:hint="手机号码或邮箱"
+        android:textColorHint="@color/app_main_tag_dec_line" />
+
+    <Button
+        android:id="@+id/bt_add_discount"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_bg_gray_yellow"
+        android:text="提交"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
 
 
 </LinearLayout>
