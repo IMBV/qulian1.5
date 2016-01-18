@@ -2,6 +2,7 @@ package com.quliantrip.qulian.ui.fragment.meFragment.register;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -15,8 +16,12 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.domain.MoBileBean;
+import com.quliantrip.qulian.domain.UserInfoBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
+import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.TimeCountUtil;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -68,20 +73,28 @@ public class RegisterPhoneFragment extends Fragment {
                 MoBileBean moBileBean = (MoBileBean) bean;
                 code = ((MoBileBean) bean).getData();
             } else if (bean.getTag().endsWith("psignup")) {
-
-
+                UserInfoBean userInfoBean = (UserInfoBean) bean;
+                QulianApplication.getInstance().saveUserInfo(userInfoBean.getData());
+                if (userInfoBean.getCode() == 200) {
+                    QulianApplication.getInstance().saveUserInfo(userInfoBean.getData());
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
+                    ((SimpleBackActivity) mContext).finish();
+                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+                } else {
+                    ToastUtil.showToast(mContext, userInfoBean.getMsg());
+                }
             }
         }
     }
 
-
     @OnClick(R.id.bt_user_register)
     void registerUser() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("password", phoneNum.getText().toString().trim());
-        map.put("mobile", passWord.getText().toString().trim());
-        map.put("code", code);
-        new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(this.getClass().getName() + "psignup"), map, null);
+        map.put("SignupForm[password]", phoneNum.getText().toString().trim());
+        map.put("SignupForm[mobile]", passWord.getText().toString().trim());
+        map.put("SignupForm[code]", code);
+        new PacketStringReQuest(HttpConstants.MOBILE_REGISTER, new UserInfoBean().setTag(this.getClass().getName() + "psignup"), map, null);
     }
 
     //手机号码的验证

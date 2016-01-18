@@ -10,7 +10,7 @@ public class LoginDataBean {
     private int id;
     private String username;
     private String auth_key;
-    private int mobile;
+    private String mobile;
     private String email;
     private int code;
     private int status;
@@ -30,7 +30,7 @@ public class LoginDataBean {
         this.auth_key = auth_key;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -70,7 +70,7 @@ public class LoginDataBean {
         return auth_key;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 

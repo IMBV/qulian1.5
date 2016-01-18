@@ -1,12 +1,15 @@
 package com.quliantrip.qulian.ui.fragment.meFragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
@@ -42,7 +45,7 @@ public class MySettingFragment extends BaseFragment {
     }
 
     //关于我们
-    @OnClick(R.id.tv_my_setting_loginout)
+    @OnClick(R.id.tv_my_setting_about_me)
     void aboutMe() {
         ToastUtil.showToast(QulianApplication.getContext(), "关于我们");
     }
@@ -50,7 +53,11 @@ public class MySettingFragment extends BaseFragment {
     //退出当前用户
     @OnClick(R.id.tv_my_setting_loginout)
     void loginoutCurrentUser() {
-        ToastUtil.showToast(QulianApplication.getContext(), "退出当前用户");
+        QulianApplication.getInstance().Logout();
+        Intent intent = ((SimpleBackActivity) mContext).getIntent();
+        ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
+        ((SimpleBackActivity) mContext).finish();
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
 
 }

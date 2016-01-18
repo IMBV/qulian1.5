@@ -18,12 +18,12 @@ import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 
 public class UIHelper {
     //显示的fragment类,bundule表示fragment的argument的参数，用来进行传递参数
-    public static void showMyLogin(Context context) {
-        showSimpleBack(context, SimpleBackPage.MY_LOGIN);
+    public static void showMyLogin(Fragment fragment, int requestCode) {
+        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_LOGIN);
     }
 
-    public static void showMeSetting(Context context) {
-        showSimpleBack(context, SimpleBackPage.MY_SETTING);
+    public static void showMeSetting(Fragment fragment, int requestCode){
+        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_SETTING);
     }
 
     public static void showCityChoose(Fragment fragment, int requestCode) {
@@ -59,10 +59,11 @@ public class UIHelper {
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
+
+
     //下面是有返回值得简单返回的activity的操作
     public static void showSimpleBackForResult(Fragment fragment, int requestCode, SimpleBackPage page) {
-        Intent intent = new Intent(fragment.getActivity(),
-                SimpleBackActivity.class);
+        Intent intent = new Intent(fragment.getActivity(),SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
         fragment.startActivityForResult(intent, requestCode);
     }

@@ -22,6 +22,10 @@ public class UserInfoBean extends BaseJson {
         this.data = data;
     }
 
+    public LoginDataBean getData() {
+        return data;
+    }
+
     public int getCode() {
         return code;
     }

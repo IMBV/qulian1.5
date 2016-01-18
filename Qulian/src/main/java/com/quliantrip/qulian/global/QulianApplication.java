@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.quliantrip.qulian.domain.LoginDataBean;
 import com.quliantrip.qulian.domain.UserInfoBean;
 import com.quliantrip.qulian.util.CommonHelp;
 
@@ -30,8 +31,7 @@ public class QulianApplication extends Application {
 
     private String userId;
     private boolean isLogin;
-    private UserInfoBean user;
-
+    private LoginDataBean user;
 
     private static QulianApplication instance;
 
@@ -44,7 +44,7 @@ public class QulianApplication extends Application {
         mContext = this;
         mainHandler = new Handler();
         initImageLoader(getContext());
-//        initLogin();
+        initLogin();
     }
 
     public static QulianApplication getInstance() {
@@ -80,15 +80,15 @@ public class QulianApplication extends Application {
     }
 
 
-//    private void initLogin() {
-//        user = getLoginUser();
-//        if (null != user && 1 == user.getStatus()) {
-//            this.isLogin = true;
-//            userId = user.getId();
-//        } else {
-//            this.cleanLoginInfo();
-//        }
-//    }
+    private void initLogin() {
+        user = getLoginUser();
+        if (null != user && user.getAuth_key()!=null) {
+            this.isLogin = true;
+            userId = user.getAuth_key();
+        } else {
+            this.cleanLoginInfo();
+        }
+    }
 
     /**
      * 获取App唯一标识
@@ -128,22 +128,13 @@ public class QulianApplication extends Application {
      * @param user
      */
     @SuppressWarnings("serial")
-    public void updateUserInfo(final UserInfoBean user) {
+    public void updateUserInfo(final LoginDataBean user) {
         setProperties(new Properties() {
             {
-//                setProperty("user.act", user.getAct());
-//                setProperty("user.city_name", user.getCity_name());
-//                setProperty("user.ctl", user.getCtl());
-//                setProperty("user.email", user.getEmail());
-//                setProperty("user.id", user.getId());
-//                setProperty("user.info", user.getInfo());
-//                setProperty("user.is_tmp", user.getIs_tmp());
-//                setProperty("user.mobile", user.getMobile());
-//                setProperty("user.returnX", String.valueOf(user.getReturnX()));
-//                setProperty("user.sess_id", user.getSess_id());
-//                setProperty("user.status", String.valueOf(user.getStatus()));
-//                setProperty("user.user_name", user.getUser_name());
-//                setProperty("user.user_pwd", user.getUser_pwd());
+                setProperty("user.name", user.getUsername());
+                setProperty("user.auth_key", user.getAuth_key());
+                setProperty("user.mobile", user.getMobile());
+                setProperty("user.email", user.getEmail());
             }
         });
     }
@@ -169,65 +160,39 @@ public class QulianApplication extends Application {
     /**
      * 保存登录信息
      */
-//    public void saveUserInfo(final UserInfoBean user) {
-//        this.userId = user.getId();
-//
-//        this.isLogin = true;
-//        setProperties(new Properties() {
-//            {
-//                setProperty("user.act", user.getAct());
-//                setProperty("user.city_name", user.getCity_name());
-//                setProperty("user.ctl", user.getCtl());
-//                setProperty("user.email", user.getEmail());
-//                setProperty("user.id", user.getId());
-//                setProperty("user.info", user.getInfo());
-//                setProperty("user.is_tmp", user.getIs_tmp());
-//                setProperty("user.mobile", user.getMobile());
-//                setProperty("user.returnX", String.valueOf(user.getReturnX()));
-//                setProperty("user.sess_id", user.getSess_id());
-//                setProperty("user.status", String.valueOf(user.getStatus()));
-//                setProperty("user.user_name", user.getUser_name());
-//                setProperty("user.user_pwd", user.getUser_pwd());
-//
-//            }
-//        });
-//
-//    }
+    public void saveUserInfo(final LoginDataBean user) {
+        this.userId = user.getAuth_key();
+        this.isLogin = true;
+        setProperties(new Properties() {
+            {
+                setProperty("user.name", user.getUsername());
+                setProperty("user.auth_key", user.getAuth_key());
+                setProperty("user.mobile", user.getMobile());
+                setProperty("user.email", user.getEmail());
+            }
+        });
+    }
 
     /**
      * 获得登录用户的信息
      *
      * @return
      */
-//    public UserInfoBean getLoginUser() {
-//        UserInfoBean user = new UserInfoBean();
-//        user.setAct(getProperty("user.act"));
-//        user.setCity_name(getProperty("user.city_name"));
-//        user.setCtl(getProperty("user.ctl"));
-//        user.setEmail(getProperty("user.email"));
-//        user.setId(getProperty("user.id"));
-//
-//        user.setInfo(getProperty("user.info"));
-//        user.setIs_tmp(getProperty("user.is_tmp"));
-//        user.setMobile(getProperty("user.mobile"));
-//        user.setReturnX(CommonHelp.toInt(getProperty("user.returnX"), 0));
-//        user.setSess_id(getProperty("user.sess_id"));
-//
-//        user.setStatus(CommonHelp.toInt(getProperty("user.status"), 0));
-//        user.setUser_name(getProperty("user.user_name"));
-//        user.setUser_pwd(getProperty("user.user_pwd"));
-//        return user;
-//    }
+    public LoginDataBean getLoginUser() {
+        LoginDataBean user = new LoginDataBean();
+
+        user.setUsername(getProperty("user.name"));
+        user.setAuth_key(getProperty("user.auth_key"));
+        user.setMobile(getProperty("user.mobile"));
+        user.setEmail(getProperty("user.email"));
+        return user;
+    }
 
     /**
      * 清除登录信息
      */
     public void cleanLoginInfo() {
-        this.userId = "0";
-        this.isLogin = false;
-        removeProperty("user.act", "user.city_name", "user.ctl", "user.email", "user.id",
-                "user.info", "user.is_tmp", "user.mobile", "user.returnX", "user.sess_id"
-                , "user.status", "user.user_name", "user.user_pwd");
+        removeProperty("user.name", "user.auth_key", "user.mobile", "user.email");
     }
 
     //这里是返回voley的消息的队列

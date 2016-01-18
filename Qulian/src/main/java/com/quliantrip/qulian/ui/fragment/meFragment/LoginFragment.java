@@ -9,9 +9,11 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.UserInfoBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.ClearEditText;
@@ -63,16 +65,16 @@ public class LoginFragment extends BaseFragment {
 
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-//            //返回后进行本地保存
             UserInfoBean userInfoBean = (UserInfoBean) bean;
-            ToastUtil.showToast(mContext,userInfoBean.getMsg()+userInfoBean.getCode());
-//            if (userInfoBean.getStatus() == 1) {
-//                QulianApplication.getInstance().saveUserInfo(userInfoBean);
-//                ((SimpleBackActivity) mContext).finish();
-//                ToastUtil.showToast(mContext, userInfoBean.getInfo());
-//            } else if (userInfoBean.getStatus() == 0) {
-//                ToastUtil.showToast(mContext, userInfoBean.getInfo());
-//            }
+            if (userInfoBean.getCode() == 200) {
+                QulianApplication.getInstance().saveUserInfo(userInfoBean.getData());
+                Intent intent = new Intent(mContext, MainActivity.class);
+                ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
+                ((SimpleBackActivity) mContext).finish();
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+            } else {
+                ToastUtil.showToast(mContext, userInfoBean.getMsg());
+            }
         }
     }
 
@@ -96,12 +98,13 @@ public class LoginFragment extends BaseFragment {
         Map<String, String> map = new HashMap<String, String>();
         map.put("LoginForm[username]", inName);
         map.put("LoginForm[password]", inPassword);
-        new PacketStringReQuest(HttpConstants.USER_LOGON,new UserInfoBean().setTag(getClass().getName()), map, null);
+        new PacketStringReQuest(HttpConstants.USER_LOGON, new UserInfoBean().setTag(getClass().getName()), map, null);
     }
 
     @OnClick(R.id.tv_btn_register_account)
     void registerAccount() {
         UIHelper.showRegister(mContext, null);
+        ((Activity) mContext).finish();
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
