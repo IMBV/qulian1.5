@@ -21,8 +21,7 @@ public class CanUserDiscountFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = View.inflate(mContext, R.layout.adapter_my_discount_item,null);
         return view;
     }

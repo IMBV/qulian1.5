@@ -29,7 +29,11 @@ public class HttpConstants {
      */
     public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1+"user/mobile";
     //手机号注册
-    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1+"user/mobile";
+    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1+"user/psignup";
+
+    //用户登录
+    public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1+"user/login";
+
 
 
 }

@@ -23,12 +23,12 @@ public class FindContentFragment extends BaseViewPagerFragment {
         // 语音广场
         adapter.addTab(title[1], "voice_square", VoiceSquareFragment.class,
                 getBundle());
-        //晒图广场
-        adapter.addTab(title[2], "print_square", PrintSquareFragment.class,
-                getBundle());
-        //趣连小黄书
-        adapter.addTab(title[3], "yellow_book", YellowBookFragment.class,
-                getBundle());
+//        //晒图广场
+//        adapter.addTab(title[2], "print_square", PrintSquareFragment.class,
+//                getBundle());
+//        //趣连小黄书
+//        adapter.addTab(title[3], "yellow_book", YellowBookFragment.class,
+//                getBundle());
         //此方法使用来进行显示哪个条目
 //        mViewPager.setCurrentItem(getArguments().getInt("orderState"));
     }

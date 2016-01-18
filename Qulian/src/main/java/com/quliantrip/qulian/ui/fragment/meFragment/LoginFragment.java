@@ -9,7 +9,6 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.UserInfoBean;
-import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
@@ -64,14 +63,16 @@ public class LoginFragment extends BaseFragment {
 
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+//            //返回后进行本地保存
             UserInfoBean userInfoBean = (UserInfoBean) bean;
-            if (userInfoBean.getStatus() == 1) {
-                QulianApplication.getInstance().saveUserInfo(userInfoBean);
-                ((SimpleBackActivity) mContext).finish();
-                ToastUtil.showToast(mContext, userInfoBean.getInfo());
-            } else if (userInfoBean.getStatus() == 0) {
-                ToastUtil.showToast(mContext, userInfoBean.getInfo());
-            }
+            ToastUtil.showToast(mContext,userInfoBean.getMsg()+userInfoBean.getCode());
+//            if (userInfoBean.getStatus() == 1) {
+//                QulianApplication.getInstance().saveUserInfo(userInfoBean);
+//                ((SimpleBackActivity) mContext).finish();
+//                ToastUtil.showToast(mContext, userInfoBean.getInfo());
+//            } else if (userInfoBean.getStatus() == 0) {
+//                ToastUtil.showToast(mContext, userInfoBean.getInfo());
+//            }
         }
     }
 
@@ -93,15 +94,9 @@ public class LoginFragment extends BaseFragment {
             return;
         }
         Map<String, String> map = new HashMap<String, String>();
-        map.put("ctl", "user");
-        map.put("act", "dologin");
-        map.put("user_key", inName);
-        map.put("user_pwd", inPassword);
-        map.put("r_type", "1");
-
-        new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET,
-                new UserInfoBean().setTag(getClass().getName()), map, null);
-
+        map.put("LoginForm[username]", inName);
+        map.put("LoginForm[password]", inPassword);
+        new PacketStringReQuest(HttpConstants.USER_LOGON,new UserInfoBean().setTag(getClass().getName()), map, null);
     }
 
     @OnClick(R.id.tv_btn_register_account)
@@ -113,7 +108,6 @@ public class LoginFragment extends BaseFragment {
     /**
      * 下面是关于第三方登录的数据
      */
-
     @OnClick(R.id.iv_third_qq)
     void qqLogin() {
         showDialog_cancel("qq登录中");

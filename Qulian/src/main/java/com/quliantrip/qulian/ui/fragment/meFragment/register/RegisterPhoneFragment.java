@@ -37,6 +37,7 @@ import de.greenrobot.event.EventBus;
 public class RegisterPhoneFragment extends Fragment {
     private Context mContext;
     private View view;
+    private String code;
 
     //手机验证下一次的时间
     @Bind(R.id.bt_get_phone_check)
@@ -44,6 +45,8 @@ public class RegisterPhoneFragment extends Fragment {
     //注册手机号
     @Bind(R.id.ct_user_phone_number)
     ClearEditText phoneNum;
+    @Bind(R.id.ct_user_password)
+    ClearEditText passWord;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,11 +64,25 @@ public class RegisterPhoneFragment extends Fragment {
 
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            MoBileBean moBileBean = (MoBileBean) bean;
-            ToastUtil.showToast(mContext, moBileBean.getMsg());
+            if (bean.getTag().endsWith("mobile")) {
+                MoBileBean moBileBean = (MoBileBean) bean;
+                code = ((MoBileBean) bean).getData();
+            } else if (bean.getTag().endsWith("psignup")) {
+
+
+            }
         }
     }
 
+
+    @OnClick(R.id.bt_user_register)
+    void registerUser() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("password", phoneNum.getText().toString().trim());
+        map.put("mobile", passWord.getText().toString().trim());
+        map.put("code", code);
+        new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(this.getClass().getName() + "psignup"), map, null);
+    }
 
     //手机号码的验证
     @OnClick(R.id.bt_get_phone_check)
@@ -82,9 +99,10 @@ public class RegisterPhoneFragment extends Fragment {
         }
         TimeCountUtil timeCountUtil = new TimeCountUtil((Activity) mContext, 60000, 1000, phone_check);
         timeCountUtil.start();
+
         Map<String, String> map = new HashMap<String, String>();
         map.put("mobile", phone);
-        new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(this.getClass().getName()), map, null);
+        new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(this.getClass().getName() + "mobile"), map, null);
     }
 
     @Override

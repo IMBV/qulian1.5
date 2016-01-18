@@ -1,129 +1,32 @@
 package com.quliantrip.qulian.domain;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by Yuly on 2015/12/17.
  * www.quliantrip.com
  */
 public class UserInfoBean extends BaseJson {
 
-    private String act;
-    private String city_name;
-    private String ctl;
-    private String email;
-    private String id;
-    private String info;
-    private String is_tmp;
-    private String mobile;
-    @SerializedName("return")
-    private int returnX;
-    private String sess_id;
-    private int status;
-    private String user_name;
-    private String user_pwd;
+    private int code;
+    private String msg;
+    private LoginDataBean data;
 
-    public void setAct(String act) {
-        this.act = act;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public void setCtl(String ctl) {
-        this.ctl = ctl;
+    public void setData(LoginDataBean data) {
+        this.data = data;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public int getCode() {
+        return code;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public void setIs_tmp(String is_tmp) {
-        this.is_tmp = is_tmp;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public void setReturnX(int returnX) {
-        this.returnX = returnX;
-    }
-
-    public void setSess_id(String sess_id) {
-        this.sess_id = sess_id;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public void setUser_pwd(String user_pwd) {
-        this.user_pwd = user_pwd;
-    }
-
-    public String getAct() {
-        return act;
-    }
-
-    public String getCity_name() {
-        return city_name;
-    }
-
-    public String getCtl() {
-        return ctl;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public String getIs_tmp() {
-        return is_tmp;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public int getReturnX() {
-        return returnX;
-    }
-
-    public String getSess_id() {
-        return sess_id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public String getUser_pwd() {
-        return user_pwd;
+    public String getMsg() {
+        return msg;
     }
 }

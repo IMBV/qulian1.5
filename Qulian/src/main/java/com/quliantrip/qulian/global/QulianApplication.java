@@ -44,7 +44,7 @@ public class QulianApplication extends Application {
         mContext = this;
         mainHandler = new Handler();
         initImageLoader(getContext());
-        initLogin();
+//        initLogin();
     }
 
     public static QulianApplication getInstance() {
@@ -80,15 +80,15 @@ public class QulianApplication extends Application {
     }
 
 
-    private void initLogin() {
-        user = getLoginUser();
-        if (null != user && 1 == user.getStatus()) {
-            this.isLogin = true;
-            userId = user.getId();
-        } else {
-            this.cleanLoginInfo();
-        }
-    }
+//    private void initLogin() {
+//        user = getLoginUser();
+//        if (null != user && 1 == user.getStatus()) {
+//            this.isLogin = true;
+//            userId = user.getId();
+//        } else {
+//            this.cleanLoginInfo();
+//        }
+//    }
 
     /**
      * 获取App唯一标识
@@ -131,19 +131,19 @@ public class QulianApplication extends Application {
     public void updateUserInfo(final UserInfoBean user) {
         setProperties(new Properties() {
             {
-                setProperty("user.act", user.getAct());
-                setProperty("user.city_name", user.getCity_name());
-                setProperty("user.ctl", user.getCtl());
-                setProperty("user.email", user.getEmail());
-                setProperty("user.id", user.getId());
-                setProperty("user.info", user.getInfo());
-                setProperty("user.is_tmp", user.getIs_tmp());
-                setProperty("user.mobile", user.getMobile());
-                setProperty("user.returnX", String.valueOf(user.getReturnX()));
-                setProperty("user.sess_id", user.getSess_id());
-                setProperty("user.status", String.valueOf(user.getStatus()));
-                setProperty("user.user_name", user.getUser_name());
-                setProperty("user.user_pwd", user.getUser_pwd());
+//                setProperty("user.act", user.getAct());
+//                setProperty("user.city_name", user.getCity_name());
+//                setProperty("user.ctl", user.getCtl());
+//                setProperty("user.email", user.getEmail());
+//                setProperty("user.id", user.getId());
+//                setProperty("user.info", user.getInfo());
+//                setProperty("user.is_tmp", user.getIs_tmp());
+//                setProperty("user.mobile", user.getMobile());
+//                setProperty("user.returnX", String.valueOf(user.getReturnX()));
+//                setProperty("user.sess_id", user.getSess_id());
+//                setProperty("user.status", String.valueOf(user.getStatus()));
+//                setProperty("user.user_name", user.getUser_name());
+//                setProperty("user.user_pwd", user.getUser_pwd());
             }
         });
     }
@@ -169,55 +169,55 @@ public class QulianApplication extends Application {
     /**
      * 保存登录信息
      */
-    public void saveUserInfo(final UserInfoBean user) {
-        this.userId = user.getId();
-
-        this.isLogin = true;
-        setProperties(new Properties() {
-            {
-                setProperty("user.act", user.getAct());
-                setProperty("user.city_name", user.getCity_name());
-                setProperty("user.ctl", user.getCtl());
-                setProperty("user.email", user.getEmail());
-                setProperty("user.id", user.getId());
-                setProperty("user.info", user.getInfo());
-                setProperty("user.is_tmp", user.getIs_tmp());
-                setProperty("user.mobile", user.getMobile());
-                setProperty("user.returnX", String.valueOf(user.getReturnX()));
-                setProperty("user.sess_id", user.getSess_id());
-                setProperty("user.status", String.valueOf(user.getStatus()));
-                setProperty("user.user_name", user.getUser_name());
-                setProperty("user.user_pwd", user.getUser_pwd());
-
-            }
-        });
-
-    }
+//    public void saveUserInfo(final UserInfoBean user) {
+//        this.userId = user.getId();
+//
+//        this.isLogin = true;
+//        setProperties(new Properties() {
+//            {
+//                setProperty("user.act", user.getAct());
+//                setProperty("user.city_name", user.getCity_name());
+//                setProperty("user.ctl", user.getCtl());
+//                setProperty("user.email", user.getEmail());
+//                setProperty("user.id", user.getId());
+//                setProperty("user.info", user.getInfo());
+//                setProperty("user.is_tmp", user.getIs_tmp());
+//                setProperty("user.mobile", user.getMobile());
+//                setProperty("user.returnX", String.valueOf(user.getReturnX()));
+//                setProperty("user.sess_id", user.getSess_id());
+//                setProperty("user.status", String.valueOf(user.getStatus()));
+//                setProperty("user.user_name", user.getUser_name());
+//                setProperty("user.user_pwd", user.getUser_pwd());
+//
+//            }
+//        });
+//
+//    }
 
     /**
      * 获得登录用户的信息
      *
      * @return
      */
-    public UserInfoBean getLoginUser() {
-        UserInfoBean user = new UserInfoBean();
-        user.setAct(getProperty("user.act"));
-        user.setCity_name(getProperty("user.city_name"));
-        user.setCtl(getProperty("user.ctl"));
-        user.setEmail(getProperty("user.email"));
-        user.setId(getProperty("user.id"));
-
-        user.setInfo(getProperty("user.info"));
-        user.setIs_tmp(getProperty("user.is_tmp"));
-        user.setMobile(getProperty("user.mobile"));
-        user.setReturnX(CommonHelp.toInt(getProperty("user.returnX"), 0));
-        user.setSess_id(getProperty("user.sess_id"));
-
-        user.setStatus(CommonHelp.toInt(getProperty("user.status"), 0));
-        user.setUser_name(getProperty("user.user_name"));
-        user.setUser_pwd(getProperty("user.user_pwd"));
-        return user;
-    }
+//    public UserInfoBean getLoginUser() {
+//        UserInfoBean user = new UserInfoBean();
+//        user.setAct(getProperty("user.act"));
+//        user.setCity_name(getProperty("user.city_name"));
+//        user.setCtl(getProperty("user.ctl"));
+//        user.setEmail(getProperty("user.email"));
+//        user.setId(getProperty("user.id"));
+//
+//        user.setInfo(getProperty("user.info"));
+//        user.setIs_tmp(getProperty("user.is_tmp"));
+//        user.setMobile(getProperty("user.mobile"));
+//        user.setReturnX(CommonHelp.toInt(getProperty("user.returnX"), 0));
+//        user.setSess_id(getProperty("user.sess_id"));
+//
+//        user.setStatus(CommonHelp.toInt(getProperty("user.status"), 0));
+//        user.setUser_name(getProperty("user.user_name"));
+//        user.setUser_pwd(getProperty("user.user_pwd"));
+//        return user;
+//    }
 
     /**
      * 清除登录信息

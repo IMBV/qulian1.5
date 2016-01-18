@@ -7,6 +7,7 @@ package com.quliantrip.qulian.domain;
 public class MoBileBean extends BaseJson {
     private String code;
     private String msg;
+    private String data;
 
     public String getMsg() {
         return msg;
@@ -22,5 +23,13 @@ public class MoBileBean extends BaseJson {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

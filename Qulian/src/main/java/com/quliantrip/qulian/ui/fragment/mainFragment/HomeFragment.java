@@ -1,5 +1,4 @@
 package com.quliantrip.qulian.ui.fragment.mainFragment;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.nineoldandroids.view.ViewHelper;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.HomeRecommendAdapter;
@@ -34,21 +32,17 @@ import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.ObservableScroll.ObservableScrollView;
 import com.quliantrip.qulian.view.ObservableScroll.ScrollViewListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 /**
  * Created by yuly on 2015/11/9.
  * 首页界面
  */
-
 public class HomeFragment extends BasePageCheckFragment implements ScrollViewListener {
     @Bind(R.id.iv_home_title_location)
     TextView homeTitle;//首页的城市
@@ -60,14 +54,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     LinearLayout modelContainer;
     @Bind(R.id.iv_home_recommend)
     MyListView listView;
-
     //定义的model
     private HomeSlideImageMode homeSlideImageMode;
     HomeFunctionMode homeFunctionMode;
     HomeChoicenessMode homeChoicenessMode;
-
     private MainActivity activity;
-
     @Override
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_main_home, null);
@@ -79,20 +70,15 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         listView.setFocusable(false);
         return view;
     }
-
-
     //添加model到linearlayout中
     private void initModel() {
         homeSlideImageMode = new HomeSlideImageMode();
         modelContainer.addView(homeSlideImageMode.getModelView());
-
         homeFunctionMode = new HomeFunctionMode(activity);
         modelContainer.addView(homeFunctionMode.getModelView());
-
         homeChoicenessMode = new HomeChoicenessMode();
         homeChoicenessMode.setContext(mContext);
     }
-
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
@@ -101,7 +87,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         map.put("r_type", "1");
         return new QuestBean(map, new HomeBean().setTag(getClass().getName()), HttpConstants.HOST_ADDR_ROOT_NET);
     }
-
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && HomeFragment.this.getClass().getName().equals(bean.getTag())) {
@@ -128,16 +113,13 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new HomeBean().setTag(HomeFragment.this.getClass().getName()), map, null);
         }
     }
-
     private HomeRecommendAdapter homeRecommendAdapter;
-
     private void initListIView(List<HomeBean.DealListEntity> dealList) {
         if (homeRecommendAdapter == null) {
             homeRecommendAdapter = new HomeRecommendAdapter((ArrayList<HomeBean.DealListEntity>) dealList);
         } else {
             homeRecommendAdapter.upDataItem((ArrayList<HomeBean.DealListEntity>) dealList);
         }
-
         listView.setAdapter(homeRecommendAdapter);
         //条目数据适配
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -148,14 +130,12 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             }
         });
     }
-
     @Override
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
         float percent = (float) y / (float) CommonHelp.dip2px(mContext, 550);
         ViewHelper.setAlpha(titleBackgroud,
                 EvaluateUtil.evaluateFloat(percent, 0.0f, 1.0f));
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
@@ -179,14 +159,12 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             new PacketStringReQuest(HttpConstants.HOST_ADDR_ROOT_NET, new ChangeCityBean().setTag(HomeFragment.this.getClass().getName() + "changeCity"), map, null);
         }
     }
-
     //点击切换城市
     @OnClick(R.id.rl_city_choose)
     void chooseSity() {
         UIHelper.showCityChoose(this, 1);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
-
     //连接wifi
     @OnClick(R.id.iv_home_title_wifi)
     void connectWifi() {
@@ -194,9 +172,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         startActivityForResult(openCameraIntent, 0);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
-
     private Bundle bundle = new Bundle();
-
     //点击景点、玩法、当地游的筛选
     @OnClick(R.id.iv_home_secnic_play_search)
     void gotoSecnicPaly() {
