@@ -33,9 +33,10 @@
         android:background="@color/colorPrimary"
         android:padding="10dp">
 
+        <!--天气的天气的信息-->
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="83dp"
+            android:layout_height="83dp">
 
             <ImageView
                 android:layout_width="83dp"
@@ -44,6 +45,40 @@
                 android:src="@mipmap/bg_default_min"
                 android:text="日历天气和聊天"
                 android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_white_18"
+                    android:text="东京" />
+
+                <TextView
+                    style="@style/text_white_14"
+                    android:layout_marginTop="5dp"
+                    android:text="12/5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp" />
+
+                <TextView
+                    style="@style/text_white_14"
+                    android:layout_marginLeft="5dp"
+                    android:text="晴" />
+
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -51,13 +86,48 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:gravity="center"
-                android:text="不知道怎么写" />
+                android:background="@drawable/shape_main_bg_angle_white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp" />
+
+                    <TextView
+                        style="@style/text_title_12"
+                        android:layout_marginLeft="10dp"
+                        android:text="乐天的channal可以" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp" />
+
+                    <TextView
+                        style="@style/text_title_12"
+                        android:layout_marginLeft="10dp"
+                        android:text="乐天的channal可以" />
+                </LinearLayout>
+            </LinearLayout>
 
             <Button
+                android:id="@+id/bt_into_flock"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_alignParentBottom="true"

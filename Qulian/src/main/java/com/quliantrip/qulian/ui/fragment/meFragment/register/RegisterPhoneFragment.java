@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.base.BaseDialogFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.domain.MoBileBean;
@@ -39,10 +40,8 @@ import de.greenrobot.event.EventBus;
  * Created by yuly on 2016/1/5.
  * 手机注册
  */
-public class RegisterPhoneFragment extends Fragment {
-    private Context mContext;
+public class RegisterPhoneFragment extends BaseDialogFragment {
     private View view;
-    private String code;
 
     //手机验证下一次的时间
     @Bind(R.id.bt_get_phone_check)
@@ -52,49 +51,61 @@ public class RegisterPhoneFragment extends Fragment {
     ClearEditText phoneNum;
     @Bind(R.id.ct_user_password)
     ClearEditText passWord;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getActivity();
-    }
+    @Bind(R.id.ct_user_phone_auth_code_number)
+    ClearEditText checkNum;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_me_register_phone, null);
         ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         return view;
     }
 
     public void onEventMainThread(BaseJson bean) {
-        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            if (bean.getTag().endsWith("mobile")) {
-                MoBileBean moBileBean = (MoBileBean) bean;
-                code = ((MoBileBean) bean).getData();
-            } else if (bean.getTag().endsWith("psignup")) {
-                UserInfoBean userInfoBean = (UserInfoBean) bean;
+        if (bean != null && (this.getClass().getName() + "mobile").equals(bean.getTag())) {
+            MoBileBean moBileBean = (MoBileBean) bean;
+            if (moBileBean.getCode()==200)
+                checkNum.setText(moBileBean.getData());
+            else
+                ToastUtil.showToast(mContext, moBileBean.getMsg());
+        }
+        if (bean != null && (this.getClass().getName() + "psignup").equals(bean.getTag())) {
+            UserInfoBean userInfoBean = (UserInfoBean) bean;
+            if (userInfoBean.getCode() == 200) {
                 QulianApplication.getInstance().saveUserInfo(userInfoBean.getData());
-                if (userInfoBean.getCode() == 200) {
-                    QulianApplication.getInstance().saveUserInfo(userInfoBean.getData());
-                    Intent intent = new Intent(mContext, MainActivity.class);
-                    ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
-                    ((SimpleBackActivity) mContext).finish();
-                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
-                } else {
-                    ToastUtil.showToast(mContext, userInfoBean.getMsg());
-                }
+                Intent intent = new Intent(mContext, MainActivity.class);
+                ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
+                ((SimpleBackActivity) mContext).finish();
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+            } else {
+                ToastUtil.showToast(mContext, userInfoBean.getMsg());
             }
         }
     }
 
     @OnClick(R.id.bt_user_register)
     void registerUser() {
+        String phone = phoneNum.getText().toString();
+        String pas = passWord.getText().toString();
+        String num = checkNum.getText().toString();
+
+        if (TextUtils.isEmpty(phone)) {
+            ToastUtil.showToast(mContext, "请输入手机号");
+            return;
+        }
+        if (TextUtils.isEmpty(num)) {
+            ToastUtil.showToast(mContext, "请输入验证码");
+            return;
+        }
+        if (TextUtils.isEmpty(pas)) {
+            ToastUtil.showToast(mContext, "请输入密码");
+            return;
+        }
         Map<String, String> map = new HashMap<String, String>();
-        map.put("SignupForm[password]", phoneNum.getText().toString().trim());
-        map.put("SignupForm[mobile]", passWord.getText().toString().trim());
-        map.put("SignupForm[code]", code);
-        new PacketStringReQuest(HttpConstants.MOBILE_REGISTER, new UserInfoBean().setTag(this.getClass().getName() + "psignup"), map, null);
+        map.put("SignupForm[mobile]", phone);
+        map.put("SignupForm[password]", pas);
+        map.put("SignupForm[code]", num);
+        new PacketStringReQuest(HttpConstants.MOBILE_REGISTER, new UserInfoBean().setTag(getClass().getName() + "psignup"), map, null);
     }
 
     //手机号码的验证
@@ -115,12 +126,6 @@ public class RegisterPhoneFragment extends Fragment {
 
         Map<String, String> map = new HashMap<String, String>();
         map.put("mobile", phone);
-        new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(this.getClass().getName() + "mobile"), map, null);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+        new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(getClass().getName() + "mobile"), map, null);
     }
 }

@@ -215,7 +215,7 @@ public class MainActivity extends FragmentActivity {
         mTempFragment = homeFragment;
         getSupportFragmentManager().beginTransaction().add(R.id.fl_content, homeFragment).commit();
         FindFragment findFragment = new FindFragment();
-        MyFragment myFragment = new MyFragment();
+        final MyFragment myFragment = new MyFragment();
         choicenessFragment = new ChoicenessFragment();
         listFragment.add(homeFragment);
         listFragment.add(choicenessFragment);
@@ -248,6 +248,10 @@ public class MainActivity extends FragmentActivity {
                         index = 3;
                         if (choicenessFragment != null) {
                             choicenessFragment.hidePopwindow();
+                        }
+                        //添加数据前提要有布局
+                        if (myFragment.getView() != null){
+                            myFragment.initDate();
                         }
                         break;
                 }

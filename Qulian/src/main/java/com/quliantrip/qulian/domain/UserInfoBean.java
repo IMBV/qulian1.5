@@ -1,8 +1,7 @@
 package com.quliantrip.qulian.domain;
 
 /**
- * Created by Yuly on 2015/12/17.
- * www.quliantrip.com
+ * 用户登录信息
  */
 public class UserInfoBean extends BaseJson {
 

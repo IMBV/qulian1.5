@@ -1,6 +1,8 @@
 package com.quliantrip.qulian.ui.activity.choiceActivity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
+import com.quliantrip.qulian.ui.activity.meActivity.MyOrderActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.UIHelper;
@@ -67,8 +70,14 @@ public class GoodDetailActivity extends SwipeBackActivity {
     //点击购买
     @OnClick(R.id.bt_detail_order_buy)
     void intoOrder() {
-        UIHelper.showGoodOrder(mContext, null);
-        overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        if(QulianApplication.getInstance().isLogin()){
+            UIHelper.showGoodOrder(mContext, null);
+            overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);;
+        }else{
+            UIHelper.showMyLogin(this, 41);
+            overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        }
+
     }
 
     //点击收藏

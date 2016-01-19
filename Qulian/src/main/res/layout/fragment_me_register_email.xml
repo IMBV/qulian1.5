@@ -4,7 +4,6 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -56,6 +55,7 @@
             android:layout_marginLeft="10dp"
             android:background="@color/colorPrimary"
             android:hint="6-20位数字或字母"
+            android:inputType="textPassword"
             android:textColor="@color/black"
             android:textColorHint="@color/app_main_tag_dec_line"
             android:textSize="14sp" />
@@ -67,15 +67,16 @@
         android:layout_marginRight="20dp" />
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:textSize="10sp"
+        android:text="点击完成即同意"
         android:textColor="@color/app_main_title_text"
-        android:text="点击完成即同意"/>
+        android:textSize="10sp" />
 
     <Button
-        android:id="@+id/bt_user_login"
+        android:id="@+id/bt_user_login_email_sadfjkasfhklasjf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

@@ -64,6 +64,7 @@ public class LoginFragment extends BaseFragment {
     }
 
     public void onEventMainThread(BaseJson bean) {
+        cancelDialog();
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             UserInfoBean userInfoBean = (UserInfoBean) bean;
             if (userInfoBean.getCode() == 200) {
@@ -73,7 +74,11 @@ public class LoginFragment extends BaseFragment {
                 ((SimpleBackActivity) mContext).finish();
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
             } else {
-                ToastUtil.showToast(mContext, userInfoBean.getMsg());
+                String allString = null;
+                for (String s : userInfoBean.getData().getPassword())
+                    if (!s.equals(""))
+                        allString += s;
+                ToastUtil.showToast(mContext, allString);
             }
         }
     }
@@ -95,6 +100,7 @@ public class LoginFragment extends BaseFragment {
             ToastUtil.showToast(mContext, "请输入密码");
             return;
         }
+        showDialog("正在登陆...");
         Map<String, String> map = new HashMap<String, String>();
         map.put("LoginForm[username]", inName);
         map.put("LoginForm[password]", inPassword);
@@ -144,7 +150,6 @@ public class LoginFragment extends BaseFragment {
         req.scope = "snsapi_userinfo";//"snsapi_base"
         req.state = "req.state";
         mWeixinAPI.sendReq(req);
-
     }
 
     @Override

@@ -17,6 +17,15 @@ public class LoginDataBean {
     private int created_at;
     private int updated_at;
     private List<String> password;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public void setId(int id) {
         this.id = id;

@@ -23,17 +23,17 @@ public class HttpConstants {
     /**
      * 本地v1服务器
      */
-    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://rest.qulian.com/v1/";
+    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155/v1/";
     /**
      * 手机号重复验证
      */
-    public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1+"user/mobile";
+    public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1 + "user/mobile";
     //手机号注册
-    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1+"user/psignup";
-
+    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/psignup";
+     //邮箱注册
+    public static final String EMAIL_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/signup";
     //用户登录
-    public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1+"user/login";
-
+    public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1 + "user/login";
 
 
 }

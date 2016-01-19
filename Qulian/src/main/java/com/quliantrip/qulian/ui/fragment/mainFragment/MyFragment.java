@@ -72,6 +72,14 @@ public class MyFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(getView() != null){
+            initDate();
+        }
+    }
+
     //设置
     @OnClick(R.id.iv_me_seeting)
     void showMySetting() {

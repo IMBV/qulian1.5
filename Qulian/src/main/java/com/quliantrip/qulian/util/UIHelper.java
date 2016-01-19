@@ -21,6 +21,9 @@ public class UIHelper {
     public static void showMyLogin(Fragment fragment, int requestCode) {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_LOGIN);
     }
+    public static void showMyLogin(Activity activity,int requestCode){
+        showSimpleBackForResult(activity,requestCode,SimpleBackPage.MY_LOGIN);
+    }
 
     public static void showMeSetting(Fragment fragment, int requestCode){
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_SETTING);

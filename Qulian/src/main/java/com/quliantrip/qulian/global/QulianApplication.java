@@ -28,7 +28,7 @@ public class QulianApplication extends Application {
     private static Handler mainHandler;
     private static RequestQueue queue;
     private static Context mContext;
-
+    //登陆的用户信息
     private String userId;
     private boolean isLogin;
     private LoginDataBean user;
@@ -82,7 +82,7 @@ public class QulianApplication extends Application {
 
     private void initLogin() {
         user = getLoginUser();
-        if (null != user && user.getAuth_key()!=null) {
+        if (null != user && user.getAuth_key() != null) {
             this.isLogin = true;
             userId = user.getAuth_key();
         } else {
@@ -133,8 +133,10 @@ public class QulianApplication extends Application {
             {
                 setProperty("user.name", user.getUsername());
                 setProperty("user.auth_key", user.getAuth_key());
-                setProperty("user.mobile", user.getMobile());
-                setProperty("user.email", user.getEmail());
+                if (user.getMobile() != null)
+                    setProperty("user.mobile", user.getMobile());
+                if (user.getEmail() != null)
+                    setProperty("user.email", user.getEmail());
             }
         });
     }
@@ -167,8 +169,10 @@ public class QulianApplication extends Application {
             {
                 setProperty("user.name", user.getUsername());
                 setProperty("user.auth_key", user.getAuth_key());
-                setProperty("user.mobile", user.getMobile());
-                setProperty("user.email", user.getEmail());
+                if (user.getMobile() != null)
+                    setProperty("user.mobile", user.getMobile());
+                if (user.getEmail() != null)
+                    setProperty("user.email", user.getEmail());
             }
         });
     }
@@ -180,11 +184,12 @@ public class QulianApplication extends Application {
      */
     public LoginDataBean getLoginUser() {
         LoginDataBean user = new LoginDataBean();
-
         user.setUsername(getProperty("user.name"));
         user.setAuth_key(getProperty("user.auth_key"));
-        user.setMobile(getProperty("user.mobile"));
-        user.setEmail(getProperty("user.email"));
+        if (user.getMobile() != null)
+            user.setMobile(getProperty("user.mobile"));
+        if (user.getEmail() != null)
+            user.setEmail(getProperty("user.email"));
         return user;
     }
 

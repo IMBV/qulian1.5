@@ -10,6 +10,8 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 
+import de.greenrobot.event.EventBus;
+
 public class ResponseErrorListener implements ErrorListener {
     private BaseJson object;
     private ResponseListenner.OnLoadFinishListener onLoadFinishListener;
@@ -36,6 +38,8 @@ public class ResponseErrorListener implements ErrorListener {
                 onLoadFinishListener.onLoadFinish(ContentPage.STATE_ERROR);
             }
         }
+        object.setTag("");
+        EventBus.getDefault().post(object);
     }
 }
 
