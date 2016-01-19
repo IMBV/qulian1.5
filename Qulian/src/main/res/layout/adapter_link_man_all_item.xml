@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_bg_while_gray"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_link_man_name"
+            style="@style/text_main_title_16"
+            android:layout_marginLeft="10dp"
+            android:text="趣连"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_wode_edit" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="10dp" />
+</LinearLayout>

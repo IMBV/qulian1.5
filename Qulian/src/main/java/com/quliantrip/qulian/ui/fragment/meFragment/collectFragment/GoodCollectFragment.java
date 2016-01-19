@@ -103,22 +103,22 @@ public class GoodCollectFragment extends Fragment {
         list = new ArrayList<com.quliantrip.qulian.domain.Test>();
         int i;
         for (i = 0; i <= 30; i++)
-            list.add(new com.quliantrip.qulian.domain.Test(false,"add"+i));
-        test = new GoodListAdapter(list,mContext);
+            list.add(new com.quliantrip.qulian.domain.Test(false, "hotGood" + i));
+        test = new GoodListAdapter(list, mContext);
         listView.setAdapter(test);
         //条目单击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //这里下拉刷新头是占一条的
-                ToastUtil.showToast(mContext, list.get(position - 1).getName());
+                ToastUtil.showToast(mContext, "商品的单击事件" + list.get(position - 1).getName());
             }
         });
         //条目长按事件
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.showToast(mContext, "长按" + list.get(position - 1));
+                ToastUtil.showToast(mContext, "商品长按" + list.get(position - 1).getName());
                 return true;
             }
         });
@@ -147,7 +147,6 @@ public class GoodCollectFragment extends Fragment {
                 int top = c.getTop();
                 return -top + firstVisiblePosition * c.getHeight();
             }
-
         });
 
         // 进行数据时的适配和是上啦还是下拉的操作
@@ -172,7 +171,7 @@ public class GoodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false,"xia"));
+                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "xia"));
                             test.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
@@ -185,7 +184,8 @@ public class GoodCollectFragment extends Fragment {
 
 class GoodListAdapter extends BasicAdapter<com.quliantrip.qulian.domain.Test> {
     private MyCollectActivity activity;
-    public GoodListAdapter(ArrayList<com.quliantrip.qulian.domain.Test> list,Context context) {
+
+    public GoodListAdapter(ArrayList<com.quliantrip.qulian.domain.Test> list, Context context) {
         super(list);
         activity = (MyCollectActivity) context;
     }
@@ -213,8 +213,7 @@ class GoodListAdapter extends BasicAdapter<com.quliantrip.qulian.domain.Test> {
         holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.addOrDelectCollect(name.ischeck(),"saasdf"+name.getName());
-
+                activity.addOrDelectCollect(name.ischeck(), "saasdf" + name.getName());
                 name.setIscheck(!name.ischeck());
                 notifyDataSetChanged();
 

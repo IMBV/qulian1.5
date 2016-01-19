@@ -5,6 +5,7 @@
     android:background="@color/app_main_bg">
     
     <ListView
+        android:id="@+id/lv_link_man_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -12,7 +13,7 @@
         android:layout_marginBottom="49dp"></ListView>
 
     <Button
-        android:id="@+id/bt_add_common_info"
+        android:id="@+id/bt_add_link_man"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_alignParentBottom="true"
@@ -23,6 +24,5 @@
         android:text="新增常用联系人"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp" />
-
 
 </RelativeLayout>

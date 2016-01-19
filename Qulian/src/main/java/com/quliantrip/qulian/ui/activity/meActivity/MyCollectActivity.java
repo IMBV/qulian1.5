@@ -121,22 +121,22 @@ public class MyCollectActivity extends SwipeBackActivity {
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
 
-    private boolean isEdit = true;
-
+    private boolean isPlayMethodEdit = true;
+    private boolean isHotGoodEdit = true;
     //编辑的操作
     @OnClick(R.id.tv_mycolloct_edit)
     void editListColloct() {
         if (currentTab == 0) {
-            if (list.size() >= 1)
-                isEdit = !isEdit;
-            playMethodCollectFragment.setEdit(isEdit);
+            if (playMethodDeletelist.size() >= 1)
+                isPlayMethodEdit = !isPlayMethodEdit;
+            playMethodCollectFragment.setEdit(isPlayMethodEdit);
             if (playTabEditState == 0) {
                 editText.setText("取消");
-                isEdit = !isEdit;
+                isPlayMethodEdit = !isPlayMethodEdit;
                 playTabEditState = 1;
             } else if (playTabEditState == 1) {
                 editText.setText("编辑");
-                isEdit = !isEdit;
+                isPlayMethodEdit = !isPlayMethodEdit;
                 playTabEditState = 0;
             } else {
                 ToastUtil.showToast(mContext, "删除操作");
@@ -144,7 +144,22 @@ public class MyCollectActivity extends SwipeBackActivity {
                 playTabEditState = 1;
             }
         } else {
-            ToastUtil.showToast(mContext, "商品收藏的编辑");
+            if (hotGoodDeletelist.size() >= 1)
+                isHotGoodEdit = !isHotGoodEdit;
+            goodCollectFragment.setEdit(isHotGoodEdit);
+            if (playTabEditState == 0) {
+                editText.setText("取消");
+                isHotGoodEdit = !isHotGoodEdit;
+                playTabEditState = 1;
+            } else if (playTabEditState == 1) {
+                editText.setText("编辑");
+                isHotGoodEdit = !isHotGoodEdit;
+                playTabEditState = 0;
+            } else {
+                ToastUtil.showToast(mContext, "删除商品操作");
+                editText.setText("取消");
+                playTabEditState = 1;
+            }
         }
     }
 
@@ -184,24 +199,41 @@ public class MyCollectActivity extends SwipeBackActivity {
         editText.setText(s);
     }
 
-    List<String> list = new ArrayList<String>();
+    List<String> playMethodDeletelist = new ArrayList<String>();
+    List<String> hotGoodDeletelist = new ArrayList<String>();
 
     //添加删除的操作
-    public void addOrDelectCollect(boolean b, String s) {
-        if (b) {
-            //删除
-            list.remove(s);
-        } else {
-            //添加
-            list.add(s);
-        }
-        if (list.size() == 0) {
-            editText.setText("取消");
-            playTabEditState = 1;
-        } else {
-            editText.setText("删除");
-
-            playTabEditState = 3;
+    public void addOrDelectCollect( boolean b, String s) {
+        if (currentTab == 0) {
+            if (b) {
+                //删除
+                playMethodDeletelist.remove(s);
+            } else {
+                //添加
+                playMethodDeletelist.add(s);
+            }
+            if (playMethodDeletelist.size() == 0) {
+                editText.setText("取消");
+                playTabEditState = 1;
+            } else {
+                editText.setText("删除");
+                playTabEditState = 3;
+            }
+        }else if(currentTab == 1){
+            if (b) {
+                //删除
+                hotGoodDeletelist.remove(s);
+            } else {
+                //添加
+                hotGoodDeletelist.add(s);
+            }
+            if (hotGoodDeletelist.size() == 0) {
+                editText.setText("取消");
+                playTabEditState = 1;
+            } else {
+                editText.setText("删除");
+                playTabEditState = 3;
+            }
         }
     }
 }

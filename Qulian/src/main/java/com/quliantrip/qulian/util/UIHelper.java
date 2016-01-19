@@ -62,6 +62,11 @@ public class UIHelper {
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
+    public static void showAddLinkMan(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.MY_ADD_LINKMAN, bundle);
+        ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
 
 
     //下面是有返回值得简单返回的activity的操作

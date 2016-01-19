@@ -102,7 +102,7 @@ public class PlayMethodCollectFragment extends Fragment {
         list = new ArrayList<com.quliantrip.qulian.domain.Test>();
         int i;
         for (i = 0; i <= 30; i++)
-            list.add(new com.quliantrip.qulian.domain.Test(false,"add"+i));
+            list.add(new com.quliantrip.qulian.domain.Test(false,"playMethod"+i));
         test = new Test(list,mContext);
         listView.setAdapter(test);
         //条目单击事件
@@ -117,7 +117,7 @@ public class PlayMethodCollectFragment extends Fragment {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.showToast(mContext, "长按" + list.get(position - 1));
+                ToastUtil.showToast(mContext, "玩法长按" + list.get(position - 1).getName());
                 return true;
             }
         });

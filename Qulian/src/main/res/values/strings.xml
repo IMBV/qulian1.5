@@ -20,6 +20,7 @@
     <string name="actionbar_pay_method">支付收银台</string>
     <string name="actionbar_me_discount">优惠券</string>
     <string name="actionbar_me_change_password">修改密码</string>
+    <string name="actionbar_me_add_link_man">编辑常用联系人</string>
 
     <string name="load_error">返回首页</string>
 

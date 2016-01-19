@@ -34,6 +34,7 @@ public class HttpConstants {
     public static final String EMAIL_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/signup";
     //用户登录
     public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1 + "user/login";
-
+    //查询联系人
+    public static final String ALL_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/contacts";
 
 }
