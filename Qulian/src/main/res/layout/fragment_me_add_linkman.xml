@@ -53,6 +53,7 @@
                 android:text="姓（拼音）" />
 
             <com.quliantrip.qulian.view.ClearEditText
+                android:id="@+id/cet_linkman_pingyin_xing"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
@@ -81,6 +82,7 @@
                 android:text="名（拼音）" />
 
             <com.quliantrip.qulian.view.ClearEditText
+                android:id="@+id/cet_linkman_pingyin_ming"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
@@ -114,11 +116,13 @@
                     android:text="出生日期" />
 
                 <TextView
+                    android:id="@+id/cet_linkman_birth"
                     style="@style/text_main_title_16"
                     android:layout_width="0dp"
                     android:layout_weight="3"
                     android:gravity="left"
                     android:hint="1991-1-1"
+                    android:text="1991-1-1"
                     android:textColorHint="@color/app_main_sub_title_text" />
             </LinearLayout>
 
@@ -151,6 +155,7 @@
                     android:text="性别" />
 
                 <TextView
+                    android:id="@+id/tv_link_man_sex"
                     style="@style/text_main_title_16"
                     android:layout_width="0dp"
                     android:layout_weight="3"
@@ -187,6 +192,7 @@
                     android:text="证件类别" />
 
                 <TextView
+                    android:id="@+id/tv_link_man_certificate_type"
                     style="@style/text_main_title_16"
                     android:layout_width="0dp"
                     android:layout_weight="3"
@@ -223,6 +229,7 @@
                     android:text="证件号码" />
 
                 <com.quliantrip.qulian.view.ClearEditText
+                    android:id="@+id/cet_link_man_certificate_number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"

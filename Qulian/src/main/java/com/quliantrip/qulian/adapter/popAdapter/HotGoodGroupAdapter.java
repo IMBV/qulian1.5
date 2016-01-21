@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.TuanBean;
+import com.quliantrip.qulian.domain.choice.HotGoodBean;
 import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.List;
@@ -23,11 +24,11 @@ import java.util.List;
 public class HotGoodGroupAdapter extends BaseAdapter {
 
 	Context mContext;// 上下文对象
-	List<TuanBean.QuanListEntity> mGroupNameArr;
+	List<HotGoodBean.DataEntity.ScreenEntity> mGroupNameArr;
 	int mPosition = 0;// 选中的位置
 
 
-	public HotGoodGroupAdapter(Context context, List<TuanBean.QuanListEntity> groupArr) {
+	public HotGoodGroupAdapter(Context context, List<HotGoodBean.DataEntity.ScreenEntity> groupArr) {
 		this.mContext = context;
 		this.mGroupNameArr = groupArr;
 	}
@@ -49,17 +50,14 @@ public class HotGoodGroupAdapter extends BaseAdapter {
 		}
 
 		// 设置控件内容
-		holder.groupName.setText(mGroupNameArr.get(position).getName());
+//		holder.groupName.setText(mGroupNameArr.get(position).ge);
 		if (mPosition == position) {
-			convertView.setBackgroundColor(mContext.getResources().getColor(
-					R.color.colorPrimary));
+			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
 			holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
 		} else {
-			convertView.setBackgroundColor(mContext.getResources().getColor(
-					R.color.app_main_sub_bg));
+			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.app_main_sub_bg));
 			holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));
 		}
-
 		return convertView;
 	}
 

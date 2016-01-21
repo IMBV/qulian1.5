@@ -105,7 +105,7 @@ public class RegisterPhoneFragment extends BaseDialogFragment {
         map.put("SignupForm[mobile]", phone);
         map.put("SignupForm[password]", pas);
         map.put("SignupForm[code]", num);
-        new PacketStringReQuest(HttpConstants.MOBILE_REGISTER, new UserInfoBean().setTag(getClass().getName() + "psignup"), map, null);
+        new PacketStringReQuest(HttpConstants.MOBILE_REGISTER, new UserInfoBean().setTag(getClass().getName() + "psignup"), map);
     }
 
     //手机号码的验证

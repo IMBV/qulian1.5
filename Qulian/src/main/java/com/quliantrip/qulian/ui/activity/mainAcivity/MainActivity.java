@@ -205,6 +205,19 @@ public class MainActivity extends FragmentActivity {
 //        return null;
 //    }
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        System.out.println("restarte");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("resume");
+    }
+
     //添加数据和对RadioGrope的显示进行监听
     private void initData() {
         radioGroup = (RadioGroup) findViewById(R.id.main_radio);

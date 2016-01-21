@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rb_hot_good_classfy_item"
-    style="@style/choiceness_btn_selector"
-    android:layout_marginLeft="10dp"
-    android:text="全部" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/rb_hot_good_classfy_item"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:textColor="@color/app_main_title_text"
+        android:textSize="14sp"
+        android:ellipsize="marquee"
+        android:button="@null"
+        android:singleLine="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/shape_button_corner_normal"
+        android:text="全部" />
+</LinearLayout>
+
+
+    <!--
+    <item name="android:textColor">@color/selector_choiceness_btn_collor</item>
+    <item name="android:background">@drawable/selector_btn_choieness</item>
+    -->
 

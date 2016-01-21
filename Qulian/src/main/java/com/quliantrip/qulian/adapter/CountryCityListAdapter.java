@@ -24,10 +24,10 @@ import butterknife.ButterKnife;
  * Created by Yuly on 2015/12/21.
  * www.quliantrip.com
  */
-public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEntity> {
+public class CountryCityListAdapter extends BasicAdapter<CityListBean.DataEntity> {
     private Context mContext;
 
-    public CountryCityListAdapter(ArrayList<CityListBean.AreaArrEntity> list) {
+    public CountryCityListAdapter(ArrayList<CityListBean.DataEntity> list) {
         super(list);
     }
 
@@ -41,17 +41,17 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.AreaArrEnt
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_city_country, null);
         }
         Holder holder = Holder.getHolder(convertView);
-        CityListBean.AreaArrEntity bean = list.get(position);
+        CityListBean.DataEntity bean = list.get(position);
         //设置国家名
-        holder.countryName.setText(bean.getName());
+        holder.countryName.setText(bean.getChinese_name());
         //设置国家内城市的显示
-        holder.gridView.setAdapter(new ClassifyCityListAdapter((ArrayList<CityListBean.AreaArrEntity.ListEntity>) bean.getList()));
+        holder.gridView.setAdapter(new ClassifyCityListAdapter((ArrayList<CityListBean.DataEntity.ChildEntity>) bean.getChild()));
         holder.gridView.setFocusable(false);
         //添加城市列表的点击事件
         holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CityListBean.AreaArrEntity.ListEntity bean = ((CityListBean.AreaArrEntity.ListEntity) parent.getAdapter().getItem(position));
+                CityListBean.DataEntity.ChildEntity bean = ((CityListBean.DataEntity.ChildEntity) parent.getAdapter().getItem(position));
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("cityId", bean.getId());
                 ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);

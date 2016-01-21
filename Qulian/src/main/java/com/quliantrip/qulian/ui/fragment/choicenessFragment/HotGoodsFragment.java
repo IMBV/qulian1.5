@@ -1,35 +1,43 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.adapter.choiceAdapter.HotGoodListAdapter;
 import com.quliantrip.qulian.adapter.popAdapter.HotGoodChildAdapter;
 import com.quliantrip.qulian.adapter.popAdapter.HotGoodGroupAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.TuanBean;
+import com.quliantrip.qulian.domain.choice.HotGoodBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Yuly on 2015/12/8.
- * www.quliantrip.com
+ * 热门商品的信息
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
 
@@ -52,57 +59,37 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     ImageView siftImg;
     @Bind(R.id.v_consume_list_bottom_line)
     View bottomLine;
+    @Bind(R.id.asklfaklhflkafh)
+    HorizontalScrollView scrollView;
+    @Bind(R.id.sakjdfhlkashflkashf)
+    LinearLayout linearLayout;
 
-    @Bind(R.id.rg_hot_good_classfy)
-    RadioGroup radioGroup;
-    //这构造函数中赋值
+    //下拉刷新
+    @Bind(R.id.pull_refresh_list)
+    PullToRefreshListView refreshViewList;
+    protected ListView listView;
 
-    Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case 20:
-                    childAdapter.setChildData(quanArray.get(msg.arg1).getQuan_sub());
-                    childAdapter.notifyDataSetChanged();
-                    groupAdapter.notifyDataSetChanged();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        ;
-    };
+//    Handler handler = new Handler() {
+//        public void handleMessage(android.os.Message msg) {
+//            switch (msg.what) {
+//                case 20:
+//                    childAdapter.setChildData(quanArray.get(msg.arg1).getQuan_sub());
+//                    childAdapter.notifyDataSetChanged();
+//                    groupAdapter.notifyDataSetChanged();
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//
+//        ;
+//    };
 
     @Override
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_choiceness_hot_good, null);
         ButterKnife.bind(this, view);
-        ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
-        initRadioButton();
         return view;
-    }
-
-    //添加选着条件按钮
-    private void initRadioButton() {
-        View view = View.inflate(mContext, R.layout.view_hot_good_classfy_item, null);
-        RadioButton radioButton = (RadioButton) view.findViewById(R.id.rb_hot_good_classfy_item);
-        radioButton.setText("美食");
-        radioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtil.showToast(mContext, "我被点击了");
-            }
-        });
-        //设置被点击了
-        radioButton.setChecked(true);
-
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext, 57), CommonHelp.dip2px(mContext, 27));
-        view.setLayoutParams(params);
-        ViewGroup.LayoutParams params2 = new ViewGroup.LayoutParams(CommonHelp.dip2px(mContext, 15), CommonHelp.dip2px(mContext, 27));
-        View view2 = new View(mContext);
-        view2.setLayoutParams(params2);
-        radioGroup.addView(view2);
-        radioGroup.addView(view);
     }
 
     private QuestBean questBean;
@@ -111,24 +98,72 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         if (questBean == null) {
             Map<String, String> map = new HashMap<String, String>();
-            map.put("ctl", "tuan");
-            map.put("r_type", "1");
-            return new QuestBean(map, new TuanBean().setTag(getClass().getName()), HttpConstants.HOST_ADDR_ROOT_NET);
+//            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+            return new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
         } else {
             return questBean;
         }
     }
 
+
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
-            TuanBean tuanbean = (TuanBean) bean;
-            quanArray = tuanbean.getQuan_list();
+            HotGoodBean hotGoodBean = (HotGoodBean) bean;
+
+            for (int i = 0; i < hotGoodBean.getData().getCate().size(); i++) {
+                initRadioButton(hotGoodBean.getData().getCate().get(i), i);
+            }
+            //这里是进行平滑的移动
+            linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onGlobalLayout() {
+                    linearLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    Button button = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
+                    button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+                    scrollView.scrollBy(linearLayout.getChildAt(currentCheckedCate).getLeft(), 0);
+                }
+            });
+            screenArray = hotGoodBean.getData().getScreen();
+            initRefreshListView(hotGoodBean.getData().getOnline());
         }
     }
 
+    //分类的筛选
+    private int currentCheckedCate = 2;
+    //map 前一个分类的id， 后表一个表示第几个加入
+    private ArrayList<HashMap<Integer, String>> addButtonList = new ArrayList<>();
 
+    //添加选着条件按钮
+    private void initRadioButton(final HotGoodBean.DataEntity.HotGoodCate cate, final int i) {
+        HashMap<Integer, String> map = new HashMap<>();
+        map.put(i, cate.getId());
+        addButtonList.add(map);
+        View view = View.inflate(mContext, R.layout.view_hot_good_classfy_item, null);
+        final Button button = (Button) view.findViewById(R.id.rb_hot_good_classfy_item);
+        button.setText(cate.getName());
+        button.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                if (currentCheckedCate != i) {
+                    button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+                    button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));
+                    Button oldButton = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
+                    oldButton.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+                    oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
+                }
+                ToastUtil.showToast(mContext, cate.getName() + cate.getId());
+                currentCheckedCate = i;
+            }
+        });
+        linearLayout.addView(view);
+    }
+
+
+    //以下是筛选按钮的简单实现
     private boolean isShowSift = true;
 
     @OnClick(R.id.ll_route_sift)
@@ -150,7 +185,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         isShowSift = !isShowSift;
     }
 
-    List<TuanBean.QuanListEntity> quanArray;
+    List<HotGoodBean.DataEntity.ScreenEntity> screenArray;
     private PopupWindow siftConditionPop;
     ListView groupListView = null;
     ListView childListView = null;
@@ -167,7 +202,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             groupListView = (ListView) popView.findViewById(R.id.lv_group);
             childListView = (ListView) popView.findViewById(R.id.lv_child);
 
-            groupAdapter = new HotGoodGroupAdapter(mContext, quanArray);
+            groupAdapter = new HotGoodGroupAdapter(mContext, screenArray);
             groupListView.setAdapter(groupAdapter);
         }
 
@@ -177,8 +212,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                TuanBean.QuanListEntity.QuanSubEntity bean =
-                        (TuanBean.QuanListEntity.QuanSubEntity) parent.getAdapter().getItem(position);
+                TuanBean.QuanListEntity.QuanSubEntity bean = (TuanBean.QuanListEntity.QuanSubEntity) parent.getAdapter().getItem(position);
                 ToastUtil.showToast(mContext, bean.getName());
                 //请求数据后发送给主线程中
             }
@@ -197,10 +231,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     class MyItemClick implements AdapterView.OnItemClickListener {
 
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             groupAdapter.setSelectedPosition(position);
-
             if (childAdapter == null) {
                 childAdapter = new HotGoodChildAdapter(mContext);
                 childListView.setAdapter(childAdapter);
@@ -210,7 +242,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             Message msg = new Message();
             msg.what = 20;
             msg.arg1 = position;
-            handler.sendMessage(msg);
+//            handler.sendMessage(msg);
         }
     }
 
@@ -225,10 +257,65 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         }
     }
 
-    @OnClick(R.id.ll_hot_good_best_item)
-    void showBestHotGoodDetail(){
-        Intent intent = new Intent(mContext,GoodDetailActivity.class);
-        mContext.startActivity(intent);
-        ((Activity)mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    //加载显示的列表
+    private HotGoodListAdapter hotGoodListAdapter;
+
+    private void initRefreshListView(final List<HotGoodBean.DataEntity.OnlineEntity> listGood) {
+        refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+        listView = refreshViewList.getRefreshableView();
+        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
+        final ArrayList<String> list = new ArrayList<String>();
+        hotGoodListAdapter = new HotGoodListAdapter((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
+        listView.setAdapter(hotGoodListAdapter);
+        View view = View.inflate(mContext, R.layout.layout_hot_good_best_to_me, null);
+        view.findViewById(R.id.ll_hot_good_best_item).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+            }
+        });
+
+        listView.addHeaderView(view);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HotGoodBean.DataEntity.OnlineEntity bean = listGood.get(position - 2);
+                Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                intent.putExtra("goodId", bean.getId());
+                intent.putExtra("isCollect", bean.isIs_house());
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+            }
+        });
+        // 进行数据时的适配和是上啦还是下拉的操作
+        refreshViewList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                // 根据不同的mode进行操作,mode中有要进行操作的类型的数据
+                if (refreshViewList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
+                    // 这里的请求数据是在子线程中，
+                    CommonHelp.runOnUIThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            refreshViewList.onRefreshComplete();
+                        }
+                    }, 500);
+                } else {
+                    CommonHelp.runOnUIThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            refreshViewList.onRefreshComplete();
+                        }
+                    }, 500);
+                }
+            }
+        });
     }
+
 }

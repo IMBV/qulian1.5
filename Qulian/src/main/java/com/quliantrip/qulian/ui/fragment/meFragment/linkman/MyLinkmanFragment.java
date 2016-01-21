@@ -1,5 +1,7 @@
 package com.quliantrip.qulian.ui.fragment.meFragment.linkman;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,11 +11,14 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.LinkManListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.HintInfoBean;
 import com.quliantrip.qulian.domain.LinkManBean;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
 import java.util.ArrayList;
@@ -43,30 +48,45 @@ public class MyLinkmanFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-
         return new QuestBean(map, new LinkManBean().setTag(getClass().getName()), HttpConstants.ALL_LINKMAN);
     }
 
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && (this.getClass().getName()).equals(bean.getTag())) {
-            LinkManBean linkManBean = (LinkManBean)bean;
+            LinkManBean linkManBean = (LinkManBean) bean;
             listView.setAdapter(new LinkManListAdapter((ArrayList<LinkManBean.LinkMan>) linkManBean.getData()));
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     LinkManBean.LinkMan bean = (LinkManBean.LinkMan) parent.getAdapter().getItem(position);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("linkMan",bean);
-                    UIHelper.showAddLinkMan(mContext, bundle);
+                    bundle.putSerializable("linkMan", bean);
+                    UIHelper.showAddLinkMan(mContext, MyLinkmanFragment.this, 441, bundle);
                 }
             });
         }
+        if (bean != null && (this.getClass().getName()+"delete").equals(bean.getTag())) {
+            HintInfoBean hintInfoBean = (HintInfoBean) bean;
+            ToastUtil.showToast(mContext,hintInfoBean.getMsg());
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        new PacketStringReQuest(HttpConstants.ALL_LINKMAN, new LinkManBean().setTag(getClass().getName()), map);
     }
 
     //添加常用联人
     @OnClick(R.id.bt_add_link_man)
     void addLinkMan() {
-        UIHelper.showAddLinkMan(mContext, null);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("linkMan", null);
+        UIHelper.showAddLinkMan(mContext, this, 441, bundle);
     }
 }

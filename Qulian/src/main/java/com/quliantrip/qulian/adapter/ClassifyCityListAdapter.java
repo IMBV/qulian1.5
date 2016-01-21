@@ -2,10 +2,13 @@ package com.quliantrip.qulian.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.CityListBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 
 import java.util.ArrayList;
@@ -18,10 +21,10 @@ import butterknife.ButterKnife;
  * Created by Yuly on 2015/12/21.
  * www.quliantrip.com
  */
-public class ClassifyCityListAdapter extends BasicAdapter<CityListBean.AreaArrEntity.ListEntity> {
+public class ClassifyCityListAdapter extends BasicAdapter<CityListBean.DataEntity.ChildEntity> {
 
 
-    public ClassifyCityListAdapter(ArrayList<CityListBean.AreaArrEntity.ListEntity> list) {
+    public ClassifyCityListAdapter(ArrayList<CityListBean.DataEntity.ChildEntity> list) {
         super(list);
     }
 
@@ -31,14 +34,20 @@ public class ClassifyCityListAdapter extends BasicAdapter<CityListBean.AreaArrEn
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_city_item, null);
         }
         Holder holder = Holder.getHolder(convertView);
-        CityListBean.AreaArrEntity.ListEntity bean = list.get(position);
-        holder.city.setText(bean.getName());
+        CityListBean.DataEntity.ChildEntity bean = list.get(position);
+        holder.cityName.setText(bean.getChinese_name());
+        holder.englishName.setText(bean.getEnglish_name());
+        ImageLoader.getInstance().displayImage(bean.getImg_url(), holder.cityImg, ImageLoaderOptions.pager_options);
         return convertView;
     }
 
     static class Holder {
         @Bind(R.id.tv_city)
-        TextView city;
+        TextView cityName;
+        @Bind(R.id.tv_city_english_name)
+        TextView englishName;
+        @Bind(R.id.iv_city_bg_img)
+        ImageView cityImg;
 
         public Holder(View convertView) {
             super();

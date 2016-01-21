@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -264,6 +265,10 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             }
         });
         singlePopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext,285));
+//        WindowManager.LayoutParams lp = ((Activity)mContext).getWindow().getAttributes();
+//        lp.alpha = (float) 0.5; //0.0-1.0
+//        ((Activity)mContext).getWindow().setAttributes(lp);
+//        singlePopupWindow.setOutsideTouchable(true);
         singlePopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //popupwindow显示的坐标的位置
         int[] location = new int[2];

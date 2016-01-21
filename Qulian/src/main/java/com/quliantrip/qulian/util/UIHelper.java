@@ -21,16 +21,17 @@ public class UIHelper {
     public static void showMyLogin(Fragment fragment, int requestCode) {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_LOGIN);
     }
-    public static void showMyLogin(Activity activity,int requestCode){
-        showSimpleBackForResult(activity,requestCode,SimpleBackPage.MY_LOGIN);
+
+    public static void showMyLogin(Activity activity, int requestCode) {
+        showSimpleBackForResult(activity, requestCode, SimpleBackPage.MY_LOGIN);
     }
 
-    public static void showMeSetting(Fragment fragment, int requestCode){
+    public static void showMeSetting(Fragment fragment, int requestCode) {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_SETTING);
     }
 
-    public static void showCityChoose(Fragment fragment, int requestCode) {
-        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.CITY_CHOOSE);
+    public static void showCityChoose(Fragment fragment, int requestCode,Bundle bundle) {
+        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.CITY_CHOOSE,bundle);
     }
 
     public static void showIntegral(Context context, Bundle bundle) {
@@ -62,17 +63,23 @@ public class UIHelper {
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
-    public static void showAddLinkMan(Context context, Bundle bundle) {
-        showSimpleBack(context, SimpleBackPage.MY_ADD_LINKMAN, bundle);
+    public static void showAddLinkMan(Context context, Fragment fragment, int requestCode, Bundle args) {
+        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_ADD_LINKMAN, args);
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
 
-
     //下面是有返回值得简单返回的activity的操作
     public static void showSimpleBackForResult(Fragment fragment, int requestCode, SimpleBackPage page) {
-        Intent intent = new Intent(fragment.getActivity(),SimpleBackActivity.class);
+        Intent intent = new Intent(fragment.getActivity(), SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
+        fragment.startActivityForResult(intent, requestCode);
+    }
+
+    public static void showSimpleBackForResult(Fragment fragment, int requestCode, SimpleBackPage page, Bundle args) {
+        Intent intent = new Intent(fragment.getActivity(), SimpleBackActivity.class);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_ARGS, args);
         fragment.startActivityForResult(intent, requestCode);
     }
 

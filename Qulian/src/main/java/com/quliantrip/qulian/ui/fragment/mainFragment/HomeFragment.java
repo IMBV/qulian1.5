@@ -162,7 +162,10 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     //点击切换城市
     @OnClick(R.id.rl_city_choose)
     void chooseSity() {
-        UIHelper.showCityChoose(this, 1);
+        Bundle bundle = new Bundle();
+        String s = homeTitle.getText().toString().trim();
+        bundle.putString("cityName",s);
+        UIHelper.showCityChoose(this, 1,bundle);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
     //连接wifi

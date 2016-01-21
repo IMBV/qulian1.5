@@ -38,6 +38,7 @@ public class LinkManBean extends BaseJson {
     }
 
     public static class LinkMan implements Serializable {
+        private String id;
         private String name;
         private String surname;
         private String pyname;
@@ -48,6 +49,14 @@ public class LinkManBean extends BaseJson {
         private String address;
         private String is_effect;
         private String describe;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public void setName(String name) {
             this.name = name;

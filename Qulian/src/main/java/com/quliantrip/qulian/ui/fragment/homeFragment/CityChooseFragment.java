@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.homeFragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,20 +31,21 @@ public class CityChooseFragment extends BasePageCheckFragment {
     TextView locationCountry;
     @Bind(R.id.mlv_contry_city_list)
     MyListView countryListView;
+    private String homeCityName;
 
     @Override
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_city_choose, null);
         ButterKnife.bind(this, view);
+        Bundle bundle =getArguments();
+        homeCityName = bundle.getString("cityName");
         return view;
     }
 
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("ctl", "city");
-        map.put("r_type", "1");
-        return new QuestBean(map, new CityListBean().setTag(getClass().getName()), HttpConstants.HOST_ADDR_ROOT_NET);
+        return new QuestBean(map, new CityListBean().setTag(getClass().getName()), HttpConstants.CHANGE_CITY);
     }
 
     @Override
@@ -51,11 +53,11 @@ public class CityChooseFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             cityListBean = (CityListBean) bean;
             //全部景区的国家的列表显示
-            CountryCityListAdapter countryCityListAdapter =new CountryCityListAdapter((ArrayList<CityListBean.AreaArrEntity>) ((CityListBean) bean).getArea_arr());
+            CountryCityListAdapter countryCityListAdapter =new CountryCityListAdapter((ArrayList<CityListBean.DataEntity>) ((CityListBean) bean).getData());
             countryCityListAdapter.setmContext(mContext);
             countryListView.setAdapter(countryCityListAdapter);
             countryListView.setFocusable(false);
-            locationCountry.setText("当前城市："+cityListBean.getCity_name());
+            locationCountry.setText("当前城市：" + homeCityName);
         }
     }
 

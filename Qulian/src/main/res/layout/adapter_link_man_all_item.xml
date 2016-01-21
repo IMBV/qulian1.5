@@ -20,10 +20,17 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="45dp"
             android:src="@mipmap/icon_wode_edit" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_link_man_delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_delt" />
+        </RelativeLayout>
 
     <View
         style="@style/dev_all_line"
