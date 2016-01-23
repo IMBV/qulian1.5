@@ -5,14 +5,14 @@ import android.os.Bundle;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.ViewPageFragmentAdapter;
 import com.quliantrip.qulian.base.BaseViewPagerFragment;
-import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.domain.choice.GoodDetailBean;
+import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.LocalPlayFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.PlayMethodFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.SecnicFragment;
-import com.quliantrip.qulian.util.ToastUtil;
 
 /**
- * Created by Qulian5 on 2016/1/5.
+ * 收缩结果页面
  */
 public class SecnicPlayFragment extends BaseViewPagerFragment {
 
@@ -26,19 +26,15 @@ public class SecnicPlayFragment extends BaseViewPagerFragment {
 
     @Override
     protected void onSetupTabAdapter(ViewPageFragmentAdapter adapter) {
-        String[] title = getResources().getStringArray(
-                R.array.home_secnic_play_local);
-        //测试传递的数据
-        ToastUtil.showToast(QulianApplication.getContext(),getArguments().getString("keyWord"));
+        String[] title = getResources().getStringArray(R.array.home_secnic_play_local);
+        SecnicPlayResultBean.DataEntity dataEntity = (SecnicPlayResultBean.DataEntity) getArguments().getSerializable("resultData");
         // 景点
-        adapter.addTab(title[0], "secnic", SecnicFragment.class,
-                getBundle());
+        adapter.addTab(title[0], "secnic", SecnicFragment.class, getBundle(dataEntity));
         // 玩法
-        adapter.addTab(title[1], "play_method", PlayMethodFragment.class,
-                getBundle());
+        adapter.addTab(title[1], "play_method", PlayMethodFragment.class, getBundle(dataEntity));
         //当地游
-        adapter.addTab(title[2], "local_play", LocalPlayFragment.class,
-                getBundle());
+        adapter.addTab(title[2], "local_play", LocalPlayFragment.class, getBundle(dataEntity));
+        //设置选中的条目
 //        mViewPager.setCurrentItem(getArguments().getInt("orderState"));
     }
 
@@ -48,9 +44,9 @@ public class SecnicPlayFragment extends BaseViewPagerFragment {
     }
 
     //这里是fragment是给fragment设置argument的参数
-    private Bundle getBundle() {
+    private Bundle getBundle(SecnicPlayResultBean.DataEntity dataEntity) {
         Bundle bundle = new Bundle();
-        bundle.putString("sadfsadf","asdfsadfsdf");
+        bundle.putSerializable("data", dataEntity);
         return bundle;
     }
 }

@@ -50,7 +50,6 @@ public class PlayMethodOrderFragment extends Fragment {
         return view;
     }
 
-
     private void initRefreshListView() {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);

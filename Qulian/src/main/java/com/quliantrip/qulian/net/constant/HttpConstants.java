@@ -53,5 +53,21 @@ public class HttpConstants {
     public static final String GOOD_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/ ahouse";
     //取消单品收藏
     public static final String GOOD_CANCEL_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/ dhouse";
+    //单品订单借口
+    public static final String  GOOD_ORDER= HOST_ADDR_ROOT_LOCAL_V1 + "order/order";
+
+    //玩法列表
+    public static final String PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/play";
+
+
+    //发现
+    //优惠券
+    public static final String DISCOUNT_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/coupon";
+
+    //首页
+    //首页的筛选
+    public static final String HOME_SECNICPLAY_CONDITION = HOST_ADDR_ROOT_LOCAL_V1 + "product/search";
+
+
 
 }

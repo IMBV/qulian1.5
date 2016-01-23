@@ -30,8 +30,6 @@ import java.util.TimerTask;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 public class MainActivity extends FragmentActivity {
-    private static final int VIBRATE_DURATION = 20;
-    private SwipeBackLayout mSwipeBackLayout;
 
     private ArrayList<Fragment> listFragment = new ArrayList<Fragment>();
     private RadioGroup radioGroup;

@@ -1,16 +1,15 @@
 package com.quliantrip.qulian.ui.fragment.homeFragment;
 
 import android.view.View;
-import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.CountryCityListAdapter;
+import com.quliantrip.qulian.adapter.homeAdapter.SearckConditionHotWordAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.view.MyListView;
+import com.quliantrip.qulian.view.MyGridView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,15 +18,29 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by Qulian5 on 2016/1/11.
- */
 public class SecnicPlayConditionFragment extends BasePageCheckFragment {
+    @Bind(R.id.mgv_secnic_play_condition)
+    MyGridView hotWord;
+
     @Override
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_home_secnic_condition, null);
         ButterKnife.bind(this, view);
+        initData();
         return view;
+    }
+
+    private void initData() {
+        final ArrayList<String> list = new ArrayList<>();
+        list.add("东京");
+        list.add("亲子乐园餐");
+        list.add("富士山");
+        list.add("浅草");
+        list.add("东京线路");
+        list.add("民俗特色");
+        list.add("休闲");
+        SearckConditionHotWordAdapter searckConditionHotWordAdapter = new SearckConditionHotWordAdapter(list,mContext);
+        hotWord.setAdapter(searckConditionHotWordAdapter);
     }
 
     @Override

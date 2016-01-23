@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lv_home_play_method_fragment_list"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimary" />
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/lv_home_play_method_fragment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:dividerHeight="10dp"
+        android:scrollbars="none" />
+</LinearLayout>
 

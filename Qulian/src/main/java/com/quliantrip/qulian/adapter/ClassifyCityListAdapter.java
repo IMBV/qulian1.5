@@ -18,11 +18,8 @@ import butterknife.ButterKnife;
 
 /**
  * 城市分类的适配器对象
- * Created by Yuly on 2015/12/21.
- * www.quliantrip.com
  */
 public class ClassifyCityListAdapter extends BasicAdapter<CityListBean.DataEntity.ChildEntity> {
-
 
     public ClassifyCityListAdapter(ArrayList<CityListBean.DataEntity.ChildEntity> list) {
         super(list);

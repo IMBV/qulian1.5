@@ -73,13 +73,8 @@ public class LoginFragment extends BaseFragment {
                 ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
                 ((SimpleBackActivity) mContext).finish();
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
-            } else {
-                String allString = null;
-                for (String s : userInfoBean.getData().getPassword())
-                    if (!s.equals(""))
-                        allString += s;
-                ToastUtil.showToast(mContext, allString);
             }
+            ToastUtil.showToast(mContext, userInfoBean.getMsg());
         }
     }
 

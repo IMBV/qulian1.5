@@ -49,7 +49,7 @@ import butterknife.OnClick;
 /**
  * 热门商品的信息
  */
-public class HotGoodsFragment extends BasePageCheckFragment {
+public class HotGoodsFragment extends BasePageCheckFragment{
 
     @Bind(R.id.ll_route_sift)
     LinearLayout siftCondition;
@@ -63,6 +63,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     HorizontalScrollView scrollView;
     @Bind(R.id.sakjdfhlkashflkashf)
     LinearLayout linearLayout;
+    @Bind(R.id.overlay)
+    ImageView bg;
 
     //下拉刷新
     @Bind(R.id.pull_refresh_list)
@@ -163,26 +165,13 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     }
 
 
-    //以下是筛选按钮的简单实现
-    private boolean isShowSift = true;
+//    //以下是筛选按钮的简单实现
+//    private boolean isShowSift = true;
 
     @OnClick(R.id.ll_route_sift)
     void showSiftRoute() {
-        setSelector(isShowSift);
-    }
-
-    //显示和隐藏筛选条件
-    public void setSelector(boolean b) {
-        if (b) {
-            siftText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-            siftImg.setImageResource(R.mipmap.nav_shaixuan_press);
-            showSiftCondition();
-        } else {
-            siftText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
-            siftImg.setImageResource(R.mipmap.nav_shaixuan_normal);
-            hidePopupWindow();
-        }
-        isShowSift = !isShowSift;
+        showSiftCondition();
+        bg.setVisibility(View.VISIBLE);
     }
 
     List<HotGoodBean.DataEntity.ScreenEntity> screenArray;
@@ -220,6 +209,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
 
         siftPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext, 285));
         siftPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        siftPopupWindow.setOutsideTouchable(true);
+//        siftPopupWindow.setFocusable(true);
+//        siftPopupWindow.setou
         //显示的筛选popupwinsow的坐标位置
         int[] location = new int[2];
         bottomLine.getLocationInWindow(location);
@@ -252,8 +244,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         if (siftPopupWindow != null) {
             siftPopupWindow.dismiss();
             siftPopupWindow = null;
-            siftText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
-            siftImg.setImageResource(R.mipmap.nav_shaixuan_normal);
+            bg.setVisibility(View.GONE);
         }
     }
 
@@ -318,4 +309,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         });
     }
 
+    @OnClick(R.id.overlay)
+    void hideBg(){
+        bg.setVisibility(View.GONE);
+    }
 }

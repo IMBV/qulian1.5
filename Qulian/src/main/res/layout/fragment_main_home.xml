@@ -88,7 +88,7 @@
             <TextView
                 android:id="@+id/iv_home_title_location"
                 style="@style/home_localtion_text"
-                android:text="北京人" />
+                android:text="北京" />
 
             <ImageView
                 android:id="@+id/iv_home_title_arrow"

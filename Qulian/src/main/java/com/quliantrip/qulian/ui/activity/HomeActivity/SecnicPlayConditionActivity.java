@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.ui.activity.HomeActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -9,25 +10,36 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.GoodDetailBean;
+import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayConditionFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.ClearEditText;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
- * Created by Qulian5 on 2016/1/5.
+ * 首页搜索的界面
  */
 public class SecnicPlayConditionActivity extends SwipeBackActivity {
-    @Bind(R.id.fl_secnic_container)
-    FrameLayout fragmentContainer;
+    private Context mContext;
 
     //查询输入的文字
-    @Bind(R.id.cet_home_search)
+    @Bind(R.id.cet_home_search_text)
     ClearEditText searchText;
+
     @Bind(R.id.tv_home_search_hint)
     TextView hintText;
 
@@ -39,7 +51,9 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secnicplay_condition);
+        mContext = this;
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         secnicPlayConditionFragment = new SecnicPlayConditionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayConditionFragment).commit();
         initTextListener();
@@ -56,11 +70,10 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
                 } else {
                     hintText.setText("搜索");
                 }
-
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
@@ -71,30 +84,44 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         });
     }
 
-    //切换fragment
-    private void changeResultFragment() {
-        if (secnicPlayFragment == null) {
-            //这里是隐藏输入键盘的操作
-            InputMethodManager imm = (InputMethodManager) getSystemService(SecnicPlayConditionActivity.this.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
-            secnicPlayFragment = new SecnicPlayFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("keyWord", "nihao");
-            secnicPlayFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayFragment).commit();
-        } else {
-
-        }
-    }
 
     //搜索点击事件
     @OnClick(R.id.tv_home_search_hint)
     void searckResult() {
-        if (TextUtils.isEmpty(searchText.getText())) {
+        String condition = searchText.getText().toString().trim();
+        if (TextUtils.isEmpty(condition)) {
             finish();
+            overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
         } else {
-            changeResultFragment();
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("title", condition);
+            new PacketStringReQuest(HttpConstants.HOME_SECNICPLAY_CONDITION, new SecnicPlayResultBean().setTag(getClass().getName()), map);
         }
+    }
+
+    public void onEventMainThread(BaseJson bean) {
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            SecnicPlayResultBean secnicPlayResultBean = (SecnicPlayResultBean) bean;
+            if (secnicPlayResultBean.getCode() == 200) {
+                changeResultFragment(secnicPlayResultBean.getData());
+            }
+            ToastUtil.showToast(mContext, secnicPlayResultBean.getMsg());
+        }
+    }
+
+    //切换fragment
+    private void changeResultFragment(SecnicPlayResultBean.DataEntity dataEntity) {
+        //这里是隐藏输入键盘的操作
+        InputMethodManager imm = (InputMethodManager) getSystemService(SecnicPlayConditionActivity.this.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(searchText.getWindowToken(), 0);
+
+        //跳转到结果页面
+        secnicPlayFragment = new SecnicPlayFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("resultData", dataEntity);
+        secnicPlayFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayFragment).commit();
+        secnicPlayFragment = null;
     }
 
     //点击返回显示
@@ -102,5 +129,10 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
     void backFinish() {
         finish();
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+    }
+
+    public void setConditionText(String s){
+        searchText.setText(s);
+        searchText.setFocusable(true);
     }
 }

@@ -7,6 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+    </style>
+
     <!--在拖拽时的背景样式的透明的有样式-->
     <style name="SwipeBackActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>

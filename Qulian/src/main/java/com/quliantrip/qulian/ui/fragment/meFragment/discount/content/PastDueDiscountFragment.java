@@ -24,7 +24,7 @@ public class PastDueDiscountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = View.inflate(mContext, R.layout.fragment_find_discount,null);
+        View view = View.inflate(mContext, R.layout.view_pulltorefresh_listview,null);
         return view;
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="285dp"
+    android:layout_height="match_parent"
     android:orientation="horizontal">
 
     <ScrollView
@@ -12,7 +12,7 @@
         <com.quliantrip.qulian.view.MyListView
             android:id="@+id/lv_group"
             android:layout_width="102dp"
-            android:layout_height="285dp"
+            android:layout_height="match_parent"
             android:background="#fbf9f8"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@color/group_item_pressed_bg"
@@ -28,7 +28,7 @@
         <com.quliantrip.qulian.view.MyListView
             android:id="@+id/lv_child"
             android:layout_width="match_parent"
-            android:layout_height="285dp"
+            android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@android:color/transparent"

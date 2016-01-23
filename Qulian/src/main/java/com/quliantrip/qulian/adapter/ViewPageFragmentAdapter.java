@@ -2,9 +2,11 @@ package com.quliantrip.qulian.adapter;
 
 
 import android.annotation.SuppressLint;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -89,7 +91,9 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         ViewPageInfo info = mTabs.get(position);
-        return Fragment.instantiate(mContext, info.clss.getName(), info.args);
+        Fragment fragment = Fragment.instantiate(mContext, info.clss.getName(), info.args);
+        ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().add(fragment, info.tag).commit();
+        return fragment;
     }
 
     @Override

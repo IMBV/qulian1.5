@@ -14,18 +14,7 @@ public class LoginDataBean {
     private String email;
     private int code;
     private int status;
-    private int created_at;
-    private int updated_at;
     private List<String> password;
-    private String msg;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -53,14 +42,6 @@ public class LoginDataBean {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public void setCreated_at(int created_at) {
-        this.created_at = created_at;
-    }
-
-    public void setUpdated_at(int updated_at) {
-        this.updated_at = updated_at;
     }
 
     public void setPassword(List<String> password) {
@@ -93,14 +74,6 @@ public class LoginDataBean {
 
     public int getStatus() {
         return status;
-    }
-
-    public int getCreated_at() {
-        return created_at;
-    }
-
-    public int getUpdated_at() {
-        return updated_at;
     }
 
     public List<String> getPassword() {

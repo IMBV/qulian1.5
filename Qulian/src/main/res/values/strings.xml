@@ -47,4 +47,5 @@
     <!-- 错误界面的提示信息-->
     <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
     <string name="error_view_loading">加载中…</string>
+    <string name="no_data">没有找到符合条件的房源</string>
 </resources>
