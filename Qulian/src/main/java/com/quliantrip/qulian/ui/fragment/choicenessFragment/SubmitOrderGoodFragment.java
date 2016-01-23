@@ -5,14 +5,26 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.text.format.Time;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.base.BaseFragment;
+import com.quliantrip.qulian.adapter.choiceAdapter.OrderGoodTypeAdapter;
+import com.quliantrip.qulian.base.BasePageCheckFragment;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.OrderSubmitBean;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
+import com.quliantrip.qulian.view.MyListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,22 +33,55 @@ import butterknife.OnClick;
 /**
  * Created by Qulian5 on 2016/1/8.
  */
-public class SubmitOrderGoodFragment extends BaseFragment {
+public class SubmitOrderGoodFragment extends BasePageCheckFragment {
+    @Bind(R.id.tv_good_name)
+    TextView name;//商品的名称
+    @Bind(R.id.mlv_good_taocan_type)
+    MyListView typeListView;//套餐的类型的列表
+
     @Bind(R.id.tv_good_check_person_number)
-    TextView number;
+    TextView number;//选着的数量
 
     @Override
-    public View initView() {
+    protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.adapter_good_order_item, null);
         ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
-    public void initDate() {
-
+    protected QuestBean requestData() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", "16");
+        return new QuestBean(map, new OrderSubmitBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER);
     }
 
+    @Override
+    public void onEventMainThread(BaseJson bean) {
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            OrderSubmitBean orderSubmitBean = (OrderSubmitBean) bean;
+            OrderSubmitBean.DataEntity dataEntity = orderSubmitBean.getData();
+            if (orderSubmitBean.getCode() == 200) {
+                name .setText(dataEntity.getOnline().getName());
+                initListView(dataEntity.getAttribute());
+
+            } else {
+                ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
+            }
+        }
+    }
+
+    //初始化可选的套餐类型
+    private void initListView(final List<OrderSubmitBean.DataEntity.AttributeEntity> attributeList) {
+        final OrderGoodTypeAdapter orderGoodTypeAdapter = new OrderGoodTypeAdapter((ArrayList<OrderSubmitBean.DataEntity.AttributeEntity>) attributeList);
+        typeListView.setAdapter(orderGoodTypeAdapter);
+        typeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                orderGoodTypeAdapter.setCheched(attributeList.get(position).getAttrid());
+            }
+        });
+    }
 
     @OnClick(R.id.iv_good_person_number_down)
     void downNumber() {
@@ -93,7 +138,6 @@ public class SubmitOrderGoodFragment extends BaseFragment {
         time.setToNow();
         int minute = time.minute;
         int hour = time.hour;
-
         TimePickerDialog timeDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
 
             @Override

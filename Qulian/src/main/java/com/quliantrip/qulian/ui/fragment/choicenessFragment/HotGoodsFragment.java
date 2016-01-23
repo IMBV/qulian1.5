@@ -30,7 +30,6 @@ import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.domain.choice.HotGoodBean;
-import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
@@ -49,7 +48,7 @@ import butterknife.OnClick;
 /**
  * 热门商品的信息
  */
-public class HotGoodsFragment extends BasePageCheckFragment{
+public class HotGoodsFragment extends BasePageCheckFragment {
 
     @Bind(R.id.ll_route_sift)
     LinearLayout siftCondition;
@@ -70,22 +69,6 @@ public class HotGoodsFragment extends BasePageCheckFragment{
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
     protected ListView listView;
-
-//    Handler handler = new Handler() {
-//        public void handleMessage(android.os.Message msg) {
-//            switch (msg.what) {
-//                case 20:
-//                    childAdapter.setChildData(quanArray.get(msg.arg1).getQuan_sub());
-//                    childAdapter.notifyDataSetChanged();
-//                    groupAdapter.notifyDataSetChanged();
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//
-//        ;
-//    };
 
     @Override
     protected View getSuccessView() {
@@ -164,10 +147,6 @@ public class HotGoodsFragment extends BasePageCheckFragment{
         linearLayout.addView(view);
     }
 
-
-//    //以下是筛选按钮的简单实现
-//    private boolean isShowSift = true;
-
     @OnClick(R.id.ll_route_sift)
     void showSiftRoute() {
         showSiftCondition();
@@ -187,12 +166,15 @@ public class HotGoodsFragment extends BasePageCheckFragment{
         View popView = null;
         if (siftConditionPop == null) {
             popView = View.inflate(mContext, R.layout.popupwindow_sift_double_list, null);
-
             groupListView = (ListView) popView.findViewById(R.id.lv_group);
             childListView = (ListView) popView.findViewById(R.id.lv_child);
-
             groupAdapter = new HotGoodGroupAdapter(mContext, screenArray);
             groupListView.setAdapter(groupAdapter);
+            childAdapter = new HotGoodChildAdapter(mContext);
+            childListView.setAdapter(childAdapter);
+            childAdapter.setChildData(screenArray.get(0).getChild());
+            childAdapter.notifyDataSetChanged();
+            groupAdapter.notifyDataSetChanged();
         }
 
         groupListView.setOnItemClickListener(new MyItemClick());
@@ -201,8 +183,8 @@ public class HotGoodsFragment extends BasePageCheckFragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                TuanBean.QuanListEntity.QuanSubEntity bean = (TuanBean.QuanListEntity.QuanSubEntity) parent.getAdapter().getItem(position);
-                ToastUtil.showToast(mContext, bean.getName());
+                HotGoodBean.DataEntity.ScreenEntity.ChildEntity bean = (HotGoodBean.DataEntity.ScreenEntity.ChildEntity) parent.getAdapter().getItem(position);
+                ToastUtil.showToast(mContext, bean.getName() + bean.getId());
                 //请求数据后发送给主线程中
             }
         });
@@ -220,6 +202,22 @@ public class HotGoodsFragment extends BasePageCheckFragment{
         siftPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 1);
     }
 
+    Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 20:
+                    childAdapter.setChildData(screenArray.get(msg.arg1).getChild());
+                    childAdapter.notifyDataSetChanged();
+                    groupAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        ;
+    };
+
     class MyItemClick implements AdapterView.OnItemClickListener {
 
         @Override
@@ -234,7 +232,7 @@ public class HotGoodsFragment extends BasePageCheckFragment{
             Message msg = new Message();
             msg.what = 20;
             msg.arg1 = position;
-//            handler.sendMessage(msg);
+            handler.sendMessage(msg);
         }
     }
 
@@ -310,7 +308,7 @@ public class HotGoodsFragment extends BasePageCheckFragment{
     }
 
     @OnClick(R.id.overlay)
-    void hideBg(){
+    void hideBg() {
         bg.setVisibility(View.GONE);
     }
 }

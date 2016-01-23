@@ -2,6 +2,7 @@ package com.quliantrip.qulian.adapter.popAdapter;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.TuanBean;
+import com.quliantrip.qulian.domain.choice.HotGoodBean;
 
 import java.util.List;
 
@@ -17,13 +19,13 @@ import java.util.List;
 public class HotGoodChildAdapter extends BaseAdapter {
 
     Context mContext;
-    List<TuanBean.QuanListEntity.QuanSubEntity> mChildArr;// 子item标题数组
+    List<HotGoodBean.DataEntity.ScreenEntity.ChildEntity> mChildArr;// 子item标题数组
 
     public HotGoodChildAdapter(Context context) {
         mContext = context;
     }
 
-    public void setChildData(List<TuanBean.QuanListEntity.QuanSubEntity> childArr) {
+    public void setChildData(List<HotGoodBean.DataEntity.ScreenEntity.ChildEntity> childArr) {
         this.mChildArr = childArr;
     }
 
@@ -40,6 +42,9 @@ public class HotGoodChildAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        if (TextUtils.isEmpty(mChildArr.get(position).getName()))
+            holder.childText.setText(mChildArr.get(position).getTag_name());
+            else
         holder.childText.setText(mChildArr.get(position).getName());
         return convertView;
     }

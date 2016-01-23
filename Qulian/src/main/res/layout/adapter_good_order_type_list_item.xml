@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_good_taocan_type_name"
+        style="@style/text_sub_title_16"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_text_right_angle"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:text="经典双人下午茶套餐"
+        android:textColor="@color/app_main_sub_title_text" />
+
+</LinearLayout><!--
+<TextView
+style="@style/text_sub_title_16"
+android:layout_marginLeft="15dp"
+android:layout_marginRight="15dp"
+android:layout_marginTop="5dp"
+android:background="@drawable/cnb_taocan"
+android:paddingBottom="10dp"
+android:paddingLeft="15dp"
+android:paddingRight="15dp"
+android:paddingTop="10dp"
+android:text="经典双人下午茶套餐" />
+
+<TextView
+style="@style/text_sub_title_16"
+android:layout_marginLeft="15dp"
+android:layout_marginRight="15dp"
+android:layout_marginTop="5dp"
+android:background="@drawable/shape_text_right_angle"
+android:paddingBottom="10dp"
+android:paddingLeft="15dp"
+android:paddingRight="15dp"
+android:paddingTop="10dp"
+android:text="经典双人下午茶套餐"
+android:textColor="@color/app_main_sub_title_text" />-->

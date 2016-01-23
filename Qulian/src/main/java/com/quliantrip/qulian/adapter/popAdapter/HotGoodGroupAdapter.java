@@ -40,17 +40,15 @@ public class HotGoodGroupAdapter extends BaseAdapter {
 		// 初始化布局控件
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.item_group_layout, null);
-			holder.groupName = (TextView) convertView
-					.findViewById(R.id.group_textView);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_group_layout, null);
+			holder.groupName = (TextView) convertView.findViewById(R.id.group_textView);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
 		// 设置控件内容
-//		holder.groupName.setText(mGroupNameArr.get(position).ge);
+		holder.groupName.setText(mGroupNameArr.get(position).getName());
 		if (mPosition == position) {
 			convertView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
 			holder.groupName.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
