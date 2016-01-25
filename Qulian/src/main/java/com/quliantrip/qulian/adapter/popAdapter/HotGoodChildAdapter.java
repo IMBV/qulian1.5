@@ -10,17 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.TuanBean;
 import com.quliantrip.qulian.domain.choice.HotGoodBean;
 
 import java.util.List;
 
-
 public class HotGoodChildAdapter extends BaseAdapter {
-
-    Context mContext;
+    private Context mContext;
     List<HotGoodBean.DataEntity.ScreenEntity.ChildEntity> mChildArr;// 子item标题数组
-
     public HotGoodChildAdapter(Context context) {
         mContext = context;
     }
@@ -28,6 +24,14 @@ public class HotGoodChildAdapter extends BaseAdapter {
     public void setChildData(List<HotGoodBean.DataEntity.ScreenEntity.ChildEntity> childArr) {
         this.mChildArr = childArr;
     }
+
+//    private int groupId;
+//    private void setGroupId(int id){
+//        groupId = id;
+//    }
+//    private void setmChildId(int id){
+//
+//    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -44,8 +48,10 @@ public class HotGoodChildAdapter extends BaseAdapter {
         }
         if (TextUtils.isEmpty(mChildArr.get(position).getName()))
             holder.childText.setText(mChildArr.get(position).getTag_name());
-            else
-        holder.childText.setText(mChildArr.get(position).getName());
+        else
+            holder.childText.setText(mChildArr.get(position).getName());
+
+
         return convertView;
     }
 

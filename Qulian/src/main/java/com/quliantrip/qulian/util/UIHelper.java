@@ -54,8 +54,17 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.MY_COMMON_INFO, bundle);
     }
 
+    public static void showMyCommonInfo(Context context, Fragment fragment, int requestCode, Bundle args) {
+        showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_COMMON_INFO, args);
+        ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
     public static void showMyDisCount(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.MY_DISCOUNT, bundle);
+    }
+
+    public static void showOrderConfirm(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.ORDER_CONFIRM, bundle);
     }
 
     public static void showChangePassword(Context context, Bundle bundle) {

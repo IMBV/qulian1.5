@@ -63,7 +63,6 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
 //        map.put("ctl", "tuan");
-//        map.put("r_type", "1");
         return new QuestBean(map, new PlayMethodBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_LIST);
     }
 

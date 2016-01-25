@@ -80,7 +80,6 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
 			mViewArray.add(r);
 			r.setTag(SMALL);
 
-
 			ToggleButton tButton = (ToggleButton) inflater.inflate(R.layout.toggle_button, this, false);
 			addView(tButton);
 			View line = new TextView(mContext);
@@ -122,7 +121,6 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
 			});
 		}
 	}
-
 
 	private void startAnimation() {
 
@@ -189,7 +187,7 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
 	private void init(Context context) {
 		mContext = context;
 		displayWidth = ((Activity) mContext).getWindowManager().getDefaultDisplay().getWidth();
-		displayHeight = ((Activity) mContext).getWindowManager().getDefaultDisplay().getHeight();
+		displayHeight = ((Activity) mContext).getWindowManager().getDefaultDisplay().getHeight()-CommonHelp.dip2px(mContext,163);
 		setOrientation(LinearLayout.HORIZONTAL);
 	}
 

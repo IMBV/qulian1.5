@@ -52,7 +52,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "16");
+        map.put("id", "11");
         return new QuestBean(map, new OrderSubmitBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER);
     }
 
@@ -62,9 +62,8 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             OrderSubmitBean orderSubmitBean = (OrderSubmitBean) bean;
             OrderSubmitBean.DataEntity dataEntity = orderSubmitBean.getData();
             if (orderSubmitBean.getCode() == 200) {
-                name .setText(dataEntity.getOnline().getName());
+                name.setText(dataEntity.getOnline().getName());
                 initListView(dataEntity.getAttribute());
-
             } else {
                 ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
             }
@@ -101,10 +100,10 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         number.setText(newNumber + "");
     }
 
-    //进去支付界面
+    //提交订单
     @OnClick(R.id.bt_order_submi_topay)
-    void toPay() {
-        UIHelper.showPayMethod(mContext, null);
+    void toConfirmOrder() {
+        UIHelper.showOrderConfirm(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 

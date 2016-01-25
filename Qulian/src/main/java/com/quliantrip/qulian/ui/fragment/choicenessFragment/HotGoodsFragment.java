@@ -84,7 +84,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         if (questBean == null) {
             Map<String, String> map = new HashMap<String, String>();
-//            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
             return new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
         } else {
             return questBean;
@@ -141,6 +140,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     oldButton.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
                     oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
                 }
+                bg.setVisibility(View.GONE);
                 ToastUtil.showToast(mContext, cate.getName() + cate.getId());
                 currentCheckedCate = i;
             }
@@ -182,8 +182,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         childListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HotGoodBean.DataEntity.ScreenEntity.ChildEntity bean = (HotGoodBean.DataEntity.ScreenEntity.ChildEntity) parent.getAdapter().getItem(position);
                 ToastUtil.showToast(mContext, bean.getName() + bean.getId());
                 //请求数据后发送给主线程中
@@ -193,6 +192,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         siftPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext, 285));
         siftPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         siftPopupWindow.setOutsideTouchable(true);
+        siftPopupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
 //        siftPopupWindow.setFocusable(true);
 //        siftPopupWindow.setou
         //显示的筛选popupwinsow的坐标位置
@@ -278,8 +278,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     intent.putExtra("isCollect", bean.isIs_house());
                     mContext.startActivity(intent);
                     ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
-                }else{
-                    ToastUtil.showToast(mContext,"请检查网络设置");
+                } else {
+                    ToastUtil.showToast(mContext, "请检查网络设置");
                 }
             }
         });

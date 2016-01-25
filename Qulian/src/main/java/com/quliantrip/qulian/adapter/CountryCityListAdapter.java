@@ -53,6 +53,7 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.DataEntity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CityListBean.DataEntity.ChildEntity bean = ((CityListBean.DataEntity.ChildEntity) parent.getAdapter().getItem(position));
                 Intent intent = new Intent(mContext, MainActivity.class);
+                intent.putExtra("cityName",bean.getChinese_name());
                 intent.putExtra("cityId", bean.getId());
                 ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
                 ((SimpleBackActivity) mContext).finish();

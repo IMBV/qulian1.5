@@ -55,6 +55,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     ImageView titleBackgroud;//标题的背景
     @Bind(R.id.sv_scroll)
     ObservableScrollView scroll;
+    @Bind(R.id.iv_home_title_arrow)
+    ImageView arrow;
+    @Bind(R.id.iv_home_title_wifi)
+    ImageView connectWifi;
+
     @Bind(R.id.ll_model_container)
     LinearLayout modelContainer;
     @Bind(R.id.iv_home_recommend)
@@ -142,11 +147,25 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         });
     }
 
+    private boolean isShang = true;
+
     //srcollView的滑动监听事件
     @Override
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
         float percent = (float) y / (float) CommonHelp.dip2px(mContext, 231);
         ViewHelper.setAlpha(titleBackgroud, EvaluateUtil.evaluateFloat(percent, 0.0f, 1.0f));
+        if (EvaluateUtil.evaluateFloat(percent, 0.0f, 1.0f) >= 0.5f && isShang) {
+            homeTitle.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+            arrow.setImageResource(R.mipmap.up_jiantou_c);
+            connectWifi.setImageResource(R.mipmap.scan_code_c);
+            isShang = !isShang;
+        }
+        if (EvaluateUtil.evaluateFloat(percent, 0.0f, 1.0f) <= 0.5f && !isShang) {
+            homeTitle.setTextColor(CommonHelp.getColor(R.color.colorPrimary));
+            arrow.setImageResource(R.mipmap.up_jiantou);
+            connectWifi.setImageResource(R.mipmap.scan_code);
+            isShang = !isShang;
+        }
     }
 
     @Override
@@ -164,6 +183,8 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
                 ToastUtil.showToast(mContext, "请扫描正确的二维码");
             }
         } else if (requestCode == 1) {
+            CommonHelp.saveStringSp(mContext,"globalCityId",data.getStringExtra("cityId"));
+            CommonHelp.saveStringSp(mContext,"globalCityName",data.getStringExtra("cityName"));
             Map<String, String> map = new HashMap<String, String>();
             map.put("ctl", "city");
             map.put("act", "city_change");

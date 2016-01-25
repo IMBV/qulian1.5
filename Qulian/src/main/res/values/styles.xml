@@ -22,7 +22,7 @@
     <style name="dev_all_line">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/app_main_dev_line</item>
+        <item name="android:background">#e6e6e6</item>
     </style>
 
     <!---->

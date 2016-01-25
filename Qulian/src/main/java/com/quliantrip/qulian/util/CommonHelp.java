@@ -94,8 +94,7 @@ public class CommonHelp {
 
     //保存和获取String类型到sp中
     public static void saveStringSp(Context context, String key, String value) {
-        SharedPreferences sp = context.getSharedPreferences(CONFIG_NAME,
-                context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(CONFIG_NAME,context.MODE_PRIVATE);
         sp.edit().putString(key, value).commit();
     }
 

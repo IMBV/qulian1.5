@@ -11,6 +11,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.view.MyListView;
 
 import java.util.ArrayList;
@@ -60,5 +61,4 @@ public class CityChooseFragment extends BasePageCheckFragment {
             locationCountry.setText("当前城市：" + homeCityName);
         }
     }
-
 }

@@ -11,22 +11,30 @@
         style="@style/app_title"
         android:background="#ffffff">
 
-        <TextView
-            android:id="@+id/tv_choiceness_title_loaction"
+        <RelativeLayout
+            android:id="@+id/rl_city_choose"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:text="北京"
-            android:textSize="16sp" />
+            android:layout_marginLeft="8dp">
 
-        <ImageView
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/tv_choiceness_title_loaction"
-            android:src="@mipmap/nav_up_h" />
+            <TextView
+                android:id="@+id/tv_choiceness_title_loaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="北京"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/tv_choiceness_title_loaction"
+                android:src="@mipmap/nav_up_h" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
