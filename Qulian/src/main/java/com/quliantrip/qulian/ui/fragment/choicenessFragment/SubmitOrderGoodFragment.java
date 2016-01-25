@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Qulian5 on 2016/1/8.
+ * 商品提交订单
  */
 public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     @Bind(R.id.tv_good_name)

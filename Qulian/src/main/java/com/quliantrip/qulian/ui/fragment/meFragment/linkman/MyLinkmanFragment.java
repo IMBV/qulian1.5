@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.LinkManListAdapter;
@@ -36,6 +37,8 @@ public class MyLinkmanFragment extends BasePageCheckFragment {
     private View view;
     @Bind(R.id.lv_link_man_all)
     ListView listView;
+    @Bind(R.id.rl_pager_empty)
+    RelativeLayout empty;
 
     @Override
     protected View getSuccessView() {
@@ -55,20 +58,27 @@ public class MyLinkmanFragment extends BasePageCheckFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && (this.getClass().getName()).equals(bean.getTag())) {
             LinkManBean linkManBean = (LinkManBean) bean;
-            listView.setAdapter(new LinkManListAdapter((ArrayList<LinkManBean.LinkMan>) linkManBean.getData()));
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    LinkManBean.LinkMan bean = (LinkManBean.LinkMan) parent.getAdapter().getItem(position);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("linkMan", bean);
-                    UIHelper.showAddLinkMan(mContext, MyLinkmanFragment.this, 441, bundle);
-                }
-            });
+            if (linkManBean.getData() != null) {
+                empty.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
+                listView.setAdapter(new LinkManListAdapter((ArrayList<LinkManBean.LinkMan>) linkManBean.getData()));
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        LinkManBean.LinkMan bean = (LinkManBean.LinkMan) parent.getAdapter().getItem(position);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("linkMan", bean);
+                        UIHelper.showAddLinkMan(mContext, MyLinkmanFragment.this, 441, bundle);
+                    }
+                });
+            }else{
+                empty.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.GONE);
+            }
         }
-        if (bean != null && (this.getClass().getName()+"delete").equals(bean.getTag())) {
+        if (bean != null && (this.getClass().getName() + "delete").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
-            ToastUtil.showToast(mContext,hintInfoBean.getMsg());
+            ToastUtil.showToast(mContext, hintInfoBean.getMsg());
         }
     }
 

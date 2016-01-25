@@ -72,7 +72,7 @@
         android:textColorHint="@color/app_main_tag_dec_line" />
 
     <Button
-        android:id="@+id/bt_add_discount"
+        android:id="@+id/bt_add_opinion"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_margin="10dp"

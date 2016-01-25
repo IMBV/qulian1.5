@@ -58,9 +58,11 @@ public class AddLinkManFragment extends Fragment {
     TextView sex;
     @Bind(R.id.tv_link_man_certificate_type)
     TextView type;
-
     @Bind(R.id.cet_link_man_certificate_number)
     ClearEditText num;
+    @Bind(R.id.cet_linkman_address)
+    ClearEditText address;
+
     @Bind(R.id.bt_save_link_man)
     Button button;
 
@@ -104,16 +106,15 @@ public class AddLinkManFragment extends Fragment {
 
     //进行初始化修改的参数
     private void intidate(LinkManBean.LinkMan linkMan) {
-        if (linkMan != null) {
-            button.setText("修改");
-            name.setText(linkMan.getName());
-            xing.setText(linkMan.getSurname());
-            ming.setText(linkMan.getPyname());
-            birth.setText(linkMan.getBirth_date());
-            sex.setText(linkMan.getSex());
-            type.setText(linkMan.getPaper_type());
-            num.setText(linkMan.getPaper_number());
-        }
+        button.setText("修改");
+        name.setText(linkMan.getName());
+        xing.setText(linkMan.getSurname());
+        ming.setText(linkMan.getPyname());
+        birth.setText(linkMan.getBirth_date());
+        sex.setText(linkMan.getSex());
+        type.setText(linkMan.getPaper_type());
+        num.setText(linkMan.getPaper_number());
+        address.setText(linkMan.getAddress());
     }
 
     //单击添加操作
@@ -130,8 +131,8 @@ public class AddLinkManFragment extends Fragment {
             map.put("Contacts[sex]", sexString);
             map.put("Contacts[paper_type]", pagerTypeString);
             map.put("Contacts[paper_number]", pagerNumberString);
-            map.put("Contacts[describe]", "来点辣椒");//备注
-            map.put("Contacts[address]", "西直门");//收货地址
+            map.put("Contacts[describe]", "");//备注
+            map.put("Contacts[address]", addressString);//收货地址
             new PacketStringReQuest(HttpConstants.ADD_LINKMAN, new HintInfoBean().setTag(getClass().getName()), map);
         } else {
             Map<String, String> map = new HashMap<String, String>();
@@ -143,6 +144,7 @@ public class AddLinkManFragment extends Fragment {
             map.put("Contacts[sex]", sexString);
             map.put("Contacts[paper_type]", pagerTypeString);
             map.put("Contacts[paper_number]", pagerNumberString);
+            map.put("Contacts[address]", addressString);
             new PacketStringReQuest(HttpConstants.EDIT_LINKMAN, new HintInfoBean().setTag(getClass().getName()), map);
         }
     }
@@ -154,6 +156,7 @@ public class AddLinkManFragment extends Fragment {
     private String sexString;
     private String pagerTypeString;
     private String pagerNumberString;
+    private String addressString;
 
     public void checkData() {
         nameString = name.getText().toString().trim();
@@ -163,5 +166,6 @@ public class AddLinkManFragment extends Fragment {
         sexString = sex.getText().toString().trim();
         pagerTypeString = type.getText().toString().trim();
         pagerNumberString = num.getText().toString().trim();
+        addressString = address.getText().toString().trim();
     }
 }

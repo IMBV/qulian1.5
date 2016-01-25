@@ -526,8 +526,7 @@ public class TDevice {
      * @param title
      * @param url
      */
-    public static void showSystemShareOption(Activity context,
-                                             final String title, final String url) {
+    public static void showSystemShareOption(Activity context,final String title, final String url) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享：" + title);

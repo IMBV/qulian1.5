@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -22,6 +23,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.downPopupwindow.ExpandTabView;
 import com.quliantrip.qulian.view.downPopupwindow.FilterDataSource;
 import com.quliantrip.qulian.view.downPopupwindow.LeftFilterView;
@@ -96,19 +98,19 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
         PlayMethodBean.DataEntity.ScreenEntity screenEntityOne = siftList.get(0);
         for (PlayMethodBean.DataEntity.ScreenEntity.ChildEntity childEntity : screenEntityOne.getChild()) {
-            themeMap.put(childEntity.getId(), childEntity.getTag_name());
+            themeMap.put(childEntity.getTag_name(),childEntity.getId());
             themeString.add(childEntity.getTag_name());
         }
 
         PlayMethodBean.DataEntity.ScreenEntity screenEntityTwo = siftList.get(1);
         for (PlayMethodBean.DataEntity.ScreenEntity.ChildEntity childEntity : screenEntityTwo.getChild()) {
-            timeMap.put(childEntity.getId(), childEntity.getName());
+            timeMap.put( childEntity.getName(),childEntity.getId());
             timeString.add(childEntity.getName());
         }
 
         PlayMethodBean.DataEntity.ScreenEntity screenEntityThree = siftList.get(2);
         for (PlayMethodBean.DataEntity.ScreenEntity.ChildEntity childEntity : screenEntityThree.getChild()) {
-            pNumberMap.put(childEntity.getId(), childEntity.getName());
+            pNumberMap.put(childEntity.getName(),childEntity.getId());
             pNumberString.add(childEntity.getName());
         }
 
@@ -153,15 +155,6 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         });
     }
 
-    private void onRefresh(View view, String showText) {
-
-        expandTabView.onPressBack();
-        int position = getPositon(view);
-        if (position >= 0 && !expandTabView.getTitle(position).equals(showText)) {
-            expandTabView.setTitle(showText, position);
-        }
-    }
-
     private int getPositon(View tView) {
         for (int i = 0; i < mViewArray.size(); i++) {
             if (mViewArray.get(i) == tView) {
@@ -170,6 +163,31 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         }
         return -1;
     }
+
+    private void onRefresh(View view, String showText) {
+
+        expandTabView.onPressBack();
+        int position = getPositon(view);
+        if (position >= 0 && !expandTabView.getTitle(position).equals(showText)) {
+            expandTabView.setTitle(showText, position);
+        }
+        switch (position){
+            case 0:
+                String themeid = themeMap.get(showText);
+                ToastUtil.showToast(mContext,showText+themeid);
+                break;
+            case 1:
+                String timeid = timeMap.get(showText);
+                ToastUtil.showToast(mContext,showText+timeid);
+                break;
+            case 2:
+                String pNumberid = pNumberMap.get(showText);
+                ToastUtil.showToast(mContext,showText+pNumberid);
+                break;
+        }
+    }
+
+
 
 
     public void hidePopupWindow() {
@@ -188,6 +206,8 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         final ArrayList<String> list = new ArrayList<String>();
         playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
         listView.setAdapter(playMethodListAdapter);
+        listView.setDivider(new ColorDrawable(Color.WHITE));
+        listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
 
         //条目点击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

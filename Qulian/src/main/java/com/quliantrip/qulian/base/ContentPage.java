@@ -19,7 +19,7 @@ import com.quliantrip.qulian.util.ToastUtil;
 
 import de.greenrobot.event.EventBus;
 
-public abstract class ContentPage extends FrameLayout {
+public abstract class  ContentPage extends FrameLayout {
     private QuestBean questBean;//请求数据的对象
     //请求后的状态
     public static final int STATE_LOADING = 0;

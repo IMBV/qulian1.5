@@ -50,9 +50,9 @@ public class HttpConstants {
     //单品详情
     public static final String GOOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/online";
     //添加单品收藏
-    public static final String GOOD_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/ ahouse";
+    public static final String GOOD_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/ahouse";
     //取消单品收藏
-    public static final String GOOD_CANCEL_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/ dhouse";
+    public static final String GOOD_CANCEL_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/dhouse";
     //单品订单借口
     public static final String  GOOD_ORDER= HOST_ADDR_ROOT_LOCAL_V1 + "order/order";
 

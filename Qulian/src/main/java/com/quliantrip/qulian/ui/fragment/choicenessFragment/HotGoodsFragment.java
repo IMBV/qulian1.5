@@ -34,6 +34,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -270,12 +271,16 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HotGoodBean.DataEntity.OnlineEntity bean = listGood.get(position - 2);
-                Intent intent = new Intent(mContext, GoodDetailActivity.class);
-                intent.putExtra("goodId", bean.getId());
-                intent.putExtra("isCollect", bean.isIs_house());
-                mContext.startActivity(intent);
-                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                if (TDevice.getNetworkType() != 0) {
+                    HotGoodBean.DataEntity.OnlineEntity bean = listGood.get(position - 2);
+                    Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                    intent.putExtra("goodId", bean.getId());
+                    intent.putExtra("isCollect", bean.isIs_house());
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                }else{
+                    ToastUtil.showToast(mContext,"请检查网络设置");
+                }
             }
         });
         // 进行数据时的适配和是上啦还是下拉的操作

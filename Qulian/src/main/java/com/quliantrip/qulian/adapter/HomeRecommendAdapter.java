@@ -2,7 +2,10 @@ package com.quliantrip.qulian.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -37,16 +40,28 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeBean.DealListEntity> 
         if (convertView == null) {
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_home_recommend_play, null);
         }
-        Holder holder = Holder.getHolder(convertView);
+        final Holder holder = Holder.getHolder(convertView);
         HomeBean.DealListEntity bean = list.get(position);
         ImageLoader.getInstance().displayImage(bean.getIcon(), holder.pic, ImageLoaderOptions.pager_options_big);
+
+        holder.preView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                holder.preView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                int height = holder.pic.getHeight();
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.preView.getLayoutParams();
+                params.height = height;
+                holder.preView.setLayoutParams(params);
+            }
+        });
         return convertView;
     }
 
     static class Holder {
         @Bind(R.id.iv_home_recommend_pic)
         ImageView pic;
-
+        @Bind(R.id.v_image_preview)
+        View preView;
 
         public Holder(View convertView) {
             super();

@@ -3,8 +3,10 @@ package com.quliantrip.qulian.ui.activity.choiceActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
@@ -15,6 +17,8 @@ import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.TDevice;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.RollViewPage;
 import com.quliantrip.qulian.view.dialog.CollectDialog;
@@ -35,6 +39,13 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  */
 public class GoodDetailActivity extends SwipeBackActivity {
     private Context mContext;
+    @Bind(R.id.fl_loading)
+    FrameLayout loadingPager;
+    @Bind(R.id.pageerrLayout)
+    FrameLayout errorPager;
+    @Bind(R.id.rl_success_pager)
+    RelativeLayout successPager;
+
     //收藏
     @Bind(R.id.iv_good_collect_img)
     ImageView collectImg;
@@ -67,6 +78,7 @@ public class GoodDetailActivity extends SwipeBackActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         mContext = this;
+        showPager(1);
         initData();
     }
 
@@ -87,10 +99,18 @@ public class GoodDetailActivity extends SwipeBackActivity {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             GoodDetailBean goodDetailBean = (GoodDetailBean) bean;
-            GoodDetailBean.DataEntity detail = goodDetailBean.getData();
-            initRollView(detail.getOnline().getImg());
-            name.setText(detail.getOnline().getName());
-            saveNumber.setText("已售"+12);
+            if(goodDetailBean.getCode() == 200) {
+                showPager(2);
+                GoodDetailBean.DataEntity detail = goodDetailBean.getData();
+                initRollView(detail.getOnline().getImg());
+                name.setText(detail.getOnline().getName());
+                saveNumber.setText("已售" + 12);
+            }else{
+                ToastUtil.showToast(mContext,goodDetailBean.getMsg());
+            }
+        }
+        if(bean.getTag().equals("")){
+            showPager(3);
         }
     }
 
@@ -119,9 +139,8 @@ public class GoodDetailActivity extends SwipeBackActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("House[products_id]", getIntent().getStringExtra("goodId"));
                 map.put("House[key]", QulianApplication.getInstance().getLoginUser().getAuth_key());
-                map.put("House[key]","1");
+                map.put("House[key]", "1");
                 new PacketStringReQuest(HttpConstants.GOOD_COLLECT, new GoodDetailBean().setTag(getClass().getName()), map);
-
             } else {
                 collectImg.setImageResource(R.mipmap.icon_x_shoucang);
                 collectText.setText("收藏");
@@ -194,5 +213,22 @@ public class GoodDetailActivity extends SwipeBackActivity {
     void finishActivity() {
         finish();
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+    }
+
+    private void showPager(int id) {
+        loadingPager.setVisibility(View.GONE);
+        successPager.setVisibility(View.GONE);
+        errorPager.setVisibility(View.GONE);
+        switch (id) {
+            case 1:
+                loadingPager.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                successPager.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                errorPager.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }

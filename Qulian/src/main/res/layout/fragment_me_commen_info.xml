@@ -11,6 +11,7 @@
         android:background="@color/colorPrimary"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="49dp"></ListView>
+    <include layout="@layout/view_page_empty"/>
 
     <Button
         android:id="@+id/bt_add_link_man"
