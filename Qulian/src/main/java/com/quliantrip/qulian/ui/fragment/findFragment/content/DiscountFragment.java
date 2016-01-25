@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.finderAdapter.DiscountListAdapter;
+import com.quliantrip.qulian.adapter.finderAdapter.DisCountListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.find.DiscountBean;
@@ -65,14 +65,14 @@ public class DiscountFragment extends BasePageCheckFragment {
     }
 
     //添加显示列表对象
-    private DiscountListAdapter discountListAdapter;
+    private DisCountListAdapter discountListAdapter;
 
     private void initListView(final List<DiscountBean.DataEntity> listDiscount) {
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
-        discountListAdapter = new DiscountListAdapter((ArrayList<DiscountBean.DataEntity>) listDiscount);
+        discountListAdapter = new DisCountListAdapter((ArrayList<DiscountBean.DataEntity>) listDiscount);
         listView.setAdapter(discountListAdapter);
 
 
