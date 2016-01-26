@@ -30,7 +30,7 @@ public class HttpConstants {
     public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1 + "user/mobile";
     //手机号注册
     public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/psignup";
-     //邮箱注册
+    //邮箱注册
     public static final String EMAIL_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/signup";
     //用户登录
     public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1 + "user/login";
@@ -54,14 +54,20 @@ public class HttpConstants {
     //取消单品收藏
     public static final String GOOD_CANCEL_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/dhouse";
     //单品订单借口
-    public static final String  GOOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "order/order";
+    public static final String GOOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "order/order";
+
+    //单品检验剩余
+    public static final String GOOD_ORDER_CHECK = HOST_ADDR_ROOT_LOCAL_V1 + "order/corder";
+    //单品提交订单订单
+    public static final String GOOD_ORDER_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "order/torder";
     //单品确认订单
-    public static final String  GOOD_ORDER_CONFIRM = HOST_ADDR_ROOT_LOCAL_V1 + "order/qorder";
+    public static final String GOOD_ORDER_CONFIRM = HOST_ADDR_ROOT_LOCAL_V1 + "order/qorder";
+
 
     //玩法列表
     public static final String PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/play";
     //玩法详情
-    public static final String PLAY_METHOD_DETRAIL= HOST_ADDR_ROOT_LOCAL_V1 + "product/playxq";
+    public static final String PLAY_METHOD_DETRAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/playxq";
 
 
     //发现
@@ -71,7 +77,6 @@ public class HttpConstants {
     //首页
     //首页的筛选
     public static final String HOME_SECNICPLAY_CONDITION = HOST_ADDR_ROOT_LOCAL_V1 + "product/search";
-
 
 
 }

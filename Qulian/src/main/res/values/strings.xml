@@ -15,6 +15,7 @@
     <string name="actionbar_order_list">我的订单</string>
     <string name="actionbar_order_detail">商品详情</string>
     <string name="actionbar_me_register">注册</string>
+    <string name="actionbar_me_searck_back_password">找回密码</string>
     <string name="actionbar_me_integral">我的积分</string>
     <string name="actionbar_good_order">提交订单</string>
     <string name="actionbar_pay_method">支付收银台</string>
@@ -22,6 +23,7 @@
     <string name="actionbar_me_change_password">修改密码</string>
     <string name="actionbar_me_add_link_man">编辑常用联系人</string>
     <string name="actionbar_order_confirm">确认订单</string>
+    <string name="actionbar_my_about">关于我们</string>
 
     <string name="load_error">返回首页</string>
 

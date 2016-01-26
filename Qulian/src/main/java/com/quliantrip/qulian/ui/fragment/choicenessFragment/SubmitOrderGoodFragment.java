@@ -106,6 +106,9 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     //提交订单
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
+//        Map<String, String> map = new HashMap<String, String>();
+//        map.put("id", "11");
+//        new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT,,map);
         UIHelper.showOrderConfirm(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }

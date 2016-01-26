@@ -335,8 +335,7 @@ public class TDevice {
         try {
             versionCode = QulianApplication.getContext()
                     .getPackageManager()
-                    .getPackageInfo(QulianApplication.getContext().getPackageName(),
-                            0).versionCode;
+                    .getPackageInfo(QulianApplication.getContext().getPackageName(),0).versionCode;
         } catch (NameNotFoundException ex) {
             versionCode = 0;
         }

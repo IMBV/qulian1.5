@@ -18,8 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Yuly on 2015/12/14.
- * www.quliantrip.com
  * 设置界面
  */
 public class MySettingFragment extends BaseFragment {
@@ -47,7 +45,8 @@ public class MySettingFragment extends BaseFragment {
     //关于我们
     @OnClick(R.id.tv_my_setting_about_me)
     void aboutMe() {
-        ToastUtil.showToast(QulianApplication.getContext(), "关于我们");
+        UIHelper.showAboutMe(mContext,null);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     //退出当前用户
@@ -59,5 +58,4 @@ public class MySettingFragment extends BaseFragment {
         ((SimpleBackActivity) mContext).finish();
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
-
 }

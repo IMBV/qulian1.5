@@ -102,10 +102,18 @@ public class LoginFragment extends BaseFragment {
         new PacketStringReQuest(HttpConstants.USER_LOGON, new UserInfoBean().setTag(getClass().getName()), map, null);
     }
 
+    //用户注册
     @OnClick(R.id.tv_btn_register_account)
     void registerAccount() {
         UIHelper.showRegister(mContext, null);
         ((Activity) mContext).finish();
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
+    //找回密码
+    @OnClick(R.id.tv_me_search_back_password)
+    void searchPassword(){
+        UIHelper.showSearchBackPassword(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 

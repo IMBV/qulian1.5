@@ -288,6 +288,13 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="text_main_app_title_16">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_title_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="text_sub_title_16">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

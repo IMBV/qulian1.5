@@ -42,6 +42,10 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.MY_REGISTER, bundle);
     }
 
+    public static void showSearchBackPassword(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.MY_SEARCH_BACK_PASSWORD, bundle);
+    }
+
     public static void showGoodOrder(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.GOOD_ORDER, bundle);
     }
@@ -52,6 +56,11 @@ public class UIHelper {
 
     public static void showMyCommonInfo(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.MY_COMMON_INFO, bundle);
+    }
+
+    //关于我们
+    public static void showAboutMe(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.OABOUT_ME, bundle);
     }
 
     public static void showMyCommonInfo(Context context, Fragment fragment, int requestCode, Bundle args) {

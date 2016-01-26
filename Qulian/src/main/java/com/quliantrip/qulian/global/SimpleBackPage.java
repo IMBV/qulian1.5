@@ -6,6 +6,7 @@ import com.quliantrip.qulian.ui.fragment.choicenessFragment.ConfirmOrderFragment
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.SubmitOrderGoodFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.CityChooseFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.AboutMeFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.ChangePasswordFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.IntegralFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
@@ -14,6 +15,7 @@ import com.quliantrip.qulian.ui.fragment.meFragment.discount.MyDiscountFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.linkman.AddLinkManFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.linkman.MyLinkmanFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.register.RegisterFragment;
+import com.quliantrip.qulian.ui.fragment.searchBackPassword.SearchBackPasswordFragment;
 
 public enum SimpleBackPage {
     MY_LOGIN(1, R.string.actionbar_title_active, LoginFragment.class),
@@ -27,7 +29,9 @@ public enum SimpleBackPage {
     MY_DISCOUNT(9, R.string.actionbar_me_discount, MyDiscountFragment.class),
     MY_CHANGE_PASSWORD(11, R.string.actionbar_me_change_password, ChangePasswordFragment.class),
     MY_ADD_LINKMAN(12, R.string.actionbar_me_add_link_man, AddLinkManFragment.class),
-    ORDER_CONFIRM(13, R.string.actionbar_order_confirm, ConfirmOrderFragment.class);
+    ORDER_CONFIRM(13, R.string.actionbar_order_confirm, ConfirmOrderFragment.class),
+    OABOUT_ME(14, R.string.actionbar_my_about, AboutMeFragment.class),
+    MY_SEARCH_BACK_PASSWORD(15, R.string.actionbar_me_searck_back_password, SearchBackPasswordFragment.class);
 
     private int title;
     private Class<?> clz;

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View style="@style/dev_all_line" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:src="@mipmap/logo_me" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp">
+
+        <TextView
+            style="@style/text_main_title_tytle_14"
+            android:text="当前版本" />
+
+        <TextView
+            android:id="@+id/tv_about_me_code"
+            style="@style/text_main_title_tytle_14"
+            android:layout_marginLeft="50dp"
+            android:text="1.5.1" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_main_app_title_16"
+            android:text="官方微信" />
+
+        <TextView
+            style="@style/text_main_title_tytle_14"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="qltrip" />
+    </RelativeLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="15dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_main_app_title_16"
+            android:text="官方微博" />
+
+        <TextView
+            style="@style/text_main_title_tytle_14"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="趣连旅行" />
+    </RelativeLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="15dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_main_app_title_16"
+            android:text="官方网站" />
+
+        <TextView
+            style="@style/text_main_title_tytle_14"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="www.about.quliantrip.com" />
+    </RelativeLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="15dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_main_app_title_16"
+            android:text="客服电话" />
+
+        <TextView
+            style="@style/text_main_title_tytle_14"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="+86-(0)10-87162852" />
+    </RelativeLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="15dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_main_sub_title_text"
+                android:textSize="11sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="5dp"
+                android:text="背景趣连科技有限公司  版权所有" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_main_sub_title_text"
+                android:textSize="10sp"
+                android:layout_alignParentRight="true"
+                android:text="Copyright © 2015-2016 quliantrip.com.All rights reserved" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
