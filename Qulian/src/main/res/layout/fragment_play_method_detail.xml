@@ -149,6 +149,15 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_play_method_detail_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="￥0"
+                    android:textColor="@color/app_main_price_text"
+                    android:textSize="18sp" />
+
 
                 <View style="@style/dev_all_line" />
 
@@ -216,13 +225,6 @@
                 </RelativeLayout>
 
                 <View style="@style/dev_all_line" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:text="阿克江红色大客户烦死啦换手机看到了
-                    发货了科技阿什顿发来看阿克江收到风科技爱好收到了客户第三
-                卡活动上开了房哈斯卡的话俺困了就收到回复了看沙发了" />
 
                 <!--这里是进行显示以后添加的module对象-->
                 <LinearLayout
