@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class PlayMethodBean extends BaseJson{
 
-
-
     private int code;
     private String msg;
     private DataEntity data;

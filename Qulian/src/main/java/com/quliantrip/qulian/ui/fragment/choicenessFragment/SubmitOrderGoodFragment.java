@@ -20,6 +20,7 @@ import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.MyListView;
+import com.quliantrip.qulian.view.dialog.SubBranchCheckDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +65,8 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             if (orderSubmitBean.getCode() == 200) {
                 name.setText(dataEntity.getOnline().getName());
                 initListView(dataEntity.getAttribute());
+                branchnameList = dataEntity.getBranchname();
+                System.out.println(branchnameList.size());
             } else {
                 ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
             }
@@ -151,11 +154,16 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         timeDialog.show();
     }
 
-    @Bind(R.id.tv_check_store_result_text)
-    TextView checkSrore;
 
+    //选择门店
+    @Bind(R.id.tv_check_store_result_text)
+    TextView checkSrore;//选择门店的中文名字
+    private List<OrderSubmitBean.DataEntity.BranchnameEntity> branchnameList;
     @OnClick(R.id.rl_check_store_setting)
     void checkStore() {
-        ToastUtil.showToast(mContext, "请选择门店");
+        final SubBranchCheckDialog dialog = new SubBranchCheckDialog(mContext,branchnameList,checkSrore);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
     }
 }

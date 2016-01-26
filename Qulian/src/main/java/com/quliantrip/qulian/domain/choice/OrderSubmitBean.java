@@ -153,59 +153,42 @@ public class OrderSubmitBean extends BaseJson {
         }
 
         public static class BranchnameEntity {
-            private int id;
-            /**
-             * address : 弟弟顶顶顶顶顶
-             * id : 1
-             * name : 弟弟顶顶顶顶顶
-             */
 
-            private NameEntity name;
+            private String id;
+            private String name;
+            private Object images;
+            private String address;
 
-            public void setId(int id) {
+            public void setId(String id) {
                 this.id = id;
             }
 
-            public void setName(NameEntity name) {
+            public void setName(String name) {
                 this.name = name;
             }
 
-            public int getId() {
+            public void setImages(Object images) {
+                this.images = images;
+            }
+
+            public void setAddress(String address) {
+                this.address = address;
+            }
+
+            public String getId() {
                 return id;
             }
 
-            public NameEntity getName() {
+            public String getName() {
                 return name;
             }
 
-            public static class NameEntity {
-                private String address;
-                private String id;
-                private String name;
+            public Object getImages() {
+                return images;
+            }
 
-                public void setAddress(String address) {
-                    this.address = address;
-                }
-
-                public void setId(String id) {
-                    this.id = id;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
-
-                public String getAddress() {
-                    return address;
-                }
-
-                public String getId() {
-                    return id;
-                }
-
-                public String getName() {
-                    return name;
-                }
+            public String getAddress() {
+                return address;
             }
         }
     }

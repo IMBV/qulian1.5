@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp">
+
+        <ImageView
+            android:id="@+id/iv_sub_branch_img"
+            android:layout_width="77dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/bg_default_min" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/icon_location" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/iv_sub_branch_name"
+                    style="@style/text_title_12"
+                    android:singleLine="true"
+                    android:text="趣连消灭一切没有准备的旅行" />
+
+                <TextView
+                    android:id="@+id/iv_sub_branch_address"
+                    style="@style/text_title_12"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="2"
+                    android:text="3 Chrome -15- 3 romppafsdh" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <View style="@style/dev_all_line" />
+</LinearLayout>

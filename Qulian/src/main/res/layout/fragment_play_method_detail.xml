@@ -5,59 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <!--商品界面的展示图片-->
-    <RelativeLayout
-        android:id="@+id/rl_detail_adv"
-        android:layout_width="match_parent"
-        android:layout_height="185dp">
-
-        <LinearLayout
-            android:id="@+id/top_news_viewpager"
-            android:layout_width="fill_parent"
-            android:layout_height="185dp"
-            android:orientation="horizontal" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="15dp"
-            android:gravity="right|bottom"
-            android:orientation="horizontal">
-            <!-- 放置图片中选中点的位置 -->
-            <LinearLayout
-                android:id="@+id/dots_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:gravity="center"
-                android:orientation="horizontal" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/iv_detail_back"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp">
-
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/icon_back_w" />
-    </RelativeLayout>
-
     <ScrollView
         android:id="@+id/sv_author_play_method_des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_detail_adv"
         android:layout_marginBottom="49.5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -65,72 +18,220 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.quliantrip.qulian.view.CircleImageView
-                android:id="@+id/tv_play_method_author_img"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="9dp"
-                android:layout_marginTop="19dp"
-                android:src="@mipmap/icon_photo"
-                app:border_color="#b2FFFFFF"
-                app:border_width="2dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--商品界面的展示图片-->
+                <RelativeLayout
+                    android:id="@+id/rl_detail_adv"
+                    android:layout_width="match_parent"
+                    android:layout_height="185dp">
 
-            <TextView
-                style="@style/text_title_12"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="15dp"
-                android:text="作者" />
+                    <LinearLayout
+                        android:id="@+id/top_news_viewpager"
+                        android:layout_width="fill_parent"
+                        android:layout_height="185dp"
+                        android:orientation="horizontal" />
 
-            <TextView
-                android:id="@+id/tv_play_method_author_introduce"
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="15dp"
+                        android:gravity="right|bottom"
+                        android:orientation="horizontal">
+                        <!-- 放置图片中选中点的位置 -->
+                        <LinearLayout
+                            android:id="@+id/dots_ll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center"
+                            android:orientation="horizontal" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/iv_detail_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/icon_back_w" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="阿福卡四季度会罚款了书法卡手机的话费卡拉斯加合法快乐是减肥哈看手机的防护，
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <com.quliantrip.qulian.view.CircleImageView
+                    android:id="@+id/tv_play_method_author_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="9dp"
+                    android:layout_marginTop="19dp"
+                    android:src="@mipmap/icon_photo"
+                    app:border_color="#b2FFFFFF"
+                    app:border_width="2dp" />
+
+                <TextView
+                    style="@style/text_title_12"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:text="作者" />
+
+                <TextView
+                    android:id="@+id/tv_play_method_author_introduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="阿福卡四季度会罚款了书法卡手机的话费卡拉斯加合法快乐是减肥哈看手机的防护，
                 阿斯顿发回复了if按开机速度发货快乐和房价快速拉横幅dfjkalhskjf阿斯顿发好了看是否
                 妇科就阿訇死了妇科哈哈拉斯发挥好卡了收到反馈卡死机会的罚款是发了哈立刻恢复了困了睡觉都会发生看了符合撒了
                 阿斯顿发生空间的发挥好阿斯顿和腐烂奥斯卡简单返回爱上咖啡哈萨克了"
-                android:textColor="@color/app_main_title"
-                android:textSize="14sp" />
+                    android:textColor="@color/app_main_title"
+                    android:textSize="14sp" />
 
-            <RelativeLayout
-                android:id="@+id/rl_play_method_author_introduce_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp">
+                <RelativeLayout
+                    android:id="@+id/rl_play_method_author_introduce_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="20dp">
 
-                <ImageView
-                    android:id="@+id/tv_play_method_author_introduce_more"
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:src="@mipmap/more_xiangqing" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/tv_play_method_author_introduce_more"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:src="@mipmap/more_xiangqing" />
+                </RelativeLayout>
 
-            <include layout="@layout/adapter_play_method_detail_good_item" />
+                <com.quliantrip.qulian.view.MyListView
+                    android:id="@+id/mlv_good_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:divider="#00000000"
+                    android:dividerHeight="10dp" />
 
-            <com.quliantrip.qulian.view.MyListView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:divider="#00000000"
-                android:dividerHeight="10dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:text="阿克江红色大客户烦死啦换手机看到了发货了科技阿什顿发来看阿克江收到风科技爱好收到了客户第三
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/icon_x_daren" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:singleLine="true"
+                        android:text="达人服务，远程免费"
+                        android:textColor="@color/app_main_title"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+                <View style="@style/dev_all_line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="bottom">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="玩法价"
+                                android:textColor="@color/app_main_collor"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="￥"
+                                android:textColor="@color/app_main_collor"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tv_total_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1244"
+                                android:textColor="@color/app_main_collor"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <FrameLayout
+                            style="@style/all_wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginBottom="15dp">
+
+                            <View
+                                android:layout_width="45dp"
+                                android:layout_height="1px"
+                                android:layout_gravity="center"
+                                android:background="@color/app_main_sub_title_text" />
+
+                            <TextView
+                                android:id="@+id/tv_tuan_deal_oldprice"
+                                style="@style/text_sub_title_style"
+                                android:layout_gravity="center"
+                                android:text="888元"
+                                android:textColor="@color/app_main_sub_title_text"
+                                android:textSize="14sp" />
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View style="@style/dev_all_line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:text="阿克江红色大客户烦死啦换手机看到了
+                    发货了科技阿什顿发来看阿克江收到风科技爱好收到了客户第三
                 卡活动上开了房哈斯卡的话俺困了就收到回复了看沙发了" />
 
-            <!--这里是进行显示以后添加的module对象-->
-            <LinearLayout
-                android:id="@+id/model_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                <!--这里是进行显示以后添加的module对象-->
+                <LinearLayout
+                    android:id="@+id/model_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

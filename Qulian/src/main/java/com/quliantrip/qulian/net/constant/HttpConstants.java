@@ -60,6 +60,8 @@ public class HttpConstants {
 
     //玩法列表
     public static final String PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/play";
+    //玩法详情
+    public static final String PLAY_METHOD_DETRAIL= HOST_ADDR_ROOT_LOCAL_V1 + "product/playxq";
 
 
     //发现

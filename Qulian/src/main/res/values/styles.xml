@@ -274,6 +274,12 @@
         <item name="android:textColor">@color/app_main_title_text</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <style name="text_title_sub_12">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_sub_title_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <style name="text_main_title_16">
         <item name="android:layout_width">wrap_content</item>
@@ -342,4 +348,23 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+
+    <style name="Theme.Base.AppCompat.Dialog.FixedSize" parent="Base.Theme.AppCompat.Dialog.FixedSize">
+    </style>
+
+    <style name="dialog_common" parent="@style/Theme.Base.AppCompat.Dialog.FixedSize">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
+
+    <style name="quick_option_dialog" parent="@style/dialog_common">
+        <item name="android:windowBackground">@color/white40</item>
+        <item name="android:windowAnimationStyle">@style/dialog_animation</item>
+    </style>
+
+    <style name="dialog_animation" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
 </resources>

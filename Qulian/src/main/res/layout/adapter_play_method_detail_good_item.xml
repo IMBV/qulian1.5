@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginTop="10dp"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/selector_bg_while_gray"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_play_method_good_bar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/ll_paly_method_good"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:gravity="center_horizontal">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@mipmap/icon_location_now" />
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/icon_location_now" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp">
+        <View
+            android:id="@+id/v_item_line"
+            android:layout_width="4px"
+            android:layout_height="110dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7.5dp"
+            android:layout_marginTop="35dp"
+            android:background="@color/app_main_dev_line" />
 
-            <View
-                android:layout_width="4px"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:background="@color/app_main_dev_line" />
-
-            <!--<ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="2.5dp"
-                android:src="@mipmap/icon_x_add" />-->
-
-
-        </RelativeLayout>
-
-
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_list_end"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="2.5dp"
+            android:src="@mipmap/icon_x_add" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_paly_method_good"
@@ -54,6 +48,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_play_method_detail_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -62,6 +57,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_play_method_detail_taocan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -70,6 +66,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_play_method_detail_des"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -85,7 +82,7 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/tv_play_method_good_price"
+                android:id="@+id/tv_play_method_detail_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥:100"
@@ -104,7 +101,7 @@
                 android:id="@+id/tv_play_method_good_item_end_line"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_below="@id/tv_play_method_good_price"
+                android:layout_below="@id/tv_play_method_detail_price"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/app_main_dev_line" />
@@ -112,7 +109,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="7.5dp"
             android:background="@color/colorPrimary" />
     </LinearLayout>
 
