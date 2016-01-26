@@ -2,8 +2,11 @@ package com.quliantrip.qulian.ui.fragment.meFragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
@@ -14,6 +17,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
+import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.ClearEditText;
@@ -44,6 +48,8 @@ public class LoginFragment extends BaseFragment {
     ClearEditText name;
     @Bind(R.id.ct_userinfo_password)
     ClearEditText password;
+    @Bind(R.id.bt_user_login)
+    Button button;
 
     private Tencent mTencent; //qq主操作对象
 
@@ -59,8 +65,32 @@ public class LoginFragment extends BaseFragment {
         EventBus.getDefault().register(this);
         View view = View.inflate(mContext, R.layout.fragment_me_login, null);
         ButterKnife.bind(this, view);
+        button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_sub_bg));
+        initListener();
         initData();
         return view;
+    }
+    private void initListener() {
+        name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(name.getText())) {
+                    button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_sub_bg));
+                } else {
+                    button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_collor));
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     public void onEventMainThread(BaseJson bean) {

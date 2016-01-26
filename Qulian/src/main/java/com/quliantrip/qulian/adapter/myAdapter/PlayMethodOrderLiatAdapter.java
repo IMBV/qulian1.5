@@ -1,44 +1,42 @@
-package com.quliantrip.qulian.adapter.finderAdapter;
+package com.quliantrip.qulian.adapter.myAdapter;
 
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.find.DiscountBean;
-import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.view.RatioImageView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * 优惠券的适配器
+ * 玩法订单列表页
  */
-public class DisCountListAdapter extends BasicAdapter<DiscountBean.DataEntity> {
-
-    public DisCountListAdapter(ArrayList<DiscountBean.DataEntity> list) {
+public class PlayMethodOrderLiatAdapter extends BasicAdapter<String> {
+    public PlayMethodOrderLiatAdapter(ArrayList<String> list) {
         super(list);
+    }
+
+    public void addItem(String s) {
+        list.add(s);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_find_disCount_item, null);
+            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_play_order_list_item, null);
         }
-        Holder holder = Holder.getHolder(convertView);
-        DiscountBean.DataEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImage().trim(), holder.imageView, ImageLoaderOptions.pager_options);
+//        Holder holder = Holder.getHolder(convertView);
+//        String name = list.get(position);
+//        holder.city.setText(name);
         return convertView;
     }
 
     static class Holder {
-        @Bind(R.id.riv_find_discount_img)
-        RatioImageView imageView;
+//        @Bind(R.id.tv_city)
+//        TextView city;
 
         public Holder(View convertView) {
             super();
@@ -53,5 +51,6 @@ public class DisCountListAdapter extends BasicAdapter<DiscountBean.DataEntity> {
             }
             return holder;
         }
+
     }
 }

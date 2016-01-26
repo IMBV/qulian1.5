@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <com.quliantrip.qulian.view.RatioImageView
-        android:id="@+id/riv_find_distount_img"
+        android:id="@+id/riv_find_discount_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"

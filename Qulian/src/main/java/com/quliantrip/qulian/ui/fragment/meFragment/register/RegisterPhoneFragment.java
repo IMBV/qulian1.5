@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,12 +55,39 @@ public class RegisterPhoneFragment extends BaseDialogFragment {
     ClearEditText passWord;
     @Bind(R.id.ct_user_phone_auth_code_number)
     ClearEditText checkNum;
+    @Bind(R.id.bt_user_register)
+    Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_me_register_phone, null);
         ButterKnife.bind(this, view);
+        button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_sub_bg));
+        initListener();
         return view;
+    }
+
+    private void initListener() {
+        phoneNum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(phoneNum.getText())) {
+                    button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_sub_bg));
+                } else {
+                    button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_collor));
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     public void onEventMainThread(BaseJson bean) {

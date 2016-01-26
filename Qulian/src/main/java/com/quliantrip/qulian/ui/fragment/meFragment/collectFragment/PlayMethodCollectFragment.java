@@ -8,23 +8,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.ui.activity.meActivity.MyCollectActivity;
+import com.quliantrip.qulian.adapter.myAdapter.PlayMethodCollectListAdapter;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
-import com.quliantrip.qulian.view.SlipRihtLayout;
 
 import java.util.ArrayList;
 
@@ -32,12 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Yuly on 2016/1/5.
+ * 玩法收藏列表
  */
 public class PlayMethodCollectFragment extends Fragment {
     private Context mContext;
     private View view;
-    private Test test;
+    private PlayMethodCollectListAdapter test;
     private ArrayList<com.quliantrip.qulian.domain.Test> list;
 
     @Bind(R.id.pull_refresh_list)
@@ -102,8 +95,8 @@ public class PlayMethodCollectFragment extends Fragment {
         list = new ArrayList<com.quliantrip.qulian.domain.Test>();
         int i;
         for (i = 0; i <= 30; i++)
-            list.add(new com.quliantrip.qulian.domain.Test(false,"playMethod"+i));
-        test = new Test(list,mContext);
+            list.add(new com.quliantrip.qulian.domain.Test(false, "playMethod" + i));
+        test = new PlayMethodCollectListAdapter(list, mContext);
         listView.setAdapter(test);
         //条目单击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -161,7 +154,7 @@ public class PlayMethodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false,"shang"));
+                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "shang"));
                             test.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
@@ -171,7 +164,7 @@ public class PlayMethodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false,"xia"));
+                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "xia"));
                             test.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
@@ -179,85 +172,5 @@ public class PlayMethodCollectFragment extends Fragment {
                 }
             }
         });
-    }
-}
-
-class Test extends BasicAdapter<com.quliantrip.qulian.domain.Test> {
-    private MyCollectActivity activity;
-    public Test(ArrayList<com.quliantrip.qulian.domain.Test> list,Context context) {
-        super(list);
-        activity = (MyCollectActivity) context;
-    }
-
-    public void addItem(com.quliantrip.qulian.domain.Test s) {
-        list.add(s);
-    }
-
-    private boolean isEdit = false;
-
-    public void setEdit(boolean b) {
-        isEdit = b;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_collect_play_method_item, null);
-        }
-        final Holder holder = Holder.getHolder(convertView);
-
-        final com.quliantrip.qulian.domain.Test name = list.get(position);
-        holder.city.setText(name.getName());
-
-        holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    activity.addOrDelectCollect(name.ischeck(),"saasdf"+name.getName());
-
-                name.setIscheck(!name.ischeck());
-                notifyDataSetChanged();
-
-            }
-        });
-
-        if (name.ischeck())
-            holder.state.setImageResource(R.mipmap.cnb_wode_pre);
-        else
-            holder.state.setImageResource(R.mipmap.cnb_wode_nor);
-
-        holder.slipRihtLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-            @Override
-            public void onGlobalLayout() {
-                holder.slipRihtLayout.layoutContent(isEdit);
-            }
-        });
-        return convertView;
-    }
-
-    static class Holder {
-        @Bind(R.id.tv_text)
-        TextView city;
-        @Bind(R.id.ll_is_checked_delect)
-        LinearLayout checkDeledct;
-        @Bind(R.id.srl_play_method_collect_item)
-        SlipRihtLayout slipRihtLayout;
-        @Bind(R.id.iv_collect_Img_state)
-        ImageView state;
-
-        public Holder(View convertView) {
-            super();
-            ButterKnife.bind(this, convertView);
-        }
-
-        public static Holder getHolder(View convertView) {
-            Holder holder = (Holder) convertView.getTag();
-            if (holder == null) {
-                holder = new Holder(convertView);
-                convertView.setTag(holder);
-            }
-            return holder;
-        }
-
     }
 }

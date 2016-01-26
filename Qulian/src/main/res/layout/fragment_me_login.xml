@@ -91,7 +91,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="44dp"
-            android:background="@drawable/selector_bg_yellow_gray"
+            android:background="@drawable/selector_bg_gray_yellow"
             android:text="登录" />
 
         <TextView

@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -17,6 +15,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
+import com.quliantrip.qulian.adapter.myAdapter.PlayMethodOrderLiatAdapter;
+import com.quliantrip.qulian.domain.Test;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.CommonHelp;
 
@@ -26,7 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Qulian5 on 2016/1/5.
+ * 玩法订单列表页
  */
 public class PlayMethodOrderFragment extends Fragment {
     private Context mContext;
@@ -59,7 +59,7 @@ public class PlayMethodOrderFragment extends Fragment {
         int i;
         for (i = 0; i <= 30; i++)
             list.add("asdf" + i);
-        final Test test = new Test(list);
+        final PlayMethodOrderLiatAdapter test = new PlayMethodOrderLiatAdapter(list);
         listView.setAdapter(test);
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
@@ -98,48 +98,5 @@ public class PlayMethodOrderFragment extends Fragment {
                 }
             }
         });
-    }
-}
-
-class Test extends BasicAdapter<String> {
-
-
-    public Test(ArrayList<String> list) {
-        super(list);
-    }
-
-    public void addItem(String s) {
-        list.add(s);
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_play_order_list_item, null);
-        }
-//        Holder holder = Holder.getHolder(convertView);
-//        String name = list.get(position);
-//        holder.city.setText(name);
-        return convertView;
-    }
-
-    static class Holder {
-//        @Bind(R.id.tv_city)
-//        TextView city;
-
-        public Holder(View convertView) {
-            super();
-            ButterKnife.bind(this, convertView);
-        }
-
-        public static Holder getHolder(View convertView) {
-            Holder holder = (Holder) convertView.getTag();
-            if (holder == null) {
-                holder = new Holder(convertView);
-                convertView.setTag(holder);
-            }
-            return holder;
-        }
-
     }
 }
