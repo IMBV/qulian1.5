@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.domain.choice;
+package com.quliantrip.qulian.domain.choice.playMethod;
 
 import com.google.gson.annotations.SerializedName;
 import com.quliantrip.qulian.domain.BaseJson;

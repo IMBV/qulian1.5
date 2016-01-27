@@ -14,10 +14,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Yuly on 2016/1/5.
- * 显示消费券
+ *查看消费券
  */
-public class ShowConSumerFragment extends Fragment {
+public class SeeConsumeTicketFragment extends Fragment {
+
     private Context mContext;
     private View view;
     @Bind(R.id.ll_line)
@@ -32,7 +32,7 @@ public class ShowConSumerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = View.inflate(mContext, R.layout.fragment_me_see_consumer, null);
+        view = View.inflate(mContext, R.layout.fragment_me_see_consumer_ticket, null);
         ButterKnife.bind(this, view);
         line.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         return view;

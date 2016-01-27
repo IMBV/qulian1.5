@@ -6,12 +6,10 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.choice.GoodDetailBean;
 import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
@@ -21,7 +19,6 @@ import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.ClearEditText;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;

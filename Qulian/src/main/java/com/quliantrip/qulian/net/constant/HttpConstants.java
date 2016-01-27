@@ -9,24 +9,11 @@ public class HttpConstants {
      * 线上服务器地址
      */
     public static final String HOST_ADDR_ROOT_NET = "http://www.quliantrip.com/mapi/index.php";
-
-    /**
-     * 本地服务器地址
-     */
-    public static final String HOST_ADDR_ROOT_LOCAL = "http://www.quliantrip.com/mapi/index.php";
-
-    /**
-     * 加载webView的连接路径
-     */
-    public static final String WEBVIEW_ROOT = "http://www.quliantrip.com/wap/index.php";
-
     /**
      * 本地v1服务器
      */
     public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155:8089/v1/";
-    /**
-     * 手机号重复验证
-     */
+    //手机号查重
     public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1 + "user/mobile";
     //手机号注册
     public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/psignup";
@@ -54,7 +41,7 @@ public class HttpConstants {
     //取消单品收藏
     public static final String GOOD_CANCEL_COLLECT = HOST_ADDR_ROOT_LOCAL_V1 + "user/dhouse";
     //单品订单借口
-    public static final String GOOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "order/order";
+    public static final String GOOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "order/orders";
 
     //单品检验剩余
     public static final String GOOD_ORDER_CHECK = HOST_ADDR_ROOT_LOCAL_V1 + "order/corder";
@@ -68,11 +55,17 @@ public class HttpConstants {
     public static final String PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/play";
     //玩法详情
     public static final String PLAY_METHOD_DETRAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/playxq";
+    //玩法提交订单
+    public static final String PLAY_METHOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/order";
+    //玩法确认订单
+    public static final String PLAY_METHOD_ORDER_CONFIRM = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/qorder";
 
 
     //发现
     //优惠券
     public static final String DISCOUNT_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/coupon";
+    //语音广场
+    public static final String VOICE_SQUARE_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/spot";
 
     //首页
     //首页的筛选

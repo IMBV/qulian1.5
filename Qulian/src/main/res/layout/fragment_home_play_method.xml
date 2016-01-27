@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ListView
         android:id="@+id/lv_home_play_method_fragment_list"
@@ -10,5 +11,6 @@
         android:background="@color/colorPrimary"
         android:dividerHeight="10dp"
         android:scrollbars="none" />
+    <include layout="@layout/view_page_empty"/>
 </LinearLayout>
 

@@ -39,6 +39,43 @@
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/rl_preview_time_data_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/selector_bg_while_gray">
+
+                    <ImageView
+                        android:id="@+id/iv_order_check_data"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_x_riqi" />
+
+                    <TextView
+                        android:id="@+id/tv_order_data_text"
+                        style="@style/order_condition_condition_text"
+                        android:layout_toRightOf="@id/iv_order_check_data"
+                        android:text="预约日期" />
+
+                    <TextView
+                        android:id="@+id/tv_preview_time_data_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="40dp"
+                        android:layout_toRightOf="@+id/tv_order_data_text"
+                        android:text="2015-12-25"
+                        android:textColor="@color/app_main_collor"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        style="@style/me_next_img"
+                        android:src="@mipmap/icon_next" />
+
+                </RelativeLayout>
+
+                <View style="@style/dev_all_line" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -51,10 +88,22 @@
                         android:layout_centerVertical="true"
                         android:src="@mipmap/icon_people" />
 
+
                     <TextView
+                        android:id="@+id/tv_order_buy_number_info"
                         style="@style/order_condition_condition_text"
                         android:layout_toRightOf="@id/iv_order_check_number"
                         android:text="选择人数" />
+
+                    <TextView
+                        android:id="@+id/tv_order_buy_number_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="40dp"
+                        android:layout_toRightOf="@+id/tv_order_buy_number_info"
+                        android:textColor="@color/app_main_collor"
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -157,43 +206,6 @@
 
                 <View style="@style/dev_all_line" />
 
-                <RelativeLayout
-                    android:id="@+id/rl_preview_time_data_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:background="@drawable/selector_bg_while_gray">
-
-                    <ImageView
-                        android:id="@+id/iv_order_check_data"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:src="@mipmap/icon_x_riqi" />
-
-                    <TextView
-                        android:id="@+id/tv_order_data_text"
-                        style="@style/order_condition_condition_text"
-                        android:layout_toRightOf="@id/iv_order_check_data"
-                        android:text="预约日期" />
-
-                    <TextView
-                        android:id="@+id/tv_preview_time_data_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="40dp"
-                        android:layout_toRightOf="@+id/tv_order_data_text"
-                        android:text="2015-12-25"
-                        android:textColor="@color/app_main_collor"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        style="@style/me_next_img"
-                        android:src="@mipmap/icon_next" />
-
-                </RelativeLayout>
-
-                <View style="@style/dev_all_line" />
 
                 <RelativeLayout
                     android:id="@+id/rl_serve_time_setting"

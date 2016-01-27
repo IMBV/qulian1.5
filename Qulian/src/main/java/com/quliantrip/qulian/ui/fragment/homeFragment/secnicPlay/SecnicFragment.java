@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.homeAdapter.SearchSecnicListAdapter;
@@ -27,7 +28,8 @@ public class SecnicFragment extends Fragment {
     private View view;
     @Bind(R.id.gv_home_secnic_fragment_list)
     GridView gridView;
-
+    @Bind(R.id.rl_pager_empty)
+    RelativeLayout empty;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,7 @@ public class SecnicFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_home_secnic,null);
         ButterKnife.bind(this, view);
         initListView();
@@ -46,7 +47,15 @@ public class SecnicFragment extends Fragment {
     }
 
     private void initListView() {
-        SearchSecnicListAdapter secnicListAdapter = new SearchSecnicListAdapter((ArrayList<SecnicPlayResultBean.DataEntity.ScenicEntity>) scenic);
-        gridView.setAdapter(secnicListAdapter);
+        if (scenic.size() == 0){
+            empty.setVisibility(View.VISIBLE);
+            gridView.setVisibility(View.GONE);
+        }
+        else {
+            empty.setVisibility(View.GONE);
+            gridView.setVisibility(View.VISIBLE);
+            SearchSecnicListAdapter secnicListAdapter = new SearchSecnicListAdapter((ArrayList<SecnicPlayResultBean.DataEntity.ScenicEntity>) scenic);
+            gridView.setAdapter(secnicListAdapter);
+        }
     }
 }

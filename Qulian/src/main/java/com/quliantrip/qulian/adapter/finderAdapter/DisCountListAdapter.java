@@ -28,7 +28,7 @@ public class DisCountListAdapter extends BasicAdapter<DiscountBean.DataEntity> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_find_disCount_item, null);
+            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_find_discount_item, null);
         }
         Holder holder = Holder.getHolder(convertView);
         DiscountBean.DataEntity bean = list.get(position);

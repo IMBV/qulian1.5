@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.adapter.choiceAdapter;
+package com.quliantrip.qulian.adapter.choiceAdapter.good;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.choice.HotGoodBean;
+import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 

@@ -15,8 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.SubBranchCheckAdapter;
-import com.quliantrip.qulian.domain.choice.OrderSubmitBean;
+import com.quliantrip.qulian.adapter.choiceAdapter.good.SubBranchCheckAdapter;
+import com.quliantrip.qulian.domain.choice.good.OrderSubmitBean;
 
 import java.util.ArrayList;
 import java.util.List;

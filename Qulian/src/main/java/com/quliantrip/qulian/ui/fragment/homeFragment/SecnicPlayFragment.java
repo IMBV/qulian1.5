@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.ViewPageFragmentAdapter;
 import com.quliantrip.qulian.base.BaseViewPagerFragment;
-import com.quliantrip.qulian.domain.choice.GoodDetailBean;
 import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.LocalPlayFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.PlayMethodFragment;

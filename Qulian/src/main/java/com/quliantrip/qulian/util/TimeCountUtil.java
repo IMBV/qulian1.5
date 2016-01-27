@@ -12,7 +12,7 @@ import android.widget.Button;
 import com.quliantrip.qulian.R;
 
 /**
- * Created by Qulian5 on 2016/1/12.
+ * 倒计时的效果的实现
  */
 public class TimeCountUtil extends CountDownTimer {
     private Activity mActivity;

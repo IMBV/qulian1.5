@@ -6,9 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -16,16 +14,13 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.TuanBean;
-import com.quliantrip.qulian.domain.choice.HotGoodBean;
-import com.quliantrip.qulian.domain.choice.PlayMethodBean;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.downPopupwindow.ExpandTabView;
-import com.quliantrip.qulian.view.downPopupwindow.FilterDataSource;
 import com.quliantrip.qulian.view.downPopupwindow.LeftFilterView;
 import com.quliantrip.qulian.view.downPopupwindow.MiddleFilterView;
 import com.quliantrip.qulian.view.downPopupwindow.RightFilterView;
@@ -37,7 +32,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Yuly on 2015/12/7.

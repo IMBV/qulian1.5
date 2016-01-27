@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <View style="@style/dev_all_line" />
+
+    <ListView
+        android:id="@+id/lv_play_method_good_check_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="49dp"
+        android:scrollbars="none"
+        android:layout_marginTop="1px"></ListView>
+
+    <include layout="@layout/layout_all_order_foot_submit" />
+</RelativeLayout>

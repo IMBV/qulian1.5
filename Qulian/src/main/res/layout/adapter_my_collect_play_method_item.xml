@@ -20,17 +20,5 @@
             android:src="@mipmap/cnb_wode_nor" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/isopen"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/app_main_collor"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="条目内容" />
-    </LinearLayout>
+   <include layout="@layout/adapter_play_list_item"/>
 </com.quliantrip.qulian.view.SlipRihtLayout>

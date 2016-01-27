@@ -14,10 +14,7 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.adapter.myAdapter.PlayMethodOrderLiatAdapter;
-import com.quliantrip.qulian.domain.Test;
-import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.adapter.myAdapter.PlayMethodOrderListAdapter;
 import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.ArrayList;
@@ -59,7 +56,7 @@ public class PlayMethodOrderFragment extends Fragment {
         int i;
         for (i = 0; i <= 30; i++)
             list.add("asdf" + i);
-        final PlayMethodOrderLiatAdapter test = new PlayMethodOrderLiatAdapter(list);
+        final PlayMethodOrderListAdapter test = new PlayMethodOrderListAdapter(list);
         listView.setAdapter(test);
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));

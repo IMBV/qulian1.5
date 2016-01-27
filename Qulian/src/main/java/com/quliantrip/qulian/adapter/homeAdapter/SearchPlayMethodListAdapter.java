@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.choice.PlayMethodBean;
 import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;

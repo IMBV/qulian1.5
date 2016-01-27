@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.choice.GoodDetailBean;
+import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.RollViewPage;

@@ -10,7 +10,8 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.LinkManBean;
-import com.quliantrip.qulian.domain.choice.OrderSubmitBean;
+import com.quliantrip.qulian.domain.LoginDataBean;
+import com.quliantrip.qulian.domain.choice.good.GoodOrderConfirmBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -38,11 +39,23 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     TextView phone;
     @Bind(R.id.tv_link_nam_email)
     TextView email;
+    @Bind(R.id.tv_order_confirm_name)
+    TextView orderName;
+    @Bind(R.id.tv_order_confirm_taocan)
+    TextView taocan;
+    @Bind(R.id.tv_order_confirm_data)
+    TextView data;
+    @Bind(R.id.tv_order_confirm_time)
+    TextView time;
 
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_confirm_order, null);
         ButterKnife.bind(this, view);
+        LoginDataBean loginDataBean = QulianApplication.getInstance().getLoginUser();
+        name.setText(loginDataBean.getUsername());
+        phone.setText(loginDataBean.getMobile());
+        email.setText(loginDataBean.getEmail());
         return view;
     }
 
@@ -50,23 +63,29 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("id", "11");
-        return new QuestBean(map, new OrderSubmitBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER);
-//        Map<String, String> map = new HashMap<String, String>();
-//        map.put("id", "11");
-//        return new QuestBean(map, new OrderSubmitBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER_CONFIRM);
+        return new QuestBean(map, new GoodOrderConfirmBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER_CONFIRM);
     }
 
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-
+            GoodOrderConfirmBean goodOrderConfirmBean = (GoodOrderConfirmBean) bean;
+            if (goodOrderConfirmBean.getCode() == 200){
+                GoodOrderConfirmBean.DataEntity dataEntity = goodOrderConfirmBean.getData();
+                name.setText(dataEntity.getOrdershop().getName());
+                taocan.setText(dataEntity.getAttribute());
+                data.setText(dataEntity.getOrdershop().getDate());
+                time.setText("没有该字段");
+            }else{
+                ToastUtil.showToast(mContext,goodOrderConfirmBean.getMsg());
+            }
         }
     }
 
     @OnClick(R.id.ll_checked_linkman)
     void intoCheckedLinkman() {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("isItemOnclick", true);
+        bundle.putBoolean("isItemOnclick", true);
         UIHelper.showMyCommonInfo(mContext, this, 241, bundle);
     }
 

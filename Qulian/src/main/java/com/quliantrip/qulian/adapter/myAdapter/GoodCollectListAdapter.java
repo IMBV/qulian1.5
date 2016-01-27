@@ -44,13 +44,11 @@ public class GoodCollectListAdapter extends BasicAdapter<Test> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_collect_play_method_item, null);
+            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_collect_hot_good_item, null);
         }
         final Holder holder = Holder.getHolder(convertView);
 
         final com.quliantrip.qulian.domain.Test name = list.get(position);
-        holder.city.setText(name.getName());
-
         holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,18 +71,22 @@ public class GoodCollectListAdapter extends BasicAdapter<Test> {
                 holder.slipRihtLayout.layoutContent(isEdit);
             }
         });
+
+        holder.city.setText(name.getName());
         return convertView;
     }
 
     static class Holder {
-        @Bind(R.id.tv_text)
-        TextView city;
         @Bind(R.id.ll_is_checked_delect)
         LinearLayout checkDeledct;
         @Bind(R.id.srl_play_method_collect_item)
         SlipRihtLayout slipRihtLayout;
         @Bind(R.id.iv_collect_Img_state)
         ImageView state;
+
+        @Bind(R.id.iv_hot_good_name)
+        TextView city;
+
 
         public Holder(View convertView) {
             super();

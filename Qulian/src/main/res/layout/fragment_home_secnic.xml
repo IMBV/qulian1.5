@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <GridView
         android:id="@+id/gv_home_secnic_fragment_list"
@@ -15,5 +16,6 @@
         android:scrollbars="none"
         android:numColumns="2"
         android:verticalSpacing="10dp" />
+    <include layout="@layout/view_page_empty"/>
 </LinearLayout>
 

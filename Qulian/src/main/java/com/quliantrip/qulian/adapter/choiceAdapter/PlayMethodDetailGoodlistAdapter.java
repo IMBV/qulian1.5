@@ -8,12 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.choice.OrderSubmitBean;
-import com.quliantrip.qulian.domain.choice.PlayMethodDetailBean;
-import com.quliantrip.qulian.global.ImageLoaderOptions;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.CommonHelp;
 

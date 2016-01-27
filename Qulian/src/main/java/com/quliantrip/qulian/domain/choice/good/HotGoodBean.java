@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.domain.choice;
+package com.quliantrip.qulian.domain.choice.good;
 
 import com.quliantrip.qulian.domain.BaseJson;
 

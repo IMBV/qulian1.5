@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.quliantrip.qulian.view.SlipRihtLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srl_play_method_collect_item"
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_is_checked_delect"
+        android:layout_width="44dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_bg_while_gray"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_collect_Img_state"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/cnb_wode_nor" />
+    </LinearLayout>
+
+   <include layout="@layout/adapter_good_list_item"/>
+</com.quliantrip.qulian.view.SlipRihtLayout>

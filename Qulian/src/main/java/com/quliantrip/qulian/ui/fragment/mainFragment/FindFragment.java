@@ -1,9 +1,12 @@
 package com.quliantrip.qulian.ui.fragment.mainFragment;
 
 
+import android.app.AlertDialog;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
@@ -14,21 +17,21 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.fragment.findFragment.FindContentFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
+import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
- * Created by yuly on 2015/11/9.
+ *发现界面
  */
-
-
 public class FindFragment extends BasePageCheckFragment {
     private View view;
-
+    private AlertDialog dialog;
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_main_find, null);
@@ -49,6 +52,17 @@ public class FindFragment extends BasePageCheckFragment {
     @Override
     public void onEventMainThread(BaseJson bean) {
 
+    }
+
+    @OnClick(R.id.bt_into_flock)
+    void intoQun(){
+        //建立弹出对话框
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setCancelable(true);
+        View view = View.inflate(mContext, R.layout.layout_find_into_qun_grounp, null);
+        dialog = builder.create();
+        dialog.setView(view, 0, 0, 0, 0);
+        dialog.show();
     }
 
 //这里是播放视频的操作

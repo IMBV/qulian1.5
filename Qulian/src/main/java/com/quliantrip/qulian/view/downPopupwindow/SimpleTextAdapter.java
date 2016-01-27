@@ -11,7 +11,6 @@
 //
 //import com.quliantrip.qulian.R;
 //import com.quliantrip.qulian.adapter.BasicAdapter;
-//import com.quliantrip.qulian.domain.choice.PlayMethodBean;
 //import com.quliantrip.qulian.util.CommonHelp;
 //
 //import java.util.ArrayList;

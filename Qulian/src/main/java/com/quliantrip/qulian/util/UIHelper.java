@@ -50,6 +50,11 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.GOOD_ORDER, bundle);
     }
 
+    //提交玩法订单详情
+    public static void showPlayMethodOrder(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.PLAY_METHOD_ORDER, bundle);
+    }
+
     public static void showPayMethod(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.PAY_METHOD, bundle);
     }
@@ -74,6 +79,9 @@ public class UIHelper {
 
     public static void showOrderConfirm(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.ORDER_CONFIRM, bundle);
+    }
+    public static void showPlayMethodOrderConfirm(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.PLAY_METHOD_ORDER_CONFIRM, bundle);
     }
 
     public static void showChangePassword(Context context, Bundle bundle) {

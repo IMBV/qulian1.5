@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.choice.HotGoodBean;
+import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 
 import java.util.List;
 

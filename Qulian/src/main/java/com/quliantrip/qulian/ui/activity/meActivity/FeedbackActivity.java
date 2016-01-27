@@ -1,21 +1,17 @@
 package com.quliantrip.qulian.ui.activity.meActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.choice.GoodDetailBean;
+import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.util.ToastUtil;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

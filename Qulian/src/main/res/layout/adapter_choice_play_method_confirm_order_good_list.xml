@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_order_confirm_name"
+            style="@style/text_main_title_16"
+            android:text="趣连" />
+
+        <TextView
+            android:id="@+id/tv_order_confirm_taocan"
+            style="@style/text_main_title_tytle_14"
+            android:layout_marginTop="15dp"
+            android:text="双人下午茶套餐" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_order_confirm_data"
+                style="@style/text_main_title_tytle_14"
+                android:text="2015-12-25" />
+
+            <TextView
+                android:id="@+id/tv_order_confirm_time"
+                style="@style/text_main_title_tytle_14"
+                android:layout_marginLeft="20dp"
+                android:text="11:20" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/dev_all_line" />
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.searchBackPassword;
+package com.quliantrip.qulian.ui.fragment.meFragment.searchBackPassword;
 
 import android.app.Activity;
 import android.os.Bundle;

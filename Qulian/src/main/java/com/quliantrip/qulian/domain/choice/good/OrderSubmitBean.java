@@ -1,5 +1,6 @@
-package com.quliantrip.qulian.domain.choice;
+package com.quliantrip.qulian.domain.choice.good;
 
+import com.google.gson.annotations.SerializedName;
 import com.quliantrip.qulian.domain.BaseJson;
 
 import java.util.List;
@@ -41,6 +42,15 @@ public class OrderSubmitBean extends BaseJson {
         private OnlineEntity online;
         private List<AttributeEntity> attribute;
         private List<BranchnameEntity> branchname;
+        private List<AttrssEntity> attrss;
+
+        public List<AttrssEntity> getAttrss() {
+            return attrss;
+        }
+
+        public void setAttrss(List<AttrssEntity> attrss) {
+            this.attrss = attrss;
+        }
 
         public void setOnline(OnlineEntity online) {
             this.online = online;
@@ -97,67 +107,37 @@ public class OrderSubmitBean extends BaseJson {
         }
 
         public static class AttributeEntity {
-            private String attrid;
-            private String name;
-            /**
-             * attrvalid : 44
-             * value : 股份的公司股份的三国杀
-             */
 
-            private List<ValsEntity> vals;
+            private String id;
+            @SerializedName("package")
+            private String packageX;
 
-            public void setAttrid(String attrid) {
-                this.attrid = attrid;
+            public void setId(String id) {
+                this.id = id;
             }
 
-            public void setName(String name) {
-                this.name = name;
+            public void setPackageX(String packageX) {
+                this.packageX = packageX;
             }
 
-            public void setVals(List<ValsEntity> vals) {
-                this.vals = vals;
+            public String getId() {
+                return id;
             }
 
-            public String getAttrid() {
-                return attrid;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public List<ValsEntity> getVals() {
-                return vals;
-            }
-
-            public static class ValsEntity {
-                private String attrvalid;
-                private String value;
-
-                public void setAttrvalid(String attrvalid) {
-                    this.attrvalid = attrvalid;
-                }
-
-                public void setValue(String value) {
-                    this.value = value;
-                }
-
-                public String getAttrvalid() {
-                    return attrvalid;
-                }
-
-                public String getValue() {
-                    return value;
-                }
+            public String getPackageX() {
+                return packageX;
             }
         }
 
         public static class BranchnameEntity {
 
+            private String address;
             private String id;
             private String name;
-            private Object images;
-            private String address;
+
+            public void setAddress(String address) {
+                this.address = address;
+            }
 
             public void setId(String id) {
                 this.id = id;
@@ -167,12 +147,8 @@ public class OrderSubmitBean extends BaseJson {
                 this.name = name;
             }
 
-            public void setImages(Object images) {
-                this.images = images;
-            }
-
-            public void setAddress(String address) {
-                this.address = address;
+            public String getAddress() {
+                return address;
             }
 
             public String getId() {
@@ -182,13 +158,35 @@ public class OrderSubmitBean extends BaseJson {
             public String getName() {
                 return name;
             }
+        }
 
-            public Object getImages() {
-                return images;
+        public static class AttrssEntity{
+            private String sale;
+            private String num;
+            private String date;
+
+            public void setSale(String sale) {
+                this.sale = sale;
             }
 
-            public String getAddress() {
-                return address;
+            public void setNum(String num) {
+                this.num = num;
+            }
+
+            public void setDate(String date) {
+                this.date = date;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getNum() {
+                return num;
+            }
+
+            public String getDate() {
+                return date;
             }
         }
     }

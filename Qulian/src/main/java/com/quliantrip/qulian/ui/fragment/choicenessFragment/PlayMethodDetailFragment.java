@@ -14,8 +14,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodDetailGoodlistAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.choice.OrderSubmitBean;
-import com.quliantrip.qulian.domain.choice.PlayMethodDetailBean;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
@@ -38,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 玩法详情页的大小
+ * 玩法详情页
  */
 public class PlayMethodDetailFragment extends BasePageCheckFragment {
     private View view;
@@ -159,7 +158,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     //点击购买
     @OnClick(R.id.bt_detail_order_buy)
     void intoOrder() {
-        UIHelper.showGoodOrder(mContext, null);
+        UIHelper.showPlayMethodOrder(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 

@@ -14,8 +14,8 @@ import butterknife.ButterKnife;
 /**
  * 玩法订单列表页
  */
-public class PlayMethodOrderLiatAdapter extends BasicAdapter<String> {
-    public PlayMethodOrderLiatAdapter(ArrayList<String> list) {
+public class GoodOrderListAdapter extends BasicAdapter<String> {
+    public GoodOrderListAdapter(ArrayList<String> list) {
         super(list);
     }
 
@@ -26,7 +26,7 @@ public class PlayMethodOrderLiatAdapter extends BasicAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_play_order_list_item, null);
+            convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_good_order_list_item, null);
         }
 //        Holder holder = Holder.getHolder(convertView);
 //        String name = list.get(position);

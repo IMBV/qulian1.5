@@ -39,21 +39,25 @@
                             style="@style/order_btn_function_selector"
                             android:layout_marginLeft="10dp"
                             android:text="全部" />
+
                         <RadioButton
                             android:id="@+id/rb_me_order_good_to_pay"
                             style="@style/order_btn_function_selector"
                             android:layout_marginLeft="10dp"
                             android:text="未付款" />
+
                         <RadioButton
                             android:id="@+id/rb_me_order_good_to_confirmed"
                             style="@style/order_btn_function_selector"
                             android:layout_marginLeft="10dp"
                             android:text="待确认" />
+
                         <RadioButton
                             android:id="@+id/rb_me_order_good_confirmed"
                             style="@style/order_btn_function_selector"
                             android:layout_marginLeft="10dp"
                             android:text="已确认" />
+
                         <RadioButton
                             android:id="@+id/rb_me_order_good_user"
                             style="@style/order_btn_function_selector"
@@ -67,149 +71,7 @@
         </ScrollView>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/ll_quan_bg_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_xiaofeiquan_shang"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/v_align_line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/ll_quan_bg_up" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_quan_bg_up"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/bg_xiaofeiquan_xia"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="asdfasfjl" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_line"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignBottom="@+id/v_align_line"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/shape_line_chopping"
-            android:orientation="horizontal" />
-    </RelativeLayout>
+    <include layout="@layout/view_pulltorefresh_listview" />
 
 
 </LinearLayout>
