@@ -17,7 +17,6 @@ import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodDetailGo
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
-import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;

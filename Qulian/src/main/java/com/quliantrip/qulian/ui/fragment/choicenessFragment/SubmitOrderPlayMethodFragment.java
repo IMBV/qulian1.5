@@ -1,8 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
-import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
@@ -10,12 +8,13 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodOrderGoodlistAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.playMethod.OrderSubmitResultBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
-import com.quliantrip.qulian.util.UIHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,12 +54,6 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
                 listView.setAdapter(new PlayMethodOrderGoodlistAdapter((ArrayList<PlayMethodOrderSubmitBean.DataEntity>) playMethodOrderSubmitBean.getData(), mContext));
                 listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
                 listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
-//                name.setText(dataEntity.getOnline().getName());
-//                initListView(dataEntity.getAttribute());
-//                branchnameList = dataEntity.getBranchname();
-//                skuId = branchnameList.get(0).getId();
-//                checkSrore.setText(branchnameList.get(0).getName());
-//                attressList = dataEntity.getAttrss();
             } else {
                 ToastUtil.showToast(mContext, playMethodOrderSubmitBean.getMsg());
             }
@@ -99,16 +92,17 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
     //提交订单
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
-//        Map<String, String> map = new HashMap<String, String>();
-//        map.put("proid", "11");
-//        map.put("date","2/12/2015");
-//        map.put("num","12");
-//        map.put("sku_id","15");
-//        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CHECK, new GoodOrderSubmitCheckBean().setTag(getClass().getName() + "check"), map);
-        Bundle bundle = new Bundle();
-        bundle.putString("orderId", "53");
-        UIHelper.showPlayMethodOrderConfirm(mContext, bundle);
-        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("proid", "1");
+        map.put("key","2/12/2015");
+        map.put("total_price","12");
+        map.put("type","15");
+        map.put("map","15");
+        new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_SUBMIT, new OrderSubmitResultBean().setTag(getClass().getName() + "check"), map);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("orderId", "53");
+//        UIHelper.showPlayMethodOrderConfirm(mContext, bundle);
+//        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
 

@@ -1,14 +1,15 @@
-package com.quliantrip.qulian.domain;
+package com.quliantrip.qulian.domain.me;
+
+import com.quliantrip.qulian.domain.BaseJson;
 
 /**
- * Created by Qulian5 on 2016/1/14.
- * 手机号查重
+ * 用户登录信息
  */
-public class MoBileBean extends BaseJson {
+public class UserInfoBean extends BaseJson {
 
     private int code;
     private String msg;
-    private String data;
+    private LoginDataBean data;
 
     public void setCode(int code) {
         this.code = code;
@@ -18,8 +19,12 @@ public class MoBileBean extends BaseJson {
         this.msg = msg;
     }
 
-    public void setData(String data) {
+    public void setData(LoginDataBean data) {
         this.data = data;
+    }
+
+    public LoginDataBean getData() {
+        return data;
     }
 
     public int getCode() {
@@ -28,9 +33,5 @@ public class MoBileBean extends BaseJson {
 
     public String getMsg() {
         return msg;
-    }
-
-    public String getData() {
-        return data;
     }
 }

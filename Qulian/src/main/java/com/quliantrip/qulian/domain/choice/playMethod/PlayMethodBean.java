@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Qulian5 on 2016/1/22.
  */
-public class PlayMethodBean extends BaseJson{
+public class PlayMethodBean extends BaseJson {
 
     private int code;
     private String msg;

@@ -1,12 +1,13 @@
-package com.quliantrip.qulian.domain;
+package com.quliantrip.qulian.domain.common;
 
 import com.google.gson.annotations.SerializedName;
+import com.quliantrip.qulian.domain.BaseJson;
 
 /**
  * Created by Yuly on 2015/12/25.
  * www.quliantrip.com
  */
-public class ChangeCityBean extends BaseJson{
+public class ChangeCityBean extends BaseJson {
 
     private String ctl;
     private String act;

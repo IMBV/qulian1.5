@@ -1,7 +1,6 @@
 package com.quliantrip.qulian.adapter.finderAdapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -9,12 +8,8 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.adapter.ClassifyCityListAdapter;
-import com.quliantrip.qulian.domain.CityListBean;
 import com.quliantrip.qulian.domain.find.VoiceSquareBean;
 import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
-import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.view.MyGridView;
 
 import java.util.ArrayList;

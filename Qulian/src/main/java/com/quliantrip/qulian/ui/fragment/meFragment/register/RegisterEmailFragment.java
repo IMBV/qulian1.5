@@ -14,7 +14,7 @@ import android.widget.Button;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseDialogFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.UserInfoBean;
+import com.quliantrip.qulian.domain.me.UserInfoBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;

@@ -59,7 +59,7 @@ public class SearckBachEmailFragment extends BaseDialogFragment {
             }
         });
     }
-    public void onEventMainThread(BaseJson bean) {
+    public void onEventMainThread(BaseJson  bean) {
         if (bean != null && (this.getClass().getName()).equals(bean.getTag())) {
         }
     }

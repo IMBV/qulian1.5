@@ -13,9 +13,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.quliantrip.qulian.domain.LoginDataBean;
-import com.quliantrip.qulian.domain.UserInfoBean;
-import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.domain.me.LoginDataBean;
 
 import java.util.Properties;
 import java.util.UUID;

@@ -1,9 +1,11 @@
-package com.quliantrip.qulian.domain;
+package com.quliantrip.qulian.domain.common;
+
+import com.quliantrip.qulian.domain.BaseJson;
 
 /**
- * Created by Qulian5 on 2016/1/20.
+ * 只有提示的类
  */
-public class HintInfoBean extends BaseJson{
+public class HintInfoBean extends BaseJson {
     private int code;
     private String msg;
 

@@ -7,7 +7,6 @@ import android.widget.ListView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.finderAdapter.VoiceSquareListAdapter;
-import com.quliantrip.qulian.adapter.finderAdapter.VoiceSquareSecnicGridViewAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.find.VoiceSquareBean;

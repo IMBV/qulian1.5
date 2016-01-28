@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 单品详情
  */
-public class GoodDetailBean extends BaseJson{
+public class GoodDetailBean extends BaseJson {
 
 
     /**

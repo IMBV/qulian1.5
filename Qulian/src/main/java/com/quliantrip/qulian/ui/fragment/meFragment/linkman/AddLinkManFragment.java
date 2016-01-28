@@ -5,30 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.myAdapter.LinkManListAdapter;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.HintInfoBean;
-import com.quliantrip.qulian.domain.LinkManBean;
-import com.quliantrip.qulian.domain.UserInfoBean;
+import com.quliantrip.qulian.domain.common.HintInfoBean;
+import com.quliantrip.qulian.domain.me.LinkManBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
-import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.ToastUtil;
-import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.ClearEditText;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

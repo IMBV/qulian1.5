@@ -64,6 +64,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         //选择门店
 //        public String skuId;
         final List<PlayMethodOrderSubmitBean.DataEntity.BranchnameEntity> branchnameList = bean.getBranchname();
+        holder.checkSrore.setText(branchnameList.get(0).getName());
         convertView.findViewById(R.id.rl_check_store_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

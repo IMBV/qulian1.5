@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 首页搜索结果
  */
-public class SecnicPlayResultBean extends BaseJson{
+public class SecnicPlayResultBean extends BaseJson {
 
 
 

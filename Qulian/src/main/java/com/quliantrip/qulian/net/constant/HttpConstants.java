@@ -55,8 +55,10 @@ public class HttpConstants {
     public static final String PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/play";
     //玩法详情
     public static final String PLAY_METHOD_DETRAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/playxq";
-    //玩法提交订单
+    //玩法订单
     public static final String PLAY_METHOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/order";
+    //玩法提交订单
+    public static final String PLAY_METHOD_ORDER_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/torder";
     //玩法确认订单
     public static final String PLAY_METHOD_ORDER_CONFIRM = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/qorder";
 

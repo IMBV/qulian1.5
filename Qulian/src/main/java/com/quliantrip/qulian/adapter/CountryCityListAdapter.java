@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.CityListBean;
+import com.quliantrip.qulian.domain.common.CityListBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;

@@ -8,10 +8,9 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.CountryCityListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.CityListBean;
+import com.quliantrip.qulian.domain.common.CityListBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.view.MyListView;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- *城市选择列表
+ * 城市选择列表
  */
 public class CityChooseFragment extends BasePageCheckFragment {
     //进行数据适配的对象
@@ -37,7 +36,7 @@ public class CityChooseFragment extends BasePageCheckFragment {
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_city_choose, null);
         ButterKnife.bind(this, view);
-        Bundle bundle =getArguments();
+        Bundle bundle = getArguments();
         homeCityName = bundle.getString("cityName");
         return view;
     }
@@ -53,7 +52,7 @@ public class CityChooseFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             cityListBean = (CityListBean) bean;
             //全部景区的国家的列表显示
-            CountryCityListAdapter countryCityListAdapter =new CountryCityListAdapter((ArrayList<CityListBean.DataEntity>) ((CityListBean) bean).getData());
+            CountryCityListAdapter countryCityListAdapter = new CountryCityListAdapter((ArrayList<CityListBean.DataEntity>) ((CityListBean) bean).getData());
             countryCityListAdapter.setmContext(mContext);
             countryListView.setAdapter(countryCityListAdapter);
             countryListView.setFocusable(false);

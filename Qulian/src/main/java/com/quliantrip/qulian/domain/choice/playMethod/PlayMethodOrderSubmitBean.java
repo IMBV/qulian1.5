@@ -10,20 +10,9 @@ import java.util.List;
  */
 public class PlayMethodOrderSubmitBean extends BaseJson{
 
-    /**
-     * code : 200
-     * msg : 成功
-     * data : [{"playitem":{"playitemsid":"21","title":"哈哈哈哈","proid":"11","name":"dddddddddddd"},"branchname":[{"id":"1","name":"弟弟顶顶顶顶顶","images":null,"address":"弟弟顶顶顶顶顶"},{"id":"2","name":"111111111111","images":null,"address":"11111111111111111"}],"attribute":[{"id":"15","package":"演出票 :大大,景点门票:儿童票"},{"id":"24","package":"演出票 :大大,景点门票:长者票"},{"id":"35","package":"演出票 :大大,景点门票:长者票"},{"id":"36","package":"演出票 :大大,景点门票:成人票"},{"id":"39","package":"演出票 :大大,景点门票:成人票"}],"attrss":[{"sale":"111","num":"34","date":1459440000,"de":"2016-04-01"}]},{"playitem":{"playitemsid":"22","title":"呵呵呵呵","proid":"11","name":"dddddddddddd"},"branchname":[{"id":"1","name":"弟弟顶顶顶顶顶","images":null,"address":"弟弟顶顶顶顶顶"},{"id":"2","name":"111111111111","images":null,"address":"11111111111111111"}],"attribute":[{"id":"15","package":"演出票 :大大,景点门票:儿童票"},{"id":"24","package":"演出票 :大大,景点门票:长者票"},{"id":"35","package":"演出票 :大大,景点门票:长者票"},{"id":"36","package":"演出票 :大大,景点门票:成人票"},{"id":"39","package":"演出票 :大大,景点门票:成人票"}],"attrss":[{"sale":"111","num":"34","date":1459440000,"de":"2016-04-01"}]},{"playitem":{"playitemsid":"23","title":"嘿嘿嘿","proid":"11","name":"dddddddddddd"},"branchname":[{"id":"1","name":"弟弟顶顶顶顶顶","images":null,"address":"弟弟顶顶顶顶顶"},{"id":"2","name":"111111111111","images":null,"address":"11111111111111111"}],"attribute":[{"id":"15","package":"演出票 :大大,景点门票:儿童票"},{"id":"24","package":"演出票 :大大,景点门票:长者票"},{"id":"35","package":"演出票 :大大,景点门票:长者票"},{"id":"36","package":"演出票 :大大,景点门票:成人票"},{"id":"39","package":"演出票 :大大,景点门票:成人票"}],"attrss":[{"sale":"111","num":"34","date":1459440000,"de":"2016-04-01"}]}]
-     */
-
     private int code;
     private String msg;
-    /**
-     * playitem : {"playitemsid":"21","title":"哈哈哈哈","proid":"11","name":"dddddddddddd"}
-     * branchname : [{"id":"1","name":"弟弟顶顶顶顶顶","images":null,"address":"弟弟顶顶顶顶顶"},{"id":"2","name":"111111111111","images":null,"address":"11111111111111111"}]
-     * attribute : [{"id":"15","package":"演出票 :大大,景点门票:儿童票"},{"id":"24","package":"演出票 :大大,景点门票:长者票"},{"id":"35","package":"演出票 :大大,景点门票:长者票"},{"id":"36","package":"演出票 :大大,景点门票:成人票"},{"id":"39","package":"演出票 :大大,景点门票:成人票"}]
-     * attrss : [{"sale":"111","num":"34","date":1459440000,"de":"2016-04-01"}]
-     */
+
 
     private List<DataEntity> data;
 
@@ -52,34 +41,10 @@ public class PlayMethodOrderSubmitBean extends BaseJson{
     }
 
     public static class DataEntity {
-        /**
-         * playitemsid : 21
-         * title : 哈哈哈哈
-         * proid : 11
-         * name : dddddddddddd
-         */
-
         private PlayitemEntity playitem;
-        /**
-         * id : 1
-         * name : 弟弟顶顶顶顶顶
-         * images : null
-         * address : 弟弟顶顶顶顶顶
-         */
-
         private List<BranchnameEntity> branchname;
-        /**
-         * id : 15
-         * package : 演出票 :大大,景点门票:儿童票
-         */
 
         private List<AttributeEntity> attribute;
-        /**
-         * sale : 111
-         * num : 34
-         * date : 1459440000
-         * de : 2016-04-01
-         */
 
         private List<AttrssEntity> attrss;
 

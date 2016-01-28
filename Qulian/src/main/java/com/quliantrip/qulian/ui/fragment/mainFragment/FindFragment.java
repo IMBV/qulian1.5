@@ -3,26 +3,19 @@ package com.quliantrip.qulian.ui.fragment.mainFragment;
 
 import android.app.AlertDialog;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.HomeBean;
-import com.quliantrip.qulian.lib.PagerSlidingTab;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.fragment.findFragment.FindContentFragment;
-import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
-import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

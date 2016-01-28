@@ -1,19 +1,15 @@
-package com.quliantrip.qulian.domain.find;
+package com.quliantrip.qulian.domain.choice.playMethod;
 
 import com.quliantrip.qulian.domain.BaseJson;
 
-import java.util.List;
-
 /**
- * 优惠券
+ * 定点提交结果
  */
-public class DiscountBean extends BaseJson {
-
-
-
+public class OrderSubmitResultBean extends BaseJson {
     private int code;
     private String msg;
-    private List<DataEntity> data;
+
+    private DataEntity data;
 
     public void setCode(int code) {
         this.code = code;
@@ -23,7 +19,7 @@ public class DiscountBean extends BaseJson {
         this.msg = msg;
     }
 
-    public void setData(List<DataEntity> data) {
+    public void setData(DataEntity data) {
         this.data = data;
     }
 
@@ -35,28 +31,28 @@ public class DiscountBean extends BaseJson {
         return msg;
     }
 
-    public List<DataEntity> getData() {
+    public DataEntity getData() {
         return data;
     }
 
     public static class DataEntity {
-        private String id;
-        private String image;
+        private int id;
+        private String order_sn;
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 
-        public void setImage(String image) {
-            this.image = image;
+        public void setOrder_sn(String order_sn) {
+            this.order_sn = order_sn;
         }
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public String getImage() {
-            return image;
+        public String getOrder_sn() {
+            return order_sn;
         }
     }
 }

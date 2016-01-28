@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.CityListBean;
+import com.quliantrip.qulian.domain.common.CityListBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 

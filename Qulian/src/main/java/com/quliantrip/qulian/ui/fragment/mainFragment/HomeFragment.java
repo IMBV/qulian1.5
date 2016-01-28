@@ -14,7 +14,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.HomeRecommendAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.ChangeCityBean;
+import com.quliantrip.qulian.domain.common.ChangeCityBean;
 import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.mode.homeMode.HomeChoicenessMode;
 import com.quliantrip.qulian.mode.homeMode.HomeFunctionMode;

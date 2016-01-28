@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.HintInfoBean;
-import com.quliantrip.qulian.domain.LinkManBean;
+import com.quliantrip.qulian.domain.common.HintInfoBean;
+import com.quliantrip.qulian.domain.me.LinkManBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;

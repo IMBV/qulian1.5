@@ -1,4 +1,6 @@
-package com.quliantrip.qulian.domain;
+package com.quliantrip.qulian.domain.common;
+
+import com.quliantrip.qulian.domain.BaseJson;
 
 import java.util.List;
 

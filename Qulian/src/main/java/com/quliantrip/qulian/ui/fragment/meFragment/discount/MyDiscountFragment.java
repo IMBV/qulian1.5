@@ -2,12 +2,10 @@ package com.quliantrip.qulian.ui.fragment.meFragment.discount;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 玩法详情的实体类
  */
-public class PlayMethodDetailBean extends BaseJson{
+public class PlayMethodDetailBean extends BaseJson {
 
     private int code;
     private String msg;

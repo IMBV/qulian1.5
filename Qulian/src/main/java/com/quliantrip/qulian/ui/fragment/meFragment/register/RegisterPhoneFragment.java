@@ -1,10 +1,8 @@
 package com.quliantrip.qulian.ui.fragment.meFragment.register;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -12,14 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseDialogFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.HomeBean;
-import com.quliantrip.qulian.domain.MoBileBean;
-import com.quliantrip.qulian.domain.UserInfoBean;
+import com.quliantrip.qulian.domain.me.MoBileBean;
+import com.quliantrip.qulian.domain.me.UserInfoBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
@@ -36,7 +32,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by yuly on 2016/1/5.

@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.domain;
+package com.quliantrip.qulian.domain.me;
 
 import java.util.List;
 

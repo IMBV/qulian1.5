@@ -11,8 +11,8 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodConfirmOrderAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.LinkManBean;
-import com.quliantrip.qulian.domain.LoginDataBean;
+import com.quliantrip.qulian.domain.me.LinkManBean;
+import com.quliantrip.qulian.domain.me.LoginDataBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMehtodOrderConfirmBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
@@ -46,7 +46,6 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     @Bind(R.id.tv_link_nam_email)
     TextView email;
 
-
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_confirm_play_method_order, null);
@@ -61,7 +60,7 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("orderid", "59");
+        map.put("orderid", "74");
         return new QuestBean(map, new PlayMehtodOrderConfirmBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_ORDER_CONFIRM);
     }
 
