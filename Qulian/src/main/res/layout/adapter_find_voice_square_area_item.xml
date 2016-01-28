@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_city_country"
+        style="@style/text_main_app_title_16"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:text="东京"/>
+
+    <com.quliantrip.qulian.view.MyGridView
+        android:id="@+id/mgv_city_list_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="5dp" />
+
+</LinearLayout>

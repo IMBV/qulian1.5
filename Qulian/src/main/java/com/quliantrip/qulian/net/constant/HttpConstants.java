@@ -70,6 +70,4 @@ public class HttpConstants {
     //首页
     //首页的筛选
     public static final String HOME_SECNICPLAY_CONDITION = HOST_ADDR_ROOT_LOCAL_V1 + "product/search";
-
-
 }

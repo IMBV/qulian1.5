@@ -22,8 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Yuly on 2015/12/15.
- * www.quliantrip.com
+ *城市选择列表
  */
 public class CityChooseFragment extends BasePageCheckFragment {
     //进行数据适配的对象

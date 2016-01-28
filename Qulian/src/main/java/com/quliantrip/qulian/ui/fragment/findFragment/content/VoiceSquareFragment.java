@@ -2,26 +2,25 @@ package com.quliantrip.qulian.ui.fragment.findFragment.content;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.adapter.finderAdapter.VoiceSquareListAdapter;
+import com.quliantrip.qulian.adapter.finderAdapter.VoiceSquareSecnicGridViewAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.find.DiscountBean;
 import com.quliantrip.qulian.domain.find.VoiceSquareBean;
-import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.greenrobot.event.EventBus;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 语音官界面
@@ -29,6 +28,8 @@ import de.greenrobot.event.EventBus;
 public class VoiceSquareFragment extends BasePageCheckFragment {
     private View view;
     private Context mContext;
+    @Bind(R.id.lv_voicequare_list)
+    ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class VoiceSquareFragment extends BasePageCheckFragment {
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_find_voice_square, null);
-        EventBus.getDefault().register(this);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -54,10 +55,10 @@ public class VoiceSquareFragment extends BasePageCheckFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             VoiceSquareBean voiceSquareBean = (VoiceSquareBean) bean;
-            if(((VoiceSquareBean) bean).getCode() == 200){
-
-            }else{
-                ToastUtil.showToast(mContext,voiceSquareBean.getMsg());
+            if (((VoiceSquareBean) bean).getCode() == 200) {
+                listView.setAdapter(new VoiceSquareListAdapter((ArrayList<VoiceSquareBean.DataEntity>)voiceSquareBean.getData()));
+            } else {
+                ToastUtil.showToast(mContext, voiceSquareBean.getMsg());
             }
         }
     }
