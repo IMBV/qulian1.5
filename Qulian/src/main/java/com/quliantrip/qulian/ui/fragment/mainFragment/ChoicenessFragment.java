@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.HotGoodsFragment;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.RecommendRouteFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.HotGoodsFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.RecommendRouteFragment;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.UIHelper;
 

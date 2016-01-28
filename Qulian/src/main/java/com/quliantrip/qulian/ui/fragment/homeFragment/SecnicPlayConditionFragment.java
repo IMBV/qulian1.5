@@ -33,13 +33,13 @@ public class SecnicPlayConditionFragment extends BaseFragment {
     @Override
     public void initDate() {
         final ArrayList<String> list = new ArrayList<>();
-        list.add("东京");
-        list.add("亲子乐园餐");
-        list.add("富士山");
-        list.add("浅草");
-        list.add("东京线路");
-        list.add("民俗特色");
-        list.add("休闲");
+        list.add("米其林");
+        list.add("河豚");
+        list.add("帝王蟹");
+        list.add("迪士尼");
+        list.add("居酒屋");
+        list.add("烤肉");
+        list.add("晴空塔");
         SearckConditionHotWordAdapter searckConditionHotWordAdapter = new SearckConditionHotWordAdapter(list, mContext);
         hotWord.setAdapter(searckConditionHotWordAdapter);
 

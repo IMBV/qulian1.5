@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.choicenessFragment;
+package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

@@ -14,15 +14,22 @@ import android.widget.TimePicker;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.adapter.choiceAdapter.good.OrderPlayMethodTypeAdapter;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitItemBean;
 import com.quliantrip.qulian.domain.choice.good.OrderSubmitBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitBean;
+import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.SubmitOrderPlayMethodFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.dialog.PlayMethodSubBranchCheckDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,10 +39,32 @@ import butterknife.ButterKnife;
  */
 public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrderSubmitBean.DataEntity> {
     private Context mContext;
+    private HashMap<Integer, PlayMethodOrderSubmitItemBean> resuleMap;
+
+    public HashMap<Integer, PlayMethodOrderSubmitItemBean> getResuleMap() {
+        return resuleMap;
+    }
 
     public PlayMethodOrderGoodlistAdapter(ArrayList<PlayMethodOrderSubmitBean.DataEntity> list, Context context) {
         super(list);
         mContext = context;
+        resuleMap = new HashMap<>();
+        initResultMap();
+    }
+
+    private void initResultMap() {
+        for (int i = 0; i < list.size(); i++) {
+            PlayMethodOrderSubmitBean.DataEntity dataEntity = list.get(i);
+            String playid = dataEntity.getPlayitem().getPlayitemsid();//玩法条目的id
+            String sku_id = dataEntity.getAttribute().get(0).getId();//玩法条目套餐的id
+            String date = dataEntity.getAttrss().get(0).getDate();//订单的日期
+            String dataString = dataEntity.getAttrss().get(0).getDe();//
+            String num = "1";//购买数量
+            String service = "11:00";//服务时间
+            String store = dataEntity.getBranchname().get(0).getId();//商店的id
+            String price = dataEntity.getAttrss().get(0).getSale();//价格
+            resuleMap.put(i, new PlayMethodOrderSubmitItemBean(playid, sku_id, date, dataString, num, service, store, price));
+        }
     }
 
     @Override
@@ -45,10 +74,12 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         }
         final Holder holder = Holder.getHolder(convertView);
         List<OrderSubmitBean.DataEntity.AttrssEntity> attressList;//有票的日期集合
+        //进行数据适配的对象
         PlayMethodOrderSubmitBean.DataEntity bean = list.get(position);
+        final PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean = resuleMap.get(position);
         holder.name.setText(bean.getPlayitem().getName());
 
-//    //初始化可选的套餐类型
+         //初始化可选的套餐类型
         final ArrayList<PlayMethodOrderSubmitBean.DataEntity.AttributeEntity> listAttribute = (ArrayList<PlayMethodOrderSubmitBean.DataEntity.AttributeEntity>) bean.getAttribute();
         final OrderPlayMethodTypeAdapter orderGoodTypeAdapter = new OrderPlayMethodTypeAdapter(listAttribute);
         holder.typeListView.setAdapter(orderGoodTypeAdapter);
@@ -57,18 +88,17 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String checkedId = listAttribute.get(position).getId();
                 orderGoodTypeAdapter.setCheched(checkedId);
+                playMethodOrderSubmitItemBean.setSku_id(checkedId);
             }
         });
-//    }
 
         //选择门店
-//        public String skuId;
         final List<PlayMethodOrderSubmitBean.DataEntity.BranchnameEntity> branchnameList = bean.getBranchname();
         holder.checkSrore.setText(branchnameList.get(0).getName());
         convertView.findViewById(R.id.rl_check_store_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final PlayMethodSubBranchCheckDialog dialog = new PlayMethodSubBranchCheckDialog(mContext, branchnameList, holder.checkSrore);
+                final PlayMethodSubBranchCheckDialog dialog = new PlayMethodSubBranchCheckDialog(mContext, branchnameList, holder.checkSrore,playMethodOrderSubmitItemBean);
                 dialog.setCancelable(true);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
@@ -82,17 +112,20 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                 Integer newNumber = new Integer(holder.number.getText().toString().trim());
                 newNumber = newNumber - 1;
                 if (newNumber > 0) {
+                    playMethodOrderSubmitItemBean.setNum(newNumber+"");
                     holder.number.setText(newNumber + "");
                 } else {
                     ToastUtil.showToast(mContext, "人数不能少于0");
                 }
             }
         });
+
         convertView.findViewById(R.id.iv_good_person_number_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer newNumber = new Integer(holder.number.getText().toString().trim());
                 newNumber = newNumber + 1;
+                playMethodOrderSubmitItemBean.setNum(newNumber+"");
                 holder.number.setText(newNumber + "");
             }
         });
@@ -171,7 +204,6 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             }
         });
 
-
         return convertView;
     }
     //设置票数的集合选取数量
@@ -223,5 +255,16 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             }
             return holder;
         }
+    }
+
+    //公共检测的方法
+    private void checkTicketNumber(int pos) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("date", resuleMap.get(pos).getDate());
+        map.put("num", resuleMap.get(pos).getNum());
+        map.put("sku_id", resuleMap.get(pos).getSku_id());
+        new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_SUBMIT,
+                new HintInfoBean().setTag(SubmitOrderPlayMethodFragment.class.getName() + "check"), map);
+
     }
 }

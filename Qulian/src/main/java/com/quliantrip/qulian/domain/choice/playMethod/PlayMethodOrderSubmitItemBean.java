@@ -1,16 +1,37 @@
-package com.quliantrip.qulian.domain.choice;
+package com.quliantrip.qulian.domain.choice.playMethod;
 
 /**
- * Created by Qulian5 on 2016/1/28.
+ * 玩法订单单条选中的数据集合
  */
-public class PlayMethodOrderSuBmitItemBean {
-    private String playid;//玩法的id
-    private String sku_id;
-    private String date;//订单的日期
+public class PlayMethodOrderSubmitItemBean {
+    public PlayMethodOrderSubmitItemBean(String playid, String sku_id, String date, String dateString, String num, String service, String store, String price) {
+        this.playid = playid;
+        this.sku_id = sku_id;
+        this.date = date;
+        this.dateString = dateString;
+        this.num = num;
+        this.service = service;
+        this.store = store;
+        this.price = price;
+    }
+
+    private String playid;//玩法条目的id
+    private String sku_id;//属性选着的id
+    private String date;//订单的日期_时间搓
+    private String dateString;//订单日期时间字符串
     private String num;//购买数量
     private String service;//服务时间
     private String store;//商店的id
     private String price;//价格
+
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
 
     public String getPlayid() {
         return playid;

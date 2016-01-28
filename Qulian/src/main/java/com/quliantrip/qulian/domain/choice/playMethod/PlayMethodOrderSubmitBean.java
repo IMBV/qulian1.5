@@ -183,7 +183,7 @@ public class PlayMethodOrderSubmitBean extends BaseJson{
         public static class AttrssEntity {
             private String sale;
             private String num;
-            private double date;
+            private String date;
             private String de;
 
             public void setSale(String sale) {
@@ -194,7 +194,7 @@ public class PlayMethodOrderSubmitBean extends BaseJson{
                 this.num = num;
             }
 
-            public void setDate(double date) {
+            public void setDate(String date) {
                 this.date = date;
             }
 
@@ -210,7 +210,7 @@ public class PlayMethodOrderSubmitBean extends BaseJson{
                 return num;
             }
 
-            public double getDate() {
+            public String getDate() {
                 return date;
             }
 

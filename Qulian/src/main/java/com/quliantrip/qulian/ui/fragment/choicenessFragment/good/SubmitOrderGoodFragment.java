@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.choicenessFragment;
+package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

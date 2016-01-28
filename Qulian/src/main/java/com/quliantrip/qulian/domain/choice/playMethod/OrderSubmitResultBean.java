@@ -2,6 +2,8 @@ package com.quliantrip.qulian.domain.choice.playMethod;
 
 import com.quliantrip.qulian.domain.BaseJson;
 
+import java.io.Serializable;
+
 /**
  * 定点提交结果
  */
@@ -35,7 +37,7 @@ public class OrderSubmitResultBean extends BaseJson {
         return data;
     }
 
-    public static class DataEntity {
+    public static class DataEntity implements Serializable{
         private int id;
         private String order_sn;
 

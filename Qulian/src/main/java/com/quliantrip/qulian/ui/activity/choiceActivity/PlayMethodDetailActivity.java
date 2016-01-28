@@ -3,27 +3,11 @@ package com.quliantrip.qulian.ui.activity.choiceActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.PlayMethodDetailFragment;
-import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.util.UIHelper;
-import com.quliantrip.qulian.view.RollViewPage;
-import com.quliantrip.qulian.view.dialog.CollectDialog;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

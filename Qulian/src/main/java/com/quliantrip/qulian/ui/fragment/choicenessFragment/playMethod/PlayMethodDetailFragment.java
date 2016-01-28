@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.choicenessFragment;
+package com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod;
 
 import android.app.Activity;
 import android.content.Intent;

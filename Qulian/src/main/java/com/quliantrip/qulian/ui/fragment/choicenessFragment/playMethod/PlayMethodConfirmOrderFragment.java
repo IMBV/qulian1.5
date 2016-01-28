@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.choicenessFragment;
+package com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,11 +11,13 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodConfirmOrderAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMehtodOrderConfirmBean;
+import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.domain.me.LinkManBean;
 import com.quliantrip.qulian.domain.me.LoginDataBean;
-import com.quliantrip.qulian.domain.choice.playMethod.PlayMehtodOrderConfirmBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
@@ -64,19 +66,6 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
         return new QuestBean(map, new PlayMehtodOrderConfirmBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_ORDER_CONFIRM);
     }
 
-    @Override
-    public void onEventMainThread(BaseJson bean) {
-        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            PlayMehtodOrderConfirmBean playMehtodOrderConfirmBean = (PlayMehtodOrderConfirmBean) bean;
-            if (playMehtodOrderConfirmBean.getCode() == 200){
-                List<PlayMehtodOrderConfirmBean.DataEntity> dataEntity = playMehtodOrderConfirmBean.getData();
-                listView.setAdapter(new PlayMethodConfirmOrderAdapter((ArrayList<PlayMehtodOrderConfirmBean.DataEntity>) dataEntity));
-            }else{
-                ToastUtil.showToast(mContext,playMehtodOrderConfirmBean.getMsg());
-            }
-        }
-    }
-
     @OnClick(R.id.ll_checked_linkman)
     void intoCheckedLinkman() {
         Bundle bundle = new Bundle();
@@ -99,7 +88,38 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     //跳入到支付界面
     @OnClick(R.id.bt_order_payment)
     void toPay() {
-        UIHelper.showPayMethod(mContext, null);
-        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("orderid", "76");//订单的id
+        map.put("memo", "备注备注备注");//备注
+        map.put("contactsid", "3");//常用联系人的id
+        new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_CONFIRM_SUBMIT,
+                new HintInfoBean().setTag(getClass().getName() + "topay"), map);
+//        UIHelper.showPayMethod(mContext, null);
+//        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
+    @Override
+    public void onEventMainThread(BaseJson bean) {
+        //初始化界面的展示
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            PlayMehtodOrderConfirmBean playMehtodOrderConfirmBean = (PlayMehtodOrderConfirmBean) bean;
+            if (playMehtodOrderConfirmBean.getCode() == 200){
+                List<PlayMehtodOrderConfirmBean.DataEntity> dataEntity = playMehtodOrderConfirmBean.getData();
+                listView.setAdapter(new PlayMethodConfirmOrderAdapter((ArrayList<PlayMehtodOrderConfirmBean.DataEntity>) dataEntity));
+            }else{
+                ToastUtil.showToast(mContext,playMehtodOrderConfirmBean.getMsg());
+            }
+        }
+
+        //确认订单后提交成功后悔跳去的支付界面
+        if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
+            HintInfoBean hintInfoBean = (HintInfoBean) bean;
+            if (hintInfoBean.getCode() == 200){
+                UIHelper.showPayMethod(mContext, null);
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+            }else{
+                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
+            }
+        }
     }
 }
