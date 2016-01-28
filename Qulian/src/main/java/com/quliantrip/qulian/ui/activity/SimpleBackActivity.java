@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseSwipeBackActivity;
 import com.quliantrip.qulian.global.SimpleBackPage;
@@ -36,7 +34,7 @@ public class SimpleBackActivity extends BaseSwipeBackActivity {
 
     @Override
     public void initFindView() {
-        ((RelativeLayout)findViewById(R.id.iv_simple_back)).setOnClickListener(new View.OnClickListener() {
+        ((RelativeLayout) findViewById(R.id.iv_simple_back)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

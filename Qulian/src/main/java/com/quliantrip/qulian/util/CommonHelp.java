@@ -98,8 +98,7 @@ public class CommonHelp {
         sp.edit().putString(key, value).commit();
     }
 
-    public static String getStringSp(Context context, String key,
-                                     String defaultValue) {
+    public static String getStringSp(Context context, String key,String defaultValue) {
         SharedPreferences sp = context.getSharedPreferences(CONFIG_NAME,
                 context.MODE_PRIVATE);
         return sp.getString(key, defaultValue);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
@@ -54,6 +55,8 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         secnicPlayConditionFragment = new SecnicPlayConditionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayConditionFragment).commit();
         initTextListener();
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     //添加数值的监听
