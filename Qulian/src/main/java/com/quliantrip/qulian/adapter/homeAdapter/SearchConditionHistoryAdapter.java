@@ -23,11 +23,11 @@ import butterknife.ButterKnife;
 /**
  * 历史搜索记录
  */
-public class SearckConditionHistoryAdapter extends BasicAdapter<String> {
+public class SearchConditionHistoryAdapter extends BasicAdapter<String> {
 
     private Context mContext;
 
-    public SearckConditionHistoryAdapter(ArrayList<String> list, Context context) {
+    public SearchConditionHistoryAdapter(ArrayList<String> list, Context context) {
         super(list);
         mContext = context;
     }

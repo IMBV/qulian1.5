@@ -1,8 +1,10 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -11,14 +13,16 @@ import android.widget.TextView;
 import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodDetailGoodlistAdapter;
+import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodDetailGoodlistAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
+import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -109,13 +113,25 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     }
 
     @Override
-    public void onEventMainThread(BaseJson bean) {
+    public void onEventMainThread(final BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             PlayMethodDetailBean playMethodDetailBean = (PlayMethodDetailBean) bean;
             PlayMethodDetailBean.DataEntity dataEntity = playMethodDetailBean.getData();
             if (playMethodDetailBean.getCode() == 200) {
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(false);
-                goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter((ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity>) dataEntity.getPackageX()));
+                final ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity> listData = (ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity>) dataEntity.getPackageX();
+                goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter(listData));
+                goodsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PlayMethodDetailBean.DataEntity.PackageEntity bean = listData.get(position);
+                        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                        intent.putExtra("goodId", bean.getPlayitemsid());
+                        intent.putExtra("isCollect", false);
+                        mContext.startActivity(intent);
+                        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                    }
+                });
 
             } else {
                 ToastUtil.showToast(mContext, playMethodDetailBean.getMsg());

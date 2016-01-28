@@ -4,22 +4,14 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.homeAdapter.SearckConditionHistoryAdapter;
+import com.quliantrip.qulian.adapter.homeAdapter.SearchConditionHistoryAdapter;
 import com.quliantrip.qulian.adapter.homeAdapter.SearckConditionHotWordAdapter;
 import com.quliantrip.qulian.base.BaseFragment;
-import com.quliantrip.qulian.base.BasePageCheckFragment;
-import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.CityListBean;
-import com.quliantrip.qulian.net.constant.HttpConstants;
-import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.view.MyGridView;
-import com.quliantrip.qulian.view.MyListMoreView;
 import com.quliantrip.qulian.view.MyListView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -59,7 +51,7 @@ public class SecnicPlayConditionFragment extends BaseFragment {
                 listHistory.add(s);
             }
         }
-        myListView.setAdapter(new SearckConditionHistoryAdapter(listHistory,mContext));
+        myListView.setAdapter(new SearchConditionHistoryAdapter(listHistory,mContext));
     }
 
 }

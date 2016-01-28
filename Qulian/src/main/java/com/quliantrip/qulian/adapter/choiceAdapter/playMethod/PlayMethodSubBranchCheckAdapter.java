@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.adapter.choiceAdapter;
+package com.quliantrip.qulian.adapter.choiceAdapter.playMethod;
 
 import android.view.View;
 import android.view.ViewGroup;

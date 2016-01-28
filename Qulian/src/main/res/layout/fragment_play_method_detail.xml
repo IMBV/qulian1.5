@@ -226,13 +226,40 @@
 
                 <View style="@style/dev_all_line" />
 
-                <!--这里是进行显示以后添加的module对象-->
                 <LinearLayout
-                    android:id="@+id/model_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="49dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical">
 
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/icon_x_jianyan" />
+
+                    <TextView
+                        style="@style/text_main_title_16"
+                        android:layout_marginLeft="10dp"
+                        android:text="达人经验" />
+                </LinearLayout>
+
+                <View style="@style/dev_all_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:background="@drawable/selector_bg_while_gray"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/icon_x_xuzhi" />
+
+                    <TextView
+                        style="@style/text_main_title_16"
+                        android:layout_marginLeft="10dp"
+                        android:text="购买须知" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -8,12 +8,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodConfirmOrderAdapter;
+import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodConfirmOrderAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.LinkManBean;
 import com.quliantrip.qulian.domain.LoginDataBean;
-import com.quliantrip.qulian.domain.choice.good.GoodOrderConfirmBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMehtodOrderConfirmBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;

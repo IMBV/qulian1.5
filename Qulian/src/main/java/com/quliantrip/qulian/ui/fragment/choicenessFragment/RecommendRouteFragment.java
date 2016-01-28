@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodListAdapter;
+import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;

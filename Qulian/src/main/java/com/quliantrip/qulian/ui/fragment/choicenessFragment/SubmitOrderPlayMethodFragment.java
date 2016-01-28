@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodOrderGoodlistAdapter;
+import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodOrderGoodlistAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitBean;

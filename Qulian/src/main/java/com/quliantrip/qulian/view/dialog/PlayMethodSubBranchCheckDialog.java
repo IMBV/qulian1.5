@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.PlayMethodSubBranchCheckAdapter;
+import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodSubBranchCheckAdapter;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitBean;
 
 import java.util.ArrayList;

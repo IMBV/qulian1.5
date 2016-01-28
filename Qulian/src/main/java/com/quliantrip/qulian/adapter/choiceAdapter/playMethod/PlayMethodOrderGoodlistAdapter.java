@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.adapter.choiceAdapter;
+package com.quliantrip.qulian.adapter.choiceAdapter.playMethod;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
