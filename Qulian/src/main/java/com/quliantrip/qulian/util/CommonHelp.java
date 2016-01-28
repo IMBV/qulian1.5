@@ -11,6 +11,10 @@ import android.view.ViewParent;
 
 import com.quliantrip.qulian.global.QulianApplication;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by yuly on 2015/11/9.
  */
@@ -140,6 +144,24 @@ public class CommonHelp {
         String telRegex = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         if (TextUtils.isEmpty(mobiles)) return false;
         else return mobiles.matches(telRegex);
+    }
+
+    //时间戳
+    public static String getTime(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d;
+        try {
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return re_time;
     }
 
 }

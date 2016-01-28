@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.PlayMethodDetailFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.PlayMethodDetailFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

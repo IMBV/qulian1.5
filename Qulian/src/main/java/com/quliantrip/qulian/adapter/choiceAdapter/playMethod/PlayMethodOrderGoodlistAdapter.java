@@ -3,6 +3,7 @@ package com.quliantrip.qulian.adapter.choiceAdapter.playMethod;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.text.format.Time;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,10 @@ import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.dialog.PlayMethodSubBranchCheckDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +79,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         final Holder holder = Holder.getHolder(convertView);
         List<OrderSubmitBean.DataEntity.AttrssEntity> attressList;//有票的日期集合
         //进行数据适配的对象
-        PlayMethodOrderSubmitBean.DataEntity bean = list.get(position);
+        final PlayMethodOrderSubmitBean.DataEntity bean = list.get(position);
         final PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean = resuleMap.get(position);
         holder.name.setText(bean.getPlayitem().getName());
 
@@ -130,23 +134,31 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             }
         });
 
+        holder.pretime.setText(playMethodOrderSubmitItemBean.getDateString());
         //选择日期
         convertView.findViewById(R.id.rl_preview_time_data_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Time time = new Time();
-                time.setToNow();
-                final int oldYear = time.year;
-                final int month = time.month;
-                final int day = time.monthDay;
+                String dateSring = playMethodOrderSubmitItemBean.getDateString();
+                String[] dateArray = dateSring.split("-");
+                final int oldYear = Integer.valueOf(dateArray[0]);
+                final int month = Integer.valueOf(dateArray[1])-1;
+                final int day = Integer.valueOf(dateArray[2]);
+
                 DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         holder.residueNumber.setText("");
                         //点击日期与现在时间对比
-                        String checkData = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
-                        String oldData = (month + 1) + "/" + day + "/" + oldYear;
+                        String monthString = null;
+                        String dayString = null;
+                        if((monthOfYear + 1)<10)
+                            monthString = "0"+(monthOfYear + 1);
+                        if (dayOfMonth<10)
+                            dayString = "0"+dayOfMonth;
+                        String checkData = year + "-" +monthString + "-" + dayString ;
+                        String oldData = playMethodOrderSubmitItemBean.getDateString();
                         if (oldYear > year) {
                             ToastUtil.showToast(mContext, "选择时间不能是今天之前");
                             holder.pretime.setText(oldData);
@@ -161,17 +173,18 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                                             ToastUtil.showToast(mContext, "选择时间不能是今天之前");
                                             holder.pretime.setText(oldData);
                                         } else {
-//                                            setNumberInfo(checkData);
-                                            holder.pretime.setText(checkData);
+                                            setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
+//                                            holder.pretime.setText(checkData);
+//                                            playMethodOrderSubmitItemBean.setDate(getTime(checkData));
                                         }
                                     } else {
-//                                        setNumberInfo(checkData);
-                                        holder.pretime.setText(checkData);
+                                        setNumberInfo(holder,checkData,playMethodOrderSubmitItemBean,bean.getAttrss());
+//                                        holder.pretime.setText(checkData);
+//                                        playMethodOrderSubmitItemBean.setDate(getTime(checkData));
                                     }
                                 }
                             } else {
-//                                setNumberInfo(checkData);
-                                holder.pretime.setText(checkData);
+                                setNumberInfo(holder,checkData,playMethodOrderSubmitItemBean,bean.getAttrss());
                             }
                         }
                     }
@@ -193,38 +206,60 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
 
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String time;
                         if (minute < 10) {
-                            holder.serveTime.setText(hourOfDay + " : 0" + minute);
+                            time = hourOfDay + " : 0" + minute;
                         } else {
-                            holder.serveTime.setText(hourOfDay + " : " + minute);
+                            time = hourOfDay + " : " + minute;
                         }
+                        holder.serveTime.setText(time);
+                        playMethodOrderSubmitItemBean.setService(time);
                     }
                 }, hour, minute, true);
                 timeDialog.show();
             }
         });
-
         return convertView;
     }
-    //设置票数的集合选取数量
-//    private void setNumberInfo(Holder holder,String checkData) {
-//        holder.pretime.setText(checkData);
-//        if (attressList != null) {
-//            for (OrderSubmitBean.DataEntity.AttrssEntity attress : attressList) {
-//                if (attress.getDate().equals(checkData)) {
-//                    if (!(Integer.valueOf(attress.getNum()) > 10))
-//                        residueNumber.setText("剩余" + attress.getNum());
-//                    else
-//                        residueNumber.setText("有票");
-//                    break;
-//                }
-//            }
-//        }
-//        if (TextUtils.isEmpty(residueNumber.getText())) {
-//            residueNumber.setText("无票");
-//        }
-//    }
 
+    //设置票数的集合选取数量
+    private void setNumberInfo(Holder holder,String checkData,
+                               PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean,
+                               List<PlayMethodOrderSubmitBean.DataEntity.AttrssEntity> attrss) {
+        holder.pretime.setText(checkData);
+        if (attrss != null) {
+            for (PlayMethodOrderSubmitBean.DataEntity.AttrssEntity attress : attrss) {
+                if (attress.getDe().equals(checkData)) {
+                    if (!(Integer.valueOf(attress.getNum()) > 10))
+                        holder.residueNumber.setText("剩余" + attress.getNum());
+                    else
+                        holder.residueNumber.setText("有票");
+                    playMethodOrderSubmitItemBean.setDate(attress.getDate());
+                    break;
+                }
+            }
+        }
+        if (TextUtils.isEmpty(holder.residueNumber.getText())) {
+            holder.residueNumber.setText("无票");
+        }
+    }
+
+    public static String getTime(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d;
+        try {
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return re_time;
+    }
     static class Holder {
         @Bind(R.id.tv_good_name)
         TextView name;//商品的名称

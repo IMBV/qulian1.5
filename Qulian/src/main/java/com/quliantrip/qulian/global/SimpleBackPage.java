@@ -2,11 +2,11 @@ package com.quliantrip.qulian.global;
 
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.ConfirmOrderFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.PlayMethodConfirmOrderFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.ConfirmOrderFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.SubmitOrderGoodFragment;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.SubmitOrderPlayMethodFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.PlayMethodConfirmOrderFragment;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.SubmitOrderPlayMethodFragment;
 import com.quliantrip.qulian.ui.fragment.homeFragment.CityChooseFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.AboutMeFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.ChangePasswordFragment;
