@@ -101,6 +101,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
             }
         }
         if (bean.getTag().equals("")) {
+            //这里可以进行请求错误时的取消下载的界面
         }
     }
 
@@ -115,6 +116,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         }
     }
+
     //点击收藏
     @OnClick(R.id.ll_good_collect)
     void collectGood() {

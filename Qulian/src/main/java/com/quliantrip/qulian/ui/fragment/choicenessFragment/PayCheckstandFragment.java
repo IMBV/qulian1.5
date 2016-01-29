@@ -3,14 +3,25 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
-import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.WeiXinRePay;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
+import com.tencent.mm.sdk.constants.Build;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Qulian5 on 2016/1/8.
@@ -25,6 +36,8 @@ public class PayCheckstandFragment extends BaseFragment {
     public View initView() {
         view = View.inflate(mContext, R.layout.fragment_pay_check_stand, null);
         ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
+        regToWx();
         return view;
     }
 
@@ -50,7 +63,8 @@ public class PayCheckstandFragment extends BaseFragment {
     void commentPay() {
         switch (mCurrentPayWay) {
             case 0:
-                showDialog_cancel("微信支付中");
+                Map<String, String> map = new HashMap<String, String>();
+                new PacketStringReQuest("http://v2.quliantrip.com/backend/web/index.php?r=site/payorder", new WeiXinRePay().setTag(getClass().getName()));
                 break;
             case 1:
                 showDialog_cancel("支付宝支付中");
@@ -58,11 +72,50 @@ public class PayCheckstandFragment extends BaseFragment {
         }
     }
 
+    public void onEventMainThread(BaseJson bean) {
+        //获取进入界面的数据
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            WeiXinRePay weiXinRePay = (WeiXinRePay) bean;
+            toWeixinPay(weiXinRePay);
+        }
+    }
+
+    //注册微信支付平台
+    private static final String WENXI_APP_ID = "wxfc835c6ebff9d032";
+    private IWXAPI api;
+
+    private void regToWx() {
+        api = WXAPIFactory.createWXAPI(mContext, WENXI_APP_ID, false);
+        api.registerApp(WENXI_APP_ID);
+    }
+
+    private void toWeixinPay(WeiXinRePay weiXinRePay) {
+        try {
+            boolean isPaySupported = api.getWXAppSupportAPI() >= Build.PAY_SUPPORTED_SDK_INT;
+            Toast.makeText(mContext, String.valueOf(isPaySupported), Toast.LENGTH_SHORT).show();
+            PayReq req = new PayReq();
+            req.appId = weiXinRePay.getAppid();
+            req.partnerId = weiXinRePay.getPartnerid();
+            req.prepayId = weiXinRePay.getPrepayid();
+            req.nonceStr = weiXinRePay.getNoncestr();
+            req.timeStamp = weiXinRePay.getTimestamp();
+            req.packageValue = weiXinRePay.getPackageX();
+            req.sign = weiXinRePay.getSign();
+            Toast.makeText(mContext, "正常调起支付", Toast.LENGTH_SHORT).show();
+//            req.extData = "app data"; // optional
+            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+            api.sendReq(req);
+        } catch (Exception e) {
+            Toast.makeText(mContext, "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     //进行选择图片的切换
     private void changePayWay(int id) {
         int oldPayWay = mCurrentPayWay;
         int newCheckId = oldCheckId;
-            switch (id) {
+        switch (id) {
             case R.id.iv_pay_method_weixin:
                 mCurrentPayWay = 0;
                 newCheckId = R.id.iv_pay_method_weixin;
@@ -76,7 +129,32 @@ public class PayCheckstandFragment extends BaseFragment {
             ((ImageView) view.findViewById(oldCheckId)).setImageResource(R.mipmap.cnb_wode_nor);
             ((ImageView) view.findViewById(newCheckId)).setImageResource(R.mipmap.cnb_wode_pre);
         }
-        System.out.println(oldPayWay+"asdf0"+mCurrentPayWay);
+        System.out.println(oldPayWay + "asdf0" + mCurrentPayWay);
         oldCheckId = id;
     }
+
+
+//    /*
+//    * 步骤一：获取AccessToken
+//    */
+//    private class GetAccessTokenTask extends AsyncTask<Void, Void, GetAccessTokenResult> {
+//        @Override
+//        protected void onPreExecute() {
+//
+//        }
+//        @Override
+//        protected void onPostExecute(GetAccessTokenResult result) {
+//                 /*
+//                 * 根据获得的access token来开启获取支付id的任务
+//                 * 开始步骤二:
+//                 */
+//            GetPrepayIdTask getPrepayId = new GetPrepayIdTask(result.accessToken);
+//            getPrepayId.execute();
+//        }
+//        @Override
+//        protected GetAccessTokenResult doInBackground(Void... params) {
+//            //发网络请求获取access token
+//        }
+
+
 }
