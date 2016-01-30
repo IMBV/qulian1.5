@@ -66,14 +66,26 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
 
-    <TextView
-
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_user_control_info"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="点击完成即同意"
-        android:textColor="@color/app_main_title_text"
-        android:textSize="10sp" />
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="点击完成即同意"
+            android:textColor="@color/app_main_sub_title_text"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《趣连用户注册协议》"
+            android:textColor="@color/app_main_collor"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/bt_user_login_email_submit"

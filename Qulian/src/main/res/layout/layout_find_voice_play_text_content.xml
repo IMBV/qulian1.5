@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
+        android:text="空间撒后方可垃圾收费卡死机打发换个卡收到就疯了要的撒覅欧耶UI沃尔业务客服号盛大卡减肥哈课时费
+        科技收到风科技拉伸到合肥科技啊哈阿斯科技大护法了客服哈卡斯
+        卡收到回复卡洛斯的粉红色都卡了符合" />
+
+</LinearLayout>

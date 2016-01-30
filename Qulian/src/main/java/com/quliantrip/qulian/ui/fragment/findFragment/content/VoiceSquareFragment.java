@@ -55,7 +55,7 @@ public class VoiceSquareFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             VoiceSquareBean voiceSquareBean = (VoiceSquareBean) bean;
             if (((VoiceSquareBean) bean).getCode() == 200) {
-                listView.setAdapter(new VoiceSquareListAdapter((ArrayList<VoiceSquareBean.DataEntity>)voiceSquareBean.getData()));
+                listView.setAdapter(new VoiceSquareListAdapter((ArrayList<VoiceSquareBean.DataEntity>)voiceSquareBean.getData(),mContext));
             } else {
                 ToastUtil.showToast(mContext, voiceSquareBean.getMsg());
             }

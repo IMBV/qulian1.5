@@ -24,6 +24,7 @@
     <string name="actionbar_me_add_link_man">编辑常用联系人</string>
     <string name="actionbar_order_confirm">确认订单</string>
     <string name="actionbar_my_about">关于我们</string>
+    <string name="actionbar_my_user_procel">用户协议</string>
 
     <string name="load_error">返回首页</string>
 

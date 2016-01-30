@@ -24,6 +24,7 @@ import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.TimeCountUtil;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.ClearEditText;
 
 import java.util.HashMap;
@@ -88,7 +89,7 @@ public class RegisterPhoneFragment extends BaseDialogFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && (this.getClass().getName() + "mobile").equals(bean.getTag())) {
             MoBileBean moBileBean = (MoBileBean) bean;
-            if (moBileBean.getCode()==200)
+            if (moBileBean.getCode() == 200)
                 checkNum.setText(moBileBean.getData());
             else
                 ToastUtil.showToast(mContext, moBileBean.getMsg());
@@ -151,5 +152,10 @@ public class RegisterPhoneFragment extends BaseDialogFragment {
         Map<String, String> map = new HashMap<String, String>();
         map.put("mobile", phone);
         new PacketStringReQuest(HttpConstants.CHECK_MOBILE_NUMBER, new MoBileBean().setTag(getClass().getName() + "mobile"), map, null);
+    }
+
+    @OnClick(R.id.ll_user_control_info)
+    void showControlInfo() {
+        UIHelper.showUserProcel(mContext, null);
     }
 }

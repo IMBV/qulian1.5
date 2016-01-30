@@ -74,6 +74,8 @@ public class HttpConstants {
     public static final String DISCOUNT_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/coupon";
     //语音广场
     public static final String VOICE_SQUARE_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/spot";
+    //语音广场详情
+    public static final String VOICE_SQUARE_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/spotxq";
 
     //首页
     //首页的筛选

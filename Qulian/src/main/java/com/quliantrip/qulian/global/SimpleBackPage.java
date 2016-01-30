@@ -13,6 +13,7 @@ import com.quliantrip.qulian.ui.fragment.meFragment.ChangePasswordFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.IntegralFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.LoginFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.MySettingFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.UserProtocolFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.discount.MyDiscountFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.linkman.AddLinkManFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.linkman.MyLinkmanFragment;
@@ -35,7 +36,8 @@ public enum SimpleBackPage {
     OABOUT_ME(14, R.string.actionbar_my_about, AboutMeFragment.class),
     MY_SEARCH_BACK_PASSWORD(15, R.string.actionbar_me_searck_back_password, SearchBackPasswordFragment.class),
     PLAY_METHOD_ORDER(16, R.string.actionbar_good_order, SubmitOrderPlayMethodFragment.class),
-    PLAY_METHOD_ORDER_CONFIRM(17, R.string.actionbar_order_confirm, PlayMethodConfirmOrderFragment.class);
+    PLAY_METHOD_ORDER_CONFIRM(17, R.string.actionbar_order_confirm, PlayMethodConfirmOrderFragment.class),
+    ME_USER_PROTOCEL(18, R.string.actionbar_my_user_procel, UserProtocolFragment.class);
 
     private int title;
     private Class<?> clz;

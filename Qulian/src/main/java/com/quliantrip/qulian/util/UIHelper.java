@@ -89,6 +89,11 @@ public class UIHelper {
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
+    public static void showUserProcel(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.ME_USER_PROTOCEL, bundle);
+        ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
     public static void showAddLinkMan(Context context, Fragment fragment, int requestCode, Bundle args) {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_ADD_LINKMAN, args);
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);

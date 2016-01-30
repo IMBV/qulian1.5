@@ -77,6 +77,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
 
+        <!--语音广场的详情-->
+        <activity
+            android:name=".ui.activity.findActivity.SpotDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SwipeBackActivity" />
+
         <!--首页玩法、景点、当地游条件-->
         <activity
             android:name=".ui.activity.HomeActivity.SecnicPlayConditionActivity"
@@ -85,11 +92,6 @@
             android:theme="@style/SwipeBackActivity" />
 
         <!--语音导航的或景区详情-->
-        <activity
-            android:name=".ui.activity.findActivity.VoiceNavigationActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/SwipeBackActivity" />
 
         <!--我的收藏-->
         <activity
@@ -157,6 +159,7 @@
             android:exported="true"
             android:label="@string/app_name"></activity>
 
+        //这里可以适应application加
         <receiver android:name=".broadcast.WeixinRegister">
             <intent-filter>
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />

@@ -1,6 +1,8 @@
 package com.quliantrip.qulian.adapter.finderAdapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,6 +12,8 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.find.VoiceSquareBean;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.ui.activity.findActivity.SpotDetailActivity;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.view.MyGridView;
 
 import java.util.ArrayList;
@@ -25,12 +29,9 @@ import butterknife.ButterKnife;
 public class VoiceSquareListAdapter extends BasicAdapter<VoiceSquareBean.DataEntity> {
     private Context mContext;
 
-    public VoiceSquareListAdapter(ArrayList<VoiceSquareBean.DataEntity> list) {
+    public VoiceSquareListAdapter(ArrayList<VoiceSquareBean.DataEntity> list,Context context) {
         super(list);
-    }
-
-    public void setmContext(Context context) {
-        this.mContext = context;
+        mContext = context;
     }
 
     @Override
@@ -46,12 +47,11 @@ public class VoiceSquareListAdapter extends BasicAdapter<VoiceSquareBean.DataEnt
         holder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                CityListBean.DataEntity.ChildEntity bean = ((CityListBean.DataEntity.ChildEntity) parent.getAdapter().getItem(position));
-//                Intent intent = new Intent(mContext, MainActivity.class);
-//                intent.putExtra("cityName",bean.getChinese_name());
-//                intent.putExtra("cityId", bean.getId());
-//                ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
-//                ((SimpleBackActivity) mContext).finish();
+                VoiceSquareBean.DataEntity.ChildEntity bean = ((VoiceSquareBean.DataEntity.ChildEntity) parent.getAdapter().getItem(position));
+                Intent intent = new Intent(mContext, SpotDetailActivity.class);
+//                intent.putExtra("spotId", bean.getId());
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }
         });
         return convertView;
