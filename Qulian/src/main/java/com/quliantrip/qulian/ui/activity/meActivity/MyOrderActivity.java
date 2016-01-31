@@ -10,10 +10,8 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.RegisterStyleAdapter;
-import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.GoodOrderFragment;
-import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.PlayMethodOrderFragment;
-import com.quliantrip.qulian.ui.fragment.meFragment.register.RegisterEmailFragment;
-import com.quliantrip.qulian.ui.fragment.meFragment.register.RegisterPhoneFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.good.GoodOrderFragment;
+import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.playMethod.PlayMethodOrderFragment;
 
 import java.util.ArrayList;
 

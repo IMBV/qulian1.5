@@ -1,16 +1,11 @@
-package com.quliantrip.qulian.ui.fragment.meFragment.orderFragment;
+package com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.good;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -20,18 +15,26 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.GoodOrderListAdapter;
+import com.quliantrip.qulian.base.BasePageCheckFragment;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.me.GoodOrderListBean;
+import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- *我的订单详列表页面
+ * 我的订单详列表页面
  */
-public class GoodOrderFragment extends Fragment {
-    private Context mContext;
+public class GoodOrderFragment extends BasePageCheckFragment {
     private View view;
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
@@ -54,20 +57,31 @@ public class GoodOrderFragment extends Fragment {
     RadioButton user;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getActivity();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_me_order_good, null);
         ButterKnife.bind(this, view);
         setOrderNumberCollor(all, 10);
         setOrderNumberCollor(toPay, 5);
-        initRefreshListView();
         return view;
+    }
+
+    @Override
+    protected QuestBean requestData() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("key", "-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");
+        return new QuestBean(map, new GoodOrderListBean().setTag(getClass().getName()), HttpConstants.ME_ORDER_GOOD_LIST);
+    }
+
+    @Override
+    public void onEventMainThread(BaseJson bean) {
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            GoodOrderListBean GoodOrderListBean = (GoodOrderListBean) bean;
+            if (GoodOrderListBean.getCode() == 200) {
+                initRefreshListView((ArrayList<com.quliantrip.qulian.domain.me.GoodOrderListBean.DataEntity>) GoodOrderListBean.getData());
+            } else {
+                ToastUtil.showToast(mContext, GoodOrderListBean.getMsg());
+            }
+        }
     }
 
     private static int chineseNums(String str) {
@@ -88,17 +102,14 @@ public class GoodOrderFragment extends Fragment {
         rb.setText(styledText, TextView.BufferType.SPANNABLE);
     }
 
-    private void initRefreshListView() {
+    private void initRefreshListView(ArrayList<GoodOrderListBean.DataEntity> list) {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
-        final ArrayList<String> list = new ArrayList<String>();
-        int i;
-        for (i = 0; i <= 30; i++)
-            list.add("asdf" + i);
-        final GoodOrderListAdapter test = new GoodOrderListAdapter(list);
-        listView.setAdapter(test);
+
+        final GoodOrderListAdapter goodOrderListAdapter = new GoodOrderListAdapter(list);
+        listView.setAdapter(goodOrderListAdapter);
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
 
@@ -118,8 +129,7 @@ public class GoodOrderFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem("shang");
-                            test.notifyDataSetChanged();
+                            goodOrderListAdapter.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
                     }, 500);
@@ -128,8 +138,7 @@ public class GoodOrderFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem("xia");
-                            test.notifyDataSetChanged();
+                            goodOrderListAdapter.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
                     }, 500);

@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.adapter.choiceAdapter.playMethod;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -51,8 +52,14 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
         }
         final PlayMethodDetailBean.DataEntity.PackageEntity bean = list.get(position);
 //        ImageLoader.getInstance().displayImage((String) bean.getImages(), holder.img, ImageLoaderOptions.pager_options);
-        holder.name.setText(bean.getName());
-        holder.taocao.setText("(" + bean.getMerchantname() + ")");
+        holder.name.setText(bean.getTitle());
+        if (bean.getMerchantname() == null||TextUtils.isEmpty(bean.getMerchantname())){
+            holder.taocao.setVisibility(View.GONE);
+        }else{
+            holder.taocao.setVisibility(View.VISIBLE);
+            holder.taocao.setText("(" + bean.getMerchantname() + ")");
+        }
+
 //        holder.des.setText(bean.getReason());
         return convertView;
     }

@@ -34,8 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Yuly on 2015/12/7.
- * www.quliantrip.com
+ * 玩法展示页
  */
 public class RecommendRouteFragment extends BasePageCheckFragment {
     @Bind(R.id.expandtab_view)
@@ -56,7 +55,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-//        map.put("ctl", "tuan");
+
         return new QuestBean(map, new PlayMethodBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_LIST);
     }
 
@@ -81,6 +80,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     List<String> themeString = new ArrayList<String>();
     List<String> timeString = new ArrayList<String>();
     List<String> pNumberString = new ArrayList<String>();
+
     //初始化筛选条件
     private void initPlayMethodConditiom(List<PlayMethodBean.DataEntity.ScreenEntity> siftList) {
         ArrayList<String> mTextArray = new ArrayList<String>();
@@ -91,25 +91,25 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
         PlayMethodBean.DataEntity.ScreenEntity screenEntityOne = siftList.get(0);
         for (PlayMethodBean.DataEntity.ScreenEntity.ChildEntity childEntity : screenEntityOne.getChild()) {
-            themeMap.put(childEntity.getTag_name(),childEntity.getId());
-            themeString.add(childEntity.getTag_name());
+            themeMap.put(childEntity.getTag_name(), childEntity.getId());
+            themeString.add(childEntity.getName());
         }
 
         PlayMethodBean.DataEntity.ScreenEntity screenEntityTwo = siftList.get(1);
         for (PlayMethodBean.DataEntity.ScreenEntity.ChildEntity childEntity : screenEntityTwo.getChild()) {
-            timeMap.put( childEntity.getName(),childEntity.getId());
+            timeMap.put(childEntity.getName(), childEntity.getId());
             timeString.add(childEntity.getName());
         }
 
         PlayMethodBean.DataEntity.ScreenEntity screenEntityThree = siftList.get(2);
         for (PlayMethodBean.DataEntity.ScreenEntity.ChildEntity childEntity : screenEntityThree.getChild()) {
-            pNumberMap.put(childEntity.getName(),childEntity.getId());
+            pNumberMap.put(childEntity.getName(), childEntity.getId());
             pNumberString.add(childEntity.getName());
         }
 
-        String[] themeArray =  themeString.toArray(new String[themeString.size()]);
-        String[] timeArray =  timeString.toArray(new String[timeString.size()]);
-        String[] pNumberArray =  pNumberString.toArray(new String[pNumberString.size()]);
+        String[] themeArray = themeString.toArray(new String[themeString.size()]);
+        String[] timeArray = timeString.toArray(new String[timeString.size()]);
+        String[] pNumberArray = pNumberString.toArray(new String[pNumberString.size()]);
         viewLeft = new LeftFilterView(mContext, themeArray);
         viewMiddle = new MiddleFilterView(mContext, timeArray);
         viewRight = new RightFilterView(mContext, pNumberArray);
@@ -164,24 +164,21 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         if (position >= 0 && !expandTabView.getTitle(position).equals(showText)) {
             expandTabView.setTitle(showText, position);
         }
-        switch (position){
+        switch (position) {
             case 0:
                 String themeid = themeMap.get(showText);
-                ToastUtil.showToast(mContext,showText+themeid);
+                ToastUtil.showToast(mContext, showText + themeid);
                 break;
             case 1:
                 String timeid = timeMap.get(showText);
-                ToastUtil.showToast(mContext,showText+timeid);
+                ToastUtil.showToast(mContext, showText + timeid);
                 break;
             case 2:
                 String pNumberid = pNumberMap.get(showText);
-                ToastUtil.showToast(mContext,showText+pNumberid);
+                ToastUtil.showToast(mContext, showText + pNumberid);
                 break;
         }
     }
-
-
-
 
     public void hidePopupWindow() {
         if (expandTabView != null) {
@@ -208,7 +205,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PlayMethodBean.DataEntity.PlayEntity bean = listPlayMethod.get(position - 1);
                 Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
-                intent.putExtra("goodId", bean.getId());
+                intent.putExtra("playMethodId", bean.getId());
 //                intent.putExtra("isCollect", bean.isIs_house());
                 mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);

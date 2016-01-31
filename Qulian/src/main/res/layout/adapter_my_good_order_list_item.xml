@@ -50,6 +50,7 @@
         android:layout_marginTop="15dp">
 
         <ImageView
+            android:id="@+id/iv_good_detail_img"
             android:layout_width="95dp"
             android:layout_height="63dp"
             android:src="@mipmap/bg_default_min" />
@@ -65,6 +66,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_good_detail_name"
                     style="@style/text_main_title_14"
                     android:layout_width="180dp"
                     android:layout_gravity="left"

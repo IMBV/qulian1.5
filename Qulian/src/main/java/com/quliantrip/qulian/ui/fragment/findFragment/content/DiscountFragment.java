@@ -54,8 +54,8 @@ public class DiscountFragment extends BasePageCheckFragment {
 
     @Override
     public void onEventMainThread(BaseJson bean) {
-        DiscountBean discountBean = (DiscountBean) bean;
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            DiscountBean discountBean = (DiscountBean) bean;
             if (discountBean.getCode() == 200){
                 initListView(discountBean.getData());
             }else{

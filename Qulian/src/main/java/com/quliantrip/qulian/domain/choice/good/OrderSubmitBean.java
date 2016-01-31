@@ -160,10 +160,11 @@ public class OrderSubmitBean extends BaseJson {
             }
         }
 
-        public static class AttrssEntity{
+        public static class AttrssEntity {
             private String sale;
             private String num;
             private String date;
+            private String de;
 
             public void setSale(String sale) {
                 this.sale = sale;
@@ -177,6 +178,10 @@ public class OrderSubmitBean extends BaseJson {
                 this.date = date;
             }
 
+            public void setDe(String de) {
+                this.de = de;
+            }
+
             public String getSale() {
                 return sale;
             }
@@ -187,6 +192,10 @@ public class OrderSubmitBean extends BaseJson {
 
             public String getDate() {
                 return date;
+            }
+
+            public String getDe() {
+                return de;
             }
         }
     }

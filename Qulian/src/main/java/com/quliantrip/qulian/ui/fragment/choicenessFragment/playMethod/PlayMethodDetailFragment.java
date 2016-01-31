@@ -107,7 +107,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "1");
+        map.put("id", ((Activity)mContext).getIntent().getStringExtra("playMethodId"));
         return new QuestBean(map, new PlayMethodDetailBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_DETRAIL);
     }
 
@@ -125,13 +125,12 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         PlayMethodDetailBean.DataEntity.PackageEntity bean = listData.get(position);
                         Intent intent = new Intent(mContext, GoodDetailActivity.class);
-                        intent.putExtra("goodId", bean.getPlayitemsid());
+                        intent.putExtra("goodId", bean.getClass_id());
                         intent.putExtra("isCollect", false);
                         mContext.startActivity(intent);
                         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                     }
                 });
-
             } else {
                 ToastUtil.showToast(mContext, playMethodDetailBean.getMsg());
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(true);

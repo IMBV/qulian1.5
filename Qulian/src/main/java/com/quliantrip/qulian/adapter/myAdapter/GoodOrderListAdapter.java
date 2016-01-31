@@ -2,24 +2,30 @@ package com.quliantrip.qulian.adapter.myAdapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
+import com.quliantrip.qulian.domain.me.GoodOrderListBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * 玩法订单列表页
  */
-public class GoodOrderListAdapter extends BasicAdapter<String> {
-    public GoodOrderListAdapter(ArrayList<String> list) {
+public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEntity> {
+    public GoodOrderListAdapter(ArrayList<GoodOrderListBean.DataEntity> list) {
         super(list);
     }
 
-    public void addItem(String s) {
+    public void addItem(GoodOrderListBean.DataEntity s) {
         list.add(s);
     }
 
@@ -28,15 +34,22 @@ public class GoodOrderListAdapter extends BasicAdapter<String> {
         if (convertView == null) {
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_good_order_list_item, null);
         }
-//        Holder holder = Holder.getHolder(convertView);
-//        String name = list.get(position);
-//        holder.city.setText(name);
+        Holder holder = Holder.getHolder(convertView);
+        final GoodOrderListBean.DataEntity bean = list.get(position);
+
+        //添加数据
+        if (bean.getImgs() != null)
+            ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+        holder.name.setText(bean.getName());
+
         return convertView;
     }
 
     static class Holder {
-//        @Bind(R.id.tv_city)
-//        TextView city;
+        @Bind(R.id.iv_good_detail_img)
+        ImageView img;
+        @Bind(R.id.tv_good_detail_name)
+        TextView name;
 
         public Holder(View convertView) {
             super();

@@ -13,10 +13,8 @@ import com.quliantrip.qulian.adapter.myAdapter.RegisterStyleAdapter;
 import com.quliantrip.qulian.ui.fragment.meFragment.collectFragment.GoodCollectFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.collectFragment.PlayMethodCollectFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.GoodOrderFragment;
-import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.PlayMethodOrderFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 
-import java.io.DataOutput;
 import java.util.ArrayList;
 import java.util.List;
 

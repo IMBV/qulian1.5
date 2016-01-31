@@ -16,10 +16,19 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.PlayMethodCollectListAdapter;
+import com.quliantrip.qulian.base.BasePageCheckFragment;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
+import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,8 +36,7 @@ import butterknife.ButterKnife;
 /**
  * 玩法收藏列表
  */
-public class PlayMethodCollectFragment extends Fragment {
-    private Context mContext;
+public class PlayMethodCollectFragment extends BasePageCheckFragment {
     private View view;
     private PlayMethodCollectListAdapter test;
     private ArrayList<com.quliantrip.qulian.domain.Test> list;
@@ -38,19 +46,32 @@ public class PlayMethodCollectFragment extends Fragment {
     protected ListView listView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getActivity();
+    protected View getSuccessView() {
+        view = View.inflate(mContext, R.layout.fragment_me_play_method_order, null);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = View.inflate(mContext, R.layout.fragment_me_play_method_order, null);
-        ButterKnife.bind(this, view);
-        initRefreshListView();
-        return view;
+    protected QuestBean requestData() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("key","-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");
+        return new QuestBean(map, new PlayCollectListBean().setTag(getClass().getName()), HttpConstants.ME_COLLECT_PLAY_METHOD_LIST);
     }
+
+    @Override
+    public void onEventMainThread(BaseJson bean) {
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            PlayCollectListBean playCollectListBean = (PlayCollectListBean) bean;
+            if (playCollectListBean.getCode() == 200){
+                initRefreshListView(playCollectListBean.getData());
+            }else {
+                ToastUtil.showToast(mContext,playCollectListBean.getMsg());
+            }
+        }
+    }
+
+
 
     public void setEdit(boolean b) {
         test.setEdit(b);
@@ -87,7 +108,7 @@ public class PlayMethodCollectFragment extends Fragment {
             test.notifyDataSetChanged();
     }
 
-    private void initRefreshListView() {
+    private void initRefreshListView(List<PlayCollectListBean.DataEntity> listBean) {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
@@ -96,7 +117,7 @@ public class PlayMethodCollectFragment extends Fragment {
         int i;
         for (i = 0; i <= 30; i++)
             list.add(new com.quliantrip.qulian.domain.Test(false, "playMethod" + i));
-        test = new PlayMethodCollectListAdapter(list, mContext);
+        test = new PlayMethodCollectListAdapter((ArrayList<PlayCollectListBean.DataEntity>) listBean, mContext);
         listView.setAdapter(test);
         //条目单击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -154,7 +175,6 @@ public class PlayMethodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "shang"));
                             test.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
@@ -164,7 +184,6 @@ public class PlayMethodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "xia"));
                             test.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }

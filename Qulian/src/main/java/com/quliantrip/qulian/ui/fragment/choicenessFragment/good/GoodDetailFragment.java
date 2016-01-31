@@ -1,14 +1,17 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.adapter.choiceAdapter.good.GoodDetailBranchCheckAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
@@ -22,6 +25,7 @@ import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
+import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.RollViewPage;
 import com.quliantrip.qulian.view.dialog.CollectDialog;
 
@@ -55,7 +59,17 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @Bind(R.id.tv_good_detail_name)
     TextView name;
     @Bind(R.id.tv_good_save_number)
-    TextView saveNumber;
+    TextView saveNumber;//已售的数量
+
+    @Bind(R.id.tv_good_detail_taocan_number)
+    TextView taocanNmber;//可选套餐的数量
+    @Bind(R.id.tv_good_detail_can_check_time)
+    TextView checkTime;//可选时间
+    @Bind(R.id.tv_good_detail_gouma_info)
+    TextView goumaInfo;//够吗须知
+    @Bind(R.id.mlv_good_detail_can_check_median)
+    MyListView medianCheck;
+
 
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
@@ -81,6 +95,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
+        System.out.println(((Activity) mContext).getIntent().getStringExtra("goodId")+"数据的id");
         map.put("id", ((Activity) mContext).getIntent().getStringExtra("goodId"));
         return new QuestBean(map, new GoodDetailBean().setTag(getClass().getName()), HttpConstants.GOOD_DETAIL);
     }
@@ -92,9 +107,13 @@ public class GoodDetailFragment extends BasePageCheckFragment {
             if (goodDetailBean.getCode() == 200) {
                 ((GoodDetailActivity) mContext).showOrHideBack(false);
                 GoodDetailBean.DataEntity detail = goodDetailBean.getData();
-                initRollView(detail.getOnline().getImg());
+                initRollView(detail.getOnline().getImgs());
                 name.setText(detail.getOnline().getName());
                 saveNumber.setText("已售" + 12);
+                taocanNmber.setText(detail.getNum()+"种");
+                checkTime.setText(detail.getOnline().getPurnotes());
+                goumaInfo.setText(detail.getOnline().getPricedesc());
+                medianCheck.setAdapter(new GoodDetailBranchCheckAdapter((ArrayList<GoodDetailBean.DataEntity.BranchEntity>) detail.getBranch()));
             } else {
                 ((GoodDetailActivity) mContext).showOrHideBack(true);
                 ToastUtil.showToast(mContext, goodDetailBean.getMsg());
@@ -109,7 +128,9 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @OnClick(R.id.bt_detail_order_buy)
     void intoOrder() {
         if (QulianApplication.getInstance().isLogin()) {
-            UIHelper.showGoodOrder(mContext, null);
+            Bundle bundle = new Bundle();
+            bundle.putString("goodId",((Activity) mContext).getIntent().getStringExtra("goodId"));
+            UIHelper.showGoodOrder(mContext, bundle);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         } else {
             UIHelper.showMyLogin(this, 41);
@@ -153,7 +174,10 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     private void initRollView(String img) {
         imageList.clear();
         dotList.clear();
-        imageList.add(img);
+        String[] strings = img.split(",");
+        for (int i=0;i<strings.length;i++){
+            imageList.add(strings[i]);
+        }
         if (imageList.size() > 0) {
             //初始化小点
             initDoc();

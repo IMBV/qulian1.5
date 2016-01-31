@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Qulian5 on 2016/1/21.
+ * 单品玩法列表也的展示
  */
 public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.OnlineEntity> {
     public HotGoodListAdapter(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
@@ -32,7 +32,7 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
         }
         Holder holder = Holder.getHolder(convertView);
         final HotGoodBean.DataEntity.OnlineEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImg(), holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImg().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
         if (bean.isIs_house()) {
             holder.isCollect.setVisibility(View.VISIBLE);
         } else {

@@ -8,21 +8,8 @@ import java.util.List;
  * 单品详情
  */
 public class GoodDetailBean extends BaseJson {
-
-
-    /**
-     * code : 200
-     * msg : 获取成功
-     * data : {"online":{"id":"31","name":"2222222","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","desc":"<p>222222222222222222222<\/p>","purnotes":"<p>222222222222222222222222222<\/p>","pricedesc":"<p>22222222222222222222<\/p>"},"branch":[{"id":3,"name":{"id":"3","name":"11111111111111","images":"","contact":"  水水水水水水水水水水水水水水水水"}}],"num":0}
-     */
-
     private int code;
     private String msg;
-    /**
-     * online : {"id":"31","name":"2222222","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","desc":"<p>222222222222222222222<\/p>","purnotes":"<p>222222222222222222222222222<\/p>","pricedesc":"<p>22222222222222222222<\/p>"}
-     * branch : [{"id":3,"name":{"id":"3","name":"11111111111111","images":"","contact":"  水水水水水水水水水水水水水水水水"}}]
-     * num : 0
-     */
 
     private DataEntity data;
 
@@ -51,21 +38,9 @@ public class GoodDetailBean extends BaseJson {
     }
 
     public static class DataEntity {
-        /**
-         * id : 31
-         * name : 2222222
-         * img : http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg
-         * desc : <p>222222222222222222222</p>
-         * purnotes : <p>222222222222222222222222222</p>
-         * pricedesc : <p>22222222222222222222</p>
-         */
 
         private OnlineEntity online;
         private int num;
-        /**
-         * id : 3
-         * name : {"id":"3","name":"11111111111111","images":"","contact":"  水水水水水水水水水水水水水水水水"}
-         */
 
         private List<BranchEntity> branch;
 
@@ -100,6 +75,8 @@ public class GoodDetailBean extends BaseJson {
             private String desc;
             private String purnotes;
             private String pricedesc;
+            private String is_res;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
@@ -125,6 +102,14 @@ public class GoodDetailBean extends BaseJson {
                 this.pricedesc = pricedesc;
             }
 
+            public void setIs_res(String is_res) {
+                this.is_res = is_res;
+            }
+
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
@@ -148,17 +133,19 @@ public class GoodDetailBean extends BaseJson {
             public String getPricedesc() {
                 return pricedesc;
             }
+
+            public String getIs_res() {
+                return is_res;
+            }
+
+            public String getImgs() {
+                return imgs;
+            }
         }
 
         public static class BranchEntity {
-            private int id;
-            /**
-             * id : 3
-             * name : 11111111111111
-             * images :
-             * contact :   水水水水水水水水水水水水水水水水
-             */
 
+            private int id;
             private NameEntity name;
 
             public void setId(int id) {
@@ -180,8 +167,8 @@ public class GoodDetailBean extends BaseJson {
             public static class NameEntity {
                 private String id;
                 private String name;
-                private String images;
-                private String contact;
+                private Object images;
+                private String address;
 
                 public void setId(String id) {
                     this.id = id;
@@ -191,12 +178,12 @@ public class GoodDetailBean extends BaseJson {
                     this.name = name;
                 }
 
-                public void setImages(String images) {
+                public void setImages(Object images) {
                     this.images = images;
                 }
 
-                public void setContact(String contact) {
-                    this.contact = contact;
+                public void setAddress(String address) {
+                    this.address = address;
                 }
 
                 public String getId() {
@@ -207,12 +194,12 @@ public class GoodDetailBean extends BaseJson {
                     return name;
                 }
 
-                public String getImages() {
+                public Object getImages() {
                     return images;
                 }
 
-                public String getContact() {
-                    return contact;
+                public String getAddress() {
+                    return address;
                 }
             }
         }

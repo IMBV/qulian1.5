@@ -75,22 +75,24 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
                 ToastUtil.showToast(mContext, playMethodOrderSubmitBean.getMsg());
             }
         }
-        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
-            HintInfoBean hintInfoBean = (HintInfoBean) bean;
-            if (hintInfoBean.getCode() == 200){
 
-            }else {
-                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
-            }
-        }
 
-        //检测订单提交是否成功
+//        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
+//            HintInfoBean hintInfoBean = (HintInfoBean) bean;
+//            if (hintInfoBean.getCode() == 200){
+//
+//            }else {
+//                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
+//            }
+//        }
+
+        //订单提交是否成功
         if (bean != null && (this.getClass().getName() + "submit").equals(bean.getTag())) {
             OrderSubmitResultBean goodOrderSubmitBean = (OrderSubmitResultBean) bean;
             if (goodOrderSubmitBean.getCode() == 200) {
-                ToastUtil.showToast(mContext, goodOrderSubmitBean.getMsg()+goodOrderSubmitBean.getData().getId());
+                ToastUtil.showToast(mContext, goodOrderSubmitBean.getMsg());
                 Bundle bundle = new Bundle();
-                bundle.putString("orderId", "74");
+                bundle.putString("orderId", goodOrderSubmitBean.getData().getId()+"");
                 UIHelper.showPlayMethodOrderConfirm(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
@@ -102,8 +104,6 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
     //提交订单
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
-//        System.out.println(getDataString());
-//        ToastUtil.showToast(mContext,playMethodOrderGoodlistAdapter.getResuleMap().get(0).getDate()+"");
         Map<String, String> map = new HashMap<String, String>();
         map.put("proid", "1");
         map.put("key", "-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");

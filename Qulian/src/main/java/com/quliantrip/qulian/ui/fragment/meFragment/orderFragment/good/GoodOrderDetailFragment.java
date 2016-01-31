@@ -1,4 +1,4 @@
-package com.quliantrip.qulian.ui.fragment.meFragment.orderFragment;
+package com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.good;
 
 import android.content.Context;
 import android.graphics.Color;

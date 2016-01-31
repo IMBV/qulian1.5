@@ -15,8 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.adapter.choiceAdapter.good.SubBranchCheckAdapter;
+import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.SubBranchCheckAdapter;
 import com.quliantrip.qulian.domain.choice.good.OrderSubmitBean;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,13 @@ public class SubBranchCheckDialog extends Dialog {
     private ListView listView;
     private List<OrderSubmitBean.DataEntity.BranchnameEntity> list;
 
-    public SubBranchCheckDialog(Context context, List<OrderSubmitBean.DataEntity.BranchnameEntity> list,TextView checkSrore) {
-        this(context, R.style.quick_option_dialog, list,checkSrore);
+    public SubBranchCheckDialog(Context context, List<OrderSubmitBean.DataEntity.BranchnameEntity> list,TextView checkSrore,PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean) {
+        this(context, R.style.quick_option_dialog, list,checkSrore,playMethodOrderSubmitItemBean);
     }
 
     @SuppressLint("InflateParams")
-    private SubBranchCheckDialog(Context context, int defStyle, final List<OrderSubmitBean.DataEntity.BranchnameEntity> list, final TextView checkSrore) {
+    private SubBranchCheckDialog(Context context, int defStyle, final List<OrderSubmitBean.DataEntity.BranchnameEntity> list,
+                                 final TextView checkSrore, final PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean) {
         super(context, defStyle);
         View contentView = getLayoutInflater().inflate(
                 R.layout.dialog_subbranch_check, null);
@@ -41,6 +43,7 @@ public class SubBranchCheckDialog extends Dialog {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderSubmitBean.DataEntity.BranchnameEntity bean = list.get(position);
                 checkSrore.setText(bean.getName());
+                playMethodOrderSubmitItemBean.setStore(bean.getId());
                 dismiss();
             }
         });

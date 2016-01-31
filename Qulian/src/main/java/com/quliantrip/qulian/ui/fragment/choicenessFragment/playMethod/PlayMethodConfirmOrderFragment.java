@@ -3,7 +3,9 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +38,9 @@ import butterknife.OnClick;
  */
 public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     private View view;
+    private String orderId;
+    private String linkManId;
+
     @Bind(R.id.lv_confirm_good_list)
     ListView listView;
 
@@ -47,6 +52,10 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     TextView phone;
     @Bind(R.id.tv_link_nam_email)
     TextView email;
+
+    //备注
+    @Bind(R.id.et_order_beizhu_text)
+    EditText beizhu;
 
     @Override
     protected View getSuccessView() {
@@ -62,7 +71,8 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("orderid", "74");
+        orderId = getArguments().getString("orderId");
+        map.put("orderid",orderId);
         return new QuestBean(map, new PlayMehtodOrderConfirmBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_ORDER_CONFIRM);
     }
 
@@ -79,6 +89,7 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
             return;
         }
         LinkManBean.LinkMan bean = (LinkManBean.LinkMan) data.getSerializableExtra("linkMan");
+        linkManId = bean.getId();
         name.setText(bean.getName());
         pyName.setText(bean.getPyname());
         phone.setText(QulianApplication.getInstance().getLoginUser().getUsername());
@@ -88,12 +99,16 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     //跳入到支付界面
     @OnClick(R.id.bt_order_payment)
     void toPay() {
+        String beizhuString = beizhu.getText().toString().trim();
+        if(linkManId  == null || TextUtils.isEmpty(linkManId)){
+            ToastUtil.showToast(mContext,"请选着联系人");
+            return;
+        }
         Map<String, String> map = new HashMap<String, String>();
-        map.put("orderid", "76");//订单的id
-        map.put("memo", "备注备注备注");//备注
-        map.put("contactsid", "3");//常用联系人的id
-        new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_CONFIRM_SUBMIT,
-                new HintInfoBean().setTag(getClass().getName() + "topay"), map);
+        map.put("orderid", orderId);//订单的id
+        map.put("memo", beizhuString);//备注
+        map.put("contactsid", linkManId);//常用联系人的id
+        new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_CONFIRM_SUBMIT,new HintInfoBean().setTag(getClass().getName() + "topay"), map);
 //        UIHelper.showPayMethod(mContext, null);
 //        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }

@@ -73,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
                 <TextView
@@ -243,6 +244,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_good_detail_taocan_number"
                         style="@style/text_title_12"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -275,6 +277,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_good_detail_can_check_time"
                         style="@style/text_title_12"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -314,6 +317,13 @@
 
                 <View style="@style/dev_all_line" />
 
+                <com.quliantrip.qulian.view.MyListView
+                    android:id="@+id/mlv_good_detail_can_check_median"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View style="@style/dev_all_line" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
@@ -331,6 +341,13 @@
                         android:text="购买须知" />
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_good_detail_gouma_info"
+                    style="@style/text_title_12"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:text="11:30-14.45" />
 
             </LinearLayout>
         </LinearLayout>

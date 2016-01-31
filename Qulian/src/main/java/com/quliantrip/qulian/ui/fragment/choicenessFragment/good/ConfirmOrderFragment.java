@@ -32,6 +32,7 @@ import butterknife.OnClick;
  */
 public class ConfirmOrderFragment extends BasePageCheckFragment {
     private View view;
+    private String orderId;
 
     @Bind(R.id.tv_link_nam_name)
     TextView name;
@@ -63,8 +64,9 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
+        orderId = getArguments().getString("orderId");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "11");
+        map.put("id", orderId);
         return new QuestBean(map, new GoodOrderConfirmBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER_CONFIRM);
     }
 
@@ -94,8 +96,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         map.put("orderid", "76");//订单的id
         map.put("memo", "备注备注备注");//备注
         map.put("contactsid", "3");//常用联系人的id
-        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CONFIRM_SUBMIT,
-                new HintInfoBean().setTag(getClass().getName() + "topay"), map);
+        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CONFIRM_SUBMIT,new HintInfoBean().setTag(getClass().getName() + "topay"), map);
 //        UIHelper.showPayMethod(mContext, null);
 //        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }

@@ -15,7 +15,7 @@ import butterknife.OnClick;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
- * Created by Yuly on 2016/1/8.
+ * 玩法详情页
  */
 public class PlayMethodDetailActivity extends SwipeBackActivity {
     private Context mContext;

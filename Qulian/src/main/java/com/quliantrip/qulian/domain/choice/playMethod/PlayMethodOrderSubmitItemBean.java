@@ -15,6 +15,18 @@ public class PlayMethodOrderSubmitItemBean {
         this.price = price;
     }
 
+    public PlayMethodOrderSubmitItemBean(String playid, String sku_id, String date, String dateString, String num, String service, String store, String price, String storeNameString) {
+        this.playid = playid;
+        this.sku_id = sku_id;
+        this.date = date;
+        this.dateString = dateString;
+        this.num = num;
+        this.service = service;
+        this.store = store;
+        this.price = price;
+        this.storeNameString = storeNameString;
+    }
+
     private String playid;//玩法条目的id
     private String sku_id;//属性选着的id
     private String date;//订单的日期_时间搓
@@ -24,6 +36,15 @@ public class PlayMethodOrderSubmitItemBean {
     private String store;//商店的id
     private String price;//价格
 
+    private String storeNameString;
+
+    public String getStoreNameString() {
+        return storeNameString;
+    }
+
+    public void setStoreNameString(String storeNameString) {
+        this.storeNameString = storeNameString;
+    }
 
     public String getDateString() {
         return dateString;

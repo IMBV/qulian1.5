@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.Test;
+import com.quliantrip.qulian.domain.me.PlayCollectListBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.ui.activity.meActivity.MyCollectActivity;
 import com.quliantrip.qulian.view.SlipRihtLayout;
@@ -23,15 +24,15 @@ import butterknife.ButterKnife;
 /**
  * 玩法的收藏的数据适配器
  */
-public class PlayMethodCollectListAdapter extends BasicAdapter<Test> {
+public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBean.DataEntity> {
     private MyCollectActivity activity;
-    public PlayMethodCollectListAdapter(ArrayList<Test> list, Context context) {
+    public PlayMethodCollectListAdapter(ArrayList<PlayCollectListBean.DataEntity> list, Context context) {
         super(list);
         activity = (MyCollectActivity) context;
     }
 
-    public void addItem(com.quliantrip.qulian.domain.Test s) {
-        list.add(s);
+    public void addItem(PlayCollectListBean.DataEntity dataEntity) {
+        list.add(dataEntity);
     }
 
     private boolean isEdit = false;
@@ -47,18 +48,17 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<Test> {
         }
         final Holder holder = Holder.getHolder(convertView);
 
-        final com.quliantrip.qulian.domain.Test name = list.get(position);
+        final PlayCollectListBean.DataEntity bean = list.get(position);
         holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.addOrDelectCollect(name.ischeck(),"saasdf"+name.getName());
+                activity.addOrDelectCollect(bean.ischeck(), bean.getId());
 
-                name.setIscheck(!name.ischeck());
+                bean.setIscheck(!bean.ischeck());
                 notifyDataSetChanged();
-
             }
         });
-        if (name.ischeck())
+        if (bean.ischeck())
             holder.state.setImageResource(R.mipmap.cnb_wode_pre);
         else
             holder.state.setImageResource(R.mipmap.cnb_wode_nor);
@@ -71,20 +71,21 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<Test> {
             }
         });
 
-        holder.city.setText(name.getName());
+        holder.title.setText(bean.getProducts_id());
         return convertView;
     }
 
     static class Holder {
+        //左边选择框
         @Bind(R.id.ll_is_checked_delect)
         LinearLayout checkDeledct;
         @Bind(R.id.srl_play_method_collect_item)
         SlipRihtLayout slipRihtLayout;
         @Bind(R.id.iv_collect_Img_state)
         ImageView state;
-
+        //右边数据对象
         @Bind(R.id.tv_play_method_title)
-        TextView city;
+        TextView title;
 
         public Holder(View convertView) {
             super();

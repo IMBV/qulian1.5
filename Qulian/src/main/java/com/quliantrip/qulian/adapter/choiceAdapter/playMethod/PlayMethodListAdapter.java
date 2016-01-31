@@ -5,9 +5,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.view.CircleImageView;
 
@@ -17,7 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Qulian5 on 2016/1/21.
+ *玩法列表展示页
  */
 public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntity.PlayEntity> {
 
@@ -32,13 +34,14 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
         }
         Holder holder = Holder.getHolder(convertView);
         PlayMethodBean.DataEntity.PlayEntity bean = list.get(position);
-//        ImageLoader.getInstance().displayImage(bean.getImg(), holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImg(), holder.img, ImageLoaderOptions.pager_options);
 //        if (bean.isIs_house()) {
 //            holder.isCollect.setVisibility(View.VISIBLE);
 //        } else {
 //            holder.isCollect.setVisibility(View.GONE);
 //        }
-//        holder.name.setText(bean.getName());
+        holder.title.setText(bean.getTitle());
+        holder.des.setText(bean.getSummary());
         return convertView;
     }
 

@@ -19,6 +19,8 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.GoodOrderSubmitBean;
 import com.quliantrip.qulian.domain.choice.good.GoodOrderSubmitCheckBean;
 import com.quliantrip.qulian.domain.choice.good.OrderSubmitBean;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitItemBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -40,6 +42,11 @@ import butterknife.OnClick;
  * 商品提交订单
  */
 public class SubmitOrderGoodFragment extends BasePageCheckFragment {
+    //提交订单的信息
+    private PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean;
+    //单品的id
+    private String goodId;
+
     @Bind(R.id.tv_good_name)
     TextView name;//商品的名称
     @Bind(R.id.mlv_good_taocan_type)
@@ -60,9 +67,89 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
+        goodId = getArguments().getString("goodId");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "11");
+        map.put("id",goodId);
         return new QuestBean(map, new OrderSubmitBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER);
+    }
+
+    //点击日期的选择
+    private String dataString;
+    @Bind(R.id.tv_preview_time_data_text)
+    TextView pretime;
+
+    @OnClick(R.id.rl_preview_time_data_setting)
+    void setPriviewTime() {
+        if (attressList != null) {
+            String[] dateArray = dataString.split("-");
+            final int oldYear = Integer.valueOf(dateArray[0]);
+            final int month = Integer.valueOf(dateArray[1]) - 1;
+            final int day = Integer.valueOf(dateArray[2]);
+            DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    residueNumber.setText("");
+                    //点击日期与现在时间对比
+                    String monthString = monthOfYear+"";
+                    String dayString = dayOfMonth+"";
+                    if ((monthOfYear + 1) < 10)
+                        monthString = "0" + (monthOfYear + 1);
+                    if (dayOfMonth < 10)
+                        dayString = "0" + dayOfMonth;
+                    String checkData = year + "-" + monthString + "-" + dayString;
+                    String oldData = dataString;
+                    if (oldYear > year) {
+                        ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                        pretime.setText(oldData);
+                    } else {
+                        if (oldYear == year) {
+                            if (month > monthOfYear) {
+                                ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                pretime.setText(oldData);
+                            } else {
+                                if (month == monthOfYear) {
+                                    if (day > dayOfMonth) {
+                                        ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                        pretime.setText(oldData);
+                                    } else {
+                                        setNumberInfo(checkData);
+                                    }
+                                } else {
+                                    setNumberInfo(checkData);
+                                }
+                            }
+                        } else {
+                            setNumberInfo(checkData);
+                        }
+                    }
+                }
+            }, oldYear, month, day);
+            datePicker.show();
+        }else{
+            ToastUtil.showToast(mContext,"所有时间都无票");
+        }
+    }
+
+    //设置票数的集合选取数量
+    private void setNumberInfo(String checkData) {
+        pretime.setText(checkData);
+        if (attressList != null) {
+            for (OrderSubmitBean.DataEntity.AttrssEntity attress : attressList) {
+                if (attress.getDate().equals(checkData)) {
+                    if (!(Integer.valueOf(attress.getNum()) > 10))
+                        residueNumber.setText("剩余" + attress.getNum());
+                    else
+                        residueNumber.setText("有票");
+                    playMethodOrderSubmitItemBean.setDate(attress.getDate());
+                    playMethodOrderSubmitItemBean.setPrice(attress.getSale());
+                    break;
+                }
+            }
+        }
+        if (TextUtils.isEmpty(residueNumber.getText())) {
+            residueNumber.setText("无票");
+        }
     }
 
     @Override
@@ -71,39 +158,62 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             OrderSubmitBean orderSubmitBean = (OrderSubmitBean) bean;
             OrderSubmitBean.DataEntity dataEntity = orderSubmitBean.getData();
             if (orderSubmitBean.getCode() == 200) {
+
+                String playid = dataEntity.getOnline().getId();//玩法条目的id
+                String sku_id = dataEntity.getAttribute().get(0).getId();//玩法条目套餐的id
+                String date = null;
+                String price = null;
+                if (dataEntity.getAttrss().size()>0) {
+                    date = dataEntity.getAttrss().get(0).getDate();//订单的日期
+                    dataString = dataEntity.getAttrss().get(0).getDe();//
+                    attressList = dataEntity.getAttrss();
+                    price = dataEntity.getAttrss().get(0).getSale();//价格
+                }
+                String num = "1";//购买数量
+                String service = "11:00";//服务时间
+                String store = dataEntity.getBranchname().get(0).getId();//商店的id
+
+                playMethodOrderSubmitItemBean = new PlayMethodOrderSubmitItemBean(playid, sku_id, date, dataString, num, service, store, price);
+
+                //设置选择日期
                 name.setText(dataEntity.getOnline().getName());
+                dataString = playMethodOrderSubmitItemBean.getDateString();
+                pretime.setText(dataString);
+
                 initListView(dataEntity.getAttribute());
                 branchnameList = dataEntity.getBranchname();
-                skuId = branchnameList.get(0).getId();
                 checkSrore.setText(branchnameList.get(0).getName());
-                attressList = dataEntity.getAttrss();
+
             } else {
                 ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
             }
         }
+
         if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
             GoodOrderSubmitCheckBean goodOrserSubmitCheckBean = (GoodOrderSubmitCheckBean) bean;
             if (goodOrserSubmitCheckBean.getCode() == 200) {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("proid", "11");
-                map.put("date", "2/12/2015");
-                map.put("key", "-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");
-                map.put("total_price", "11111");
-                map.put("num", "3");
+                map.put("date", playMethodOrderSubmitItemBean.getDate());
+                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+                map.put("total_price", playMethodOrderSubmitItemBean.getPrice());
+                map.put("num", playMethodOrderSubmitItemBean.getNum());
                 map.put("type", "1");
-                map.put("price", "1111");
-                map.put("service", "11:30");
-                map.put("sku_id", "15");
+                map.put("price", playMethodOrderSubmitItemBean.getPrice());
+                map.put("service", playMethodOrderSubmitItemBean.getService());
+                map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
                 new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
             } else {
                 ToastUtil.showToast(mContext, goodOrserSubmitCheckBean.getMsg());
             }
         }
+
         if (bean != null && (this.getClass().getName() + "submit").equals(bean.getTag())) {
             GoodOrderSubmitBean goodOrderSubmitBean = (GoodOrderSubmitBean) bean;
             if (goodOrderSubmitBean.getCode() == 200) {
-                Bundle bundle =  new Bundle();
-                bundle.putString("orderId",goodOrderSubmitBean.getData().getId()+"");
+                ToastUtil.showToast(mContext, goodOrderSubmitBean.getData().getId() + "");
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", goodOrderSubmitBean.getData().getId() + "");
                 UIHelper.showOrderConfirm(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
@@ -117,14 +227,21 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     void toConfirmOrder() {
 //        Map<String, String> map = new HashMap<String, String>();
 //        map.put("proid", "11");
-//        map.put("date","2/12/2015");
-//        map.put("num","12");
-//        map.put("sku_id","15");
+//        map.put("date", playMethodOrderSubmitItemBean.getDate());
+//        map.put("num", playMethodOrderSubmitItemBean.getNum());
+//        map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
 //        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CHECK, new GoodOrderSubmitCheckBean().setTag(getClass().getName() + "check"), map);
-        Bundle bundle =  new Bundle();
-        bundle.putString("orderId","53");
-        UIHelper.showOrderConfirm(mContext, bundle);
-        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("proid",goodId);
+        map.put("date", playMethodOrderSubmitItemBean.getDate()==null?null:playMethodOrderSubmitItemBean.getDate());
+        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        map.put("total_price", playMethodOrderSubmitItemBean.getPrice()==null?"":playMethodOrderSubmitItemBean.getPrice());
+        map.put("num", playMethodOrderSubmitItemBean.getNum()==null?"":playMethodOrderSubmitItemBean.getNum());
+        map.put("type", "1");
+        map.put("price", playMethodOrderSubmitItemBean.getPrice()==null?"":playMethodOrderSubmitItemBean.getPrice());
+        map.put("service", playMethodOrderSubmitItemBean.getService()==null?"":playMethodOrderSubmitItemBean.getService());
+        map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id()==null?"":playMethodOrderSubmitItemBean.getSku_id());
+        new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
     }
 
     //初始化可选的套餐类型
@@ -136,17 +253,19 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String checkedId = attributeList.get(position).getId();
                 orderGoodTypeAdapter.setCheched(checkedId);
+                playMethodOrderSubmitItemBean.setSku_id(checkedId);
             }
         });
     }
 
-    //选择够吗数量
+    //选择数量
     @OnClick(R.id.iv_good_person_number_down)
     void downNumber() {
         Integer newNumber = new Integer(number.getText().toString().trim());
         newNumber = newNumber - 1;
         if (newNumber > 0) {
             number.setText(newNumber + "");
+            playMethodOrderSubmitItemBean.setNum(newNumber + "");
         } else {
             ToastUtil.showToast(mContext, "人数不能少于0");
         }
@@ -157,75 +276,9 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         Integer newNumber = new Integer(number.getText().toString().trim());
         newNumber = newNumber + 1;
         number.setText(newNumber + "");
+        playMethodOrderSubmitItemBean.setNum(newNumber + "");
     }
 
-
-    //点击日期的选择
-    @Bind(R.id.tv_preview_time_data_text)
-    TextView pretime;
-
-    @OnClick(R.id.rl_preview_time_data_setting)
-    void setPriviewTime() {
-        Time time = new Time();
-        time.setToNow();
-        final int oldYear = time.year;
-        final int month = time.month;
-        final int day = time.monthDay;
-        DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                residueNumber.setText("");
-                //点击日期与现在时间对比
-                String checkData = (monthOfYear + 1) + "/" + dayOfMonth + "/" + year;
-                String oldData = (month + 1) + "/" + day + "/" + oldYear;
-                if (oldYear > year) {
-                    ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                    pretime.setText(oldData);
-                } else {
-                    if (oldYear == year) {
-                        if (month > monthOfYear) {
-                            ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                            pretime.setText(oldData);
-                        } else {
-                            if (month == monthOfYear) {
-                                if (day > dayOfMonth) {
-                                    ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                                    pretime.setText(oldData);
-                                } else {
-                                    setNumberInfo(checkData);
-                                }
-                            } else {
-                                setNumberInfo(checkData);
-                            }
-                        }
-                    } else {
-                        setNumberInfo(checkData);
-                    }
-                }
-            }
-        }, oldYear, month, day);
-        datePicker.show();
-    }
-
-    //设置票数的集合选取数量
-    private void setNumberInfo(String checkData) {
-        pretime.setText(checkData);
-        if (attressList != null) {
-            for (OrderSubmitBean.DataEntity.AttrssEntity attress : attressList) {
-                if (attress.getDate().equals(checkData)) {
-                    if (!(Integer.valueOf(attress.getNum()) > 10))
-                        residueNumber.setText("剩余" + attress.getNum());
-                    else
-                        residueNumber.setText("有票");
-                    break;
-                }
-            }
-        }
-        if (TextUtils.isEmpty(residueNumber.getText())) {
-            residueNumber.setText("无票");
-        }
-    }
 
     @Bind(R.id.tv_serve_time_text)
     TextView serveTime;
@@ -243,8 +296,10 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 if (minute < 10) {
                     serveTime.setText(hourOfDay + " : 0" + minute);
+                    playMethodOrderSubmitItemBean.setService(hourOfDay + " : 0" + minute);
                 } else {
                     serveTime.setText(hourOfDay + " : " + minute);
+                    playMethodOrderSubmitItemBean.setService(hourOfDay + " : " + minute);
                 }
             }
         }, hour, minute, true);
@@ -255,12 +310,11 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     @Bind(R.id.tv_check_store_result_text)
     TextView checkSrore;//选择门店的中文名字
 
-    public String skuId;
     private List<OrderSubmitBean.DataEntity.BranchnameEntity> branchnameList;
 
     @OnClick(R.id.rl_check_store_setting)
     void checkStore() {
-        final SubBranchCheckDialog dialog = new SubBranchCheckDialog(mContext, branchnameList, checkSrore);
+        final SubBranchCheckDialog dialog = new SubBranchCheckDialog(mContext, branchnameList, checkSrore, playMethodOrderSubmitItemBean);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();

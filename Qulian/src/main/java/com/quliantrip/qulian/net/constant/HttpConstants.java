@@ -13,22 +13,7 @@ public class HttpConstants {
      * 本地v1服务器
      */
     public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155:8089/v1/";
-    //手机号查重
-    public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1 + "user/mobile";
-    //手机号注册
-    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/psignup";
-    //邮箱注册
-    public static final String EMAIL_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/signup";
-    //用户登录
-    public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1 + "user/login";
-    //查询联系人
-    public static final String ALL_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/contacts";
-    //修改联系人
-    public static final String EDIT_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/ucontacts";
-    //添加联系人
-    public static final String ADD_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/acontacts";
-    //删除联系人
-    public static final String DELETE_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/dcontacts";
+
 
     //热门商品列表
     public static final String HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";
@@ -36,6 +21,9 @@ public class HttpConstants {
     public static final String CHANGE_CITY = HOST_ADDR_ROOT_LOCAL_V1 + "product/areas";
 
 
+    //首页
+    //首页的筛选
+    public static final String HOME_SECNICPLAY_CONDITION = HOST_ADDR_ROOT_LOCAL_V1 + "product/search";
     //单品详情
     public static final String GOOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/online";
     //添加单品收藏
@@ -46,7 +34,7 @@ public class HttpConstants {
     public static final String GOOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "order/orders";
     //单品检验剩余
     public static final String GOOD_ORDER_CHECK = HOST_ADDR_ROOT_LOCAL_V1 + "order/corder";//这个事公共的单凭检验的方法
-    //单品提交订单订单
+    //单品提交订单
     public static final String GOOD_ORDER_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "order/torder";
     //单品确认订单
     public static final String GOOD_ORDER_CONFIRM = HOST_ADDR_ROOT_LOCAL_V1 + "order/qorder";
@@ -64,10 +52,8 @@ public class HttpConstants {
     public static final String PLAY_METHOD_ORDER_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/torder";
     //玩法确认订单
     public static final String PLAY_METHOD_ORDER_CONFIRM = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/qorder";
-    //玩法确认订单提交
+    //玩法确认订单
     public static final String PLAY_METHOD_ORDER_CONFIRM_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "playorder/tpay";
-
-
 
     //发现
     //优惠券
@@ -77,9 +63,31 @@ public class HttpConstants {
     //语音广场详情
     public static final String VOICE_SQUARE_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/spotxq";
 
-    //首页
-    //首页的筛选
-    public static final String HOME_SECNICPLAY_CONDITION = HOST_ADDR_ROOT_LOCAL_V1 + "product/search";
+    //我的
+    //手机号查重
+    public static final String CHECK_MOBILE_NUMBER = HOST_ADDR_ROOT_LOCAL_V1 + "user/mobile";
+    //手机号注册
+    public static final String MOBILE_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/psignup";
+    //邮箱注册
+    public static final String EMAIL_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/signup";
+    //用户登录
+    public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1 + "user/login";
+    //查询联系人
+    public static final String ALL_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/contacts";
+    //修改联系人
+    public static final String EDIT_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/ucontacts";
+    //添加联系人
+    public static final String ADD_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/acontacts";
+    //删除联系人
+    public static final String DELETE_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/dcontacts";
 
+    //我的收藏_GOOD
+    public static final String ME_COLLECT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "user/house";
+    //我的收藏_PLAY_METHOD
+    public static final String ME_COLLECT_PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "user/housewf";
 
+    //我的订单列表_GOOD
+    public static final String ME_ORDER_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/order";
+    //我的订单列表_PLAY_METHOD
+    public static final String ME_ORDER_PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/playorder";
 }

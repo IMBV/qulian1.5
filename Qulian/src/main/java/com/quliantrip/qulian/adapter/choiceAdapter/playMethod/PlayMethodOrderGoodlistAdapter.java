@@ -61,13 +61,23 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             PlayMethodOrderSubmitBean.DataEntity dataEntity = list.get(i);
             String playid = dataEntity.getPlayitem().getPlayitemsid();//玩法条目的id
             String sku_id = dataEntity.getAttribute().get(0).getId();//玩法条目套餐的id
-            String date = dataEntity.getAttrss().get(0).getDate();//订单的日期
-            String dataString = dataEntity.getAttrss().get(0).getDe();//
+            String date = "";
+            String dataString = "所有时间都没有票";
+            String price = "0.00";
+            if (dataEntity.getAttrss().size() > 0) {
+                date = dataEntity.getAttrss().get(0).getDate();//订单的日期
+                dataString = dataEntity.getAttrss().get(0).getDe();//日期字符串
+                price = dataEntity.getAttrss().get(0).getSale();//价格
+            }
             String num = "1";//购买数量
             String service = "11:00";//服务时间
-            String store = dataEntity.getBranchname().get(0).getId();//商店的id
-            String price = dataEntity.getAttrss().get(0).getSale();//价格
-            resuleMap.put(i, new PlayMethodOrderSubmitItemBean(playid, sku_id, date, dataString, num, service, store, price));
+            String store = "";
+            String storeNameString = "";
+            if (dataEntity.getBranchname().size() > 0) {
+                store = dataEntity.getBranchname().get(0).getId();//商店的id
+                storeNameString = dataEntity.getBranchname().get(0).getName();
+            }
+            resuleMap.put(i, new PlayMethodOrderSubmitItemBean(playid, sku_id, date, dataString, num, service, store, price, storeNameString));
         }
     }
 
@@ -81,9 +91,9 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         //进行数据适配的对象
         final PlayMethodOrderSubmitBean.DataEntity bean = list.get(position);
         final PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean = resuleMap.get(position);
-        holder.name.setText(bean.getPlayitem().getName());
+        holder.name.setText(bean.getPlayitem().getTitle());
 
-         //初始化可选的套餐类型
+        //初始化可选的套餐类型
         final ArrayList<PlayMethodOrderSubmitBean.DataEntity.AttributeEntity> listAttribute = (ArrayList<PlayMethodOrderSubmitBean.DataEntity.AttributeEntity>) bean.getAttribute();
         final OrderPlayMethodTypeAdapter orderGoodTypeAdapter = new OrderPlayMethodTypeAdapter(listAttribute);
         holder.typeListView.setAdapter(orderGoodTypeAdapter);
@@ -98,16 +108,17 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
 
         //选择门店
         final List<PlayMethodOrderSubmitBean.DataEntity.BranchnameEntity> branchnameList = bean.getBranchname();
-        holder.checkSrore.setText(branchnameList.get(0).getName());
-        convertView.findViewById(R.id.rl_check_store_setting).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final PlayMethodSubBranchCheckDialog dialog = new PlayMethodSubBranchCheckDialog(mContext, branchnameList, holder.checkSrore,playMethodOrderSubmitItemBean);
-                dialog.setCancelable(true);
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.show();
-            }
-        });
+        holder.checkSrore.setText(playMethodOrderSubmitItemBean.getStoreNameString());
+        if (branchnameList.size() > 0)
+            convertView.findViewById(R.id.rl_check_store_setting).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final PlayMethodSubBranchCheckDialog dialog = new PlayMethodSubBranchCheckDialog(mContext, branchnameList, holder.checkSrore, playMethodOrderSubmitItemBean);
+                    dialog.setCancelable(true);
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.show();
+                }
+            });
 
         //选着的数量的减少或添加
         convertView.findViewById(R.id.iv_good_person_number_down).setOnClickListener(new View.OnClickListener() {
@@ -116,7 +127,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                 Integer newNumber = new Integer(holder.number.getText().toString().trim());
                 newNumber = newNumber - 1;
                 if (newNumber > 0) {
-                    playMethodOrderSubmitItemBean.setNum(newNumber+"");
+                    playMethodOrderSubmitItemBean.setNum(newNumber + "");
                     holder.number.setText(newNumber + "");
                 } else {
                     ToastUtil.showToast(mContext, "人数不能少于0");
@@ -129,7 +140,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             public void onClick(View v) {
                 Integer newNumber = new Integer(holder.number.getText().toString().trim());
                 newNumber = newNumber + 1;
-                playMethodOrderSubmitItemBean.setNum(newNumber+"");
+                playMethodOrderSubmitItemBean.setNum(newNumber + "");
                 holder.number.setText(newNumber + "");
             }
         });
@@ -142,7 +153,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                 String dateSring = playMethodOrderSubmitItemBean.getDateString();
                 String[] dateArray = dateSring.split("-");
                 final int oldYear = Integer.valueOf(dateArray[0]);
-                final int month = Integer.valueOf(dateArray[1])-1;
+                final int month = Integer.valueOf(dateArray[1]) - 1;
                 final int day = Integer.valueOf(dateArray[2]);
 
                 DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
@@ -151,13 +162,13 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         holder.residueNumber.setText("");
                         //点击日期与现在时间对比
-                        String monthString = null;
-                        String dayString = null;
-                        if((monthOfYear + 1)<10)
-                            monthString = "0"+(monthOfYear + 1);
-                        if (dayOfMonth<10)
-                            dayString = "0"+dayOfMonth;
-                        String checkData = year + "-" +monthString + "-" + dayString ;
+                        String monthString = monthOfYear+"";
+                        String dayString = dayOfMonth+"";
+                        if ((monthOfYear + 1) < 10)
+                            monthString = "0" + (monthOfYear + 1);
+                        if (dayOfMonth < 10)
+                            dayString = "0" + dayOfMonth;
+                        String checkData = year + "-" + monthString + "-" + dayString;
                         String oldData = playMethodOrderSubmitItemBean.getDateString();
                         if (oldYear > year) {
                             ToastUtil.showToast(mContext, "选择时间不能是今天之前");
@@ -178,13 +189,13 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
 //                                            playMethodOrderSubmitItemBean.setDate(getTime(checkData));
                                         }
                                     } else {
-                                        setNumberInfo(holder,checkData,playMethodOrderSubmitItemBean,bean.getAttrss());
+                                        setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
 //                                        holder.pretime.setText(checkData);
 //                                        playMethodOrderSubmitItemBean.setDate(getTime(checkData));
                                     }
                                 }
                             } else {
-                                setNumberInfo(holder,checkData,playMethodOrderSubmitItemBean,bean.getAttrss());
+                                setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
                             }
                         }
                     }
@@ -223,7 +234,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
     }
 
     //设置票数的集合选取数量
-    private void setNumberInfo(Holder holder,String checkData,
+    private void setNumberInfo(Holder holder, String checkData,
                                PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean,
                                List<PlayMethodOrderSubmitBean.DataEntity.AttrssEntity> attrss) {
         holder.pretime.setText(checkData);
@@ -260,6 +271,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         }
         return re_time;
     }
+
     static class Holder {
         @Bind(R.id.tv_good_name)
         TextView name;//商品的名称
