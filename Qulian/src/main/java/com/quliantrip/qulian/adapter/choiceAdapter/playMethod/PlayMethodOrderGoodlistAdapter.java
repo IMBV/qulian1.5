@@ -87,9 +87,10 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_play_method_order_every_good_check_item, null);
         }
         final Holder holder = Holder.getHolder(convertView);
-        List<OrderSubmitBean.DataEntity.AttrssEntity> attressList;//有票的日期集合
+
         //进行数据适配的对象
         final PlayMethodOrderSubmitBean.DataEntity bean = list.get(position);
+        List<PlayMethodOrderSubmitBean.DataEntity.AttrssEntity> attressList = bean.getAttrss();//有票的日期集合
         final PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean = resuleMap.get(position);
         holder.name.setText(bean.getPlayitem().getTitle());
 
@@ -146,64 +147,67 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         });
 
         holder.pretime.setText(playMethodOrderSubmitItemBean.getDateString());
-        //选择日期
-        convertView.findViewById(R.id.rl_preview_time_data_setting).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String dateSring = playMethodOrderSubmitItemBean.getDateString();
-                String[] dateArray = dateSring.split("-");
-                final int oldYear = Integer.valueOf(dateArray[0]);
-                final int month = Integer.valueOf(dateArray[1]) - 1;
-                final int day = Integer.valueOf(dateArray[2]);
+        if (attressList != null) {
+            //选择日期
+            convertView.findViewById(R.id.rl_preview_time_data_setting).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String dateSring = playMethodOrderSubmitItemBean.getDateString();
+                    String[] dateArray = dateSring.split("-");
+                    final int oldYear = Integer.valueOf(dateArray[0]);
+                    final int month = Integer.valueOf(dateArray[1]) - 1;
+                    final int day = Integer.valueOf(dateArray[2]);
 
-                DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+                    DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        holder.residueNumber.setText("");
-                        //点击日期与现在时间对比
-                        String monthString = monthOfYear+"";
-                        String dayString = dayOfMonth+"";
-                        if ((monthOfYear + 1) < 10)
-                            monthString = "0" + (monthOfYear + 1);
-                        if (dayOfMonth < 10)
-                            dayString = "0" + dayOfMonth;
-                        String checkData = year + "-" + monthString + "-" + dayString;
-                        String oldData = playMethodOrderSubmitItemBean.getDateString();
-                        if (oldYear > year) {
-                            ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                            holder.pretime.setText(oldData);
-                        } else {
-                            if (oldYear == year) {
-                                if (month > monthOfYear) {
-                                    ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                                    holder.pretime.setText(oldData);
-                                } else {
-                                    if (month == monthOfYear) {
-                                        if (day > dayOfMonth) {
-                                            ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                                            holder.pretime.setText(oldData);
-                                        } else {
-                                            setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            holder.residueNumber.setText("");
+                            //点击日期与现在时间对比
+                            String monthString = monthOfYear + "";
+                            String dayString = dayOfMonth + "";
+                            if ((monthOfYear + 1) < 10)
+                                monthString = "0" + (monthOfYear + 1);
+                            if (dayOfMonth < 10)
+                                dayString = "0" + dayOfMonth;
+                            String checkData = year + "-" + monthString + "-" + dayString;
+                            String oldData = playMethodOrderSubmitItemBean.getDateString();
+                            if (oldYear > year) {
+                                ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                holder.pretime.setText(oldData);
+                            } else {
+                                if (oldYear == year) {
+                                    if (month > monthOfYear) {
+                                        ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                        holder.pretime.setText(oldData);
+                                    } else {
+                                        if (month == monthOfYear) {
+                                            if (day > dayOfMonth) {
+                                                ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                                holder.pretime.setText(oldData);
+                                            } else {
+                                                setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
 //                                            holder.pretime.setText(checkData);
 //                                            playMethodOrderSubmitItemBean.setDate(getTime(checkData));
-                                        }
-                                    } else {
-                                        setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
+                                            }
+                                        } else {
+                                            setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
 //                                        holder.pretime.setText(checkData);
 //                                        playMethodOrderSubmitItemBean.setDate(getTime(checkData));
+                                        }
                                     }
+                                } else {
+                                    setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
                                 }
-                            } else {
-                                setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
                             }
                         }
-                    }
-                }, oldYear, month, day);
-                datePicker.show();
-            }
-        });
-
+                    }, oldYear, month, day);
+                    datePicker.show();
+                }
+            });
+        }else{
+            ToastUtil.showToast(mContext,"所有时间都无票");
+        }
 
         //选着服务时间
         convertView.findViewById(R.id.rl_serve_time_setting).setOnClickListener(new View.OnClickListener() {

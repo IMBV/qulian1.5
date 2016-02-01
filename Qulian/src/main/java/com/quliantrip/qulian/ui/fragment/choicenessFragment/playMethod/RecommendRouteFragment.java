@@ -55,7 +55,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-
+        map.put("city", "21410000");
         return new QuestBean(map, new PlayMethodBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_LIST);
     }
 
@@ -193,7 +193,8 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
-        final ArrayList<String> list = new ArrayList<String>();
+
+
         playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
         listView.setAdapter(playMethodListAdapter);
         listView.setDivider(new ColorDrawable(Color.WHITE));

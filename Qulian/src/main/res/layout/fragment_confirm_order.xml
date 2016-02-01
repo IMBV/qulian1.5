@@ -118,6 +118,7 @@
             android:textColor="@color/app_main_title" />
 
         <EditText
+            android:id="@+id/et_good_order_beizhu"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginBottom="10dp"

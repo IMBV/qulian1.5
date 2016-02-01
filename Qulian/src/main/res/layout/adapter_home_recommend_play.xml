@@ -35,6 +35,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_home_play_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="上野公园-熊猫咖啡-演歌表演-江户川定食"

@@ -19,6 +19,7 @@ import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.me.GoodOrderListBean;
 import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
@@ -68,7 +69,10 @@ public class GoodOrderFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("key", "-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");
+        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        map.put("pay_status","");
+        map.put("order_status","");
+        map.put("is_use","");
         return new QuestBean(map, new GoodOrderListBean().setTag(getClass().getName()), HttpConstants.ME_ORDER_GOOD_LIST);
     }
 

@@ -2,6 +2,7 @@ package com.quliantrip.qulian.ui.fragment.mainFragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,10 +14,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.domain.common.ChangeCityBean;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
+import com.quliantrip.qulian.scanner.activity.OpenWifiActivity;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.HotGoodsFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.RecommendRouteFragment;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +40,7 @@ public class ChoicenessFragment extends Fragment {
     private Fragment currentFragment = new RecommendRouteFragment();
     private FragmentManager mFragmentManager;
     private View view;
+    private String cityId;
 
     @Bind(R.id.tv_choiceness_title_loaction)
     TextView cityName;
@@ -67,15 +77,19 @@ public class ChoicenessFragment extends Fragment {
     }
 
     //这里是进行数据展示的界面
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
-//        if (hidden){
-//            System.out.println("caozuo01");
-//        }else{
-//            System.out.println("caozuo02");
-//        }
-//    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            cityName.setText(cityNameString);
+            cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+        } else {
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            cityName.setText(cityNameString);
+            cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+        }
+    }
 
     @OnClick(R.id.rl_recommend_route)
     void showRecommendRoute() {
@@ -137,8 +151,21 @@ public class ChoicenessFragment extends Fragment {
         Bundle bundle = new Bundle();
         String s = cityName.getText().toString().trim();
         bundle.putString("cityName", s);
-        UIHelper.showCityChoose(this, 1, bundle);
+        UIHelper.showCityChoose(this, 20, bundle);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == 20) {
+            CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
+            CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
+            cityName.setText(data.getStringExtra("cityName"));
+            cityId = CommonHelp.getStringSp(mContext, data.getStringExtra("cityId"), "21410000");
+        }
     }
 
     public void changeHotGoodFragment() {
@@ -146,6 +173,5 @@ public class ChoicenessFragment extends Fragment {
             hotGoodsFragment = new HotGoodsFragment();
         }
         gotoSubFragmennt(hotGoodsFragment);
-//        hotGoodsFragment.changeClassfy();
     }
 }

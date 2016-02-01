@@ -76,6 +76,7 @@ public class SecnicPlayResultBean extends BaseJson {
             private String id;
             private String name;
             private String img;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
@@ -89,6 +90,10 @@ public class SecnicPlayResultBean extends BaseJson {
                 this.img = img;
             }
 
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
@@ -100,6 +105,10 @@ public class SecnicPlayResultBean extends BaseJson {
             public String getImg() {
                 return img;
             }
+
+            public String getImgs() {
+                return imgs;
+            }
         }
 
         public static class RuleEntity implements Serializable{
@@ -108,6 +117,7 @@ public class SecnicPlayResultBean extends BaseJson {
             private String title;
             private String img;
             private String summary;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
@@ -129,6 +139,10 @@ public class SecnicPlayResultBean extends BaseJson {
                 this.summary = summary;
             }
 
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
@@ -147,6 +161,10 @@ public class SecnicPlayResultBean extends BaseJson {
 
             public String getSummary() {
                 return summary;
+            }
+
+            public String getImgs() {
+                return imgs;
             }
         }
 

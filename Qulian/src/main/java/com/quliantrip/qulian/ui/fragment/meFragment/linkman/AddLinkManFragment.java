@@ -55,6 +55,9 @@ public class AddLinkManFragment extends Fragment {
     ClearEditText num;
     @Bind(R.id.cet_linkman_address)
     ClearEditText address;
+    @Bind(R.id.cet_linkman_number)
+    ClearEditText phone;
+
 
     @Bind(R.id.bt_save_link_man)
     Button button;
@@ -124,8 +127,9 @@ public class AddLinkManFragment extends Fragment {
             map.put("Contacts[sex]", sexString);
             map.put("Contacts[paper_type]", pagerTypeString);
             map.put("Contacts[paper_number]", pagerNumberString);
-            map.put("Contacts[describe]", "");//备注
+            map.put("Contacts[describe]", "");
             map.put("Contacts[address]", addressString);//收货地址
+            map.put("Contacts[tel]", phoneString);
             new PacketStringReQuest(HttpConstants.ADD_LINKMAN, new HintInfoBean().setTag(getClass().getName()), map);
         } else {
             Map<String, String> map = new HashMap<String, String>();
@@ -136,8 +140,10 @@ public class AddLinkManFragment extends Fragment {
             map.put("Contacts[birth_date]", birdString);
             map.put("Contacts[sex]", sexString);
             map.put("Contacts[paper_type]", pagerTypeString);
+            map.put("Contacts[describe]", "");
             map.put("Contacts[paper_number]", pagerNumberString);
             map.put("Contacts[address]", addressString);
+            map.put("Contacts[tel]", phoneString);
             new PacketStringReQuest(HttpConstants.EDIT_LINKMAN, new HintInfoBean().setTag(getClass().getName()), map);
         }
     }
@@ -150,6 +156,7 @@ public class AddLinkManFragment extends Fragment {
     private String pagerTypeString;
     private String pagerNumberString;
     private String addressString;
+    private String phoneString;
 
     public void checkData() {
         nameString = name.getText().toString().trim();
@@ -160,5 +167,6 @@ public class AddLinkManFragment extends Fragment {
         pagerTypeString = type.getText().toString().trim();
         pagerNumberString = num.getText().toString().trim();
         addressString = address.getText().toString().trim();
+        phoneString = phone.getText().toString().trim();
     }
 }

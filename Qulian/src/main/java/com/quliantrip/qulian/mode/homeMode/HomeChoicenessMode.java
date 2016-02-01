@@ -1,14 +1,19 @@
 package com.quliantrip.qulian.mode.homeMode;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.HomeBean;
+import com.quliantrip.qulian.domain.home.HomeShowBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,7 +24,7 @@ import butterknife.OnClick;
  * Created by Yuly on 2015/12/11.
  * www.quliantrip.com
  */
-public class HomeChoicenessMode extends BaseMode<HomeBean.QualityGoodsEntity> {
+public class HomeChoicenessMode extends BaseMode<HomeShowBean.DataEntity.ProductInfoEntity> {
     private View view;
     @Bind(R.id.iv_home_quality_icon)
     ImageView icon;
@@ -40,12 +45,10 @@ public class HomeChoicenessMode extends BaseMode<HomeBean.QualityGoodsEntity> {
     }
 
     @Override
-    public void setData(HomeBean.QualityGoodsEntity bean) {
-//        goodId = bean.getId();
-//        ImageLoader.getInstance().displayImage(bean.getIcon(), icon, ImageLoaderOptions.options);
-//        name.setText(bean.getName());
-//        price.setText("￥" + bean.getCurrent_price());
-//        saleNumber.setText("已售:" + bean.getBuy_count());
+    public void setData(HomeShowBean.DataEntity.ProductInfoEntity bean) {
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], icon, ImageLoaderOptions.options);
+        name.setText(bean.getName());
+        goodId = bean.getId();
     }
 
     public void setContext(Context context) {
@@ -54,9 +57,10 @@ public class HomeChoicenessMode extends BaseMode<HomeBean.QualityGoodsEntity> {
 
     @OnClick(R.id.ll_quality_goods)
     void initDetail() {
-//        Intent intent = new Intent(mContext, GoodDetailActivity.class);
-//        intent.putExtra("goodId", HttpConstants.WEBVIEW_ROOT + "?ctl=deal&data_id=" + goodId);
-//        mContext.startActivity(intent);
-
+        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+        intent.putExtra("goodId", goodId);
+        intent.putExtra("isCollect", false);
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 }

@@ -24,6 +24,9 @@ public class HttpConstants {
     //首页
     //首页的筛选
     public static final String HOME_SECNICPLAY_CONDITION = HOST_ADDR_ROOT_LOCAL_V1 + "product/search";
+    //首页信息
+    public static final String HOME_MAIN = HOST_ADDR_ROOT_LOCAL_V1 + "product/links";
+
     //单品详情
     public static final String GOOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "product/online";
     //添加单品收藏

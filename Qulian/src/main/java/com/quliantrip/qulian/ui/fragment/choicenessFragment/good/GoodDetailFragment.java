@@ -1,7 +1,9 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,6 +23,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailIntroduceActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -63,8 +66,8 @@ public class GoodDetailFragment extends BasePageCheckFragment {
 
     @Bind(R.id.tv_good_detail_taocan_number)
     TextView taocanNmber;//可选套餐的数量
-    @Bind(R.id.tv_good_detail_can_check_time)
-    TextView checkTime;//可选时间
+    //    @Bind(R.id.tv_good_detail_can_check_time)
+//    TextView checkTime;//可选时间
     @Bind(R.id.tv_good_detail_gouma_info)
     TextView goumaInfo;//够吗须知
     @Bind(R.id.mlv_good_detail_can_check_median)
@@ -74,8 +77,6 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
     private List<View> dotList = new ArrayList<View>();
-    //mode兑现的显示
-    private HomeSlideImageMode homeSlideImageMode;
 
     @Override
     protected View getSuccessView() {
@@ -89,13 +90,14 @@ public class GoodDetailFragment extends BasePageCheckFragment {
             collectImg.setImageResource(R.mipmap.icon_x_shoucang);
             collectText.setText("收藏");
         }
+        medianCheck.setFocusable(false);
         return view;
     }
 
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        System.out.println(((Activity) mContext).getIntent().getStringExtra("goodId")+"数据的id");
+        System.out.println(((Activity) mContext).getIntent().getStringExtra("goodId") + "数据的id");
         map.put("id", ((Activity) mContext).getIntent().getStringExtra("goodId"));
         return new QuestBean(map, new GoodDetailBean().setTag(getClass().getName()), HttpConstants.GOOD_DETAIL);
     }
@@ -110,9 +112,9 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 initRollView(detail.getOnline().getImgs());
                 name.setText(detail.getOnline().getName());
                 saveNumber.setText("已售" + 12);
-                taocanNmber.setText(detail.getNum()+"种");
-                checkTime.setText(detail.getOnline().getPurnotes());
-                goumaInfo.setText(detail.getOnline().getPricedesc());
+                taocanNmber.setText(detail.getNum() + "种");
+//                checkTime.setText(Html.fromHtml(detail.getOnline().getPurnotes()));
+                goumaInfo.setText(Html.fromHtml(detail.getOnline().getPricedesc()));
                 medianCheck.setAdapter(new GoodDetailBranchCheckAdapter((ArrayList<GoodDetailBean.DataEntity.BranchEntity>) detail.getBranch()));
             } else {
                 ((GoodDetailActivity) mContext).showOrHideBack(true);
@@ -129,7 +131,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     void intoOrder() {
         if (QulianApplication.getInstance().isLogin()) {
             Bundle bundle = new Bundle();
-            bundle.putString("goodId",((Activity) mContext).getIntent().getStringExtra("goodId"));
+            bundle.putString("goodId", ((Activity) mContext).getIntent().getStringExtra("goodId"));
             UIHelper.showGoodOrder(mContext, bundle);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         } else {
@@ -175,7 +177,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
         imageList.clear();
         dotList.clear();
         String[] strings = img.split(",");
-        for (int i=0;i<strings.length;i++){
+        for (int i = 0; i < strings.length; i++) {
             imageList.add(strings[i]);
         }
         if (imageList.size() > 0) {
@@ -228,5 +230,13 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     void finishActivity() {
         ((Activity) mContext).finish();
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+    }
+
+    //点击进入详情介绍界面
+    @OnClick(R.id.rl_good_detail_introduct)
+    void intoIntroduce() {
+        Intent intent = new Intent(mContext, GoodDetailIntroduceActivity.class);
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 }

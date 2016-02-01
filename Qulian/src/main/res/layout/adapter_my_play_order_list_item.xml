@@ -20,6 +20,7 @@
                 android:text="订单组号：" />
 
             <TextView
+                android:id="@+id/tv_play_method_group_number"
                 style="@style/text_main_title_14"
                 android:text="12545454354" />
         </LinearLayout>
@@ -43,8 +44,9 @@
             android:text="玩法名称：" />
 
         <TextView
+            android:id="@+id/tv_play_method_order_name"
             style="@style/text_main_title_14"
-            android:text="12545454354" />
+            android:text="趣连，带你去旅行" />
     </LinearLayout>
 
 
@@ -53,68 +55,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp">
+   <com.quliantrip.qulian.view.MyListView
+       android:id="@+id/mlv_play_method_good_list"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="15dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp">
 
-        <TextView
-            style="@style/text_main_title_tytle_14"
-            android:text="产品标签：" />
 
-        <TextView
-            style="@style/text_main_title_14"
-            android:layout_marginLeft="10dp"
-            android:text="京都" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            style="@style/text_main_title_tytle_14"
-            android:text="套餐类型：" />
-
-        <TextView
-            style="@style/text_main_title_14"
-            android:layout_marginLeft="10dp"
-            android:text="京都" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            style="@style/text_main_title_tytle_14"
-            android:text="预约时间：" />
-
-        <TextView
-            style="@style/text_main_title_14"
-            android:layout_marginLeft="10dp"
-            android:text="京都" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            style="@style/text_main_title_tytle_14"
-            android:text="数量：" />
-
-        <TextView
-            style="@style/text_main_title_14"
-            android:layout_marginLeft="10dp"
-            android:text="2" />
-    </LinearLayout>
-
+   </com.quliantrip.qulian.view.MyListView>
 </LinearLayout>

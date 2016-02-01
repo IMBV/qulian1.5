@@ -20,6 +20,8 @@ import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ import butterknife.OnClick;
 public class ConfirmOrderFragment extends BasePageCheckFragment {
     private View view;
     private String orderId;
+    private String linkManId;
 
     @Bind(R.id.tv_link_nam_name)
     TextView name;
@@ -50,6 +53,10 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     TextView data;
     @Bind(R.id.tv_order_confirm_time)
     TextView time;
+    @Bind(R.id.iv_order_total_prices)
+    TextView price;//价格
+    @Bind(R.id.et_good_order_beizhu)
+    TextView beizhu;//
 
     @Override
     protected View getSuccessView() {
@@ -66,7 +73,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         orderId = getArguments().getString("orderId");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", orderId);
+        map.put("orderid", orderId);
         return new QuestBean(map, new GoodOrderConfirmBean().setTag(getClass().getName()), HttpConstants.GOOD_ORDER_CONFIRM);
     }
 
@@ -83,6 +90,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
             return;
         }
         LinkManBean.LinkMan bean = (LinkManBean.LinkMan) data.getSerializableExtra("linkMan");
+        linkManId = bean.getId();
         name.setText(bean.getName());
         pyName.setText(bean.getPyname());
         phone.setText(QulianApplication.getInstance().getLoginUser().getUsername());
@@ -93,15 +101,15 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     @OnClick(R.id.bt_order_payment)
     void toPay() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("orderid", "76");//订单的id
-        map.put("memo", "备注备注备注");//备注
-        map.put("contactsid", "3");//常用联系人的id
+        map.put("orderid", orderId);//订单的id
+        map.put("memo", beizhu.getText().toString().trim());//备注
+        map.put("contactsid", linkManId);//常用联系人的id
         new PacketStringReQuest(HttpConstants.GOOD_ORDER_CONFIRM_SUBMIT,new HintInfoBean().setTag(getClass().getName() + "topay"), map);
 //        UIHelper.showPayMethod(mContext, null);
 //        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
-
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     public void onEventMainThread(BaseJson bean) {
         //初始化界面的显示
@@ -109,10 +117,11 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
             GoodOrderConfirmBean goodOrderConfirmBean = (GoodOrderConfirmBean) bean;
             if (goodOrderConfirmBean.getCode() == 200){
                 GoodOrderConfirmBean.DataEntity dataEntity = goodOrderConfirmBean.getData();
-                name.setText(dataEntity.getOrdershop().getName());
+                orderName.setText(dataEntity.getOrdershop().getName());
                 taocan.setText(dataEntity.getAttribute());
-                data.setText(dataEntity.getOrdershop().getDate());
+                data.setText(sdf.format(new Date(Integer.valueOf(dataEntity.getOrdershop().getDate()) * 1000)));
                 time.setText("没有该字段");
+                price.setText("￥"+dataEntity.getOrdershop().getPrice());
             }else{
                 ToastUtil.showToast(mContext,goodOrderConfirmBean.getMsg());
             }

@@ -51,8 +51,8 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
             holder.end.setVisibility(View.GONE);
         }
         final PlayMethodDetailBean.DataEntity.PackageEntity bean = list.get(position);
-//        ImageLoader.getInstance().displayImage((String) bean.getImages(), holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getTitle());
+
         if (bean.getMerchantname() == null||TextUtils.isEmpty(bean.getMerchantname())){
             holder.taocao.setVisibility(View.GONE);
         }else{
@@ -60,7 +60,7 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
             holder.taocao.setText("(" + bean.getMerchantname() + ")");
         }
 
-//        holder.des.setText(bean.getReason());
+        holder.des.setText(bean.getReason());
         return convertView;
     }
 

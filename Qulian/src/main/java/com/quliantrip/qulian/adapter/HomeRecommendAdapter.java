@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.HomeBean;
+import com.quliantrip.qulian.domain.home.HomeShowBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 
@@ -23,13 +24,13 @@ import butterknife.ButterKnife;
  * Created by Yuly on 2015/12/10.
  * www.quliantrip.com
  */
-public class HomeRecommendAdapter extends BasicAdapter<HomeBean.DealListEntity> {
+public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.PlayEntity> {
 
-    public HomeRecommendAdapter(ArrayList<HomeBean.DealListEntity> list) {
+    public HomeRecommendAdapter(ArrayList<HomeShowBean.DataEntity.PlayEntity> list) {
         super(list);
     }
 
-    public void upDataItem(ArrayList<HomeBean.DealListEntity> list) {
+    public void upDataItem(ArrayList<HomeShowBean.DataEntity.PlayEntity> list) {
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
@@ -41,8 +42,8 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeBean.DealListEntity> 
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_home_recommend_play, null);
         }
         final Holder holder = Holder.getHolder(convertView);
-        HomeBean.DealListEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getIcon(), holder.pic, ImageLoaderOptions.pager_options_big);
+        HomeShowBean.DataEntity.PlayEntity bean = list.get(position);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.pic, ImageLoaderOptions.pager_options_big);
 
         holder.preView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -54,6 +55,8 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeBean.DealListEntity> 
                 holder.preView.setLayoutParams(params);
             }
         });
+        holder.title.setText(bean.getTitle());
+
         return convertView;
     }
 
@@ -62,6 +65,8 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeBean.DealListEntity> 
         ImageView pic;
         @Bind(R.id.v_image_preview)
         View preView;
+        @Bind(R.id.tv_home_play_title)
+        TextView title;
 
         public Holder(View convertView) {
             super();

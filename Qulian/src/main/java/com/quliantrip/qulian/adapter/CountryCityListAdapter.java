@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -57,6 +58,7 @@ public class CountryCityListAdapter extends BasicAdapter<CityListBean.DataEntity
                 intent.putExtra("cityId", bean.getId());
                 ((SimpleBackActivity) mContext).setResult(((SimpleBackActivity) mContext).RESULT_OK, intent);
                 ((SimpleBackActivity) mContext).finish();
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
             }
         });
 

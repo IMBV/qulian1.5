@@ -5,7 +5,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import java.util.List;
 
 /**
- * Created by Qulian5 on 2016/1/22.
+ * 玩法的bean对象
  */
 public class PlayMethodBean extends BaseJson {
 
@@ -114,18 +114,20 @@ public class PlayMethodBean extends BaseJson {
             }
         }
 
-        public static class PlayEntity {
+        public static class     PlayEntity {
+
             private String id;
-            private String name;
+            private Object name;
             private String title;
             private String img;
             private String summary;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
             }
 
-            public void setName(String name) {
+            public void setName(Object name) {
                 this.name = name;
             }
 
@@ -141,11 +143,15 @@ public class PlayMethodBean extends BaseJson {
                 this.summary = summary;
             }
 
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
 
-            public String getName() {
+            public Object getName() {
                 return name;
             }
 
@@ -159,6 +165,10 @@ public class PlayMethodBean extends BaseJson {
 
             public String getSummary() {
                 return summary;
+            }
+
+            public String getImgs() {
+                return imgs;
             }
         }
     }

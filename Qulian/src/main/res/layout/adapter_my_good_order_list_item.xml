@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -83,10 +84,12 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_good_order_every_price"
                         style="@style/text_main_title_12"
                         android:text="￥160.00" />
 
                     <TextView
+                        android:id="@+id/tv_good_order_num"
                         style="@style/text_title_sub_12"
                         android:text="×2" />
 
@@ -94,6 +97,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_good_order_taocan"
                 style="@style/text_title_sub_12"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp"
@@ -121,6 +125,7 @@
                     android:text="￥" />
 
                 <TextView
+                    android:id="@+id/tv_good_order_price"
                     style="@style/text_main_title_16"
                     android:text="320.00" />
             </LinearLayout>
@@ -146,6 +151,7 @@
             android:layout_centerVertical="true">
 
             <Button
+                android:id="@+id/bt_good_order_link_daren"
                 android:layout_width="76dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="15dp"
@@ -155,6 +161,7 @@
                 android:textSize="12sp" />
 
             <Button
+                android:id="@+id/bt_good_order_cancel"
                 android:layout_width="76dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="15dp"
@@ -164,6 +171,7 @@
                 android:textSize="12sp" />
 
             <Button
+                android:id="@+id/bt_good_order_see_consume"
                 android:layout_width="76dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="15dp"

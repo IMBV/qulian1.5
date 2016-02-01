@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <ListView
+        android:id="@+id/lv_play_method_good_detail_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="49dp"

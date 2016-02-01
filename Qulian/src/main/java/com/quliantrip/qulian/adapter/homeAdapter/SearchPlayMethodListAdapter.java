@@ -34,7 +34,7 @@ public class SearchPlayMethodListAdapter extends BasicAdapter<SecnicPlayResultBe
         }
         Holder holder = Holder.getHolder(convertView);
         SecnicPlayResultBean.DataEntity.RuleEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImg(), holder.img, ImageLoaderOptions.pager_options_big);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
         return convertView;

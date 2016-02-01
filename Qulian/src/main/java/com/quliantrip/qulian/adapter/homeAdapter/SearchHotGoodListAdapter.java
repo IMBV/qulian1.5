@@ -32,7 +32,7 @@ public class SearchHotGoodListAdapter extends BasicAdapter<SecnicPlayResultBean.
         }
         Holder holder = Holder.getHolder(convertView);
         final SecnicPlayResultBean.DataEntity.WareEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImg(), holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0] , holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getName());
         return convertView;
     }

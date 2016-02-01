@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodOrderGoodlistAdapter;
@@ -14,6 +15,7 @@ import com.quliantrip.qulian.domain.choice.playMethod.OrderSubmitResultBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitItemBean;
 import com.quliantrip.qulian.domain.common.HintInfoBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -33,8 +35,13 @@ import butterknife.OnClick;
  * 玩法的订单
  */
 public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
+    private String playMethodId;
+
     @Bind(R.id.lv_play_method_good_check_list)
     ListView listView;
+    @Bind(R.id.iv_good_collect_text)
+    TextView totalPrice;
+
     private ArrayList<PlayMethodOrderSubmitBean.DataEntity> goodList;
 
     //玩法点单属性的集合
@@ -52,8 +59,9 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
+        playMethodId = getArguments().getString("playMethodId");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "1");
+        map.put("id", playMethodId);
         return new QuestBean(map, new PlayMethodOrderSubmitBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_ORDER);
     }
 
@@ -105,9 +113,9 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("proid", "1");
-        map.put("key", "-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");
-        map.put("total_price", "122");
+        map.put("proid", playMethodId);
+        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        map.put("total_price","466");
         map.put("type", "2");
         map.put("data", getDataString());
         new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_SUBMIT, new OrderSubmitResultBean().setTag(getClass().getName() + "submit"), map);

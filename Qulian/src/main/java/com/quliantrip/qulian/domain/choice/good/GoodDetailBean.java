@@ -167,7 +167,7 @@ public class GoodDetailBean extends BaseJson {
             public static class NameEntity {
                 private String id;
                 private String name;
-                private Object images;
+                private String images;
                 private String address;
 
                 public void setId(String id) {
@@ -178,7 +178,7 @@ public class GoodDetailBean extends BaseJson {
                     this.name = name;
                 }
 
-                public void setImages(Object images) {
+                public void setImages(String images) {
                     this.images = images;
                 }
 
@@ -194,7 +194,7 @@ public class GoodDetailBean extends BaseJson {
                     return name;
                 }
 
-                public Object getImages() {
+                public String getImages() {
                     return images;
                 }
 

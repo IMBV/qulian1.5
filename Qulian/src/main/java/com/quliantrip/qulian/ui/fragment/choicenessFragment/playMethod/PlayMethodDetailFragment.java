@@ -2,6 +2,7 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
@@ -44,6 +45,8 @@ import butterknife.OnClick;
  */
 public class PlayMethodDetailFragment extends BasePageCheckFragment {
     private View view;
+    private String playMethodId;
+
     //滑动的scrollView
     @Bind(R.id.sv_author_play_method_des)
     ScrollView scrollView;
@@ -71,14 +74,12 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
     private List<View> dotList = new ArrayList<View>();
-    //mode兑现的显示
-    private HomeSlideImageMode homeSlideImageMode;
 
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_play_method_detail, null);
         ButterKnife.bind(this, view);
-        initSlideImage();
+        System.out.println(QulianApplication.getInstance().getLoginUser().getAuth_key());
         //获取viewtreeobject的观察者进行数据的设置
         authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -101,13 +102,15 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 });
             }
         });
+        goodsListView.setFocusable(false);
         return view;
     }
 
     @Override
     protected QuestBean requestData() {
+        playMethodId = ((Activity)mContext).getIntent().getStringExtra("playMethodId");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", ((Activity)mContext).getIntent().getStringExtra("playMethodId"));
+        map.put("id",playMethodId );
         return new QuestBean(map, new PlayMethodDetailBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_DETRAIL);
     }
 
@@ -116,9 +119,11 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             PlayMethodDetailBean playMethodDetailBean = (PlayMethodDetailBean) bean;
             PlayMethodDetailBean.DataEntity dataEntity = playMethodDetailBean.getData();
+            initRollView(dataEntity.getPlay().getImgs());
             if (playMethodDetailBean.getCode() == 200) {
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(false);
                 final ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity> listData = (ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity>) dataEntity.getPackageX();
+
                 goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter(listData));
                 goodsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -131,6 +136,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                     }
                 });
+
             } else {
                 ToastUtil.showToast(mContext, playMethodDetailBean.getMsg());
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(true);
@@ -172,8 +178,15 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     //点击购买
     @OnClick(R.id.bt_detail_order_buy)
     void intoOrder() {
-        UIHelper.showPlayMethodOrder(mContext, null);
-        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        if (QulianApplication.getInstance().isLogin()) {
+            Bundle bundle = new Bundle();
+            bundle.putString("playMethodId", playMethodId);
+            UIHelper.showPlayMethodOrder(mContext, bundle);
+            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        } else {
+            UIHelper.showMyLogin(this, 41);
+            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        }
     }
 
     //点击收藏
@@ -192,18 +205,16 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
         isCollect = !isCollect;
     }
 
-    //初始化广告的条目
-    private void initSlideImage() {
-        initRollView();
-    }
-
     //初始化轮播图
-    private void initRollView() {
+    private void initRollView(String imgsString) {
         imageList.clear();
         dotList.clear();
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed3a64400b.png");
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed3762c8e5.png");
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed327a6642.png");
+        if (imgsString != null){
+            String[] imgArray = imgsString.split(",");
+            for(int i=0;i<imgArray.length;i++){
+                imageList.add(imgArray[i]);
+            }
+        }
         if (imageList.size() > 0) {
             //初始化小点
             initDoc();

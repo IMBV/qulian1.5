@@ -184,6 +184,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HotGoodBean.DataEntity.ScreenEntity.ChildEntity bean = (HotGoodBean.DataEntity.ScreenEntity.ChildEntity) parent.getAdapter().getItem(position);
                 ToastUtil.showToast(mContext, bean.getName() + bean.getId());
+                hidePopupWindow();
                 //请求数据后发送给主线程中
             }
         });
@@ -192,8 +193,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         siftPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         siftPopupWindow.setOutsideTouchable(true);
         siftPopupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
-//        siftPopupWindow.setFocusable(true);
-//        siftPopupWindow.setou
         //显示的筛选popupwinsow的坐标位置
         int[] location = new int[2];
         bottomLine.getLocationInWindow(location);
@@ -260,9 +259,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         view.findViewById(R.id.ll_hot_good_best_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, GoodDetailActivity.class);
-                mContext.startActivity(intent);
-                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                ToastUtil.showToast(mContext,"暂时没有该条数据");
             }
         });
 

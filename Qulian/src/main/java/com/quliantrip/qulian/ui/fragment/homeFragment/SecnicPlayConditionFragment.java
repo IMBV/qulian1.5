@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SecnicPlayConditionFragment extends BaseFragment {
     private View view;
@@ -54,4 +55,8 @@ public class SecnicPlayConditionFragment extends BaseFragment {
         myListView.setAdapter(new SearchConditionHistoryAdapter(listHistory,mContext));
     }
 
+    @OnClick(R.id.tv_search_condition)
+    void clearHistory(){
+        
+    }
 }

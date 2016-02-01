@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.domain.home.HomeShowBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
 import com.quliantrip.qulian.util.CommonHelp;
@@ -18,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * 首页的图片的滑动模块
  */
-public class HomeSlideImageMode extends BaseMode<List<String>> {
+public class HomeSlideImageMode extends BaseMode<List<HomeShowBean.DataEntity.BannerEntity>> {
 
     private View view;
     private RollViewPage rollViewPage;
@@ -26,6 +27,8 @@ public class HomeSlideImageMode extends BaseMode<List<String>> {
     LinearLayout top_news_viewpager;//轮播的viewpage
     @Bind(R.id.dots_ll)
     LinearLayout dots_ll;//下面的小点
+
+    private ArrayList<HomeShowBean.DataEntity.BannerEntity> list;
 
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
@@ -43,19 +46,17 @@ public class HomeSlideImageMode extends BaseMode<List<String>> {
 
     //在这里进行数据的添加,o表示传如的类，进行空间的加载布局
     @Override
-    public void setData(List<String> advs) {
+    public void setData(List<HomeShowBean.DataEntity.BannerEntity> list) {
+        this.list = (ArrayList<HomeShowBean.DataEntity.BannerEntity>) list;
         initRollView();
     }
 
     private void initRollView() {
         imageList.clear();
         dotList.clear();
-//        for (HomeBean.AdvsEntity adv:advs) {
-//            imageList.add(adv.getImg());
-//        }
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed3a64400b.png");
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed3762c8e5.png");
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed327a6642.png");
+        for (HomeShowBean.DataEntity.BannerEntity bannerEntities:list) {
+            imageList.add(bannerEntities.getImage());
+        }
         if (imageList.size() > 0) {
             //初始化小点
             initDoc();

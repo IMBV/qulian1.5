@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.domain.home.HomeShowBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
 import com.quliantrip.qulian.mode.homeMode.FunctionModeFragment.FunctionModeFragmentOne;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by Yuly on 2015/12/4.
  * www.quliantrip.com
  */
-public class HomeFunctionMode extends BaseMode<List<String>> {
+public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.MenuEntity>> {
 
     private View view;
     @Bind(R.id.vp_home_function)
@@ -57,7 +58,7 @@ public class HomeFunctionMode extends BaseMode<List<String>> {
     }
 
     @Override
-    public void setData(final List<String> list) {
+    public void setData(final List<HomeShowBean.DataEntity.MenuEntity> list) {
 
     }
 

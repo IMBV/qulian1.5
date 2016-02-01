@@ -276,6 +276,32 @@
             style="@style/dev_all_line"
             android:layout_marginLeft="10dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/text_main_title_16"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="手机号码" />
+
+            <com.quliantrip.qulian.view.ClearEditText
+                android:id="@+id/cet_linkman_number"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/colorPrimary"
+                android:hint="请填写手机号码"
+                android:textColor="@color/app_main_title"
+                android:textColorHint="@color/app_main_sub_title_text"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 

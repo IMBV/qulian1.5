@@ -2,12 +2,15 @@ package com.quliantrip.qulian.adapter.choiceAdapter.good;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.domain.choice.good.OrderSubmitBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 
 import java.util.ArrayList;
@@ -30,15 +33,15 @@ public class GoodDetailBranchCheckAdapter extends BasicAdapter<GoodDetailBean.Da
         }
         Holder holder = Holder.getHolder(convertView);
         final GoodDetailBean.DataEntity.BranchEntity bean = list.get(position);
-//        ImageLoader.getInstance().displayImage((String) bean.getImages(), holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getName().getImages(), holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getName().getName());
         holder.address.setText(bean.getName().getAddress());
         return convertView;
     }
 
     static class Holder {
-//        @Bind(R.id.iv_sub_branch_img)
-//        ImageView img;
+        @Bind(R.id.iv_sub_branch_img)
+        ImageView img;
         @Bind(R.id.iv_sub_branch_name)
         TextView name;
         @Bind(R.id.iv_sub_branch_address)

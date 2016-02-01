@@ -62,18 +62,20 @@ public class PlayMethodDetailBean extends BaseJson {
         }
 
         public static class PlayEntity {
+
             private String id;
-            private String name;
+            private Object name;
             private String img;
-            private String desc;
+            private Object desc;
             private String buydesc;
             private String sequence;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
             }
 
-            public void setName(String name) {
+            public void setName(Object name) {
                 this.name = name;
             }
 
@@ -81,7 +83,7 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.img = img;
             }
 
-            public void setDesc(String desc) {
+            public void setDesc(Object desc) {
                 this.desc = desc;
             }
 
@@ -93,11 +95,15 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.sequence = sequence;
             }
 
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
 
-            public String getName() {
+            public Object getName() {
                 return name;
             }
 
@@ -105,7 +111,7 @@ public class PlayMethodDetailBean extends BaseJson {
                 return img;
             }
 
-            public String getDesc() {
+            public Object getDesc() {
                 return desc;
             }
 
@@ -116,9 +122,14 @@ public class PlayMethodDetailBean extends BaseJson {
             public String getSequence() {
                 return sequence;
             }
+
+            public String getImgs() {
+                return imgs;
+            }
         }
 
         public static class PackageEntity {
+
             private String playitemsid;
             private String title;
             private String type;
@@ -126,6 +137,7 @@ public class PlayMethodDetailBean extends BaseJson {
             private String class_id;
             private String name;
             private String merchant;
+            private String is_res;
             private String merchantname;
 
             public void setPlayitemsid(String playitemsid) {
@@ -154,6 +166,10 @@ public class PlayMethodDetailBean extends BaseJson {
 
             public void setMerchant(String merchant) {
                 this.merchant = merchant;
+            }
+
+            public void setIs_res(String is_res) {
+                this.is_res = is_res;
             }
 
             public void setMerchantname(String merchantname) {
@@ -186,6 +202,10 @@ public class PlayMethodDetailBean extends BaseJson {
 
             public String getMerchant() {
                 return merchant;
+            }
+
+            public String getIs_res() {
+                return is_res;
             }
 
             public String getMerchantname() {

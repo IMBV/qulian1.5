@@ -44,8 +44,7 @@ public class PlayMethodFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_home_play_method, null);
         ButterKnife.bind(this, view);
         iniiListView();
@@ -69,7 +68,7 @@ public class PlayMethodFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     SecnicPlayResultBean.DataEntity.RuleEntity bean = rule.get(position);
                     Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
-                    intent.putExtra("goodId", bean.getId());
+                    intent.putExtra("playMethodId", bean.getId());
                     intent.putExtra("isCollect", false);
                     mContext.startActivity(intent);
                     ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
