@@ -2,6 +2,7 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.good.HotGoodListAdapter;
 import com.quliantrip.qulian.adapter.popAdapter.HotGoodChildAdapter;
@@ -29,6 +31,7 @@ import com.quliantrip.qulian.adapter.popAdapter.HotGoodGroupAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
@@ -70,6 +73,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     PullToRefreshListView refreshViewList;
     protected ListView listView;
 
+    private HotGoodBean.DataEntity.ProductInfoEntity productInfoEntity;
+
     @Override
     protected View getSuccessView() {
         View view = View.inflate(mContext, R.layout.fragment_choiceness_hot_good, null);
@@ -95,10 +100,12 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
             HotGoodBean hotGoodBean = (HotGoodBean) bean;
-
+            cateList = hotGoodBean.getData().getCate();
             for (int i = 0; i < hotGoodBean.getData().getCate().size(); i++) {
                 initRadioButton(hotGoodBean.getData().getCate().get(i), i);
             }
+
+            currentCheckedCate = map.get(classId);
             //这里是进行平滑的移动
             linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -111,20 +118,26 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 }
             });
             screenArray = hotGoodBean.getData().getScreen();
+            productInfoEntity = hotGoodBean.getData().getProductInfo();
+
             initRefreshListView(hotGoodBean.getData().getOnline());
         }
     }
 
+    private List<HotGoodBean.DataEntity.HotGoodCate> cateList;
     //分类的筛选
-    private int currentCheckedCate = 2;
+    private int currentCheckedCate = 0;
+    private String classId = "-1";
     //map 前一个分类的id， 后表一个表示第几个加入
-    private ArrayList<HashMap<Integer, String>> addButtonList = new ArrayList<>();
+    HashMap<String, Integer> map = new HashMap<String, Integer>() {
+        {
+            put("-1", 0);
+        }
+    };
 
     //添加选着条件按钮
     private void initRadioButton(final HotGoodBean.DataEntity.HotGoodCate cate, final int i) {
-        HashMap<Integer, String> map = new HashMap<>();
-        map.put(i, cate.getId());
-        addButtonList.add(map);
+        map.put(cate.getId(), i);
         View view = View.inflate(mContext, R.layout.view_hot_good_classfy_item, null);
         final Button button = (Button) view.findViewById(R.id.rb_hot_good_classfy_item);
         button.setText(cate.getName());
@@ -256,13 +269,18 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         hotGoodListAdapter = new HotGoodListAdapter((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
         listView.setAdapter(hotGoodListAdapter);
         View view = View.inflate(mContext, R.layout.layout_hot_good_best_to_me, null);
+        ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) view.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
         view.findViewById(R.id.ll_hot_good_best_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(mContext,"暂时没有该条数据");
+                Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                intent.putExtra("goodId", productInfoEntity.getId());
+                intent.putExtra("isCollect", false);
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }
         });
-
+        ((TextView) view.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
         listView.addHeaderView(view);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -308,8 +326,18 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         });
     }
 
+    //设置背景取消
     @OnClick(R.id.overlay)
     void hideBg() {
         bg.setVisibility(View.GONE);
+    }
+
+    public void changeClassify(String id) {
+        if(cateList == null){
+            classId = id;
+        }else{
+            classId = id;
+            ToastUtil.showToast(mContext,"获取数据改变选中的id");
+        }
     }
 }

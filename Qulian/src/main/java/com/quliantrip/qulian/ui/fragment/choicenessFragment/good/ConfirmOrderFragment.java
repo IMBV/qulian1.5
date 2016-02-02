@@ -3,6 +3,7 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -100,41 +101,45 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     //跳入到支付界面
     @OnClick(R.id.bt_order_payment)
     void toPay() {
+        if (linkManId == null || TextUtils.isEmpty(linkManId)) {
+            ToastUtil.showToast(mContext, "请选着联系人");
+            return;
+        }
         Map<String, String> map = new HashMap<String, String>();
         map.put("orderid", orderId);//订单的id
         map.put("memo", beizhu.getText().toString().trim());//备注
         map.put("contactsid", linkManId);//常用联系人的id
-        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CONFIRM_SUBMIT,new HintInfoBean().setTag(getClass().getName() + "topay"), map);
-//        UIHelper.showPayMethod(mContext, null);
-//        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CONFIRM_SUBMIT, new HintInfoBean().setTag(getClass().getName() + "topay"), map);
+
     }
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     public void onEventMainThread(BaseJson bean) {
         //初始化界面的显示
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             GoodOrderConfirmBean goodOrderConfirmBean = (GoodOrderConfirmBean) bean;
-            if (goodOrderConfirmBean.getCode() == 200){
+            if (goodOrderConfirmBean.getCode() == 200) {
                 GoodOrderConfirmBean.DataEntity dataEntity = goodOrderConfirmBean.getData();
                 orderName.setText(dataEntity.getOrdershop().getName());
                 taocan.setText(dataEntity.getAttribute());
                 data.setText(sdf.format(new Date(Integer.valueOf(dataEntity.getOrdershop().getDate()) * 1000)));
                 time.setText("没有该字段");
-                price.setText("￥"+dataEntity.getOrdershop().getPrice());
-            }else{
-                ToastUtil.showToast(mContext,goodOrderConfirmBean.getMsg());
+                price.setText("￥" + dataEntity.getOrdershop().getPrice());
+            } else {
+                ToastUtil.showToast(mContext, goodOrderConfirmBean.getMsg());
             }
         }
 
         //确认订单后提交成功后悔跳去的支付界面
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
-            if (hintInfoBean.getCode() == 200){
+            if (hintInfoBean.getCode() == 200) {
                 UIHelper.showPayMethod(mContext, null);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
-            }else{
-                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
+            } else {
+                ToastUtil.showToast(mContext, hintInfoBean.getMsg());
             }
         }
     }

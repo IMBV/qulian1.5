@@ -19,7 +19,6 @@ import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
@@ -79,7 +78,6 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_play_method_detail, null);
         ButterKnife.bind(this, view);
-        System.out.println(QulianApplication.getInstance().getLoginUser().getAuth_key());
         //获取viewtreeobject的观察者进行数据的设置
         authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 

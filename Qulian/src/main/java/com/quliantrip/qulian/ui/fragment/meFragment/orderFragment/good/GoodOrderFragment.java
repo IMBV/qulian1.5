@@ -2,10 +2,12 @@ package com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.good;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -24,6 +26,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.util.UIHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,7 +109,7 @@ public class GoodOrderFragment extends BasePageCheckFragment {
         rb.setText(styledText, TextView.BufferType.SPANNABLE);
     }
 
-    private void initRefreshListView(ArrayList<GoodOrderListBean.DataEntity> list) {
+    private void initRefreshListView(final ArrayList<GoodOrderListBean.DataEntity> list) {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
@@ -116,6 +119,16 @@ public class GoodOrderFragment extends BasePageCheckFragment {
         listView.setAdapter(goodOrderListAdapter);
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId",list.get(position-1).getId());
+                UIHelper.showMyOrderDetail(mContext,bundle);
+            }
+        });
+
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) refreshViewList.getLayoutParams();
         params.topMargin = CommonHelp.dip2px(mContext, 10);

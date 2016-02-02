@@ -111,6 +111,7 @@ public class AddLinkManFragment extends Fragment {
         type.setText(linkMan.getPaper_type());
         num.setText(linkMan.getPaper_number());
         address.setText(linkMan.getAddress());
+        phone.setText(linkMan.getTel());
     }
 
     //单击添加操作

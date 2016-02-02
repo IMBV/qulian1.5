@@ -39,6 +39,8 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
             holder.isCollect.setVisibility(View.GONE);
         }
         holder.name.setText(bean.getName());
+        holder.newPrice.setText("￥"+bean.getSale());
+        holder.oldPrice.setText(bean.getSale());
         return convertView;
     }
 

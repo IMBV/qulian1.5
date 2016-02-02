@@ -41,10 +41,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp resp) {
-
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("tishi");
+            builder.setTitle("支付结果");
             builder.setMessage("微信支付结果");
             builder.show();
         }

@@ -196,24 +196,24 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             }
         }
 
-        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
-            GoodOrderSubmitCheckBean goodOrserSubmitCheckBean = (GoodOrderSubmitCheckBean) bean;
-            if (goodOrserSubmitCheckBean.getCode() == 200) {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("proid", "11");
-                map.put("date", playMethodOrderSubmitItemBean.getDate());
-                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-                map.put("total_price", playMethodOrderSubmitItemBean.getPrice());
-                map.put("num", playMethodOrderSubmitItemBean.getNum());
-                map.put("type", "1");
-                map.put("price", playMethodOrderSubmitItemBean.getPrice());
-                map.put("service", playMethodOrderSubmitItemBean.getService());
-                map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
-                new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
-            } else {
-                ToastUtil.showToast(mContext, goodOrserSubmitCheckBean.getMsg());
-            }
-        }
+//        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
+//            GoodOrderSubmitCheckBean goodOrserSubmitCheckBean = (GoodOrderSubmitCheckBean) bean;
+//            if (goodOrserSubmitCheckBean.getCode() == 200) {
+//                Map<String, String> map = new HashMap<String, String>();
+//                map.put("proid", "11");
+//                map.put("date", playMethodOrderSubmitItemBean.getDate());
+//                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+//                map.put("total_price", playMethodOrderSubmitItemBean.getPrice());
+//                map.put("num", playMethodOrderSubmitItemBean.getNum());
+//                map.put("type", "1");
+//                map.put("price", playMethodOrderSubmitItemBean.getPrice());
+//                map.put("service", playMethodOrderSubmitItemBean.getService());
+//                map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
+//                new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
+//            } else {
+//                ToastUtil.showToast(mContext, goodOrserSubmitCheckBean.getMsg());
+//            }
+//        }
 
         if (bean != null && (this.getClass().getName() + "submit").equals(bean.getTag())) {
             GoodOrderSubmitBean goodOrderSubmitBean = (GoodOrderSubmitBean) bean;
@@ -231,12 +231,6 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     //提交订单
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
-//        Map<String, String> map = new HashMap<String, String>();
-//        map.put("proid", "11");
-//        map.put("date", playMethodOrderSubmitItemBean.getDate());
-//        map.put("num", playMethodOrderSubmitItemBean.getNum());
-//        map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
-//        new PacketStringReQuest(HttpConstants.GOOD_ORDER_CHECK, new GoodOrderSubmitCheckBean().setTag(getClass().getName() + "check"), map);
         Map<String, String> map = new HashMap<String, String>();
         map.put("proid", goodId);
         map.put("date", playMethodOrderSubmitItemBean.getDate() == null ? null : playMethodOrderSubmitItemBean.getDate());

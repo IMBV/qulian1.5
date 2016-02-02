@@ -95,7 +95,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         homeChoicenessMode.setContext(mContext);
     }
 
-
     //这里是进行数据展示的界面
     @Override
     public void onHiddenChanged(boolean hidden) {

@@ -9,6 +9,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.WeiXinRePay;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.tencent.mm.sdk.constants.Build;
 import com.tencent.mm.sdk.modelpay.PayReq;
@@ -63,8 +64,11 @@ public class PayCheckstandFragment extends BaseFragment {
     void commentPay() {
         switch (mCurrentPayWay) {
             case 0:
+                showDialog_cancel("支付宝支付中");
                 Map<String, String> map = new HashMap<String, String>();
-                new PacketStringReQuest("http://v2.quliantrip.com/backend/web/index.php?r=site/payorder", new WeiXinRePay().setTag(getClass().getName()));
+//                +"&"+"key="+ QulianApplication.getInstance().getLoginUser().getAuth_key()
+//                        +"&order_sn="+
+                new PacketStringReQuest("http://v2.quliantrip.com/index.php?r=site/payorder", new WeiXinRePay().setTag(getClass().getName()));
                 break;
             case 1:
                 showDialog_cancel("支付宝支付中");
@@ -77,6 +81,7 @@ public class PayCheckstandFragment extends BaseFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             WeiXinRePay weiXinRePay = (WeiXinRePay) bean;
             toWeixinPay(weiXinRePay);
+            cancelDialog();
         }
     }
 
@@ -129,7 +134,6 @@ public class PayCheckstandFragment extends BaseFragment {
             ((ImageView) view.findViewById(oldCheckId)).setImageResource(R.mipmap.cnb_wode_nor);
             ((ImageView) view.findViewById(newCheckId)).setImageResource(R.mipmap.cnb_wode_pre);
         }
-        System.out.println(oldPayWay + "asdf0" + mCurrentPayWay);
         oldCheckId = id;
     }
 

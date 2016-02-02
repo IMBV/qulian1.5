@@ -43,8 +43,7 @@ public class PlayMethodOrderListAdapter extends BasicAdapter<PlayMethodOrderBean
         holder.listView.setDividerHeight(CommonHelp.dip2px(QulianApplication.getContext(), 15));
 
         holder.listView.setAdapter(new PlayMethodOrderListGoodItemAdapter((ArrayList<PlayMethodOrderBean.DataEntity.PalyEntity>) bean.getPaly()));
-
-
+        holder.listView.setFocusable(false);
         return convertView;
     }
 

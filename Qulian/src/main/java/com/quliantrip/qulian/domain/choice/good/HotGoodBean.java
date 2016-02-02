@@ -46,6 +46,8 @@ public class HotGoodBean extends BaseJson {
     }
 
     public static class DataEntity {
+        private ProductInfoEntity productInfo;
+
         /**
          * id : 17
          * name : 特色餐厅
@@ -68,6 +70,14 @@ public class HotGoodBean extends BaseJson {
          */
 
         private List<OnlineEntity> online;
+
+        public ProductInfoEntity getProductInfo() {
+            return productInfo;
+        }
+
+        public void setProductInfo(ProductInfoEntity productInfo) {
+            this.productInfo = productInfo;
+        }
 
         public void setCate(List<HotGoodCate> cate) {
             this.cate = cate;
@@ -93,6 +103,44 @@ public class HotGoodBean extends BaseJson {
             return online;
         }
 
+        public static class ProductInfoEntity {
+            private String id;
+            private String name;
+            private String img;
+            private String imgs;
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public void setImg(String img) {
+                this.img = img;
+            }
+
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public String getImg() {
+                return img;
+            }
+
+            public String getImgs() {
+                return imgs;
+            }
+        }
         public static class HotGoodCate {
             private String id;
             private String name;
@@ -213,6 +261,19 @@ public class HotGoodBean extends BaseJson {
             private String name;
             private String img;
             private boolean is_house;
+            private String sale;
+
+            public boolean is_house() {
+                return is_house;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
 
             public void setId(String id) {
                 this.id = id;

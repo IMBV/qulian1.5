@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.PlayMethodDetailFragment;
 
 import butterknife.Bind;
@@ -27,6 +28,7 @@ public class PlayMethodDetailActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_play_method);
         ButterKnife.bind(this);
         mContext = this;

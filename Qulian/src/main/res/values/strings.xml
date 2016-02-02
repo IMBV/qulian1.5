@@ -25,6 +25,7 @@
     <string name="actionbar_order_confirm">确认订单</string>
     <string name="actionbar_my_about">关于我们</string>
     <string name="actionbar_my_user_procel">用户协议</string>
+    <string name="actionbar_my_order_good_detail">订单详情</string>
 
     <string name="load_error">返回首页</string>
 

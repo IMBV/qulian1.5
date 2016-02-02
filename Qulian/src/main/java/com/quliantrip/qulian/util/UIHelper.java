@@ -94,6 +94,11 @@ public class UIHelper {
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
+    public static void showMyOrderDetail(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.ME_GOOD_ORDER_DETAIL, bundle);
+        ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
     public static void showAddLinkMan(Context context, Fragment fragment, int requestCode, Bundle args) {
         showSimpleBackForResult(fragment, requestCode, SimpleBackPage.MY_ADD_LINKMAN, args);
         ((Activity) context).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.view.dialog.LoadingDialog;
 
 import de.greenrobot.event.EventBus;
 
@@ -70,5 +71,33 @@ public abstract class BasePageCheckFragment extends Fragment {
             getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
         }
         super.setMenuVisibility(menuVisible);
+    }
+
+    private LoadingDialog progressDialog;
+
+    /**
+     * 显示提示框
+     *
+     * @param title
+     */
+    public void showDialog(String title) {
+        cancelDialog();
+        progressDialog = new LoadingDialog(mContext, title);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+    }
+
+    public void showDialog_cancel(String title) {
+        cancelDialog();
+        progressDialog = new LoadingDialog(mContext, title);
+        progressDialog.setCanceledOnTouchOutside(true);
+        progressDialog.show();
+    }
+
+    public void cancelDialog() {
+        if (progressDialog != null) {
+            progressDialog.cancel();
+        }
     }
 }

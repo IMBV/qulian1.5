@@ -17,13 +17,19 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public class MyPlaymethodOrderDetailActivity extends SwipeBackActivity {
     @Bind(R.id.tv_title_name)
     TextView title;
+    private String playOrdernumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_play_order_detail);
         ButterKnife.bind(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new PlayMethodOrderDetailFragment()).commit();
+        PlayMethodOrderDetailFragment playMethodOrderDetailFragment = new PlayMethodOrderDetailFragment();
+        Bundle bundle = getIntent().getExtras();
+        playMethodOrderDetailFragment.setArguments(bundle);
+        playOrdernumber = bundle.getString("playOrdernumber");
+        setTitle(playOrdernumber);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,playMethodOrderDetailFragment ).commit();
     }
 
     //设置标题为订单号

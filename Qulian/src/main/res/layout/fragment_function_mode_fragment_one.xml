@@ -4,7 +4,9 @@
     android:background="#ffffff"
     android:gravity="center">
 
-    <LinearLayout style="@style/home_function_every">
+    <LinearLayout
+        android:id="@+id/ll_home_function_play"
+        style="@style/home_function_every">
 
         <ImageView
             android:layout_width="46dp"
@@ -22,6 +24,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_home_function_play_eat"
         style="@style/home_function_every"
         android:layout_marginLeft="45dp">
 

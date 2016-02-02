@@ -32,8 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by yuly on 2015/11/9.
- * 精选筛选的界面
+ * 精选界面
  */
 public class ChoicenessFragment extends Fragment {
     protected Context mContext;
@@ -104,7 +103,7 @@ public class ChoicenessFragment extends Fragment {
     }
 
     //改变主题样式的颜色
-    private void setTextColor(Boolean starte) {
+    public void setTextColor(Boolean starte) {
         if (starte) {
             routeText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
             goodText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
@@ -168,10 +167,13 @@ public class ChoicenessFragment extends Fragment {
         }
     }
 
+    //切换的玩法的列表
     public void changeHotGoodFragment() {
         if (hotGoodsFragment == null) {
             hotGoodsFragment = new HotGoodsFragment();
         }
         gotoSubFragmennt(hotGoodsFragment);
+        hotGoodsFragment.changeClassify("53");
+        setTextColor(false);
     }
 }

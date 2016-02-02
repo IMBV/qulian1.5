@@ -26,8 +26,6 @@ import butterknife.ButterKnife;
 
 /**
  * 首页的功能导航的模块
- * Created by Yuly on 2015/12/4.
- * www.quliantrip.com
  */
 public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.MenuEntity>> {
 
@@ -116,10 +114,8 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
     //小点滑动滑动的操作
     private class MyPageChangedListtener implements ViewPager.OnPageChangeListener {
         @Override
-        public void onPageScrolled(int position, float positionOffset,
-                                   int positionOffsetPixels) {
-            int len = (int) (mPointWidth * positionOffset + position
-                    * mPointWidth);
+        public void onPageScrolled(int position, float positionOffset,int positionOffsetPixels) {
+            int len = (int) (mPointWidth * positionOffset + position* mPointWidth);
             RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) deep_gray.getLayoutParams();
             params.leftMargin = len;
             deep_gray.setLayoutParams(params);

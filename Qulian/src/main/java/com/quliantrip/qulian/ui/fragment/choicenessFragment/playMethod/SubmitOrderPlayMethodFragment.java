@@ -98,7 +98,6 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "submit").equals(bean.getTag())) {
             OrderSubmitResultBean goodOrderSubmitBean = (OrderSubmitResultBean) bean;
             if (goodOrderSubmitBean.getCode() == 200) {
-                ToastUtil.showToast(mContext, goodOrderSubmitBean.getMsg());
                 Bundle bundle = new Bundle();
                 bundle.putString("orderId", goodOrderSubmitBean.getData().getId()+"");
                 UIHelper.showPlayMethodOrderConfirm(mContext, bundle);
@@ -119,10 +118,6 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
         map.put("type", "2");
         map.put("data", getDataString());
         new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_SUBMIT, new OrderSubmitResultBean().setTag(getClass().getName() + "submit"), map);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("orderId", "53");
-//        UIHelper.showPlayMethodOrderConfirm(mContext, bundle);
-//        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     private String getDataString() {

@@ -72,7 +72,7 @@ public class PlayMethodOrderFragment extends BasePageCheckFragment {
     }
 
 
-    private void initRefreshListView(List<PlayMethodOrderBean.DataEntity> list) {
+    private void initRefreshListView(final List<PlayMethodOrderBean.DataEntity> list) {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
@@ -87,6 +87,8 @@ public class PlayMethodOrderFragment extends BasePageCheckFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, MyPlaymethodOrderDetailActivity.class);
+                intent.putExtra("orderId",list.get(position-1).getId());
+                intent.putExtra("playOrdernumber",list.get(position-1).getOrder_sn());
                 ((Activity) mContext).startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }

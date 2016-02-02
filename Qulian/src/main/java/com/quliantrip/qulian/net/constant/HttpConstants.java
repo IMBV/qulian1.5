@@ -10,9 +10,10 @@ public class HttpConstants {
      */
     public static final String HOST_ADDR_ROOT_NET = "http://www.quliantrip.com/mapi/index.php";
     /**
-     * 本地v1服务器
+     * 本地v1服务器http://rest.v2.quliantrip.com/
+     * http://192.168.0.155:8089/v1/
      */
-    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155:8089/v1/";
+    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://rest.v2.quliantrip.com/v1/";
 
 
     //热门商品列表
@@ -84,6 +85,7 @@ public class HttpConstants {
     //删除联系人
     public static final String DELETE_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/dcontacts";
 
+
     //我的收藏_GOOD
     public static final String ME_COLLECT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "user/house";
     //我的收藏_PLAY_METHOD
@@ -91,6 +93,12 @@ public class HttpConstants {
 
     //我的订单列表_GOOD
     public static final String ME_ORDER_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/order";
+    //订单订单_GOOD
+    public static final String ME_ORDER_GOOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/orderxq";
+
+
     //我的订单列表_PLAY_METHOD
     public static final String ME_ORDER_PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/playorder";
+    //订单详情_PLAY_METHOD
+    public static final String ME_ORDER_PLAY_METHOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/playorderxq";
 }

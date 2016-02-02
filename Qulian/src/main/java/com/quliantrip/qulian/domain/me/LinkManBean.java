@@ -40,6 +40,7 @@ public class LinkManBean extends BaseJson {
     }
 
     public static class LinkMan implements Serializable {
+
         private String id;
         private String user_id;
         private String name;
@@ -49,6 +50,7 @@ public class LinkManBean extends BaseJson {
         private String sex;
         private String paper_type;
         private String paper_number;
+        private String tel;
         private String address;
         private String is_effect;
         private String describe;
@@ -89,6 +91,10 @@ public class LinkManBean extends BaseJson {
 
         public void setPaper_number(String paper_number) {
             this.paper_number = paper_number;
+        }
+
+        public void setTel(String tel) {
+            this.tel = tel;
         }
 
         public void setAddress(String address) {
@@ -145,6 +151,10 @@ public class LinkManBean extends BaseJson {
 
         public String getPaper_number() {
             return paper_number;
+        }
+
+        public String getTel() {
+            return tel;
         }
 
         public String getAddress() {

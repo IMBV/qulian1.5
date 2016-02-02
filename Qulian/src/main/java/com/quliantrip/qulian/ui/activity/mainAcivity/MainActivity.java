@@ -261,7 +261,7 @@ public class MainActivity extends FragmentActivity {
                             choicenessFragment.hidePopwindow();
                         }
                         //添加数据前提要有布局
-                        if (myFragment.getView() != null){
+                        if (myFragment.getView() != null) {
                             myFragment.initDate();
                         }
                         break;
@@ -377,21 +377,33 @@ public class MainActivity extends FragmentActivity {
     }
 
     //加载选着大分类的消费列表并显示，这里进行传递对象
-//    public void changeChoicenessContion(String name, String id) {
-//        if (choicenessFragment == null) {
-//            choicenessFragment = new ChoicenessFragment();
-//        }
-//        if(!choicenessFragment.isAdded()){
-//            choicenessFragment.changeBigSortNoFragemnt(name,id);
-//            switchFragment(choicenessFragment);
-//        }else{
-//            switchFragment(choicenessFragment);
-//            choicenessFragment.changeBigSort(name,id);
-//        }
-//
-//        ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
-//    }
-    public void test(){
-        ToastUtil.showToast(getApplicationContext(),"测试方法调用");
+    public void changeChoicenessContion(String type) {
+        if (choicenessFragment == null) {
+            choicenessFragment = new ChoicenessFragment();
+        }
+        if (type.equals("1")) {
+            if (!choicenessFragment.isAdded()) {
+                switchFragment(choicenessFragment);
+            } else {
+                switchFragment(choicenessFragment);
+            }
+
+        }else{
+            if (!choicenessFragment.isAdded()) {
+                switchFragment(choicenessFragment);
+                choicenessFragment.changeHotGoodFragment();
+            } else {
+                switchFragment(choicenessFragment);
+                choicenessFragment.changeHotGoodFragment();
+            }
+
+        }
+
+        ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
+    }
+
+
+    public void test() {
+        ToastUtil.showToast(getApplicationContext(), "测试方法调用");
     }
 }

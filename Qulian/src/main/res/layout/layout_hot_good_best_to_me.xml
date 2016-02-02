@@ -19,6 +19,7 @@
         RatioImageView:ratioscale="2.1428" />
 
     <TextView
+        android:id="@+id/tv_choice_hot_good_best_name"
         style="@style/text_title_style"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
