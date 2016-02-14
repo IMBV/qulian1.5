@@ -15,31 +15,23 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     public void test() {
-//        String timeStemp = getTime("2016-04-01");
-//        System.out.println(timeStemp);
-//        System.out.println("sadfasdfsadf");
-//        System.out.println("sadfasdfsadf");
-//        System.out.println("sadfasdfsadf");
-//        System.out.println("sadfasdfsadf");
-//        System.out.println("sadfasdfsadf");
+
+        String data = getStrTime("1459440000");
+        System.out.println(data);
+        System.out.println(data);
+        System.out.println(data);
+        System.out.println(data);
+        System.out.println(data);
+        System.out.println(data);
+        System.out.println(data);
     }
-
-
-
-//    public static String getTime(String user_time) {
-//        String re_time = null;
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Date d;
-//        try {
-//            d = sdf.parse(user_time);
-//            long l = d.getTime();
-//            String str = String.valueOf(l);
-//            re_time = str.substring(0, 10);
-//
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return re_time;
-//    }
+    // 将时间戳转为字符串
+    public static String getStrTime(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+        // 例如：cc_time=1291778220
+        long lcc_time = Long.valueOf(cc_time);
+        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+        return re_StrTime;
+    }
 }

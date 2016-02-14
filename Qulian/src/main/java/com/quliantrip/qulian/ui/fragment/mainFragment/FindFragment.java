@@ -1,9 +1,13 @@
 package com.quliantrip.qulian.ui.fragment.mainFragment;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
@@ -12,24 +16,31 @@ import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.fragment.findFragment.FindContentFragment;
+import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.UIHelper;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- *发现界面
+ * 发现界面
  */
 public class FindFragment extends BasePageCheckFragment {
     private View view;
     private AlertDialog dialog;
+    @Bind(R.id.find_change_city)
+    TextView homeTitle;
+
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_main_find, null);
         ButterKnife.bind(this, view);
         ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, new FindContentFragment()).commit();
+        homeTitle.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
         return view;
     }
 
@@ -47,8 +58,49 @@ public class FindFragment extends BasePageCheckFragment {
 
     }
 
+    //点击切换城市
+
+    //点击切换城市
+    @OnClick(R.id.find_change_city)
+    void chooseSity() {
+        Bundle bundle = new Bundle();
+        String s = homeTitle.getText().toString().trim();
+        bundle.putString("cityName", s);
+        UIHelper.showCityChoose(this, 31, bundle);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == 31) {
+            CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
+            CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
+            CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
+            homeTitle.setText(data.getStringExtra("cityName"));
+//            Map<String, String> map = new HashMap<String, String>();
+//            new PacketStringReQuest(HttpConstants.HOME_MAIN, new HomeShowBean().setTag(HomeFragment.this.getClass().getName()), map, null);
+        }
+    }
+
+    //这里是进行数据展示的界面
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            homeTitle.setText(cityNameString);
+        } else {
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            homeTitle.setText(cityNameString);
+        }
+    }
+
+    //点击进入群
     @OnClick(R.id.bt_into_flock)
-    void intoQun(){
+    void intoQun() {
         //建立弹出对话框
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setCancelable(true);

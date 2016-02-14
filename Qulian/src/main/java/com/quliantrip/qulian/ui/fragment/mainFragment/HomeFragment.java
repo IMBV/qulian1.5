@@ -196,6 +196,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         } else if (requestCode == 1) {
             CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
+            CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
             homeTitle.setText(data.getStringExtra("cityName"));
             Map<String, String> map = new HashMap<String, String>();
             new PacketStringReQuest(HttpConstants.HOME_MAIN, new HomeShowBean().setTag(HomeFragment.this.getClass().getName()), map, null);

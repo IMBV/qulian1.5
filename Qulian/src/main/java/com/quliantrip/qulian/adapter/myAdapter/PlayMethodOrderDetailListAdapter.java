@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.find.VoiceSquareBean;
 import com.quliantrip.qulian.domain.me.PlayMethodOrderDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
 
@@ -22,6 +21,7 @@ import butterknife.ButterKnife;
  */
 public class PlayMethodOrderDetailListAdapter extends BasicAdapter<PlayMethodOrderDetailBean.DataEntity> {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     public PlayMethodOrderDetailListAdapter(ArrayList<PlayMethodOrderDetailBean.DataEntity> list) {
         super(list);
     }
@@ -41,7 +41,7 @@ public class PlayMethodOrderDetailListAdapter extends BasicAdapter<PlayMethodOrd
         holder.number.setText(bean.getOrder_code());
         holder.name.setText(bean.getTitle());
         holder.taocan.setText(bean.getPackageX());
-        holder.dataTime.setText(sdf.format(new Date(Integer.valueOf(bean.getDate())*1000))+" "+bean.getService());
+        holder.dataTime.setText(sdf.format(new Date(Integer.valueOf(bean.getDate()) * 1000L)) + " " + bean.getService());
         holder.num.setText(bean.getNum());
         return convertView;
     }
@@ -71,6 +71,5 @@ public class PlayMethodOrderDetailListAdapter extends BasicAdapter<PlayMethodOrd
             }
             return holder;
         }
-
     }
 }

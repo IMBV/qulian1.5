@@ -125,6 +125,7 @@ public class LoginFragment extends BaseFragment {
             ToastUtil.showToast(mContext, "请输入密码");
             return;
         }
+
         showDialog("正在登陆...");
         Map<String, String> map = new HashMap<String, String>();
         map.put("LoginForm[username]", inName);

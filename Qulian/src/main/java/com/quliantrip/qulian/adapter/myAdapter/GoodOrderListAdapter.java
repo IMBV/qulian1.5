@@ -46,6 +46,7 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
         holder.price.setText((Double.valueOf(bean.getPrice()) * Double.valueOf(bean.getNum())) + "");
         holder.taocan.setText(bean.getPackageX());
         holder.num.setText("×" + bean.getNum());
+        holder.orderNumber.setText(bean.getOrder_sn());
         //设置点击事件
         convertView.findViewById(R.id.bt_good_order_see_consume).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +83,8 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
         TextView ePrice;
         @Bind(R.id.tv_good_order_num)
         TextView num;
+        @Bind(R.id.tv_order_number_info)
+        TextView orderNumber;
 
         public Holder(View convertView) {
             super();
@@ -96,6 +99,5 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
             }
             return holder;
         }
-
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -277,11 +278,9 @@ public class MainActivity extends FragmentActivity {
     private void switchFragment(Fragment fragment) {
         if (fragment != mTempFragment) {
             if (!fragment.isAdded()) {
-                getSupportFragmentManager().beginTransaction().hide(mTempFragment)
-                        .add(R.id.fl_content, fragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(mTempFragment).add(R.id.fl_content, fragment).commit();
             } else {
-                getSupportFragmentManager().beginTransaction().hide(mTempFragment)
-                        .show(fragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(mTempFragment).show(fragment).commit();
             }
             mTempFragment = fragment;
         }
@@ -381,24 +380,23 @@ public class MainActivity extends FragmentActivity {
         if (choicenessFragment == null) {
             choicenessFragment = new ChoicenessFragment();
         }
+
         if (type.equals("1")) {
             if (!choicenessFragment.isAdded()) {
                 switchFragment(choicenessFragment);
             } else {
                 switchFragment(choicenessFragment);
+                choicenessFragment.changePlayMethodFragment();
             }
-
         }else{
             if (!choicenessFragment.isAdded()) {
+                choicenessFragment.changeNoHotGoodFragment();
                 switchFragment(choicenessFragment);
-                choicenessFragment.changeHotGoodFragment();
             } else {
                 switchFragment(choicenessFragment);
                 choicenessFragment.changeHotGoodFragment();
             }
-
         }
-
         ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);
     }
 

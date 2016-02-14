@@ -32,6 +32,11 @@ public class SearchConditionHistoryAdapter extends BasicAdapter<String> {
         mContext = context;
     }
 
+    public void clearHistory(){
+        list.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

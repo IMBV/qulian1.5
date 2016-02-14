@@ -2,6 +2,7 @@ package com.quliantrip.qulian.ui.fragment.homeFragment;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.homeAdapter.SearchConditionHistoryAdapter;
@@ -23,6 +24,10 @@ public class SecnicPlayConditionFragment extends BaseFragment {
     MyGridView hotWord;
     @Bind(R.id.mlv_secnic_play_hosity_list)
     MyListView myListView;//历史记录
+    @Bind(R.id.tv_search_condition)
+    TextView history;
+
+    private SearchConditionHistoryAdapter searchConditionHistoryAdapter;
 
     @Override
     public View initView() {
@@ -48,15 +53,25 @@ public class SecnicPlayConditionFragment extends BaseFragment {
         String hotWordListString = CommonHelp.getStringSp(mContext, "hotWordString", "");
         if (!TextUtils.isEmpty(hotWordListString)) {
             String[] stringList = hotWordListString.split("::");
-            for (String s:stringList) {
+            for (String s : stringList) {
                 listHistory.add(s);
+                history.setText("清空历史记录");
+                history.setClickable(true);
             }
+        } else {
+            history.setText("没有历史记录");
+            history.setClickable(false);
         }
-        myListView.setAdapter(new SearchConditionHistoryAdapter(listHistory,mContext));
+        searchConditionHistoryAdapter = new SearchConditionHistoryAdapter(listHistory, mContext);
+
+        myListView.setAdapter(searchConditionHistoryAdapter);
     }
 
     @OnClick(R.id.tv_search_condition)
-    void clearHistory(){
-        
+    void clearHistory() {
+        CommonHelp.saveStringSp(mContext, "hotWordString", null);
+        searchConditionHistoryAdapter.clearHistory();
+        history.setText("没有历史记录");
+        history.setClickable(false);
     }
 }

@@ -71,8 +71,6 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
         }
     }
 
-
-
     public void setEdit(boolean b) {
         test.setEdit(b);
         test.notifyDataSetChanged();

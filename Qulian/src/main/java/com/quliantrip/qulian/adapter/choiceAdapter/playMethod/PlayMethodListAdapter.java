@@ -34,7 +34,7 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
         }
         Holder holder = Holder.getHolder(convertView);
         PlayMethodBean.DataEntity.PlayEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
 //        if (bean.isIs_house()) {
 //            holder.isCollect.setVisibility(View.VISIBLE);
 //        } else {

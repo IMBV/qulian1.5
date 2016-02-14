@@ -14,18 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.domain.common.ChangeCityBean;
-import com.quliantrip.qulian.net.constant.HttpConstants;
-import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
-import com.quliantrip.qulian.scanner.activity.OpenWifiActivity;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.HotGoodsFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.RecommendRouteFragment;
 import com.quliantrip.qulian.util.CommonHelp;
-import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -143,7 +135,6 @@ public class ChoicenessFragment extends Fragment {
         }
     }
 
-
     //点击切换城市
     @OnClick(R.id.rl_city_choose)
     void chooseSity() {
@@ -167,13 +158,43 @@ public class ChoicenessFragment extends Fragment {
         }
     }
 
-    //切换的玩法的列表
+    //切换为热门单品列表
     public void changeHotGoodFragment() {
         if (hotGoodsFragment == null) {
             hotGoodsFragment = new HotGoodsFragment();
         }
-        gotoSubFragmennt(hotGoodsFragment);
-        hotGoodsFragment.changeClassify("53");
-        setTextColor(false);
+    }
+
+    //切换当没有显示精选Fragment没有添加时调用
+    public void changeNoHotGoodFragment() {
+        if (hotGoodsFragment == null) {
+            hotGoodsFragment = new HotGoodsFragment();
+        }
+        isShowHotGood = true;
+        hotGoodClassfyId = "53";
+    }
+
+    private boolean isShowHotGood = false;
+    private String hotGoodClassfyId = null;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (isShowHotGood) {
+            gotoSubFragmennt(hotGoodsFragment);
+            if (hotGoodClassfyId != null)
+                hotGoodsFragment.changeClassify(hotGoodClassfyId);
+            setTextColor(false);
+        }
+        isShowHotGood = false;
+    }
+
+    //切换为玩法显示列表
+    public void changePlayMethodFragment() {
+        if (recommendRouteFragment == null) {
+            recommendRouteFragment = new RecommendRouteFragment();
+        }
+        gotoSubFragmennt(recommendRouteFragment);
+        setTextColor(true);
     }
 }

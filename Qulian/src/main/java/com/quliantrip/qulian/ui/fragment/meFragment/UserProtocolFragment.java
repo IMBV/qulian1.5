@@ -6,7 +6,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BaseFragment;
 
 /**
- * Created by Qulian5 on 2016/1/29.
+ * 用户
  */
 public class UserProtocolFragment extends BaseFragment {
 

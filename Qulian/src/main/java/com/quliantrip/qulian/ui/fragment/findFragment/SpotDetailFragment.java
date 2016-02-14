@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.finderAdapter.SpotDetailVoiceAdapter;
@@ -49,10 +50,14 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     @Bind(R.id.spot_introduct_voice)
     MyListView listView;
 
+    @Bind(R.id.seekbar_progress)
+    SeekBar seekBar;
+
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_find_spot_method_detail, null);
         ButterKnife.bind(this, view);
+        seekBar.setMax(100);
         initRollView();
         return view;
     }
@@ -72,7 +77,6 @@ public class SpotDetailFragment extends BasePageCheckFragment {
                 SpotDetailBean.DataEntity dataEntity = spotDetailBean.getData();
                 ((SpotDetailActivity) mContext).showOrHideBack(false);
                 listView.setAdapter(new SpotDetailVoiceAdapter((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) dataEntity.getVoicInfo()));
-
             } else {
                 ToastUtil.showToast(mContext, spotDetailBean.getMsg());
                 ((SpotDetailActivity) mContext).showOrHideBack(true);
@@ -89,8 +93,6 @@ public class SpotDetailFragment extends BasePageCheckFragment {
         dialog = builder.create();
         dialog.setView(view, 0, 0, 0, 0);
         dialog.show();
-
-
     }
 
     //初始化轮播图

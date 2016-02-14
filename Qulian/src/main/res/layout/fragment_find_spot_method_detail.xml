@@ -150,9 +150,9 @@
                 <com.quliantrip.qulian.view.MyListView
                     android:id="@+id/spot_introduct_voice"
                     android:layout_width="match_parent"
-                    android:dividerHeight="0dp"
+                    android:layout_height="match_parent"
                     android:divider="@color/colorPrimary"
-                    android:layout_height="match_parent" />
+                    android:dividerHeight="0dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -166,12 +166,15 @@
 
         <View style="@style/dev_all_line" />
 
-
         <SeekBar
             android:id="@+id/seekbar_progress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_height="12dp"
+            android:focusable="true"
+            android:max="100"
+            android:maxHeight="2dip"
+            android:minHeight="2dip"
+            android:progress="20"
             android:progressDrawable="@drawable/audio_progress_drawable"
             android:thumb="@mipmap/icon_play_location"
             android:thumbOffset="0dp" />
