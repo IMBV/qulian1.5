@@ -126,7 +126,7 @@ public class LoginFragment extends BaseFragment {
             return;
         }
 
-        showDialog("正在登陆...");
+        showDialog("正在登录...");
         Map<String, String> map = new HashMap<String, String>();
         map.put("LoginForm[username]", inName);
         map.put("LoginForm[password]", inPassword);

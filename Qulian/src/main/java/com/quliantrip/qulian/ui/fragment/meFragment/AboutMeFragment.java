@@ -28,5 +28,4 @@ public class AboutMeFragment extends BaseFragment {
     public void initDate() {
         code.setText(TDevice.getVersionName());
     }
-
 }

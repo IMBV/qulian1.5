@@ -103,7 +103,7 @@ public class PlayMethodOrderSubmitItemBean {
     }
 
     public String getPrice() {
-        return price;
+        return Integer.valueOf(price) * Integer.valueOf(num) + "";
     }
 
     public void setPrice(String price) {

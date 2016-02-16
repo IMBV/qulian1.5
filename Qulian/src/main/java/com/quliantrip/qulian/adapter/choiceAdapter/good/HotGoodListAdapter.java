@@ -24,6 +24,11 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
     public HotGoodListAdapter(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
         super(list);
     }
+    public void updateListView(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -39,7 +44,7 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
             holder.isCollect.setVisibility(View.GONE);
         }
         holder.name.setText(bean.getName());
-        holder.newPrice.setText("￥"+bean.getSale());
+        holder.newPrice.setText("￥"+bean.getProce());
         holder.oldPrice.setText(bean.getSale());
         return convertView;
     }

@@ -21,8 +21,6 @@ import butterknife.OnClick;
 
 /**
  * 首页商店信息的模块
- * Created by Yuly on 2015/12/11.
- * www.quliantrip.com
  */
 public class HomeChoicenessMode extends BaseMode<HomeShowBean.DataEntity.ProductInfoEntity> {
     private View view;

@@ -40,11 +40,11 @@
             android:layout_height="83dp">
 
             <ImageView
+                android:id="@+id/city_img"
                 android:layout_width="83dp"
                 android:layout_height="83dp"
                 android:gravity="center_vertical"
                 android:src="@mipmap/bg_default_min"
-                android:text="日历天气和聊天"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -53,10 +53,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_find_weather_city"
                     style="@style/text_white_18"
                     android:text="东京" />
 
                 <TextView
+                    android:id="@+id/tv_find_weather_data"
                     style="@style/text_white_14"
                     android:layout_marginTop="5dp"
                     android:text="12/5" />

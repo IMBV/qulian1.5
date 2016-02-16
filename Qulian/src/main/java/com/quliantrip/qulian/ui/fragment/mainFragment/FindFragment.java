@@ -1,18 +1,21 @@
 package com.quliantrip.qulian.ui.fragment.mainFragment;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.format.Time;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.HomeBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.fragment.findFragment.FindContentFragment;
@@ -34,6 +37,16 @@ public class FindFragment extends BasePageCheckFragment {
     private AlertDialog dialog;
     @Bind(R.id.find_change_city)
     TextView homeTitle;
+    @Bind(R.id.city_img)
+    ImageView cityImg;
+    @Bind(R.id.tv_find_weather_city)
+    TextView weatherCity;
+    @Bind(R.id.tv_find_weather_data)
+    TextView weatherData;
+
+    //当前的年月
+    private String dayString;
+    private String monthString;
 
     @Override
     protected View getSuccessView() {
@@ -46,6 +59,10 @@ public class FindFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
+        Time time = new Time();
+        time.setToNow();
+        monthString = (time.month+1) + "";
+        dayString = time.monthDay + "";
         Map<String, String> map = new HashMap<String, String>();
         map.put("ctl", "index");
         map.put("act", "app");
@@ -55,10 +72,12 @@ public class FindFragment extends BasePageCheckFragment {
 
     @Override
     public void onEventMainThread(BaseJson bean) {
-
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", ""), cityImg, ImageLoaderOptions.pager_options);
+            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
+            weatherData.setText(monthString+"/"+dayString);
+        }
     }
-
-    //点击切换城市
 
     //点击切换城市
     @OnClick(R.id.find_change_city)
@@ -79,7 +98,10 @@ public class FindFragment extends BasePageCheckFragment {
             CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
             CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
+            ImageLoader.getInstance().displayImage(data.getStringExtra("cityImg"), cityImg, ImageLoaderOptions.pager_options);
+            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
             homeTitle.setText(data.getStringExtra("cityName"));
+            //这里是进行添加数据
 //            Map<String, String> map = new HashMap<String, String>();
 //            new PacketStringReQuest(HttpConstants.HOME_MAIN, new HomeShowBean().setTag(HomeFragment.this.getClass().getName()), map, null);
         }
@@ -95,6 +117,8 @@ public class FindFragment extends BasePageCheckFragment {
         } else {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
             homeTitle.setText(cityNameString);
+            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
+            ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", ""), cityImg, ImageLoaderOptions.pager_options);
         }
     }
 

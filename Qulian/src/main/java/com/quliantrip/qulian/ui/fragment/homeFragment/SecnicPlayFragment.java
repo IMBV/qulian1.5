@@ -11,7 +11,7 @@ import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.PlayMethodFragm
 import com.quliantrip.qulian.ui.fragment.homeFragment.secnicPlay.SecnicFragment;
 
 /**
- * 收缩结果页面
+ * 搜索结果页面
  */
 public class SecnicPlayFragment extends BaseViewPagerFragment {
 
@@ -27,14 +27,14 @@ public class SecnicPlayFragment extends BaseViewPagerFragment {
     protected void onSetupTabAdapter(ViewPageFragmentAdapter adapter) {
         String[] title = getResources().getStringArray(R.array.home_secnic_play_local);
         SecnicPlayResultBean.DataEntity dataEntity = (SecnicPlayResultBean.DataEntity) getArguments().getSerializable("resultData");
-        // 景点
-        adapter.addTab(title[0], "secnic", SecnicFragment.class, getBundle(dataEntity));
-        // 玩法
-        adapter.addTab(title[1], "play_method", PlayMethodFragment.class, getBundle(dataEntity));
         //当地游
         adapter.addTab(title[2], "local_play", LocalPlayFragment.class, getBundle(dataEntity));
+        // 玩法
+        adapter.addTab(title[1], "play_method", PlayMethodFragment.class, getBundle(dataEntity));
+        // 景点
+        adapter.addTab(title[0], "secnic", SecnicFragment.class, getBundle(dataEntity));
         //设置选中的条目
-//        mViewPager.setCurrentItem(getArguments().getInt("orderState"));
+        mViewPager.setCurrentItem(1);
     }
 
     @Override

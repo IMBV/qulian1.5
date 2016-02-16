@@ -70,22 +70,6 @@
 
         <include layout="@layout/view_pulltorefresh_listview" />
 
-
-        <!--<include layout="@layout/layout_hot_good_best_to_me" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="@color/colorPrimary" />
-
-        <include layout="@layout/adapter_good_list_item" />-->
-
-
-        <!--<ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"></ListView>-->
-
     </LinearLayout>
 
     <ImageView

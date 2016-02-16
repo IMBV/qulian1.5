@@ -27,6 +27,13 @@
     <string name="actionbar_my_user_procel">用户协议</string>
     <string name="actionbar_my_order_good_detail">订单详情</string>
 
+    <!--默认城市的名称-->
+    <string name="change_city_tacit_name">北京</string>
+    <!--默认城市的id-->
+    <string name="change_city_tacit_id">21410000</string>
+    <!--默认城市的坐标-->
+    <string name="change_city_tacit_geographic">""::""</string>
+
     <string name="load_error">返回首页</string>
 
     <string name="me_setting">点击登录</string>

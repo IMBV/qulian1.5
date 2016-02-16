@@ -24,6 +24,7 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.scanner.zxing.decoding.Intents;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
@@ -57,6 +58,10 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     TextView number;//选着的数量
     @Bind(R.id.tv_order_buy_number_text)
     TextView residueNumber;
+
+    @Bind(R.id.iv_good_collect_text)
+    TextView totalPrice;
+
     private List<OrderSubmitBean.DataEntity.AttrssEntity> attressList;//有票的日期集合
 
     @Override
@@ -75,7 +80,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     }
 
     //点击日期的选择
-    private String dataString;
+    private String dataString = "请选择日期";
     @Bind(R.id.tv_preview_time_data_text)
     TextView pretime;
 
@@ -100,7 +105,6 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                         dayString = "0" + dayOfMonth;
 
                     String checkData = year + "-" + monthString + "-" + dayString;
-                    System.out.println(checkData);
                     String oldData = dataString;
                     if (oldYear > year) {
                         ToastUtil.showToast(mContext, "选择时间不能是今天之前");
@@ -144,8 +148,10 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                         residueNumber.setText("剩余" + attress.getNum());
                     else
                         residueNumber.setText("有票");
+                    //点击的操作
                     playMethodOrderSubmitItemBean.setDate(attress.getDate());
-                    playMethodOrderSubmitItemBean.setPrice(attress.getSale());
+                    playMethodOrderSubmitItemBean.setPrice(attress.getProce());
+                    totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
                     break;
                 }
             }
@@ -165,12 +171,12 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                 String playid = dataEntity.getOnline().getId();//玩法条目的id
                 String sku_id = dataEntity.getAttribute().get(0).getId();//玩法条目套餐的id
                 String date = null;
-                String price = null;
+                String price = "0";
                 if (dataEntity.getAttrss().size() > 0) {
                     date = dataEntity.getAttrss().get(0).getDate();//订单的日期
                     dataString = dataEntity.getAttrss().get(0).getDe();//
                     attressList = dataEntity.getAttrss();
-                    price = dataEntity.getAttrss().get(0).getSale();//价格
+                    price = dataEntity.getAttrss().get(0).getProce();//价格
                 }
                 String num = "1";//购买数量
                 String service = "11:00";//服务时间
@@ -179,7 +185,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                     store = dataEntity.getBranchname().get(0).getId();//商店的id
                     branchnameList = dataEntity.getBranchname();
                     checkSrore.setText(branchnameList.get(0).getName());
-                }else{
+                } else {
                     checkSrore.setText("没有课选门店");
                 }
 
@@ -189,6 +195,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                 name.setText(dataEntity.getOnline().getName());
                 dataString = playMethodOrderSubmitItemBean.getDateString();
                 pretime.setText(dataString);
+                totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
 
                 initListView(dataEntity.getAttribute());
             } else {
@@ -231,18 +238,22 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     //提交订单
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("proid", goodId);
-        map.put("date", playMethodOrderSubmitItemBean.getDate() == null ? null : playMethodOrderSubmitItemBean.getDate());
-        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-        map.put("total_price", playMethodOrderSubmitItemBean.getPrice() == null ? "" : playMethodOrderSubmitItemBean.getPrice());
-        map.put("num", playMethodOrderSubmitItemBean.getNum() == null ? "" : playMethodOrderSubmitItemBean.getNum());
-        map.put("type", "1");
-        map.put("price", playMethodOrderSubmitItemBean.getPrice() == null ? "" : playMethodOrderSubmitItemBean.getPrice());
-        map.put("service", playMethodOrderSubmitItemBean.getService() == null ? "" : playMethodOrderSubmitItemBean.getService());
-        map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id() == null ? "" : playMethodOrderSubmitItemBean.getSku_id());
-        map.put("store", playMethodOrderSubmitItemBean.getStore() == null ? "" : playMethodOrderSubmitItemBean.getStore());
-        new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
+        if (playMethodOrderSubmitItemBean.getDateString().equals("请选择日期")) {
+            ToastUtil.showToast(mContext,"请选择日期");
+        } else {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("proid", goodId);
+            map.put("date", playMethodOrderSubmitItemBean.getDate() == null ? null : playMethodOrderSubmitItemBean.getDate());
+            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+            map.put("total_price", playMethodOrderSubmitItemBean.getPrice() == null ? "" : playMethodOrderSubmitItemBean.getPrice());
+            map.put("num", playMethodOrderSubmitItemBean.getNum() == null ? "" : playMethodOrderSubmitItemBean.getNum());
+            map.put("type", "1");
+            map.put("price", playMethodOrderSubmitItemBean.getPrice() == null ? "" : playMethodOrderSubmitItemBean.getPrice());
+            map.put("service", playMethodOrderSubmitItemBean.getService() == null ? "" : playMethodOrderSubmitItemBean.getService());
+            map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id() == null ? "" : playMethodOrderSubmitItemBean.getSku_id());
+            map.put("store", playMethodOrderSubmitItemBean.getStore() == null ? "" : playMethodOrderSubmitItemBean.getStore());
+            new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
+        }
     }
 
     //初始化可选的套餐类型
@@ -267,6 +278,8 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         if (newNumber > 0) {
             number.setText(newNumber + "");
             playMethodOrderSubmitItemBean.setNum(newNumber + "");
+            playMethodOrderSubmitItemBean.setNum(newNumber + "");
+            totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
         } else {
             ToastUtil.showToast(mContext, "人数不能少于0");
         }
@@ -278,6 +291,8 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         newNumber = newNumber + 1;
         number.setText(newNumber + "");
         playMethodOrderSubmitItemBean.setNum(newNumber + "");
+        playMethodOrderSubmitItemBean.setNum(newNumber + "");
+        totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
     }
 
 
@@ -320,8 +335,8 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
             dialog.show();
-        }else{
-            ToastUtil.showToast(mContext,"没有可以选门店");
+        } else {
+            ToastUtil.showToast(mContext, "没有可以选门店");
         }
     }
 }

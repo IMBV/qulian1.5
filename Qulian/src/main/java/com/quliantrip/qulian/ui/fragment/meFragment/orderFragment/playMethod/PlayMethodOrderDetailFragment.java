@@ -22,6 +22,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 我的订单详情页
@@ -69,4 +70,9 @@ public class PlayMethodOrderDetailFragment extends BasePageCheckFragment {
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
     }
 
+    //点击联系玩法订单联系达人界面
+    @OnClick(R.id.tv_play_method_order_detail_link_daren)
+    void linkpalymethodDaren(){
+        ToastUtil.showToast(mContext,"这里暂定显示趣连的群二位码");
+    }
 }

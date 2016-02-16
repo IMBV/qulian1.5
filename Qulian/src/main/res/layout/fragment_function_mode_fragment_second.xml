@@ -4,70 +4,89 @@
     android:background="#ffffff"
     android:gravity="center">
 
-    <LinearLayout style="@style/home_function_every">
+    <LinearLayout
+        android:id="@+id/ll_home_function_play_one"
+        style="@style/home_function_every">
 
         <ImageView
+            android:id="@+id/lv_home_function_play_one_img"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_daijinquan" />
+            android:src="@mipmap/fenlei_wanfa" />
 
         <TextView
+            android:id="@+id/tv_home_function_play_one_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="代金劵"
+            android:text="玩法"
             android:textColor="#323232"
             android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_home_function_play_two"
         style="@style/home_function_every"
         android:layout_marginLeft="45dp">
 
         <ImageView
+            android:id="@+id/lv_home_function_play_two_img"
             android:layout_width="46dp"
-            android:layout_height="46dp" />
+            android:layout_height="46dp"
+            android:src="@mipmap/fenlei_meishi" />
 
         <TextView
+            android:id="@+id/tv_home_function_play_two_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:text="特色美食"
             android:textColor="#323232"
             android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_home_function_play_three"
         style="@style/home_function_every"
         android:layout_marginLeft="45dp">
 
         <ImageView
+            android:id="@+id/lv_home_function_play_three_img"
             android:layout_width="46dp"
-            android:layout_height="46dp" />
+            android:layout_height="46dp"
+            android:src="@mipmap/fenlei_menpiao" />
 
         <TextView
+            android:id="@+id/tv_home_function_play_three_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:text="景点门票"
             android:textColor="#323232"
             android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_home_function_play_four"
         style="@style/home_function_every"
         android:layout_marginLeft="45dp">
 
         <ImageView
+            android:id="@+id/lv_home_function_play_four_img"
             android:layout_width="46dp"
-            android:layout_height="46dp" />
+            android:layout_height="46dp"
+            android:src="@mipmap/fenlei_jiaotong" />
 
         <TextView
+            android:id="@+id/tv_home_function_play_four_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:text="交通"
             android:textColor="#323232"
             android:textSize="12sp" />
     </LinearLayout>

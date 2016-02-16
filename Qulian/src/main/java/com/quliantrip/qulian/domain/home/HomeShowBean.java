@@ -196,6 +196,7 @@ public class HomeShowBean extends BaseJson {
             private String image;
             private String cate_id;
             private String pro_id;
+            private String iteam;
 
             public void setId(String id) {
                 this.id = id;
@@ -217,6 +218,10 @@ public class HomeShowBean extends BaseJson {
                 this.pro_id = pro_id;
             }
 
+            public void setIteam(String iteam) {
+                this.iteam = iteam;
+            }
+
             public String getId() {
                 return id;
             }
@@ -235,6 +240,10 @@ public class HomeShowBean extends BaseJson {
 
             public String getPro_id() {
                 return pro_id;
+            }
+
+            public String getIteam() {
+                return iteam;
             }
         }
 

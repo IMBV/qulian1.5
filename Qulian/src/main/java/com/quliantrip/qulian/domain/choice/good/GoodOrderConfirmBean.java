@@ -59,7 +59,11 @@ public class GoodOrderConfirmBean extends BaseJson {
         public static class OrdershopEntity {
             private String date;
             private String price;
+            private String num;
+            private String service;
             private String name;
+            private String total_price;
+            private String de;
 
             public void setDate(String date) {
                 this.date = date;
@@ -69,8 +73,24 @@ public class GoodOrderConfirmBean extends BaseJson {
                 this.price = price;
             }
 
+            public void setNum(String num) {
+                this.num = num;
+            }
+
+            public void setService(String service) {
+                this.service = service;
+            }
+
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public void setTotal_price(String total_price) {
+                this.total_price = total_price;
+            }
+
+            public void setDe(String de) {
+                this.de = de;
             }
 
             public String getDate() {
@@ -81,8 +101,24 @@ public class GoodOrderConfirmBean extends BaseJson {
                 return price;
             }
 
+            public String getNum() {
+                return num;
+            }
+
+            public String getService() {
+                return service;
+            }
+
             public String getName() {
                 return name;
+            }
+
+            public String getTotal_price() {
+                return total_price;
+            }
+
+            public String getDe() {
+                return de;
             }
         }
     }

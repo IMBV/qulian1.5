@@ -5,18 +5,9 @@ import com.quliantrip.qulian.domain.BaseJson;
 import java.util.List;
 
 /**
- * Created by Qulian5 on 2016/1/20.
- * HotGoodCate
+ * 热门商品的数据的bean对象
  */
 public class HotGoodBean extends BaseJson {
-
-
-    /**
-     * code : 200
-     * msg : 成功
-     * data : {"cate":[{"id":"17","name":"特色餐厅"},{"id":"16","name":"门票"},{"id":"11","name":"WIFI"},{"id":"10","name":"交通"},{"id":"9","name":"购物"},{"id":"8","name":"玩乐"}],"screen":[{"id":"22","name":"商户服务","pid":"0","child":[{"id":"24","name":"英文服务","pid":"22","child":[]},{"id":"25","name":"中文服务","pid":"22","child":[]},{"id":"26","name":"可刷银联卡","pid":"22","child":[]},{"id":"27","name":"无烟坐席","pid":"22","child":[]}]},{"id":"23","name":"可预约时间","pid":"0","child":[{"id":"28","name":"即买即用","pid":"23","child":[]},{"id":"29","name":"今日可用","pid":"23","child":[]},{"id":"30","name":"明日可用","pid":"23","child":[]},{"id":"31","name":"提前2天","pid":"23","child":[]},{"id":"32","name":"提前3天以上","pid":"23","child":[]}]},{"name":"特色主题","child":[{"id":"2","tag_name":"dfdf"},{"id":"3","tag_name":"sdfsd"},{"id":"4","tag_name":"浪漫樱花"}]}],"online":[{"id":"14","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"15","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"16","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"19","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"20","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"21","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"22","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"33","name":"2222222","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"34","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"29","name":"dddddddddddd","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"31","name":"2222222","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"32","name":"2222222","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"30","name":"收到附近发生的粉红色","img":"http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg","is_house":false},{"id":"36","name":"bussid","img":"bussid","is_house":false},{"id":"37","name":"dddddddddddd","img":"dddddddddddd","is_house":false},{"id":"38","name":"dddddddddddd","img":"dddddddddddd","is_house":false}]}
-     */
-
     private int code;
     private String msg;
     private DataEntity data;
@@ -48,26 +39,8 @@ public class HotGoodBean extends BaseJson {
     public static class DataEntity {
         private ProductInfoEntity productInfo;
 
-        /**
-         * id : 17
-         * name : 特色餐厅
-         */
-
         private List<HotGoodCate> cate;
-        /**
-         * id : 22
-         * name : 商户服务
-         * pid : 0
-         * child : [{"id":"24","name":"英文服务","pid":"22","child":[]},{"id":"25","name":"中文服务","pid":"22","child":[]},{"id":"26","name":"可刷银联卡","pid":"22","child":[]},{"id":"27","name":"无烟坐席","pid":"22","child":[]}]
-         */
-
         private List<ScreenEntity> screen;
-        /**
-         * id : 14
-         * name : dddddddddddd
-         * img : http://www.quliantrip.com/public/attachment/201511/27/14/5657f561ee46d_460x280.jpg
-         * is_house : false
-         */
 
         private List<OnlineEntity> online;
 
@@ -141,6 +114,7 @@ public class HotGoodBean extends BaseJson {
                 return imgs;
             }
         }
+
         public static class HotGoodCate {
             private String id;
             private String name;
@@ -166,12 +140,6 @@ public class HotGoodBean extends BaseJson {
             private String id;
             private String name;
             private String pid;
-            /**
-             * id : 24
-             * name : 英文服务
-             * pid : 22
-             * child : []
-             */
 
             private List<ChildEntity> child;
 
@@ -260,20 +228,11 @@ public class HotGoodBean extends BaseJson {
             private String id;
             private String name;
             private String img;
-            private boolean is_house;
+            private String meter;
+            private String chinese_name;
             private String sale;
-
-            public boolean is_house() {
-                return is_house;
-            }
-
-            public String getSale() {
-                return sale;
-            }
-
-            public void setSale(String sale) {
-                this.sale = sale;
-            }
+            private String proce;
+            private boolean is_house;
 
             public void setId(String id) {
                 this.id = id;
@@ -285,6 +244,22 @@ public class HotGoodBean extends BaseJson {
 
             public void setImg(String img) {
                 this.img = img;
+            }
+
+            public void setMeter(String meter) {
+                this.meter = meter;
+            }
+
+            public void setChinese_name(String chinese_name) {
+                this.chinese_name = chinese_name;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
             }
 
             public void setIs_house(boolean is_house) {
@@ -301,6 +276,22 @@ public class HotGoodBean extends BaseJson {
 
             public String getImg() {
                 return img;
+            }
+
+            public String getMeter() {
+                return meter;
+            }
+
+            public String getChinese_name() {
+                return chinese_name;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
             }
 
             public boolean isIs_house() {

@@ -81,7 +81,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         activity = (MainActivity) getActivity();
         initModel();
         listView.setFocusable(false);
-        homeTitle.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
+        homeTitle.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
         return view;
     }
 
@@ -100,11 +100,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName",CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
             cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
         } else {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
             cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
         }
@@ -112,7 +112,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
 
     @Override
     protected QuestBean requestData() {
+        //打印获取坐标
+        System.out.println(CommonHelp.getStringSp(mContext,"geographic",CommonHelp.getString(R.string.change_city_tacit_name)));
+//        cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
         Map<String, String> map = new HashMap<String, String>();
+        map.put("city","21410000");
         return new QuestBean(map, new HomeShowBean().setTag(getClass().getName()), HttpConstants.HOME_MAIN);
     }
 
@@ -122,8 +126,9 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             HomeShowBean homeShowBean = (HomeShowBean) bean;
             //banner
             homeSlideImageMode.setData(homeShowBean.getData().getBanner());
-
-            //附近一个单品
+            //功能引导
+            homeFunctionMode.setData(homeShowBean.getData().getMenu());
+            //附近推荐单品
             if (homeShowBean.getData().getProductInfo() != null) {
                 modelContainer.removeView(homeChoicenessMode.getModelView());
                 modelContainer.addView(homeChoicenessMode.getModelView());
@@ -131,7 +136,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             } else {
                 modelContainer.removeView(homeChoicenessMode.getModelView());
             }
-
+            //初始化listView的数据对象
             initListIView(homeShowBean.getData().getPlay());
         }
     }
@@ -220,8 +225,6 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         startActivityForResult(openCameraIntent, 0);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
-
-    private Bundle bundle = new Bundle();
 
     //点击景点、玩法、当地游的筛选
     @OnClick(R.id.iv_home_secnic_play_search)

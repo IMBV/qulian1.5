@@ -62,20 +62,22 @@ public class PlayMethodDetailBean extends BaseJson {
         }
 
         public static class PlayEntity {
-
             private String id;
-            private Object name;
+            private String name;
             private String img;
             private Object desc;
             private String buydesc;
-            private String sequence;
+            private String min_price;
+            private String userid;
+            private String username;
+            private String head_img;
             private String imgs;
 
             public void setId(String id) {
                 this.id = id;
             }
 
-            public void setName(Object name) {
+            public void setName(String name) {
                 this.name = name;
             }
 
@@ -91,8 +93,21 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.buydesc = buydesc;
             }
 
-            public void setSequence(String sequence) {
-                this.sequence = sequence;
+
+            public void setMin_price(String min_price) {
+                this.min_price = min_price;
+            }
+
+            public void setUserid(String userid) {
+                this.userid = userid;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public void setHead_img(String head_img) {
+                this.head_img = head_img;
             }
 
             public void setImgs(String imgs) {
@@ -103,7 +118,7 @@ public class PlayMethodDetailBean extends BaseJson {
                 return id;
             }
 
-            public Object getName() {
+            public String getName() {
                 return name;
             }
 
@@ -119,8 +134,20 @@ public class PlayMethodDetailBean extends BaseJson {
                 return buydesc;
             }
 
-            public String getSequence() {
-                return sequence;
+            public String getMin_price() {
+                return min_price;
+            }
+
+            public String getUserid() {
+                return userid;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public String getHead_img() {
+                return head_img;
             }
 
             public String getImgs() {

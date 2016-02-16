@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by Qulian5 on 2016/1/12.
+ * 注册方式的数据适配器
  */
 public class RegisterStyleAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragments;

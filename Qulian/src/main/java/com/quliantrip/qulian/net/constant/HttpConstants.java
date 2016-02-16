@@ -2,7 +2,6 @@ package com.quliantrip.qulian.net.constant;
 
 /**
  * 定义网络请求的常量
- * Created by yuly on 2015/11/27.
  */
 public class HttpConstants {
     /**
@@ -10,10 +9,10 @@ public class HttpConstants {
      */
     public static final String HOST_ADDR_ROOT_NET = "http://www.quliantrip.com/mapi/index.php";
     /**
-     * 本地v1服务器http://rest.v2.quliantrip.com/
-     * http://192.168.0.155:8089/v1/
+     *线上数据服务器http://rest.v2.quliantrip.com/
+     * 线下数据http://192.168.0.155:8089/v1/
      */
-    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://rest.v2.quliantrip.com/v1/";
+    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155:8089/v1/";
 
 
     //热门商品列表

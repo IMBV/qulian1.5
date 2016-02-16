@@ -76,6 +76,9 @@ public class GoodDetailBean extends BaseJson {
             private String purnotes;
             private String pricedesc;
             private String is_res;
+            private Object featured;
+            private String sale;
+            private String proce;
             private String imgs;
 
             public void setId(String id) {
@@ -104,6 +107,18 @@ public class GoodDetailBean extends BaseJson {
 
             public void setIs_res(String is_res) {
                 this.is_res = is_res;
+            }
+
+            public void setFeatured(Object featured) {
+                this.featured = featured;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
             }
 
             public void setImgs(String imgs) {
@@ -136,6 +151,18 @@ public class GoodDetailBean extends BaseJson {
 
             public String getIs_res() {
                 return is_res;
+            }
+
+            public Object getFeatured() {
+                return featured;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
             }
 
             public String getImgs() {

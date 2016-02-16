@@ -2,7 +2,6 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +32,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
@@ -49,9 +49,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 热门商品的信息
+ * 热门商品展示显示页
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
+    private View bestView;
+    private String city;
+    private String cate;
+    private String merchant;
+    private String bespeak;
+    private String theme;
 
     @Bind(R.id.ll_route_sift)
     LinearLayout siftCondition;
@@ -94,32 +100,52 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         }
     }
 
+    //所有参数进行
+    public void requestDataForAll() {
+        Map<String, String> map = new HashMap<String, String>();
+        if (city != null)
+            map.put("city", city);
+        if (cate != null)
+            map.put("cate", cate);
+        if (merchant != null)
+            map.put("merchant", merchant);
+        if (bespeak != null)
+            map.put("bespeak", bespeak);
+        if (theme != null)
+            map.put("theme", theme);
+        new PacketStringReQuest(HttpConstants.HOT_GOOD_LIST, new HotGoodBean().setTag(getClass().getName()), map);
+    }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
             HotGoodBean hotGoodBean = (HotGoodBean) bean;
-            cateList = hotGoodBean.getData().getCate();
-            for (int i = 0; i < hotGoodBean.getData().getCate().size(); i++) {
-                initRadioButton(hotGoodBean.getData().getCate().get(i), i);
-            }
-
-            currentCheckedCate = map.get(classId);
-            //这里是进行平滑的移动
-            linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-                @Override
-                public void onGlobalLayout() {
-                    linearLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    Button button = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
-                    button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-                    scrollView.scrollBy(linearLayout.getChildAt(currentCheckedCate).getLeft(), 0);
+            if (cateList == null) {
+                cateList = hotGoodBean.getData().getCate();
+                if (map.size() < 2) {
+                    for (int i = 0; i < hotGoodBean.getData().getCate().size(); i++) {
+                        initRadioButton(hotGoodBean.getData().getCate().get(i), i);
+                    }
                 }
-            });
-            screenArray = hotGoodBean.getData().getScreen();
-            productInfoEntity = hotGoodBean.getData().getProductInfo();
+                currentCheckedCate = map.get(classId);
+                //这里是进行平滑的移动
+                linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                    @Override
+                    public void onGlobalLayout() {
+                        linearLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        Button button = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
+                        button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+                        button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));
+                        scrollView.scrollBy(linearLayout.getChildAt(currentCheckedCate).getLeft(), 0);
 
+                    }
+                });
+                screenArray = hotGoodBean.getData().getScreen();
+                productInfoEntity = hotGoodBean.getData().getProductInfo();
+            }
             initRefreshListView(hotGoodBean.getData().getOnline());
         }
     }
@@ -127,6 +153,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     private List<HotGoodBean.DataEntity.HotGoodCate> cateList;
     //分类的筛选
     private int currentCheckedCate = 0;
+    private int oldCheckedCate = -1;
     private String classId = "-1";
     //map 前一个分类的id， 后表一个表示第几个加入
     HashMap<String, Integer> map = new HashMap<String, Integer>() {
@@ -153,8 +180,10 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
                 }
                 bg.setVisibility(View.GONE);
-                ToastUtil.showToast(mContext, cate.getName() + cate.getId());
+                oldCheckedCate = currentCheckedCate;
                 currentCheckedCate = i;
+                HotGoodsFragment.this.cate = cate.getId();
+                requestDataForAll();
             }
         });
         linearLayout.addView(view);
@@ -174,6 +203,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     HotGoodChildAdapter childAdapter = null;
     private PopupWindow siftPopupWindow;
 
+    private String sreenGigId = "0";
+
     //显示筛选条件
     public void showSiftCondition() {
         View popView = null;
@@ -183,25 +214,42 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             childListView = (ListView) popView.findViewById(R.id.lv_child);
             groupAdapter = new HotGoodGroupAdapter(mContext, screenArray);
             groupListView.setAdapter(groupAdapter);
-            childAdapter = new HotGoodChildAdapter(mContext);
+            if (childAdapter == null) {
+                childAdapter = new HotGoodChildAdapter(mContext);
+            }
             childListView.setAdapter(childAdapter);
             childAdapter.setChildData(screenArray.get(0).getChild());
             childAdapter.notifyDataSetChanged();
             groupAdapter.notifyDataSetChanged();
         }
-
         groupListView.setOnItemClickListener(new MyItemClick());
+        //筛选二级的分类
         childListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HotGoodBean.DataEntity.ScreenEntity.ChildEntity bean = (HotGoodBean.DataEntity.ScreenEntity.ChildEntity) parent.getAdapter().getItem(position);
-                ToastUtil.showToast(mContext, bean.getName() + bean.getId());
+                switch (sreenGigId) {
+                    case "0":
+
+                        childAdapter.setMerchantId(bean.getId());
+                        HotGoodsFragment.this.merchant = bean.getId();
+                        HotGoodsFragment.this.requestDataForAll();
+                        break;
+                    case "1":
+                        childAdapter.setBespeakId(bean.getId());
+                        HotGoodsFragment.this.bespeak = bean.getId();
+                        HotGoodsFragment.this.requestDataForAll();
+                        break;
+                    case "2":
+                        childAdapter.setThemeId(bean.getId());
+                        HotGoodsFragment.this.theme = bean.getId();
+                        HotGoodsFragment.this.requestDataForAll();
+                        break;
+                }
                 hidePopupWindow();
-                //请求数据后发送给主线程中
             }
         });
-
         siftPopupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, CommonHelp.dip2px(mContext, 285));
         siftPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         siftPopupWindow.setOutsideTouchable(true);
@@ -241,6 +289,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             } else {
                 childListView.setAdapter(childAdapter);
             }
+            sreenGigId = position + "";
             Message msg = new Message();
             msg.what = 20;
             msg.arg1 = position;
@@ -265,23 +314,44 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
-        final ArrayList<String> list = new ArrayList<String>();
-        hotGoodListAdapter = new HotGoodListAdapter((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
-        listView.setAdapter(hotGoodListAdapter);
-        View view = View.inflate(mContext, R.layout.layout_hot_good_best_to_me, null);
-        ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) view.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
-        view.findViewById(R.id.ll_hot_good_best_item).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, GoodDetailActivity.class);
-                intent.putExtra("goodId", productInfoEntity.getId());
-                intent.putExtra("isCollect", false);
-                mContext.startActivity(intent);
-                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
-            }
-        });
-        ((TextView) view.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
-        listView.addHeaderView(view);
+
+        if (hotGoodListAdapter == null) {
+            hotGoodListAdapter = new HotGoodListAdapter((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
+            listView.setAdapter(hotGoodListAdapter);
+        } else {
+            hotGoodListAdapter.updateListView((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
+        }
+
+        if (bestView == null) {
+            bestView = View.inflate(mContext, R.layout.layout_hot_good_best_to_me, null);
+            ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) bestView.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
+            bestView.findViewById(R.id.ll_hot_good_best_item).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                    intent.putExtra("goodId", productInfoEntity.getId());
+                    intent.putExtra("isCollect", false);
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                }
+            });
+            ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
+            listView.addHeaderView(bestView);
+        } else {
+            ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) bestView.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
+            bestView.findViewById(R.id.ll_hot_good_best_item).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                    intent.putExtra("goodId", productInfoEntity.getId());
+                    intent.putExtra("isCollect", false);
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                }
+            });
+            ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
+        }
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -332,12 +402,21 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         bg.setVisibility(View.GONE);
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void changeClassify(String id) {
-        if(cateList == null){
+        if (cateList == null) {
             classId = id;
-        }else{
+        } else {
             classId = id;
-            ToastUtil.showToast(mContext,"获取数据改变选中的id");
+            ToastUtil.showToast(mContext, "获取数据改变选中的id");
         }
+
+        if (oldCheckedCate > -1) {
+            Button oldButton = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
+            oldButton.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+            oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
+        }
+        Map<String, String> map = new HashMap<String, String>();
+        new PacketStringReQuest(HttpConstants.HOT_GOOD_LIST, new HotGoodBean().setTag(getClass().getName()), map, null);
     }
 }

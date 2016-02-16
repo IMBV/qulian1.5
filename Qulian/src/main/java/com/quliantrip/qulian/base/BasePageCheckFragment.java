@@ -63,15 +63,16 @@ public abstract class BasePageCheckFragment extends Fragment {
 
     public abstract void onEventMainThread(BaseJson bean);
 
-    // 设置fragment的适配的内容显示当前的
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        // getView()该视图的fragment对象
-        if (getView() != null) {
-            getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
-        }
-        super.setMenuVisibility(menuVisible);
-    }
+    //这里是错误的代码但是现在还是不明白为什么
+//    // 设置fragment的适配的内容显示当前的
+//    @Override
+//    public void setMenuVisibility(boolean menuVisible) {
+//        // getView()该视图的fragment对象
+//        if (getView() != null) {
+//            getView().setVisibility(menuVisible ? View.VISIBLE : View.GONE);
+//        }
+//        super.setMenuVisibility(menuVisible);
+//    }
 
     private LoadingDialog progressDialog;
 

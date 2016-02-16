@@ -27,14 +27,25 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
         super(list);
     }
 
+    public void updataListView(ArrayList<PlayMethodBean.DataEntity.PlayEntity> list){
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_play_list_item, null);
         }
         Holder holder = Holder.getHolder(convertView);
+
+        //进行数据添加
         PlayMethodBean.DataEntity.PlayEntity bean = list.get(position);
+        //添加玩法图片资源
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        //添加达人头像
+        ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
 //        if (bean.isIs_house()) {
 //            holder.isCollect.setVisibility(View.VISIBLE);
 //        } else {
@@ -42,6 +53,7 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
 //        }
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
+        holder.price.setText("￥"+bean.getMin_price());
         return convertView;
     }
 

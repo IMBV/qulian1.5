@@ -38,11 +38,7 @@ public class PlayMethodBean extends BaseJson {
     }
 
     public static class DataEntity {
-
-
         private List<ScreenEntity> screen;
-
-
         private List<PlayEntity> play;
 
         public void setScreen(List<ScreenEntity> screen) {
@@ -63,8 +59,6 @@ public class PlayMethodBean extends BaseJson {
 
         public static class ScreenEntity {
             private String name;
-
-
             private List<ChildEntity> child;
 
             public void setName(String name) {
@@ -114,20 +108,22 @@ public class PlayMethodBean extends BaseJson {
             }
         }
 
-        public static class     PlayEntity {
-
+        public static class PlayEntity {
             private String id;
-            private Object name;
+            private String name;
             private String title;
-            private String img;
             private String summary;
+            private String min_price;
+            private String userid;
+            private String username;
+            private String head_img;
             private String imgs;
 
             public void setId(String id) {
                 this.id = id;
             }
 
-            public void setName(Object name) {
+            public void setName(String name) {
                 this.name = name;
             }
 
@@ -135,12 +131,24 @@ public class PlayMethodBean extends BaseJson {
                 this.title = title;
             }
 
-            public void setImg(String img) {
-                this.img = img;
-            }
-
             public void setSummary(String summary) {
                 this.summary = summary;
+            }
+
+            public void setMin_price(String min_price) {
+                this.min_price = min_price;
+            }
+
+            public void setUserid(String userid) {
+                this.userid = userid;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public void setHead_img(String head_img) {
+                this.head_img = head_img;
             }
 
             public void setImgs(String imgs) {
@@ -151,7 +159,7 @@ public class PlayMethodBean extends BaseJson {
                 return id;
             }
 
-            public Object getName() {
+            public String getName() {
                 return name;
             }
 
@@ -159,12 +167,24 @@ public class PlayMethodBean extends BaseJson {
                 return title;
             }
 
-            public String getImg() {
-                return img;
-            }
-
             public String getSummary() {
                 return summary;
+            }
+
+            public String getMin_price() {
+                return min_price;
+            }
+
+            public String getUserid() {
+                return userid;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public String getHead_img() {
+                return head_img;
             }
 
             public String getImgs() {

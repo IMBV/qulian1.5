@@ -5,19 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.adapter.choiceAdapter.MainChoiceAdapter;
+import com.quliantrip.qulian.ui.activity.HomeActivity.SecnicPlayConditionActivity;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.HotGoodsFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.RecommendRouteFragment;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.UIHelper;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,6 +38,9 @@ public class ChoicenessFragment extends Fragment {
 
     @Bind(R.id.tv_choiceness_title_loaction)
     TextView cityName;
+
+    @Bind(R.id.vp_happiness_container)
+    ViewPager viewPager;
     @Bind(R.id.tv_recommend_route_text)
     TextView routeText;
     @Bind(R.id.tv_hot_goods_text)
@@ -43,7 +49,8 @@ public class ChoicenessFragment extends Fragment {
     View routeLine;
     @Bind(R.id.v_hot_goods_line)
     View hotGoodLine;
-
+    private MainChoiceAdapter adapter;
+    private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
     private RecommendRouteFragment recommendRouteFragment;
     private HotGoodsFragment hotGoodsFragment;
 
@@ -57,14 +64,69 @@ public class ChoicenessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_main_choiceness, null);
         ButterKnife.bind(this, view);
-        mFragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
         recommendRouteFragment = new RecommendRouteFragment();
         hotGoodsFragment = new HotGoodsFragment();
-        gotoSubFragmennt(recommendRouteFragment);
-        String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
-        cityName.setText(cityNameString);
-        setTextColor(true);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (isShowHotGood) {
+            if (hotGoodClassfyId != null)
+                hotGoodsFragment.changeClassify(hotGoodClassfyId);
+            viewPager.setCurrentItem(1);
+        }
+        isShowHotGood = false;
+        initListener();
+        initData();
+    }
+
+    private void initListener() {
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                lightAndScaleTitle();
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                                       int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    protected void initData() {
+        fragments.add(recommendRouteFragment);
+        fragments.add(hotGoodsFragment);
+        adapter = new MainChoiceAdapter(getChildFragmentManager(), fragments);
+        viewPager.setAdapter(adapter);
+        lightAndScaleTitle();
+    }
+
+
+    private void lightAndScaleTitle() {
+        final int currentPage = viewPager.getCurrentItem();
+        routeText.setTextColor(getResources().getColor(currentPage == 0 ? R.color.app_main_collor : R.color.app_main_title_text));
+        goodText.setTextColor(getResources().getColor(currentPage == 1 ? R.color.app_main_collor : R.color.app_main_title_text));
+        routeLine.setVisibility(currentPage == 0 ? View.VISIBLE : View.GONE);
+        hotGoodLine.setVisibility(currentPage == 1 ? View.VISIBLE : View.GONE);
+    }
+
+    @OnClick(R.id.rl_recommend_route)
+    void showRecommendRoute() {
+        viewPager.setCurrentItem(0);
+        hidePopwindow();
+    }
+
+    @OnClick(R.id.rl_hot_goods)
+    void showHotGoods() {
+        viewPager.setCurrentItem(1);
+        hidePopwindow();
     }
 
     //这里是进行数据展示的界面
@@ -79,49 +141,6 @@ public class ChoicenessFragment extends Fragment {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
             cityName.setText(cityNameString);
             cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
-        }
-    }
-
-    @OnClick(R.id.rl_recommend_route)
-    void showRecommendRoute() {
-        gotoSubFragmennt(recommendRouteFragment);
-        setTextColor(true);
-    }
-
-    @OnClick(R.id.rl_hot_goods)
-    void showHotGoods() {
-        gotoSubFragmennt(hotGoodsFragment);
-        setTextColor(false);
-    }
-
-    //改变主题样式的颜色
-    public void setTextColor(Boolean starte) {
-        if (starte) {
-            routeText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-            goodText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
-            routeLine.setVisibility(View.VISIBLE);
-            hotGoodLine.setVisibility(View.GONE);
-        } else {
-            routeText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
-            goodText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-            routeLine.setVisibility(View.GONE);
-            hotGoodLine.setVisibility(View.VISIBLE);
-        }
-        hidePopwindow();
-    }
-
-    //切换要显示的fragment的样式
-    private void gotoSubFragmennt(Fragment fragment) {
-        if (currentFragment != fragment) {
-            FragmentTransaction transaction = mFragmentManager.beginTransaction();
-            if (fragment.isAdded()) {
-                transaction.show(fragment);
-            } else {
-                transaction.add(R.id.fl_happiness_container, fragment);
-            }
-            transaction.hide(currentFragment);
-            transaction.commit();
-            currentFragment = fragment;
         }
     }
 
@@ -153,6 +172,7 @@ public class ChoicenessFragment extends Fragment {
         if (requestCode == 20) {
             CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
+            CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
             cityName.setText(data.getStringExtra("cityName"));
             cityId = CommonHelp.getStringSp(mContext, data.getStringExtra("cityId"), "21410000");
         }
@@ -163,6 +183,8 @@ public class ChoicenessFragment extends Fragment {
         if (hotGoodsFragment == null) {
             hotGoodsFragment = new HotGoodsFragment();
         }
+        hotGoodsFragment.changeClassify(hotGoodClassfyId);
+        viewPager.setCurrentItem(1);
     }
 
     //切换当没有显示精选Fragment没有添加时调用
@@ -177,24 +199,21 @@ public class ChoicenessFragment extends Fragment {
     private boolean isShowHotGood = false;
     private String hotGoodClassfyId = null;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (isShowHotGood) {
-            gotoSubFragmennt(hotGoodsFragment);
-            if (hotGoodClassfyId != null)
-                hotGoodsFragment.changeClassify(hotGoodClassfyId);
-            setTextColor(false);
-        }
-        isShowHotGood = false;
-    }
+
 
     //切换为玩法显示列表
     public void changePlayMethodFragment() {
         if (recommendRouteFragment == null) {
             recommendRouteFragment = new RecommendRouteFragment();
         }
-        gotoSubFragmennt(recommendRouteFragment);
-        setTextColor(true);
+        viewPager.setCurrentItem(0);
+    }
+
+    //搜索界面
+    @OnClick(R.id.iv_find_earch)
+    void gotoFindSecnicPaly() {
+        Intent intent = new Intent(mContext, SecnicPlayConditionActivity.class);
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 }

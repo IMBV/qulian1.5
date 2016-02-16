@@ -108,7 +108,7 @@
             style="@style/text_main_title_tytle_14"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:text="+86-(0)10-87162852" />
+            android:text="+86-(0)10-53683169" />
     </RelativeLayout>
 
     <View
@@ -133,7 +133,7 @@
                 android:textSize="11sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="5dp"
-                android:text="背景趣连科技有限公司  版权所有" />
+                android:text="北京趣连科技有限公司  版权所有" />
 
             <TextView
                 android:layout_width="wrap_content"

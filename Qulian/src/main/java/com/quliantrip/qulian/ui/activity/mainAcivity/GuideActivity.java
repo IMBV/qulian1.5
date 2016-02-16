@@ -34,7 +34,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 public class GuideActivity extends FragmentActivity {
     private Context mContext;
     private SystemBarTintManager mTintManager;

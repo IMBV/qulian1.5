@@ -38,6 +38,7 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
     View deep_gray;
     private int mPointWidth;
     private ArrayList<Fragment> list;
+    private List<HomeShowBean.DataEntity.MenuEntity> listData;
     //这里是进行模块切换的调用
     private MainActivity mMainActivity;
 
@@ -49,21 +50,33 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
     @Override
     public View getModelView() {
         ButterKnife.bind(this, view);
-        initDrawe();
-        guide.setAdapter(new MypageAdapter(mMainActivity.getSupportFragmentManager()));
-        guide.setOnPageChangeListener(new MyPageChangedListtener());
         return view;
     }
 
     @Override
     public void setData(final List<HomeShowBean.DataEntity.MenuEntity> list) {
-
+        listData = list;
+        initDrawe();
+        guide.setAdapter(new MypageAdapter(mMainActivity.getSupportFragmentManager()));
+        guide.setOnPageChangeListener(new MyPageChangedListtener());
     }
 
     private void initDrawe() {
         list = new ArrayList<Fragment>();
         list.add(new FunctionModeFragmentOne());
-        list.add(new FunctionModeFragmentSecond());
+
+        //进行数据的适配，动态的添加数据并且进行数据的适配
+        List<HomeShowBean.DataEntity.MenuEntity> fourList = new ArrayList<>();
+        for (int i = 0; i < listData.size(); i++) {
+            fourList.add(listData.get(i));
+            if (fourList.size() == 4 || i == listData.size() - 1) {
+                if (fourList.size() > 0) {
+                    list.add(new FunctionModeFragmentSecond((ArrayList<HomeShowBean.DataEntity.MenuEntity>) fourList));
+                    fourList.clear();
+                }
+            }
+        }
+
         for (int i = 0; i < list.size(); i++) {
             View view = new View(QulianApplication.getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonHelp.dip2px(QulianApplication.getContext(), 6),
@@ -114,8 +127,8 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
     //小点滑动滑动的操作
     private class MyPageChangedListtener implements ViewPager.OnPageChangeListener {
         @Override
-        public void onPageScrolled(int position, float positionOffset,int positionOffsetPixels) {
-            int len = (int) (mPointWidth * positionOffset + position* mPointWidth);
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            int len = (int) (mPointWidth * positionOffset + position * mPointWidth);
             RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) deep_gray.getLayoutParams();
             params.leftMargin = len;
             deep_gray.setLayoutParams(params);
@@ -123,13 +136,12 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
 
         @Override
         public void onPageSelected(int position) {
+
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
 
         }
-
     }
-
 }

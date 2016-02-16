@@ -13,8 +13,8 @@
         android:divider="@color/colorPrimary"
         android:dividerHeight="0dp" />
 
-
     <TextView
+        android:id="@+id/tv_play_method_order_detail_link_daren"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_alignParentBottom="true"

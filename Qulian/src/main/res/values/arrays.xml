@@ -12,7 +12,7 @@
     <string-array name="home_secnic_play_local">
         <item>景点</item>
         <item>玩法</item>
-        <item>当地游</item>
+        <item>热门商品</item>
     </string-array>
     <!--发现的内容也-->
     <string-array name="find_content_tab">

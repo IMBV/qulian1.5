@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.playMethod.PlayMethodOrderDetailFragment;
+import com.quliantrip.qulian.util.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,5 +42,11 @@ public class MyPlaymethodOrderDetailActivity extends SwipeBackActivity {
     void back() {
         finish();
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+    }
+
+    //取消订单
+    @OnClick(R.id.tv_play_order_cancel)
+    void cancelPlayMethodOrder(){
+        ToastUtil.showToast(this,"该取消返回显示界面");
     }
 }

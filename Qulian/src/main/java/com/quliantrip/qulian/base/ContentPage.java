@@ -142,7 +142,6 @@ public abstract class  ContentPage extends FrameLayout {
                 }
             });
         }
-
     }
 
     // 根据状态进行显示不同的界面

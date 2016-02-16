@@ -79,11 +79,12 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
                 //设置listView之间的间距
                 listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
                 listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
+                totalPrice.setText(getTotalPrice());
+
             } else {
                 ToastUtil.showToast(mContext, playMethodOrderSubmitBean.getMsg());
             }
         }
-
 
 //        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
 //            HintInfoBean hintInfoBean = (HintInfoBean) bean;
@@ -106,6 +107,16 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
                 ToastUtil.showToast(mContext, goodOrderSubmitBean.getMsg());
             }
         }
+    }
+
+    private String getTotalPrice(){
+        resuleMap = playMethodOrderGoodlistAdapter.getResuleMap();
+        String string  = "0";
+        for (int i = 0; i <goodList.size(); i++) {
+            PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean = resuleMap.get(i);
+            string = (Double.valueOf(string) + Double.valueOf(playMethodOrderSubmitItemBean.getPrice()))+"";
+        }
+        return string;
     }
 
     //提交订单

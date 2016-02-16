@@ -21,7 +21,7 @@ import butterknife.OnClick;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
- * Created by Qulian5 on 2016/1/13.
+ * 我的订单展示页
  */
 public class MyOrderActivity extends SwipeBackActivity {
     private Context mContext;

@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.view.ViewPropertyAnimator;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodDetailGoodlistAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -26,6 +28,7 @@ import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
+import com.quliantrip.qulian.view.CircleImageView;
 import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.RollViewPage;
 import com.quliantrip.qulian.view.dialog.CollectDialog;
@@ -49,16 +52,26 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     //滑动的scrollView
     @Bind(R.id.sv_author_play_method_des)
     ScrollView scrollView;
+
     //作者简介
+    @Bind(R.id.tv_play_method_author_img)
+    CircleImageView authorImg;
+    @Bind(R.id.tv_play_method_detail_name)
+    TextView authorName;
     @Bind(R.id.tv_play_method_author_introduce)
     TextView authorIntroduce;
     private int minHeight, maxHeight;
-    //下拉的箭头
     @Bind(R.id.tv_play_method_author_introduce_more)
     ImageView moreArrow;
+
     //单品集合的列表
     @Bind(R.id.mlv_good_container)
     MyListView goodsListView;
+
+    //玩法详细信息
+    @Bind(R.id.tv_total_price)
+    TextView totalPrice;
+
     //收藏
     @Bind(R.id.iv_good_collect_img)
     ImageView collectImg;
@@ -106,9 +119,9 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
-        playMethodId = ((Activity)mContext).getIntent().getStringExtra("playMethodId");
+        playMethodId = ((Activity) mContext).getIntent().getStringExtra("playMethodId");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id",playMethodId );
+        map.put("id", playMethodId);
         return new QuestBean(map, new PlayMethodDetailBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_DETRAIL);
     }
 
@@ -121,6 +134,11 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
             if (playMethodDetailBean.getCode() == 200) {
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(false);
                 final ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity> listData = (ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity>) dataEntity.getPackageX();
+                //初始化作者的信息
+                PlayMethodDetailBean.DataEntity.PlayEntity playEntity = dataEntity.getPlay();
+                ImageLoader.getInstance().displayImage(playEntity.getHead_img(),authorImg, ImageLoaderOptions.pager_options);
+                authorName.setText(playEntity.getUsername());
+                totalPrice.setText(playEntity.getMin_price());
 
                 goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter(listData));
                 goodsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,7 +152,6 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                     }
                 });
-
             } else {
                 ToastUtil.showToast(mContext, playMethodDetailBean.getMsg());
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(true);
@@ -162,7 +179,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 authorIntroduce.requestLayout();
                 if (isShow) {
 //                   这里是实现的向上移动的显示的内容
-//                    scrollView.scrollBy(0, maxHeight-minHeight);
+//                    scrollView.scro   llBy(0, maxHeight-minHeight);
                 }
             }
         });
@@ -207,9 +224,9 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     private void initRollView(String imgsString) {
         imageList.clear();
         dotList.clear();
-        if (imgsString != null){
+        if (imgsString != null) {
             String[] imgArray = imgsString.split(",");
-            for(int i=0;i<imgArray.length;i++){
+            for (int i = 0; i < imgArray.length; i++) {
                 imageList.add(imgArray[i]);
             }
         }

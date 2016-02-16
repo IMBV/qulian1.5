@@ -59,8 +59,14 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @Bind(R.id.dots_ll)
     LinearLayout dots_ll;//下面的小点
 
+    //单品的详细信息
     @Bind(R.id.tv_good_detail_name)
     TextView name;
+    @Bind(R.id.tv_hot_good_currentprice)
+    TextView newPrice;
+    @Bind(R.id.tv_hot_good_old_price)
+    TextView oldPrice;
+
     @Bind(R.id.tv_good_save_number)
     TextView saveNumber;//已售的数量
 
@@ -110,10 +116,12 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 ((GoodDetailActivity) mContext).showOrHideBack(false);
                 GoodDetailBean.DataEntity detail = goodDetailBean.getData();
                 initRollView(detail.getOnline().getImgs());
+                //初始化单品的信息
                 name.setText(detail.getOnline().getName());
+                newPrice.setText("￥"+detail.getOnline().getProce());
+                oldPrice.setText("￥"+detail.getOnline().getSale());
                 saveNumber.setText("已售" + 12);
                 taocanNmber.setText(detail.getNum() + "种");
-//                checkTime.setText(Html.fromHtml(detail.getOnline().getPurnotes()));
                 goumaInfo.setText(Html.fromHtml(detail.getOnline().getPricedesc()));
                 medianCheck.setAdapter(new GoodDetailBranchCheckAdapter((ArrayList<GoodDetailBean.DataEntity.BranchEntity>) detail.getBranch()));
             } else {
