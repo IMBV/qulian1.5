@@ -1,9 +1,11 @@
 package com.quliantrip.qulian.ui.fragment.findFragment.content;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -16,6 +18,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.find.DiscountBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.findActivity.ImageScaleActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 
@@ -79,7 +82,7 @@ public class DiscountFragment extends BasePageCheckFragment {
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.colorPrimary)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
 
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) refreshViewList.getLayoutParams();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) refreshViewList.getLayoutParams();
         params.topMargin = CommonHelp.dip2px(mContext, 10);
         refreshViewList.setLayoutParams(params);
 
@@ -87,7 +90,18 @@ public class DiscountFragment extends BasePageCheckFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                DiscountBean.DataEntity bean = listDiscount.get(position - 1);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        DiscountBean.DataEntity bean = listDiscount.get(position - 1);
+                        Intent intent = new Intent(mContext, ImageScaleActivity.class);
+                        final ArrayList<String> listArray = new ArrayList<String>();
+                        listArray.add(bean.getImage());
+                        intent.putStringArrayListExtra("screenList", listArray);
+                        intent.putExtra("position", position);
+                        mContext.startActivity(intent);
+                    }
+                });
 //                Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
 //                intent.putExtra("goodId", bean.getId());
 ////                intent.putExtra("isCollect", bean.isIs_house());

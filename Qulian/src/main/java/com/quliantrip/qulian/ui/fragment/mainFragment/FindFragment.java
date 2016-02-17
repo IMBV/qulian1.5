@@ -80,7 +80,7 @@ public class FindFragment extends BasePageCheckFragment {
     }
 
     //点击切换城市
-    @OnClick(R.id.find_change_city)
+    @OnClick(R.id.find_change_city_big)
     void chooseSity() {
         Bundle bundle = new Bundle();
         String s = homeTitle.getText().toString().trim();

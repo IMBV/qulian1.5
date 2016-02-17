@@ -92,6 +92,8 @@ public class HttpConstants {
 
     //我的订单列表_GOOD
     public static final String ME_ORDER_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/order";
+    //商品取消订单
+    public static final String MY_ORDER_GOOD_CANCEL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/delorder";
     //订单订单_GOOD
     public static final String ME_ORDER_GOOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/orderxq";
 
@@ -106,5 +108,8 @@ public class HttpConstants {
 
     //用户意见反馈
     public static final String MY_USER_FEED_BACK = HOST_ADDR_ROOT_LOCAL_V1 + "user/feedback";
+
+
+
 
 }

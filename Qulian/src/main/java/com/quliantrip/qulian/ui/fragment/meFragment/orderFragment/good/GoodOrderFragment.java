@@ -19,6 +19,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.GoodOrderListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.domain.me.GoodOrderListBean;
 import com.quliantrip.qulian.domain.me.PlayCollectListBean;
 import com.quliantrip.qulian.global.QulianApplication;
@@ -44,6 +45,7 @@ public class GoodOrderFragment extends BasePageCheckFragment {
     PullToRefreshListView refreshViewList;
     protected ListView listView;
 
+    private GoodOrderListAdapter goodOrderListAdapter;
     //所有
     @Bind(R.id.rb_me_order_good_all)
     RadioButton all;
@@ -73,20 +75,29 @@ public class GoodOrderFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-        map.put("pay_status","");
-        map.put("order_status","");
-        map.put("is_use","");
+        map.put("pay_status", "");
+        map.put("order_status", "");
+        map.put("is_use", "");
         return new QuestBean(map, new GoodOrderListBean().setTag(getClass().getName()), HttpConstants.ME_ORDER_GOOD_LIST);
     }
 
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            GoodOrderListBean GoodOrderListBean = (GoodOrderListBean) bean;
-            if (GoodOrderListBean.getCode() == 200) {
-                initRefreshListView((ArrayList<com.quliantrip.qulian.domain.me.GoodOrderListBean.DataEntity>) GoodOrderListBean.getData());
+            GoodOrderListBean goodOrderListBean = (GoodOrderListBean) bean;
+            if (goodOrderListBean.getCode() == 200) {
+                initRefreshListView((ArrayList<com.quliantrip.qulian.domain.me.GoodOrderListBean.DataEntity>) goodOrderListBean.getData());
             } else {
-                ToastUtil.showToast(mContext, GoodOrderListBean.getMsg());
+                ToastUtil.showToast(mContext, goodOrderListBean.getMsg());
+            }
+        }
+        if (bean != null && (this.getClass().getName()+"delOrder").equals(bean.getTag())) {
+            HintInfoBean hintInfoBean = (HintInfoBean) bean;
+            if (hintInfoBean.getCode() == 200) {
+                goodOrderListAdapter.remveItem();
+                ToastUtil.showToast(mContext, hintInfoBean.getMsg());
+            } else {
+                ToastUtil.showToast(mContext, hintInfoBean.getMsg());
             }
         }
     }
@@ -115,17 +126,19 @@ public class GoodOrderFragment extends BasePageCheckFragment {
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
 
-        final GoodOrderListAdapter goodOrderListAdapter = new GoodOrderListAdapter(list);
-        listView.setAdapter(goodOrderListAdapter);
-        listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
-        listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
+        if (goodOrderListAdapter == null) {
+            goodOrderListAdapter = new GoodOrderListAdapter(list);
+            listView.setAdapter(goodOrderListAdapter);
+            listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
+            listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putString("orderId",list.get(position-1).getId());
-                UIHelper.showMyOrderDetail(mContext,bundle);
+                bundle.putString("orderId", list.get(position - 1).getId());
+                UIHelper.showMyOrderDetail(mContext, bundle);
             }
         });
 

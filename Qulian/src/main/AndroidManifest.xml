@@ -135,6 +135,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/SwipeBackActivity" />
 
+        <!--这里只有简单返回activity-->
+        <activity
+            android:name=".ui.activity.findActivity.ImageScaleActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/SwipeBackActivity" />
+
         <!--第三方-->
         <!--qq的登录界面-->
         <activity

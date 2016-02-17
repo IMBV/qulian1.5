@@ -66,6 +66,7 @@ public class ChoicenessFragment extends Fragment {
         ButterKnife.bind(this, view);
         recommendRouteFragment = new RecommendRouteFragment();
         hotGoodsFragment = new HotGoodsFragment();
+        cityName.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
         return view;
     }
 
@@ -134,7 +135,7 @@ public class ChoicenessFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));;
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             cityName.setText(cityNameString);
             cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         } else {

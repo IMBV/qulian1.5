@@ -78,27 +78,27 @@ public class FunctionModeFragmentSecond extends Fragment {
     //进行数据初始化
     private void initData() {
         if(fourList.size() == 4){
-            ImageLoader.getInstance().displayImage(fourList.get(0).getImage(),oneImg, ImageLoaderOptions.pager_options);
-            ImageLoader.getInstance().displayImage(fourList.get(1).getImage(),twoImg, ImageLoaderOptions.pager_options);
-            ImageLoader.getInstance().displayImage(fourList.get(2).getImage(),threeImg, ImageLoaderOptions.pager_options);
-            ImageLoader.getInstance().displayImage(fourList.get(3).getImage(),fourImg, ImageLoaderOptions.pager_options);
+            ImageLoader.getInstance().displayImage(fourList.get(0).getImage(), oneImg, ImageLoaderOptions.pager_options);
+            ImageLoader.getInstance().displayImage(fourList.get(1).getImage(), twoImg, ImageLoaderOptions.pager_options);
+            ImageLoader.getInstance().displayImage(fourList.get(2).getImage(), threeImg, ImageLoaderOptions.pager_options);
+            ImageLoader.getInstance().displayImage(fourList.get(3).getImage(), fourImg, ImageLoaderOptions.pager_options);
             oneName.setText(fourList.get(0).getName());
-            oneName.setText(fourList.get(1).getName());
-            oneName.setText(fourList.get(2).getName());
-            oneName.setText(fourList.get(3).getName());
+            twoName.setText(fourList.get(1).getName());
+            threeName.setText(fourList.get(2).getName());
+            fourName.setText(fourList.get(3).getName());
         }else if(fourList.size() == 3){
             ImageLoader.getInstance().displayImage(fourList.get(0).getImage(),oneImg, ImageLoaderOptions.pager_options);
             ImageLoader.getInstance().displayImage(fourList.get(1).getImage(),twoImg, ImageLoaderOptions.pager_options);
             ImageLoader.getInstance().displayImage(fourList.get(2).getImage(),threeImg, ImageLoaderOptions.pager_options);
             oneName.setText(fourList.get(0).getName());
-            oneName.setText(fourList.get(1).getName());
-            oneName.setText(fourList.get(2).getName());
+            twoName.setText(fourList.get(1).getName());
+            threeName.setText(fourList.get(2).getName());
             four.setVisibility(View.INVISIBLE);
         }else if (fourList.size() == 2){
             ImageLoader.getInstance().displayImage(fourList.get(0).getImage(),oneImg, ImageLoaderOptions.pager_options);
-            ImageLoader.getInstance().displayImage(fourList.get(1).getImage(),twoImg, ImageLoaderOptions.pager_options);
+            ImageLoader.getInstance().displayImage(fourList.get(1).getImage(), twoImg, ImageLoaderOptions.pager_options);
             oneName.setText(fourList.get(0).getName());
-            oneName.setText(fourList.get(1).getName());
+            twoName.setText(fourList.get(1).getName());
             three.setVisibility(View.INVISIBLE);
             four.setVisibility(View.INVISIBLE);
         }else if(fourList.size() == 1){

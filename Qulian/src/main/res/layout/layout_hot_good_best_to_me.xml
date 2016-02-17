@@ -44,6 +44,7 @@
                 android:src="@mipmap/icon_location" />
 
             <TextView
+                android:id="@+id/tv_good_best_location_dicount"
                 style="@style/text_sub_title_style"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -66,7 +67,7 @@
                     android:background="@color/app_main_sub_title_text" />
 
                 <TextView
-                    android:id="@+id/tv_tuan_deal_oldprice"
+                    android:id="@+id/tv_hot_good_best_oldPrice"
                     style="@style/text_sub_title_style"
                     android:layout_gravity="center"
                     android:text="￥60"
@@ -74,6 +75,7 @@
             </FrameLayout>
 
             <TextView
+                android:id="@+id/tv_hot_good_best_newPrice"
                 style="@style/all_wrap_content"
                 android:text="￥60"
                 android:textColor="@color/app_main_price_text"

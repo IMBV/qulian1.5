@@ -35,8 +35,6 @@ public class HotGoodChildAdapter extends BaseAdapter {
     }
     public void setMerchantId(String id){
         this.merchant = id+"";
-        System.out.println(id);
-        System.out.println(this.merchant);
         notifyDataSetChanged();
     }
     public void setBespeakId(String id){
@@ -67,9 +65,9 @@ public class HotGoodChildAdapter extends BaseAdapter {
             holder.childText.setText(mChildArr.get(position).getTag_name());
         else
             holder.childText.setText(mChildArr.get(position).getName());
-
-
-        if(bean.getId().equals(this.merchant)||bean.getId().equals(bespeak)||bean.getId().equals(theme)){
+        if((bean.getId().equals("")?"-1":bean.getId()).equals(this.merchant)
+                ||(bean.getId().equals("")?"-1":bean.getId()).equals(bespeak)
+                ||(bean.getId().equals("")?"-1":bean.getId()).equals(theme)){
             holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_gray));
             holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
         }else{

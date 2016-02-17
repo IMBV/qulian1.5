@@ -46,6 +46,17 @@ public class ExpandTabView extends LinearLayout implements OnDismissListener {
 	 */
 	public void setTitle(String valueText, int position) {
 		if (position < mToggleButton.size()) {
+			switch (position){
+				case 0:
+					valueText = valueText.equals("全部")?"特设主题":valueText;
+					break;
+				case 1:
+					valueText = valueText.equals("全部")?"可预约时间":valueText;
+					break;
+				case 2:
+					valueText = valueText.equals("全部")?"适用人群":valueText;
+					break;
+			}
 			mToggleButton.get(position).setText(valueText);
 		}
 	}

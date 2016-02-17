@@ -51,6 +51,7 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
 //        } else {
 //            holder.isCollect.setVisibility(View.GONE);
 //        }
+        holder.dianDisCount.setText(bean.getRegion()+""+"没有距离字段");
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
         holder.likeNumber.setText("有"+bean.getBuynum()+"这样玩");

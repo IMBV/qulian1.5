@@ -53,7 +53,7 @@ import butterknife.OnClick;
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
     private View bestView;
-    private String city;
+    private String city = "21410000";
     private String cate;
     private String merchant;
     private String bespeak;
@@ -94,6 +94,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         if (questBean == null) {
             Map<String, String> map = new HashMap<String, String>();
+            map.put("city",city);
             return new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
         } else {
             return questBean;
@@ -116,14 +117,16 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         new PacketStringReQuest(HttpConstants.HOT_GOOD_LIST, new HotGoodBean().setTag(getClass().getName()), map);
     }
 
+    private int oldCateSize = 0;
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             //想mode添加数据
             HotGoodBean hotGoodBean = (HotGoodBean) bean;
-            if (cateList == null) {
+            if (cateList == null||oldCateSize != hotGoodBean.getData().getCate().size()) {
                 cateList = hotGoodBean.getData().getCate();
+                oldCateSize = cateList.size();
                 if (map.size() < 2) {
                     for (int i = 0; i < hotGoodBean.getData().getCate().size(); i++) {
                         initRadioButton(hotGoodBean.getData().getCate().get(i), i);
@@ -231,18 +234,17 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 HotGoodBean.DataEntity.ScreenEntity.ChildEntity bean = (HotGoodBean.DataEntity.ScreenEntity.ChildEntity) parent.getAdapter().getItem(position);
                 switch (sreenGigId) {
                     case "0":
-
-                        childAdapter.setMerchantId(bean.getId());
+                        childAdapter.setMerchantId(bean.getId().equals("")?"-1":bean.getId());
                         HotGoodsFragment.this.merchant = bean.getId();
                         HotGoodsFragment.this.requestDataForAll();
                         break;
                     case "1":
-                        childAdapter.setBespeakId(bean.getId());
+                        childAdapter.setBespeakId(bean.getId().equals("")?"-1":bean.getId());
                         HotGoodsFragment.this.bespeak = bean.getId();
                         HotGoodsFragment.this.requestDataForAll();
                         break;
                     case "2":
-                        childAdapter.setThemeId(bean.getId());
+                        childAdapter.setThemeId(bean.getId().equals("")?"-1":bean.getId());
                         HotGoodsFragment.this.theme = bean.getId();
                         HotGoodsFragment.this.requestDataForAll();
                         break;
@@ -336,6 +338,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 }
             });
             ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
+            ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).setText("￥"+productInfoEntity.getSale());
+            ((TextView) bestView.findViewById(R.id.tv_hot_good_best_newPrice)).setText("￥"+productInfoEntity.getProce());
+
             listView.addHeaderView(bestView);
         } else {
             ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) bestView.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
@@ -350,6 +355,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 }
             });
             ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
+            ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).setText("￥" + productInfoEntity.getSale());
+            ((TextView) bestView.findViewById(R.id.tv_hot_good_best_newPrice)).setText("￥"+productInfoEntity.getProce());
+            ((TextView) bestView.findViewById(R.id.tv_good_best_location_dicount)).setText(productInfoEntity.getChinese_name()+" · "+productInfoEntity.getMeter());
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

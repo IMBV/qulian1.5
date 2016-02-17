@@ -17,10 +17,11 @@
     <!--发现的内容也-->
     <string-array name="find_content_tab">
         <item>优惠券</item>
-        <item>语音广场</item>
+        <item>语音导览</item>
         <item>晒图广场</item>
         <item>趣连小黄书</item>
     </string-array>
+
     <!--优惠券的使用情况-->
     <string-array name="my_discount_content_tab">
         <item>可使用</item>

@@ -79,8 +79,11 @@ public class HotGoodBean extends BaseJson {
         public static class ProductInfoEntity {
             private String id;
             private String name;
-            private String img;
+            private String sale;
+            private String proce;
             private String imgs;
+            private String chinese_name;
+            private String meter;
 
             public void setId(String id) {
                 this.id = id;
@@ -90,12 +93,24 @@ public class HotGoodBean extends BaseJson {
                 this.name = name;
             }
 
-            public void setImg(String img) {
-                this.img = img;
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
             }
 
             public void setImgs(String imgs) {
                 this.imgs = imgs;
+            }
+
+            public void setChinese_name(String chinese_name) {
+                this.chinese_name = chinese_name;
+            }
+
+            public void setMeter(String meter) {
+                this.meter = meter;
             }
 
             public String getId() {
@@ -106,16 +121,33 @@ public class HotGoodBean extends BaseJson {
                 return name;
             }
 
-            public String getImg() {
-                return img;
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
             }
 
             public String getImgs() {
                 return imgs;
             }
+
+            public String getChinese_name() {
+                return chinese_name;
+            }
+
+            public String getMeter() {
+                return meter;
+            }
         }
 
         public static class HotGoodCate {
+            public HotGoodCate(String id, String name) {
+                this.id = id;
+                this.name = name;
+            }
+
             private String id;
             private String name;
 
