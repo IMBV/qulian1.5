@@ -53,7 +53,7 @@ public class FindFragment extends BasePageCheckFragment {
         view = View.inflate(mContext, R.layout.fragment_main_find, null);
         ButterKnife.bind(this, view);
         ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, new FindContentFragment()).commit();
-        homeTitle.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
+        homeTitle.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
         return view;
     }
 
@@ -73,8 +73,8 @@ public class FindFragment extends BasePageCheckFragment {
     @Override
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
-            ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", ""), cityImg, ImageLoaderOptions.pager_options);
-            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
+            ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", CommonHelp.getString(R.string.change_city_tacit_img)), cityImg, ImageLoaderOptions.pager_options);
+            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
             weatherData.setText(monthString+"/"+dayString);
         }
     }
@@ -99,7 +99,7 @@ public class FindFragment extends BasePageCheckFragment {
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
             CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
             ImageLoader.getInstance().displayImage(data.getStringExtra("cityImg"), cityImg, ImageLoaderOptions.pager_options);
-            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
+            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
             homeTitle.setText(data.getStringExtra("cityName"));
             //这里是进行添加数据
 //            Map<String, String> map = new HashMap<String, String>();
@@ -112,13 +112,13 @@ public class FindFragment extends BasePageCheckFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
         } else {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
-            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", "北京"));
-            ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", ""), cityImg, ImageLoaderOptions.pager_options);
+            weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
+                    ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", CommonHelp.getString(R.string.change_city_tacit_img)), cityImg, ImageLoaderOptions.pager_options);
         }
     }
 

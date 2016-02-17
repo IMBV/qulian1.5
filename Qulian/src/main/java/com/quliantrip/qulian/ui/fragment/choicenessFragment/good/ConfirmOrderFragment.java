@@ -126,7 +126,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
                 taocan.setText(dataEntity.getAttribute());
                 data.setText(sdf.format(new Date(Integer.valueOf(dataEntity.getOrdershop().getDate()) * 1000)));
                 time.setText(dataEntity.getOrdershop().getTotal_price());
-                price.setText("￥" + dataEntity.getOrdershop().getPrice());
+                price.setText("￥" + dataEntity.getOrdershop().getTotal_price());
             } else {
                 ToastUtil.showToast(mContext, goodOrderConfirmBean.getMsg());
             }

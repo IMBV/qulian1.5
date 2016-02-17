@@ -134,13 +134,13 @@ public class ChoicenessFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));;
             cityName.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         } else {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", "北京");
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             cityName.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         }
     }
 
@@ -174,7 +174,7 @@ public class ChoicenessFragment extends Fragment {
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
             CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
             cityName.setText(data.getStringExtra("cityName"));
-            cityId = CommonHelp.getStringSp(mContext, data.getStringExtra("cityId"), "21410000");
+            cityId = CommonHelp.getStringSp(mContext, data.getStringExtra("cityId"), CommonHelp.getString(R.string.change_city_tacit_id));
         }
     }
 

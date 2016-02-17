@@ -21,8 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Yuly on 2015/12/10.
- * www.quliantrip.com
+ * 首页玩法列表页面
  */
 public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.PlayEntity> {
 
@@ -56,7 +55,7 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
             }
         });
         holder.title.setText(bean.getTitle());
-
+        holder.like.setText("有"+bean.getBuynum()+"人这样玩");
         return convertView;
     }
 
@@ -67,6 +66,8 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
         View preView;
         @Bind(R.id.tv_home_play_title)
         TextView title;
+        @Bind(R.id.tv_home_play_method_like)
+        TextView like;
 
         public Holder(View convertView) {
             super();

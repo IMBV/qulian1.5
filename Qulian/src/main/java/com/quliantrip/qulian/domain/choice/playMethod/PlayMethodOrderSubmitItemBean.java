@@ -103,9 +103,12 @@ public class PlayMethodOrderSubmitItemBean {
     }
 
     public String getPrice() {
-        return Integer.valueOf(price) * Integer.valueOf(num) + "";
+        return  price;
     }
 
+    public String getTotalPrice(){
+        return Double.valueOf(price) * Double.valueOf(num) + "";
+    }
     public void setPrice(String price) {
         this.price = price;
     }

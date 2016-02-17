@@ -53,7 +53,8 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
 //        }
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
-        holder.price.setText("￥"+bean.getMin_price());
+        holder.likeNumber.setText("有"+bean.getBuynum()+"这样玩");
+        holder.price.setText("￥"+bean.getProce());
         return convertView;
     }
 

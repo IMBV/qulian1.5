@@ -63,8 +63,6 @@ public class PlayMethodDetailBean extends BaseJson {
 
         public static class PlayEntity {
             private String id;
-            private String name;
-            private String img;
             private Object desc;
             private String buydesc;
             private String min_price;
@@ -72,17 +70,11 @@ public class PlayMethodDetailBean extends BaseJson {
             private String username;
             private String head_img;
             private String imgs;
+            private String sale;
+            private String proce;
 
             public void setId(String id) {
                 this.id = id;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public void setImg(String img) {
-                this.img = img;
             }
 
             public void setDesc(Object desc) {
@@ -92,7 +84,6 @@ public class PlayMethodDetailBean extends BaseJson {
             public void setBuydesc(String buydesc) {
                 this.buydesc = buydesc;
             }
-
 
             public void setMin_price(String min_price) {
                 this.min_price = min_price;
@@ -114,16 +105,16 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.imgs = imgs;
             }
 
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
+            }
+
             public String getId() {
                 return id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public String getImg() {
-                return img;
             }
 
             public Object getDesc() {
@@ -153,6 +144,14 @@ public class PlayMethodDetailBean extends BaseJson {
             public String getImgs() {
                 return imgs;
             }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
+            }
         }
 
         public static class PackageEntity {
@@ -162,9 +161,13 @@ public class PlayMethodDetailBean extends BaseJson {
             private String type;
             private String reason;
             private String class_id;
+            @SerializedName("class")
+            private String classX;
             private String name;
             private String merchant;
             private String is_res;
+            private String sale;
+            private String proce;
             private String merchantname;
 
             public void setPlayitemsid(String playitemsid) {
@@ -187,6 +190,10 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.class_id = class_id;
             }
 
+            public void setClassX(String classX) {
+                this.classX = classX;
+            }
+
             public void setName(String name) {
                 this.name = name;
             }
@@ -197,6 +204,14 @@ public class PlayMethodDetailBean extends BaseJson {
 
             public void setIs_res(String is_res) {
                 this.is_res = is_res;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
             }
 
             public void setMerchantname(String merchantname) {
@@ -223,6 +238,10 @@ public class PlayMethodDetailBean extends BaseJson {
                 return class_id;
             }
 
+            public String getClassX() {
+                return classX;
+            }
+
             public String getName() {
                 return name;
             }
@@ -233,6 +252,14 @@ public class PlayMethodDetailBean extends BaseJson {
 
             public String getIs_res() {
                 return is_res;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
             }
 
             public String getMerchantname() {

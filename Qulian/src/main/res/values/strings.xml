@@ -28,9 +28,11 @@
     <string name="actionbar_my_order_good_detail">订单详情</string>
 
     <!--默认城市的名称-->
-    <string name="change_city_tacit_name">北京</string>
+    <string name="change_city_tacit_name">东京</string>
     <!--默认城市的id-->
     <string name="change_city_tacit_id">21410000</string>
+    <!--默认城市的图片-->
+    <string name="change_city_tacit_img">http://7xpvcj.com2.z0.glb.qiniucdn.com/Tokyo.jpg</string>
     <!--默认城市的坐标-->
     <string name="change_city_tacit_geographic">""::""</string>
 

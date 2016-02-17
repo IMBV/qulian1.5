@@ -73,13 +73,14 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
             if (playMethodOrderSubmitBean.getCode() == 200) {
                 //对数据进行
                 goodList = (ArrayList<PlayMethodOrderSubmitBean.DataEntity>) playMethodOrderSubmitBean.getData();
-                playMethodOrderGoodlistAdapter = new PlayMethodOrderGoodlistAdapter(goodList, mContext);
+                playMethodOrderGoodlistAdapter = new PlayMethodOrderGoodlistAdapter(goodList, mContext,this);
                 listView.setAdapter(playMethodOrderGoodlistAdapter);
 
                 //设置listView之间的间距
                 listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
                 listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
-                totalPrice.setText(getTotalPrice());
+
+                getTotalPrice();
 
             } else {
                 ToastUtil.showToast(mContext, playMethodOrderSubmitBean.getMsg());
@@ -109,14 +110,14 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
         }
     }
 
-    private String getTotalPrice(){
+    public void getTotalPrice(){
         resuleMap = playMethodOrderGoodlistAdapter.getResuleMap();
         String string  = "0";
         for (int i = 0; i <goodList.size(); i++) {
             PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean = resuleMap.get(i);
-            string = (Double.valueOf(string) + Double.valueOf(playMethodOrderSubmitItemBean.getPrice()))+"";
+            string = (Double.valueOf(string) + Double.valueOf(playMethodOrderSubmitItemBean.getTotalPrice()))+"";
         }
-        return string;
+        totalPrice.setText(string);
     }
 
     //提交订单
@@ -125,7 +126,7 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
         Map<String, String> map = new HashMap<String, String>();
         map.put("proid", playMethodId);
         map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-        map.put("total_price","466");
+        map.put("total_price",totalPrice.getText().toString().trim());//总的价格
         map.put("type", "2");
         map.put("data", getDataString());
         new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_SUBMIT, new OrderSubmitResultBean().setTag(getClass().getName() + "submit"), map);

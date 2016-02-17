@@ -171,10 +171,8 @@
             android:layout_width="match_parent"
             android:layout_height="12dp"
             android:focusable="true"
-            android:max="100"
             android:maxHeight="2dip"
             android:minHeight="2dip"
-            android:progress="20"
             android:progressDrawable="@drawable/audio_progress_drawable"
             android:thumb="@mipmap/icon_play_location"
             android:thumbOffset="0dp" />
@@ -213,6 +211,7 @@
                 android:gravity="center_vertical">
 
                 <ImageView
+                    android:id="@+id/iv_spot_play_detail_anniu"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginRight="35dp"

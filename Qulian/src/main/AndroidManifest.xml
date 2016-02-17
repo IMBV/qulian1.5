@@ -179,5 +179,8 @@
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
             </intent-filter>
         </receiver>
+
+        <!--注册注册播放音频服务 -->
+        <service android:name="com.quliantrip.qulian.service.MusicService"></service>
     </application>
 </manifest>

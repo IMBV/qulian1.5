@@ -2,6 +2,12 @@ package com.quliantrip.qulian.ui.fragment.findFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -14,6 +20,8 @@ import com.quliantrip.qulian.domain.find.SpotDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.service.Iservice;
+import com.quliantrip.qulian.service.MusicService;
 import com.quliantrip.qulian.ui.activity.findActivity.SpotDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -50,17 +58,58 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     @Bind(R.id.spot_introduct_voice)
     MyListView listView;
 
-    @Bind(R.id.seekbar_progress)
-    SeekBar seekBar;
+    //音乐有关的数据
+    private Iservice iservice;//就是我们的中间人对象的实现
+    private static SeekBar seekBar;
+
+    //定义一个handler
+    public static Handler handler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+            //(1)获取我们封装的数据
+            Bundle data = msg.getData();
+            int duration = data.getInt("duration");
+            int currentPosition = data.getInt("currentPosition");
+
+            //(2)设置seekbar的最大进度
+            seekBar.setMax(duration);
+            seekBar.setProgress(currentPosition); //设置当前进度
+        };
+    };
 
     @Override
     protected View getSuccessView() {
+
         view = View.inflate(mContext, R.layout.fragment_find_spot_method_detail, null);
+        seekBar = (SeekBar) view.findViewById(R.id.seekbar_progress);
         ButterKnife.bind(this, view);
-        seekBar.setMax(100);
         initRollView();
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            //当拖动停止的时候调用
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //调用播放的指定位置的方法
+                if (iservice == null)
+                    iservice = ((SpotDetailActivity)mContext).getIservice();
+                iservice.callSetSeekPosition(seekBar.getProgress());
+
+
+            }
+            //刚开始拖动调用
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+            //当进度发生改变的时候调用
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+
+            }
+        });
         return view;
     }
+
 
     @Override
     protected QuestBean requestData() {
@@ -152,5 +201,14 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     void finishActivity() {
         ((Activity) mContext).finish();
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+    }
+
+
+    //点击播放音乐的操作
+    @OnClick(R.id.iv_spot_play_detail_anniu)
+    void playDetail() {
+        if (iservice == null)
+            iservice = ((SpotDetailActivity)mContext).getIservice();
+        iservice.callPlayMusic();
     }
 }

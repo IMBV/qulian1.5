@@ -35,13 +35,14 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_play_method_detail_good_item, null);
         }
         final Holder holder = Holder.getHolder(convertView);
+
         holder.playMethod.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 holder.playMethod.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 int height = holder.playMethod.getHeight();
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.line.getLayoutParams();
-                params.height  = height - CommonHelp.dip2px(QulianApplication.getContext(), (float) 42.5);
+                params.height = height - CommonHelp.dip2px(QulianApplication.getContext(), (float) 42.5);
                 holder.line.setLayoutParams(params);
             }
         });
@@ -61,6 +62,7 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
         }
 
         holder.des.setText(bean.getReason());
+        holder.price.setText("￥ "+bean.getProce());
         return convertView;
     }
 

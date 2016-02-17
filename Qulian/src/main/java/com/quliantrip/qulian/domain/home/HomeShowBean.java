@@ -252,6 +252,7 @@ public class HomeShowBean extends BaseJson {
             private String name;
             private String img;
             private String title;
+            private String buynum;
             private String imgs;
 
             public void setId(String id) {
@@ -268,6 +269,10 @@ public class HomeShowBean extends BaseJson {
 
             public void setTitle(String title) {
                 this.title = title;
+            }
+
+            public void setBuynum(String buynum) {
+                this.buynum = buynum;
             }
 
             public void setImgs(String imgs) {
@@ -288,6 +293,10 @@ public class HomeShowBean extends BaseJson {
 
             public String getTitle() {
                 return title;
+            }
+
+            public String getBuynum() {
+                return buynum;
             }
 
             public String getImgs() {

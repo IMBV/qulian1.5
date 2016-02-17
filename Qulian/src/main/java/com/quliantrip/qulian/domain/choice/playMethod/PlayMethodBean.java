@@ -110,21 +110,19 @@ public class PlayMethodBean extends BaseJson {
 
         public static class PlayEntity {
             private String id;
-            private String name;
             private String title;
             private String summary;
-            private String min_price;
             private String userid;
+            private String buynum;
             private String username;
             private String head_img;
+            private String region;
+            private String sale;
+            private String proce;
             private String imgs;
 
             public void setId(String id) {
                 this.id = id;
-            }
-
-            public void setName(String name) {
-                this.name = name;
             }
 
             public void setTitle(String title) {
@@ -135,12 +133,12 @@ public class PlayMethodBean extends BaseJson {
                 this.summary = summary;
             }
 
-            public void setMin_price(String min_price) {
-                this.min_price = min_price;
-            }
-
             public void setUserid(String userid) {
                 this.userid = userid;
+            }
+
+            public void setBuynum(String buynum) {
+                this.buynum = buynum;
             }
 
             public void setUsername(String username) {
@@ -151,16 +149,24 @@ public class PlayMethodBean extends BaseJson {
                 this.head_img = head_img;
             }
 
+            public void setRegion(String region) {
+                this.region = region;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
+            }
+
             public void setImgs(String imgs) {
                 this.imgs = imgs;
             }
 
             public String getId() {
                 return id;
-            }
-
-            public String getName() {
-                return name;
             }
 
             public String getTitle() {
@@ -171,12 +177,12 @@ public class PlayMethodBean extends BaseJson {
                 return summary;
             }
 
-            public String getMin_price() {
-                return min_price;
-            }
-
             public String getUserid() {
                 return userid;
+            }
+
+            public String getBuynum() {
+                return buynum;
             }
 
             public String getUsername() {
@@ -185,6 +191,18 @@ public class PlayMethodBean extends BaseJson {
 
             public String getHead_img() {
                 return head_img;
+            }
+
+            public String getRegion() {
+                return region;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
             }
 
             public String getImgs() {

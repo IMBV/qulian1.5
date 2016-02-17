@@ -102,11 +102,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         if (hidden) {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName",CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         } else {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         }
     }
 

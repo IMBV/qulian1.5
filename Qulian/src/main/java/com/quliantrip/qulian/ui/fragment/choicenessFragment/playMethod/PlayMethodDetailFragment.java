@@ -71,6 +71,8 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     //玩法详细信息
     @Bind(R.id.tv_total_price)
     TextView totalPrice;
+    @Bind(R.id.tv_tuan_deal_oldprice)
+    TextView oldTotalPeice;
 
     //收藏
     @Bind(R.id.iv_good_collect_img)
@@ -138,7 +140,8 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 PlayMethodDetailBean.DataEntity.PlayEntity playEntity = dataEntity.getPlay();
                 ImageLoader.getInstance().displayImage(playEntity.getHead_img(),authorImg, ImageLoaderOptions.pager_options);
                 authorName.setText(playEntity.getUsername());
-                totalPrice.setText(playEntity.getMin_price());
+                totalPrice.setText(playEntity.getProce());
+                oldTotalPeice.setText(playEntity.getSale());
 
                 goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter(listData));
                 goodsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

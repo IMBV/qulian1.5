@@ -4,22 +4,22 @@ package com.quliantrip.qulian.net.constant;
  * 定义网络请求的常量
  */
 public class HttpConstants {
+
     /**
      * 线上服务器地址
      */
+
     public static final String HOST_ADDR_ROOT_NET = "http://www.quliantrip.com/mapi/index.php";
     /**
-     *线上数据服务器http://rest.v2.quliantrip.com/
+     *线上数据服务器http://rest.v2.quliantrip.com/v1/
      * 线下数据http://192.168.0.155:8089/v1/
      */
     public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155:8089/v1/";
-
 
     //热门商品列表
     public static final String HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";
     //切换城市
     public static final String CHANGE_CITY = HOST_ADDR_ROOT_LOCAL_V1 + "product/areas";
-
 
     //首页
     //首页的筛选

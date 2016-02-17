@@ -10,19 +10,22 @@ import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMehtodOrderConfirmBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.view.CircleImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Qulian5 on 2016/1/21.
+ * 玩法确认订单，单品信息数据适配器
  */
-public class PlayMethodConfirmOrderAdapter extends BasicAdapter<PlayMehtodOrderConfirmBean.DataEntity> {
-
-    public PlayMethodConfirmOrderAdapter(ArrayList<PlayMehtodOrderConfirmBean.DataEntity> list) {
+public class PlayMethodConfirmOrderAdapter extends BasicAdapter<PlayMehtodOrderConfirmBean.DataEntity.PlayorderEntity> {
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public PlayMethodConfirmOrderAdapter(ArrayList<PlayMehtodOrderConfirmBean.DataEntity.PlayorderEntity> list) {
         super(list);
     }
 
@@ -32,11 +35,10 @@ public class PlayMethodConfirmOrderAdapter extends BasicAdapter<PlayMehtodOrderC
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_choice_play_method_confirm_order_good_list, null);
         }
         Holder holder = Holder.getHolder(convertView);
-        PlayMehtodOrderConfirmBean.DataEntity bean = list.get(position);
+        PlayMehtodOrderConfirmBean.DataEntity.PlayorderEntity bean = list.get(position);
         holder.orderName.setText(bean.getOrdershop().getName());
         holder.taocan.setText(bean.getAttribute());
-        holder.data.setText(bean.getOrdershop().getDate());
-//        holder.time.setText(QulianApplication.getInstance().getLoginUser().getEmail());
+        holder.data.setText(sdf.format(new Date(Integer.valueOf(bean.getOrdershop().getDate()) * 1000L)));
         return convertView;
     }
 

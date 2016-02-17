@@ -44,15 +44,17 @@ import butterknife.ButterKnife;
 public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrderSubmitBean.DataEntity> {
     private Context mContext;
     private HashMap<Integer, PlayMethodOrderSubmitItemBean> resuleMap;
+    private SubmitOrderPlayMethodFragment submitOrderPlayMethodFragment;
 
     public HashMap<Integer, PlayMethodOrderSubmitItemBean> getResuleMap() {
         return resuleMap;
     }
 
-    public PlayMethodOrderGoodlistAdapter(ArrayList<PlayMethodOrderSubmitBean.DataEntity> list, Context context) {
+    public PlayMethodOrderGoodlistAdapter(ArrayList<PlayMethodOrderSubmitBean.DataEntity> list, Context context,SubmitOrderPlayMethodFragment submitOrderPlayMethodFragment) {
         super(list);
         mContext = context;
         resuleMap = new HashMap<>();
+        this.submitOrderPlayMethodFragment = submitOrderPlayMethodFragment;
         initResultMap();
     }
 
@@ -67,7 +69,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             if (dataEntity.getAttrss().size() > 0) {
                 date = dataEntity.getAttrss().get(0).getDate();//订单的日期
                 dataString = dataEntity.getAttrss().get(0).getDe();//日期字符串
-                price = dataEntity.getAttrss().get(0).getSale();//价格
+                price = dataEntity.getAttrss().get(0).getProce();//价格
             }
             String num = "1";//购买数量
             String service = "11:00";//服务时间
@@ -130,6 +132,8 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                 if (newNumber > 0) {
                     playMethodOrderSubmitItemBean.setNum(newNumber + "");
                     holder.number.setText(newNumber + "");
+                    playMethodOrderSubmitItemBean.setNum(newNumber + "");
+                    submitOrderPlayMethodFragment.getTotalPrice();
                 } else {
                     ToastUtil.showToast(mContext, "人数不能少于0");
                 }
@@ -143,6 +147,8 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                 newNumber = newNumber + 1;
                 playMethodOrderSubmitItemBean.setNum(newNumber + "");
                 holder.number.setText(newNumber + "");
+                playMethodOrderSubmitItemBean.setNum(newNumber + "");
+                submitOrderPlayMethodFragment.getTotalPrice();
             }
         });
 
@@ -187,13 +193,9 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                                                 holder.pretime.setText(oldData);
                                             } else {
                                                 setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
-//                                            holder.pretime.setText(checkData);
-//                                            playMethodOrderSubmitItemBean.setDate(getTime(checkData));
                                             }
                                         } else {
                                             setNumberInfo(holder, checkData, playMethodOrderSubmitItemBean, bean.getAttrss());
-//                                        holder.pretime.setText(checkData);
-//                                        playMethodOrderSubmitItemBean.setDate(getTime(checkData));
                                         }
                                     }
                                 } else {
@@ -205,8 +207,8 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                     datePicker.show();
                 }
             });
-        }else{
-            ToastUtil.showToast(mContext,"所有时间都无票");
+        } else {
+            ToastUtil.showToast(mContext, "所有时间都无票");
         }
 
         //选着服务时间
@@ -250,6 +252,8 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                     else
                         holder.residueNumber.setText("有票");
                     playMethodOrderSubmitItemBean.setDate(attress.getDate());
+                    playMethodOrderSubmitItemBean.setPrice(attress.getProce());
+                    submitOrderPlayMethodFragment.getTotalPrice();
                     break;
                 }
             }

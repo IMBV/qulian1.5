@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by yuly on 2015/11/9.
+ * 公用的工具类
  */
 public class CommonHelp {
     public static void runOnUIThread(Runnable r) {
@@ -146,7 +146,7 @@ public class CommonHelp {
         else return mobiles.matches(telRegex);
     }
 
-    //时间戳
+    //时间戳转化为
     public static String getTime(String user_time) {
         String re_time = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -156,8 +156,6 @@ public class CommonHelp {
             long l = d.getTime();
             String str = String.valueOf(l);
             re_time = str.substring(0, 10);
-
-
         } catch (ParseException e) {
             e.printStackTrace();
         }

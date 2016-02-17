@@ -63,6 +63,7 @@
                     android:src="@mipmap/like" />
 
                 <TextView
+                    android:id="@+id/tv_home_play_method_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="有1000人这样玩"

@@ -57,6 +57,10 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
     @Bind(R.id.et_order_beizhu_text)
     EditText beizhu;
 
+    //显示价格
+    @Bind(R.id.iv_order_total_prices)
+    TextView totalPrice;
+
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_confirm_play_method_order, null);
@@ -119,8 +123,9 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             PlayMehtodOrderConfirmBean playMehtodOrderConfirmBean = (PlayMehtodOrderConfirmBean) bean;
             if (playMehtodOrderConfirmBean.getCode() == 200){
-                List<PlayMehtodOrderConfirmBean.DataEntity> dataEntity = playMehtodOrderConfirmBean.getData();
-                listView.setAdapter(new PlayMethodConfirmOrderAdapter((ArrayList<PlayMehtodOrderConfirmBean.DataEntity>) dataEntity));
+                List<PlayMehtodOrderConfirmBean.DataEntity.PlayorderEntity> dataEntity = playMehtodOrderConfirmBean.getData().getPlayorder();
+                listView.setAdapter(new PlayMethodConfirmOrderAdapter((ArrayList<PlayMehtodOrderConfirmBean.DataEntity.PlayorderEntity>) dataEntity));
+                totalPrice.setText(playMehtodOrderConfirmBean.getData().getTotal_price());
             }else{
                 ToastUtil.showToast(mContext,playMehtodOrderConfirmBean.getMsg());
             }

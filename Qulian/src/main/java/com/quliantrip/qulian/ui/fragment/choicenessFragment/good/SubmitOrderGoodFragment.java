@@ -195,8 +195,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                 name.setText(dataEntity.getOnline().getName());
                 dataString = playMethodOrderSubmitItemBean.getDateString();
                 pretime.setText(dataString);
-                totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
-
+                totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
                 initListView(dataEntity.getAttribute());
             } else {
                 ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
@@ -245,7 +244,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             map.put("proid", goodId);
             map.put("date", playMethodOrderSubmitItemBean.getDate() == null ? null : playMethodOrderSubmitItemBean.getDate());
             map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-            map.put("total_price", playMethodOrderSubmitItemBean.getPrice() == null ? "" : playMethodOrderSubmitItemBean.getPrice());
+            map.put("total_price", playMethodOrderSubmitItemBean.getTotalPrice() == null ? "" : playMethodOrderSubmitItemBean.getTotalPrice());
             map.put("num", playMethodOrderSubmitItemBean.getNum() == null ? "" : playMethodOrderSubmitItemBean.getNum());
             map.put("type", "1");
             map.put("price", playMethodOrderSubmitItemBean.getPrice() == null ? "" : playMethodOrderSubmitItemBean.getPrice());
@@ -279,7 +278,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             number.setText(newNumber + "");
             playMethodOrderSubmitItemBean.setNum(newNumber + "");
             playMethodOrderSubmitItemBean.setNum(newNumber + "");
-            totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
+            totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
         } else {
             ToastUtil.showToast(mContext, "人数不能少于0");
         }
@@ -292,7 +291,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         number.setText(newNumber + "");
         playMethodOrderSubmitItemBean.setNum(newNumber + "");
         playMethodOrderSubmitItemBean.setNum(newNumber + "");
-        totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
+        totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
     }
 
 
