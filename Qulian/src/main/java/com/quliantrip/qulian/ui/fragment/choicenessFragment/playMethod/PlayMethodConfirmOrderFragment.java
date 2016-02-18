@@ -113,8 +113,6 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
         map.put("memo", beizhuString);//备注
         map.put("contactsid", linkManId);//常用联系人的id
         new PacketStringReQuest(HttpConstants.PLAY_METHOD_ORDER_CONFIRM_SUBMIT,new HintInfoBean().setTag(getClass().getName() + "topay"), map);
-//        UIHelper.showPayMethod(mContext, null);
-//        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 
     @Override
@@ -135,7 +133,9 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200){
-                UIHelper.showPayMethod(mContext, null);
+                Bundle bundle =  new Bundle();
+                bundle.putString("totalPrice",totalPrice.getText().toString());
+                UIHelper.showPayMethod(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }else{
                 ToastUtil.showToast(mContext,hintInfoBean.getMsg());

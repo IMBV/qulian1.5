@@ -14,10 +14,10 @@ public class HttpConstants {
      *线上数据服务器http://rest.v2.quliantrip.com/v1/
      * 线下数据http://192.168.0.155:8089/v1/
      */
-    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://192.168.0.155:8089/v1/";
+    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://rest.v2.quliantrip.com/v1/";
 
     //热门商品列表
-    public static final String HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";
+    public static final String   HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";
     //切换城市
     public static final String CHANGE_CITY = HOST_ADDR_ROOT_LOCAL_V1 + "product/areas";
 
@@ -36,7 +36,7 @@ public class HttpConstants {
     //单品订单借口
     public static final String GOOD_ORDER = HOST_ADDR_ROOT_LOCAL_V1 + "order/orders";
     //单品检验剩余
-    public static final String GOOD_ORDER_CHECK = HOST_ADDR_ROOT_LOCAL_V1 + "order/corder";//这个事公共的单凭检验的方法
+    public static final String GOOD_ORDER_CHECK = HOST_ADDR_ROOT_LOCAL_V1 + "order/corder";//这个是公共的单凭检验的方法
     //单品提交订单
     public static final String GOOD_ORDER_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "order/torder";
     //单品确认订单

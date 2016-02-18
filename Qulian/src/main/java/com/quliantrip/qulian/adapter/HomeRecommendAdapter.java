@@ -35,6 +35,11 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
         notifyDataSetChanged();
     }
 
+    public void clearAllData(){
+        this.list.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -55,7 +60,7 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
             }
         });
         holder.title.setText(bean.getTitle());
-        holder.like.setText("有"+bean.getBuynum()+"人这样玩");
+        holder.like.setText(bean.getBuynum());
         return convertView;
     }
 

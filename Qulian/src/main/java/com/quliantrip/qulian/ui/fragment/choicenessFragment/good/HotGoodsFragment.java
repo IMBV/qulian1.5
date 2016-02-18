@@ -53,7 +53,7 @@ import butterknife.OnClick;
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
     private View bestView;
-    private String city = "21410000";
+    private String city = CommonHelp.getString(R.string.change_city_tacit_id);
     private String cate;
     private String merchant;
     private String bespeak;
@@ -93,6 +93,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         if (questBean == null) {
+            city =CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
             Map<String, String> map = new HashMap<String, String>();
             map.put("city",city);
             return new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
@@ -104,6 +105,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     //所有参数进行
     public void requestDataForAll() {
         Map<String, String> map = new HashMap<String, String>();
+        city = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         if (city != null)
             map.put("city", city);
         if (cate != null)
@@ -225,6 +227,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             childAdapter.notifyDataSetChanged();
             groupAdapter.notifyDataSetChanged();
         }
+
+
         groupListView.setOnItemClickListener(new MyItemClick());
         //筛选二级的分类
         childListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -239,12 +243,12 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                         HotGoodsFragment.this.requestDataForAll();
                         break;
                     case "1":
-                        childAdapter.setBespeakId(bean.getId().equals("")?"-1":bean.getId());
+                        childAdapter.setBespeakId(bean.getId().equals("")?"-2":bean.getId());
                         HotGoodsFragment.this.bespeak = bean.getId();
                         HotGoodsFragment.this.requestDataForAll();
                         break;
                     case "2":
-                        childAdapter.setThemeId(bean.getId().equals("")?"-1":bean.getId());
+                        childAdapter.setThemeId(bean.getId().equals("")?"-3":bean.getId());
                         HotGoodsFragment.this.theme = bean.getId();
                         HotGoodsFragment.this.requestDataForAll();
                         break;
@@ -292,6 +296,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 childListView.setAdapter(childAdapter);
             }
             sreenGigId = position + "";
+            childAdapter.setBigCate(position);
             Message msg = new Message();
             msg.what = 20;
             msg.arg1 = position;
@@ -307,6 +312,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             siftPopupWindow = null;
             bg.setVisibility(View.GONE);
         }
+        if (childAdapter != null)
+            childAdapter.setBigCate(0);
     }
 
     //加载显示的列表

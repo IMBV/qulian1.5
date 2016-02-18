@@ -1,5 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +26,6 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by Qulian5 on 2016/1/8.
  * 支付收银台
  */
 public class PayCheckstandFragment extends BaseFragment {
@@ -44,7 +44,10 @@ public class PayCheckstandFragment extends BaseFragment {
 
     @Override
     public void initDate() {
-
+        String totalPrice = getArguments().getString("totalPrice");
+        if(!TextUtils.isEmpty(totalPrice)){
+            payMoney.setText(totalPrice);
+        }
     }
 
     private int mCurrentPayWay = 0;
@@ -107,8 +110,6 @@ public class PayCheckstandFragment extends BaseFragment {
             req.packageValue = weiXinRePay.getPackageX();
             req.sign = weiXinRePay.getSign();
             Toast.makeText(mContext, "正常调起支付", Toast.LENGTH_SHORT).show();
-//            req.extData = "app data"; // optional
-            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
             api.sendReq(req);
         } catch (Exception e) {
             Toast.makeText(mContext, "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -136,29 +137,5 @@ public class PayCheckstandFragment extends BaseFragment {
         }
         oldCheckId = id;
     }
-
-
-//    /*
-//    * 步骤一：获取AccessToken
-//    */
-//    private class GetAccessTokenTask extends AsyncTask<Void, Void, GetAccessTokenResult> {
-//        @Override
-//        protected void onPreExecute() {
-//
-//        }
-//        @Override
-//        protected void onPostExecute(GetAccessTokenResult result) {
-//                 /*
-//                 * 根据获得的access token来开启获取支付id的任务
-//                 * 开始步骤二:
-//                 */
-//            GetPrepayIdTask getPrepayId = new GetPrepayIdTask(result.accessToken);
-//            getPrepayId.execute();
-//        }
-//        @Override
-//        protected GetAccessTokenResult doInBackground(Void... params) {
-//            //发网络请求获取access token
-//        }
-
 
 }

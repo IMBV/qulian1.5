@@ -97,10 +97,6 @@
                     android:id="@+id/tv_play_method_author_introduce"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="阿福卡四季度会罚款了书法卡手机的话费卡拉斯加合法快乐是减肥哈看手机的防护，
-                阿斯顿发回复了if按开机速度发货快乐和房价快速拉横幅dfjkalhskjf阿斯顿发好了看是否
-                妇科就阿訇死了妇科哈哈拉斯发挥好卡了收到反馈卡死机会的罚款是发了哈立刻恢复了困了睡觉都会发生看了符合撒了
-                阿斯顿发生空间的发挥好阿斯顿和腐烂奥斯卡简单返回爱上咖啡哈萨克了"
                     android:textColor="@color/app_main_title"
                     android:textSize="14sp" />
 
@@ -261,7 +257,14 @@
                         style="@style/text_main_title_16"
                         android:layout_marginLeft="10dp"
                         android:text="购买须知" />
+
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_play_method_buy_des"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

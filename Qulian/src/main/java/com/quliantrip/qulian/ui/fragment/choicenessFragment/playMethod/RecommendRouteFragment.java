@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
  */
 public class RecommendRouteFragment extends BasePageCheckFragment {
     //筛选条件
+    private String city = CommonHelp.getString(R.string.change_city_tacit_id);//筛选城市的id
     private String theme;//特设主题
     private String bespeak;//预约时间
     private String crowd;//使用人群
@@ -62,14 +63,17 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
+        city =CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         Map<String, String> map = new HashMap<String, String>();
-        map.put("city", "21410000");
+        map.put("city", city);
         return new QuestBean(map, new PlayMethodBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_LIST);
     }
 
     public void requestDataForAll() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("city", "21410000");
+        city = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+        if (city != null)
+            map.put("city", city);
         if (bespeak != null)
             map.put("bespeak", bespeak);
         if (theme != null)

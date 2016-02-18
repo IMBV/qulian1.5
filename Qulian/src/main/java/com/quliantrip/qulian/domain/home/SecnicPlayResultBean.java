@@ -73,10 +73,19 @@ public class SecnicPlayResultBean extends BaseJson {
         }
 
         public static class WareEntity implements Serializable{
+
             private String id;
             private String name;
             private String img;
+            private String xpoint;
+            private String ypoint;
+            private String city;
+            private String sale;
+            private String proce;
+            private double agio;
             private String imgs;
+            private String meter;
+            private String chinese_name;
 
             public void setId(String id) {
                 this.id = id;
@@ -90,8 +99,40 @@ public class SecnicPlayResultBean extends BaseJson {
                 this.img = img;
             }
 
+            public void setXpoint(String xpoint) {
+                this.xpoint = xpoint;
+            }
+
+            public void setYpoint(String ypoint) {
+                this.ypoint = ypoint;
+            }
+
+            public void setCity(String city) {
+                this.city = city;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
+            }
+
+            public void setAgio(double agio) {
+                this.agio = agio;
+            }
+
             public void setImgs(String imgs) {
                 this.imgs = imgs;
+            }
+
+            public void setMeter(String meter) {
+                this.meter = meter;
+            }
+
+            public void setChinese_name(String chinese_name) {
+                this.chinese_name = chinese_name;
             }
 
             public String getId() {
@@ -106,17 +147,54 @@ public class SecnicPlayResultBean extends BaseJson {
                 return img;
             }
 
+            public String getXpoint() {
+                return xpoint;
+            }
+
+            public String getYpoint() {
+                return ypoint;
+            }
+
+            public String getCity() {
+                return city;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
+            }
+
+            public double getAgio() {
+                return agio;
+            }
+
             public String getImgs() {
                 return imgs;
+            }
+
+            public String getMeter() {
+                return meter;
+            }
+
+            public String getChinese_name() {
+                return chinese_name;
             }
         }
 
         public static class RuleEntity implements Serializable{
+
             private String id;
             private String name;
             private String title;
-            private String img;
             private String summary;
+            private String buynum;
+            private String username;
+            private String head_img;
+            private String sale;
+            private String proce;
             private String imgs;
 
             public void setId(String id) {
@@ -131,12 +209,28 @@ public class SecnicPlayResultBean extends BaseJson {
                 this.title = title;
             }
 
-            public void setImg(String img) {
-                this.img = img;
-            }
-
             public void setSummary(String summary) {
                 this.summary = summary;
+            }
+
+            public void setBuynum(String buynum) {
+                this.buynum = buynum;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public void setHead_img(String head_img) {
+                this.head_img = head_img;
+            }
+
+            public void setSale(String sale) {
+                this.sale = sale;
+            }
+
+            public void setProce(String proce) {
+                this.proce = proce;
             }
 
             public void setImgs(String imgs) {
@@ -155,12 +249,28 @@ public class SecnicPlayResultBean extends BaseJson {
                 return title;
             }
 
-            public String getImg() {
-                return img;
-            }
-
             public String getSummary() {
                 return summary;
+            }
+
+            public String getBuynum() {
+                return buynum;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public String getHead_img() {
+                return head_img;
+            }
+
+            public String getSale() {
+                return sale;
+            }
+
+            public String getProce() {
+                return proce;
             }
 
             public String getImgs() {

@@ -37,8 +37,8 @@
 
     <View style="@style/dev_all_line" />
 
-    <WebView
-        android:id="@+id/wv_container"
+    <TextView
+        android:id="@+id/tv_good_des"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

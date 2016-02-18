@@ -69,6 +69,7 @@ public class GoodDetailBean extends BaseJson {
         }
 
         public static class OnlineEntity {
+
             private String id;
             private String name;
             private String img;
@@ -76,9 +77,10 @@ public class GoodDetailBean extends BaseJson {
             private String purnotes;
             private String pricedesc;
             private String is_res;
-            private Object featured;
+            private String featured;
             private String sale;
             private String proce;
+            private String agio;
             private String imgs;
 
             public void setId(String id) {
@@ -109,7 +111,7 @@ public class GoodDetailBean extends BaseJson {
                 this.is_res = is_res;
             }
 
-            public void setFeatured(Object featured) {
+            public void setFeatured(String featured) {
                 this.featured = featured;
             }
 
@@ -119,6 +121,10 @@ public class GoodDetailBean extends BaseJson {
 
             public void setProce(String proce) {
                 this.proce = proce;
+            }
+
+            public void setAgio(String agio) {
+                this.agio = agio;
             }
 
             public void setImgs(String imgs) {
@@ -153,7 +159,7 @@ public class GoodDetailBean extends BaseJson {
                 return is_res;
             }
 
-            public Object getFeatured() {
+            public String getFeatured() {
                 return featured;
             }
 
@@ -163,6 +169,10 @@ public class GoodDetailBean extends BaseJson {
 
             public String getProce() {
                 return proce;
+            }
+
+            public String getAgio() {
+                return agio;
             }
 
             public String getImgs() {

@@ -35,10 +35,14 @@ public class SearchPlayMethodListAdapter extends BasicAdapter<SecnicPlayResultBe
         Holder holder = Holder.getHolder(convertView);
         SecnicPlayResultBean.DataEntity.RuleEntity bean = list.get(position);
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
+        holder.likeNumber.setText("有"+bean.getBuynum()+"这样玩");
+        holder.dianDisCount.setText("暂时该字段");
+        holder.price.setText("￥ "+bean.getProce());
         return convertView;
-    }
+     }
 
     static class Holder {
         @Bind(R.id.iv_choice_paly_method_pic)

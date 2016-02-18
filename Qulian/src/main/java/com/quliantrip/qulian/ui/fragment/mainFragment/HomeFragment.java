@@ -14,6 +14,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.HomeRecommendAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
 import com.quliantrip.qulian.domain.common.ChangeCityBean;
 import com.quliantrip.qulian.domain.HomeBean;
@@ -50,7 +51,7 @@ import butterknife.OnClick;
  * 首页界面
  */
 public class HomeFragment extends BasePageCheckFragment implements ScrollViewListener {
-    private String cityId;
+    private String cityId = CommonHelp.getString(R.string.change_city_tacit_id);
     @Bind(R.id.iv_home_title_location)
     TextView homeTitle;//首页的城市
     @Bind(R.id.iv_home_title_back)
@@ -100,24 +101,37 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName",CommonHelp.getString(R.string.change_city_tacit_name));
-            homeTitle.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+            String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
+            if (!cityNameString.equals(homeTitle.getText().toString().trim())) {
+                homeTitle.setText(cityNameString);
+                requestDataForAll();
+            }
         } else {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
-            homeTitle.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+            if (!cityNameString.equals(homeTitle.getText().toString().trim())) {
+                homeTitle.setText(cityNameString);
+                requestDataForAll();
+            }
         }
     }
 
     @Override
     protected QuestBean requestData() {
         //打印获取坐标
-        System.out.println(CommonHelp.getStringSp(mContext,"geographic",CommonHelp.getString(R.string.change_city_tacit_name)));
-//        cityId = CommonHelp.getStringSp(mContext, "globalCityId", "21410000");
+//        System.out.println(CommonHelp.getStringSp(mContext, "geographic", CommonHelp.getString(R.string.change_city_tacit_name)));
+        cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         Map<String, String> map = new HashMap<String, String>();
-        map.put("city","21410000");
+        map.put("city", cityId);
         return new QuestBean(map, new HomeShowBean().setTag(getClass().getName()), HttpConstants.HOME_MAIN);
+    }
+
+    //所有参数进行
+    public void requestDataForAll() {
+        Map<String, String> map = new HashMap<String, String>();
+        cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+        if (cityId != null)
+            map.put("city", cityId);
+        new PacketStringReQuest(HttpConstants.HOME_MAIN, new HomeShowBean().setTag(getClass().getName()), map);
     }
 
     @Override
@@ -144,23 +158,27 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     private HomeRecommendAdapter homeRecommendAdapter;
 
     private void initListIView(final List<HomeShowBean.DataEntity.PlayEntity> dealList) {
-        if (homeRecommendAdapter == null) {
-            homeRecommendAdapter = new HomeRecommendAdapter((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList);
-        } else {
-            homeRecommendAdapter.upDataItem((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList);
-        }
-        listView.setAdapter(homeRecommendAdapter);
-        //条目数据适配
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HomeShowBean.DataEntity.PlayEntity bean = dealList.get(position);
-                Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
-                intent.putExtra("playMethodId", bean.getId());
-                mContext.startActivity(intent);
-                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+        if (dealList.size() > 0) {
+            if (homeRecommendAdapter == null) {
+                homeRecommendAdapter = new HomeRecommendAdapter((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList);
+            } else {
+                homeRecommendAdapter.upDataItem((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList);
             }
-        });
+            listView.setAdapter(homeRecommendAdapter);
+            //条目数据适配
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    HomeShowBean.DataEntity.PlayEntity bean = dealList.get(position);
+                    Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
+                    intent.putExtra("playMethodId", bean.getId());
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                }
+            });
+        }else{
+            homeRecommendAdapter.clearAllData();
+        }
     }
 
     private boolean isShang = true;
@@ -202,9 +220,11 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
             CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
-            homeTitle.setText(data.getStringExtra("cityName"));
-            Map<String, String> map = new HashMap<String, String>();
-            new PacketStringReQuest(HttpConstants.HOME_MAIN, new HomeShowBean().setTag(HomeFragment.this.getClass().getName()), map, null);
+
+            if (!homeTitle.getText().toString().trim().equals(data.getStringExtra("cityName"))) {
+                homeTitle.setText(data.getStringExtra("cityName"));
+                requestDataForAll();
+            }
         }
     }
 

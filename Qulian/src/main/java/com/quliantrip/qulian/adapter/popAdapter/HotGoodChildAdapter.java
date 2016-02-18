@@ -20,9 +20,10 @@ import java.util.List;
 
 public class HotGoodChildAdapter extends BaseAdapter {
     private Context mContext;
-    private String merchant;
-    private String bespeak;
-    private String theme;
+    private int bigCate = 0;
+    private String merchant = "-1";
+    private String bespeak = "-2";
+    private String theme = "-3";
 
 
     List<HotGoodBean.DataEntity.ScreenEntity.ChildEntity> mChildArr;// 子item标题数组
@@ -33,8 +34,13 @@ public class HotGoodChildAdapter extends BaseAdapter {
     public void setChildData(List<HotGoodBean.DataEntity.ScreenEntity.ChildEntity> childArr) {
         this.mChildArr = childArr;
     }
+    public void setBigCate(int cate){
+        this.bigCate = cate;
+        notifyDataSetChanged();
+    }
+
     public void setMerchantId(String id){
-        this.merchant = id+"";
+        this.merchant = id;
         notifyDataSetChanged();
     }
     public void setBespeakId(String id){
@@ -65,16 +71,35 @@ public class HotGoodChildAdapter extends BaseAdapter {
             holder.childText.setText(mChildArr.get(position).getTag_name());
         else
             holder.childText.setText(mChildArr.get(position).getName());
-        if((bean.getId().equals("")?"-1":bean.getId()).equals(this.merchant)
-                ||(bean.getId().equals("")?"-1":bean.getId()).equals(bespeak)
-                ||(bean.getId().equals("")?"-1":bean.getId()).equals(theme)){
-            holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_gray));
-            holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-        }else{
-            holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_white));
-            holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+        switch (bigCate){
+            case 0:
+                if((bean.getId().equals("")?"-1":bean.getId()).equals(this.merchant)){
+                    holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_gray));
+                    holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+                }else{
+                    holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_white));
+                    holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+                }
+                break;
+            case 1:
+                if((bean.getId().equals("")?"-2":bean.getId()).equals(bespeak)){
+                    holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_gray));
+                    holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+                }else{
+                    holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_white));
+                    holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+                }
+                break;
+            case 2:
+                if((bean.getId().equals("")?"-3":bean.getId()).equals(theme)){
+                    holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_gray));
+                    holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
+                }else{
+                    holder.childBg.setBackground(CommonHelp.getDrawable(R.drawable.shape_bg_white));
+                    holder.childText.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+                }
+                break;
         }
-
         return convertView;
     }
 

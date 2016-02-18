@@ -34,6 +34,10 @@ public class SearchHotGoodListAdapter extends BasicAdapter<SecnicPlayResultBean.
         final SecnicPlayResultBean.DataEntity.WareEntity bean = list.get(position);
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0] , holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getName());
+        holder.isCollect.setVisibility(View.INVISIBLE);
+        holder.newPrice.setText("￥" + bean.getProce());
+        holder.oldPrice.setText("￥"+bean.getSale());
+        holder.locationDiscount.setText(bean.getChinese_name()+" · "+bean.getMeter());
         return convertView;
     }
 

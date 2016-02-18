@@ -10,10 +10,10 @@ import android.widget.TextView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.good.GoodOrderConfirmBean;
 import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.domain.me.LinkManBean;
 import com.quliantrip.qulian.domain.me.LoginDataBean;
-import com.quliantrip.qulian.domain.choice.good.GoodOrderConfirmBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
@@ -110,7 +110,6 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         map.put("memo", beizhu.getText().toString().trim());//备注
         map.put("contactsid", linkManId);//常用联系人的id
         new PacketStringReQuest(HttpConstants.GOOD_ORDER_CONFIRM_SUBMIT, new HintInfoBean().setTag(getClass().getName() + "topay"), map);
-
     }
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -126,7 +125,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
                 taocan.setText(dataEntity.getAttribute());
                 data.setText(sdf.format(new Date(Integer.valueOf(dataEntity.getOrdershop().getDate()) * 1000)));
                 time.setText(dataEntity.getOrdershop().getTotal_price());
-                price.setText("￥" + dataEntity.getOrdershop().getTotal_price());
+                price.setText(dataEntity.getOrdershop().getTotal_price());
             } else {
                 ToastUtil.showToast(mContext, goodOrderConfirmBean.getMsg());
             }
@@ -136,7 +135,9 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200) {
-                UIHelper.showPayMethod(mContext, null);
+                Bundle bundle = new Bundle();
+                bundle.putString("totalPrice", price.getText().toString());
+                UIHelper.showPayMethod(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
                 ToastUtil.showToast(mContext, hintInfoBean.getMsg());

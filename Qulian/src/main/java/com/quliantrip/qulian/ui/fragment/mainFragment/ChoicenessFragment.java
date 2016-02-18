@@ -136,12 +136,24 @@ public class ChoicenessFragment extends Fragment {
         super.onHiddenChanged(hidden);
         if (hidden) {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
-            cityName.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+            if (!cityName.getText().toString().trim().equals(cityNameString)) {
+                cityName.setText(cityNameString);
+                if (hotGoodsFragment != null)
+                    hotGoodsFragment.requestDataForAll();
+                if (recommendRouteFragment != null)
+                    recommendRouteFragment.requestDataForAll();
+            }
         } else {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
-            cityName.setText(cityNameString);
-            cityId = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+            if (!cityName.getText().toString().trim().equals(cityNameString)) {
+                cityName.setText(cityNameString);
+                hotGoodsFragment.requestDataForAll();
+                recommendRouteFragment.requestDataForAll();
+                if (hotGoodsFragment != null)
+                    hotGoodsFragment.requestDataForAll();
+                if (recommendRouteFragment != null)
+                    recommendRouteFragment.requestDataForAll();
+            }
         }
     }
 
@@ -174,8 +186,13 @@ public class ChoicenessFragment extends Fragment {
             CommonHelp.saveStringSp(mContext, "globalCityId", data.getStringExtra("cityId"));
             CommonHelp.saveStringSp(mContext, "globalCityName", data.getStringExtra("cityName"));
             CommonHelp.saveStringSp(mContext, "cityImg", data.getStringExtra("cityImg"));
-            cityName.setText(data.getStringExtra("cityName"));
-            cityId = CommonHelp.getStringSp(mContext, data.getStringExtra("cityId"), CommonHelp.getString(R.string.change_city_tacit_id));
+            if (!cityName.getText().toString().trim().equals(data.getStringExtra("cityName"))) {
+                cityName.setText(data.getStringExtra("cityName"));
+                if (hotGoodsFragment != null)
+                    hotGoodsFragment.requestDataForAll();
+                if (recommendRouteFragment != null)
+                    recommendRouteFragment.requestDataForAll();
+            }
         }
     }
 
@@ -199,7 +216,6 @@ public class ChoicenessFragment extends Fragment {
 
     private boolean isShowHotGood = false;
     private String hotGoodClassfyId = null;
-
 
 
     //切换为玩法显示列表

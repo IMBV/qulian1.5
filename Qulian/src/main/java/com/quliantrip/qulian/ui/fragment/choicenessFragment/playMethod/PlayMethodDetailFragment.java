@@ -73,6 +73,9 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     TextView totalPrice;
     @Bind(R.id.tv_tuan_deal_oldprice)
     TextView oldTotalPeice;
+    @Bind(R.id.tv_play_method_buy_des)
+    TextView buyDes;
+
 
     //收藏
     @Bind(R.id.iv_good_collect_img)
@@ -94,27 +97,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
         view = View.inflate(mContext, R.layout.fragment_play_method_detail, null);
         ButterKnife.bind(this, view);
         //获取viewtreeobject的观察者进行数据的设置
-        authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-            @Override
-            public void onGlobalLayout() {
-                maxHeight = authorIntroduce.getHeight();
-                authorIntroduce.setMaxLines(2);
-                authorIntroduce.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-                    @Override
-                    public void onGlobalLayout() {
-                        authorIntroduce.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        minHeight = authorIntroduce.getHeight();
-                        authorIntroduce.setMaxLines(Integer.MAX_VALUE);
-                        //进行重新的绘制
-                        authorIntroduce.getLayoutParams().height = minHeight;
-                        authorIntroduce.requestLayout();
-                    }
-                });
-            }
-        });
         goodsListView.setFocusable(false);
         return view;
     }
@@ -138,11 +121,35 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 final ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity> listData = (ArrayList<PlayMethodDetailBean.DataEntity.PackageEntity>) dataEntity.getPackageX();
                 //初始化作者的信息
                 PlayMethodDetailBean.DataEntity.PlayEntity playEntity = dataEntity.getPlay();
-                ImageLoader.getInstance().displayImage(playEntity.getHead_img(),authorImg, ImageLoaderOptions.pager_options);
+                ImageLoader.getInstance().displayImage(playEntity.getHead_img(), authorImg, ImageLoaderOptions.pager_options);
                 authorName.setText(playEntity.getUsername());
                 totalPrice.setText(playEntity.getProce());
                 oldTotalPeice.setText(playEntity.getSale());
+                authorIntroduce.setText(playEntity.getSummary());
+                //这里是用于显示多于两行时就初始化显示两行
+                authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
+                    @Override
+                    public void onGlobalLayout() {
+                        maxHeight = authorIntroduce.getHeight();
+                        authorIntroduce.setMaxLines(2);
+                        authorIntroduce.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                            @Override
+                            public void onGlobalLayout() {
+                                authorIntroduce.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                                minHeight = authorIntroduce.getHeight();
+                                authorIntroduce.setMaxLines(Integer.MAX_VALUE);
+                                //进行重新的绘制
+                                authorIntroduce.getLayoutParams().height = minHeight;
+                                authorIntroduce.requestLayout();
+                            }
+                        });
+                    }
+                });
+                //填充购买须知数据
+                buyDes.setText(playEntity.getBuydesc());
                 goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter(listData));
                 goodsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

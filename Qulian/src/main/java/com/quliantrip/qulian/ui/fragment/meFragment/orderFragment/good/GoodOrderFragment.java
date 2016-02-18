@@ -46,28 +46,28 @@ public class GoodOrderFragment extends BasePageCheckFragment {
     protected ListView listView;
 
     private GoodOrderListAdapter goodOrderListAdapter;
-    //所有
-    @Bind(R.id.rb_me_order_good_all)
-    RadioButton all;
-    //未付款
-    @Bind(R.id.rb_me_order_good_to_pay)
-    RadioButton toPay;
-    //待确认
-    @Bind(R.id.rb_me_order_good_to_confirmed)
-    RadioButton toConfirmed;
-    //已确认
-    @Bind(R.id.rb_me_order_good_confirmed)
-    RadioButton confirmed;
-    //已使用
-    @Bind(R.id.rb_me_order_good_user)
+//    //所有
+//    @Bind(R.id.rb_me_order_good_all)
+//    RadioButton all;
+//    //未付款
+//    @Bind(R.id.rb_me_order_good_to_pay)
+//    RadioButton toPay;
+//    //待确认
+//    @Bind(R.id.rb_me_order_good_to_confirmed)
+//    RadioButton toConfirmed;
+//    //已确认
+//    @Bind(R.id.rb_me_order_good_confirmed)
+//    RadioButton confirmed;
+//    //已使用
+//    @Bind(R.id.rb_me_order_good_user)
     RadioButton user;
 
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_me_order_good, null);
         ButterKnife.bind(this, view);
-        setOrderNumberCollor(all, 10);
-        setOrderNumberCollor(toPay, 5);
+//        setOrderNumberCollor(all, 10);
+//        setOrderNumberCollor(toPay, 5);
         return view;
     }
 
@@ -107,17 +107,6 @@ public class GoodOrderFragment extends BasePageCheckFragment {
         int byteLength = b.length;
         int strLength = str.length();
         return (byteLength - strLength) / 2;
-    }
-
-    //设置选择框内的数量的显示为黄色
-    public void setOrderNumberCollor(RadioButton rb, int number) {
-        String s = rb.getText().toString();
-        int oldLenght = chineseNums(s);
-        String num = "(" + number + ")";
-        int endNumber = num.getBytes().length;
-        SpannableString styledText = new SpannableString(s + num);
-        styledText.setSpan(new TextAppearanceSpan(mContext, R.style.text_end_yellow), oldLenght, oldLenght + endNumber, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        rb.setText(styledText, TextView.BufferType.SPANNABLE);
     }
 
     private void initRefreshListView(final ArrayList<GoodOrderListBean.DataEntity> list) {
@@ -175,5 +164,16 @@ public class GoodOrderFragment extends BasePageCheckFragment {
                 }
             }
         });
+    }
+
+    //设置选择框内的数量的显示为黄色，暂时没有作用
+    public void setOrderNumberCollor(RadioButton rb, int number) {
+        String s = rb.getText().toString();
+        int oldLenght = chineseNums(s);
+        String num = "(" + number + ")";
+        int endNumber = num.getBytes().length;
+        SpannableString styledText = new SpannableString(s + num);
+        styledText.setSpan(new TextAppearanceSpan(mContext, R.style.text_end_yellow), oldLenght, oldLenght + endNumber, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        rb.setText(styledText, TextView.BufferType.SPANNABLE);
     }
 }

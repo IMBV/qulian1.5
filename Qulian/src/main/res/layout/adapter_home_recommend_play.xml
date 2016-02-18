@@ -24,11 +24,11 @@
         <View
             android:id="@+id/v_image_preview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#4c000000" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
@@ -39,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="上野公园-熊猫咖啡-演歌表演-江户川定食"
+                android:singleLine="true"
                 android:textColor="#ffffff"
                 android:textSize="14sp" />
 
@@ -61,21 +62,36 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="1dp"
                     android:src="@mipmap/like" />
+                <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_home_play_method_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="有1000人这样玩"
-                    android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="有"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_home_play_method_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="人这样玩"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
                 <View
                     android:layout_width="30dp"
                     android:layout_height="1dp"
                     android:layout_marginLeft="12dp"
                     android:background="#ffffff" />
-
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

@@ -5,7 +5,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@color/app_main_bg">
@@ -69,7 +69,7 @@
                 </RelativeLayout>
             </HorizontalScrollView>
         </ScrollView>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <include layout="@layout/view_pulltorefresh_listview" />
 

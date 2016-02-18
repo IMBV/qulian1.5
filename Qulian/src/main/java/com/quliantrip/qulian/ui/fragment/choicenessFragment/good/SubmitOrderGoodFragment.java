@@ -151,7 +151,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                     //点击的操作
                     playMethodOrderSubmitItemBean.setDate(attress.getDate());
                     playMethodOrderSubmitItemBean.setPrice(attress.getProce());
-                    totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getPrice());
+                    totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
                     break;
                 }
             }

@@ -46,6 +46,7 @@ import butterknife.OnClick;
  */
 public class GoodDetailFragment extends BasePageCheckFragment {
     private View view;
+    private String goodDetailDes;
     //收藏
     @Bind(R.id.iv_good_collect_img)
     ImageView collectImg;
@@ -69,6 +70,11 @@ public class GoodDetailFragment extends BasePageCheckFragment {
 
     @Bind(R.id.tv_good_save_number)
     TextView saveNumber;//已售的数量
+
+    @Bind(R.id.tv_good_detail_featured)
+    TextView featured;//特色活动
+    @Bind(R.id.tv_good_detail_discount)
+    TextView discount;
 
     @Bind(R.id.tv_good_detail_taocan_number)
     TextView taocanNmber;//可选套餐的数量
@@ -118,11 +124,16 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 initRollView(detail.getOnline().getImgs());
                 //初始化单品的信息
                 name.setText(detail.getOnline().getName());
-                newPrice.setText("￥"+detail.getOnline().getProce());
-                oldPrice.setText("￥"+detail.getOnline().getSale());
+                newPrice.setText("￥" + detail.getOnline().getProce());
+                oldPrice.setText("￥" + detail.getOnline().getSale());
                 saveNumber.setText("已售" + 12);
                 taocanNmber.setText(detail.getNum() + "种");
-                goumaInfo.setText(Html.fromHtml(detail.getOnline().getPricedesc()));
+                goodDetailDes = detail.getOnline().getDesc();
+                if (detail.getOnline().getPricedesc() != null)
+                    goumaInfo.setText(Html.fromHtml(detail.getOnline().getPricedesc()));
+                featured.setText(detail.getOnline().getFeatured());
+                discount.setText(detail.getOnline().getAgio()+"折");
+
                 medianCheck.setAdapter(new GoodDetailBranchCheckAdapter((ArrayList<GoodDetailBean.DataEntity.BranchEntity>) detail.getBranch()));
             } else {
                 ((GoodDetailActivity) mContext).showOrHideBack(true);
@@ -161,7 +172,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("House[products_id]", ((Activity) mContext).getIntent().getStringExtra("goodId"));
                 map.put("House[key]", QulianApplication.getInstance().getLoginUser().getAuth_key());
-                map.put("House[key]", "1");
+                map.put("House[type]", "1");
                 new PacketStringReQuest(HttpConstants.GOOD_COLLECT, new GoodDetailBean().setTag(getClass().getName()), map);
             } else {
                 collectImg.setImageResource(R.mipmap.icon_x_shoucang);
@@ -234,6 +245,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
         }
     }
 
+    //返回
     @OnClick(R.id.iv_detail_back)
     void finishActivity() {
         ((Activity) mContext).finish();
@@ -244,6 +256,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @OnClick(R.id.rl_good_detail_introduct)
     void intoIntroduce() {
         Intent intent = new Intent(mContext, GoodDetailIntroduceActivity.class);
+        intent.putExtra("goodGes", goodDetailDes);
         mContext.startActivity(intent);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
