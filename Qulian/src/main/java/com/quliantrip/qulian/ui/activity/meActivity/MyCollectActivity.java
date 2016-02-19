@@ -23,7 +23,6 @@ import butterknife.OnClick;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
- * Created by Yuly on 2016/1/12.
  * 我的收藏
  */
 public class MyCollectActivity extends SwipeBackActivity {

@@ -123,6 +123,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
                 }
             });
 
+        holder.number.setText("1");
         //选着的数量的减少或添加
         convertView.findViewById(R.id.iv_good_person_number_down).setOnClickListener(new View.OnClickListener() {
             @Override

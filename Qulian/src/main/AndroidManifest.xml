@@ -37,6 +37,7 @@
         android:icon="@mipmap/ic_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
         <!--展示页-->
         <activity
             android:name=".ui.activity.mainAcivity.SplashActivity"
@@ -187,5 +188,10 @@
 
         <!--注册注册播放音频服务 -->
         <service android:name="com.quliantrip.qulian.service.MusicService"></service>
+
+        <!--关于友盟的数据统计-->
+
+        <meta-data android:value="56c67379e0f55a1198000a18" android:name="UMENG_APPKEY"></meta-data>
+        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
     </application>
 </manifest>

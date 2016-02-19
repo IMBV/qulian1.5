@@ -32,7 +32,7 @@ public class DisCountListAdapter extends BasicAdapter<DiscountBean.DataEntity> {
         }
         Holder holder = Holder.getHolder(convertView);
         DiscountBean.DataEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImage().trim(), holder.imageView, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImage().trim(), holder.imageView, ImageLoaderOptions.pager_options_big);
         return convertView;
     }
 

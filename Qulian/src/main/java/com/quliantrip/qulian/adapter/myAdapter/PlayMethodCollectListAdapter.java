@@ -8,12 +8,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.Test;
 import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.ui.activity.meActivity.MyCollectActivity;
+import com.quliantrip.qulian.view.CircleImageView;
+import com.quliantrip.qulian.view.RatioImageView;
 import com.quliantrip.qulian.view.SlipRihtLayout;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ import butterknife.ButterKnife;
  */
 public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBean.DataEntity> {
     private MyCollectActivity activity;
+
     public PlayMethodCollectListAdapter(ArrayList<PlayCollectListBean.DataEntity> list, Context context) {
         super(list);
         activity = (MyCollectActivity) context;
@@ -47,22 +52,22 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_collect_play_method_item, null);
         }
         final Holder holder = Holder.getHolder(convertView);
-
         final PlayCollectListBean.DataEntity bean = list.get(position);
-        holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.addOrDelectCollect(bean.ischeck(), bean.getId());
 
-                bean.setIscheck(!bean.ischeck());
-                notifyDataSetChanged();
-            }
-        });
+        //设置左边编辑按钮
         if (bean.ischeck())
             holder.state.setImageResource(R.mipmap.cnb_wode_pre);
         else
             holder.state.setImageResource(R.mipmap.cnb_wode_nor);
 
+        holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.addOrDelectCollect(bean.ischeck(), bean.getId());
+                bean.setIscheck(!bean.ischeck());
+                notifyDataSetChanged();
+            }
+        });
         holder.slipRihtLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @Override
@@ -71,7 +76,16 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
             }
         });
 
-        holder.title.setText(bean.getProducts_id());
+        //添加数据
+        //添加玩法图片资源
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        //添加达人头像
+        ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
+        holder.dianDisCount.setText(bean.getRegion()+""+"没有距离字段");
+        holder.title.setText(bean.getTitle());
+        holder.des.setText(bean.getSummary());
+        holder.likeNumber.setText("有" + bean.getBuynum() + "这样玩");
+        holder.price.setText("￥" + bean.getProce());
         return convertView;
     }
 
@@ -83,9 +97,22 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
         SlipRihtLayout slipRihtLayout;
         @Bind(R.id.iv_collect_Img_state)
         ImageView state;
+
         //右边数据对象
+        @Bind(R.id.iv_choice_paly_method_pic)
+        RatioImageView img;
+        @Bind(R.id.civ_expert_author_img)
+        CircleImageView authoeImg;
+        @Bind(R.id.tv_like_person_number)
+        TextView likeNumber;
         @Bind(R.id.tv_play_method_title)
         TextView title;
+        @Bind(R.id.tv_play_method_des)
+        TextView des;
+        @Bind(R.id.tv_play_method_dian_disount)
+        TextView dianDisCount;
+        @Bind(R.id.tv_play_method_price)
+        TextView price;
 
         public Holder(View convertView) {
             super();

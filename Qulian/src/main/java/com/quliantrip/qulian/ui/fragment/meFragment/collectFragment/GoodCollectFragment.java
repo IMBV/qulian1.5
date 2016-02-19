@@ -1,6 +1,8 @@
 package com.quliantrip.qulian.ui.fragment.meFragment.collectFragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,10 +18,24 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.myAdapter.GoodCollectListAdapter;
+import com.quliantrip.qulian.base.BasePageCheckFragment;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
+import com.quliantrip.qulian.domain.me.GoodCollectListBean;
+import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.good.GoodOrderFragment;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,34 +43,47 @@ import butterknife.ButterKnife;
 /**
  * 热门商品的收藏
  */
-public class GoodCollectFragment extends Fragment {
-    private Context mContext;
+public class GoodCollectFragment extends BasePageCheckFragment {
     private View view;
-    private GoodCollectListAdapter test;
-    private ArrayList<com.quliantrip.qulian.domain.Test> list;
+    private GoodCollectListAdapter goodCollectListAdapter;
+    private List<GoodCollectListBean.DataEntity> listGood;
+
 
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
     protected ListView listView;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getActivity();
-    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_me_play_method_order, null);
         ButterKnife.bind(this, view);
-        initRefreshListView();
         return view;
     }
 
+    @Override
+    protected QuestBean requestData() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        map.put("cate","");
+        return new QuestBean(map, new GoodCollectListBean().setTag(getClass().getName()), HttpConstants.ME_COLLECT_GOOD_LIST);
+    }
+    @Override
+    public void onEventMainThread(BaseJson bean) {
+        if (bean != null && this.getClass().getName().equals(bean.getTag())) {
+            GoodCollectListBean goodCollectListBean = (GoodCollectListBean) bean;
+            if (goodCollectListBean.getCode() == 200){
+                listGood = goodCollectListBean.getData();
+                initRefreshListView(goodCollectListBean.getData());
+            }else {
+                ToastUtil.showToast(mContext,goodCollectListBean.getMsg());
+            }
+        }
+    }
+
     public void setEdit(boolean b) {
-        test.setEdit(b);
-        test.notifyDataSetChanged();
+        goodCollectListAdapter.setEdit(b);
+        goodCollectListAdapter.notifyDataSetChanged();
         if (b) {
             //条目单击事件
             listView.setOnItemClickListener(null);
@@ -66,14 +95,12 @@ public class GoodCollectFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //这里下拉刷新头是占一条的
-                    ToastUtil.showToast(mContext, list.get(position - 1).getName());
                 }
             });
             //条目长按事件
             listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    ToastUtil.showToast(mContext, "长按" + list.get(position - 1));
                     return true;
                 }
             });
@@ -83,34 +110,37 @@ public class GoodCollectFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (test != null)
-            test.notifyDataSetChanged();
+        if (goodCollectListAdapter != null)
+            goodCollectListAdapter.notifyDataSetChanged();
     }
 
-    private void initRefreshListView() {
+    private void initRefreshListView(List<GoodCollectListBean.DataEntity> listBean)  {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
-        list = new ArrayList<com.quliantrip.qulian.domain.Test>();
-        int i;
-        for (i = 0; i <= 30; i++)
-            list.add(new com.quliantrip.qulian.domain.Test(false, "hotGood" + i));
-        test = new GoodCollectListAdapter(list, mContext);
-        listView.setAdapter(test);
+        goodCollectListAdapter = new GoodCollectListAdapter((ArrayList<GoodCollectListBean.DataEntity>) listBean, mContext);
+        listView.setAdapter(goodCollectListAdapter);
         //条目单击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //这里下拉刷新头是占一条的
-                ToastUtil.showToast(mContext, "商品的单击事件" + list.get(position - 1).getName());
+                if (TDevice.getNetworkType() != 0) {
+                    GoodCollectListBean.DataEntity bean = listGood.get(position - 1);
+                    Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                    intent.putExtra("goodId", bean.getId());
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                } else {
+                    ToastUtil.showToast(mContext, "请检查网络设置");
+                }
             }
         });
         //条目长按事件
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.showToast(mContext, "商品长按" + list.get(position - 1).getName());
                 return true;
             }
         });
@@ -126,7 +156,7 @@ public class GoodCollectFragment extends Fragment {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (Math.abs(getScrollY() - currentItem) > 5 && firstVisibleItem < (totalItemCount - visibleItemCount))
-                    test.notifyDataSetChanged();
+                    goodCollectListAdapter.notifyDataSetChanged();
                 currentItem = getScrollY();
             }
 
@@ -153,8 +183,8 @@ public class GoodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "shang"));
-                            test.notifyDataSetChanged();
+//                            goodCollectListAdapter.addItem(new com.quliantrip.qulian.domain.Test(false, "shang"));
+                            goodCollectListAdapter.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
                     }, 500);
@@ -163,8 +193,8 @@ public class GoodCollectFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            test.addItem(new com.quliantrip.qulian.domain.Test(false, "xia"));
-                            test.notifyDataSetChanged();
+//                            goodCollectListAdapter.addItem(new com.quliantrip.qulian.domain.Test(false, "xia"));
+                            goodCollectListAdapter.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
                     }, 500);

@@ -100,7 +100,7 @@
                 android:layout_toRightOf="@id/iv_home_quality_icon"
                 android:background="@mipmap/yishou"
                 android:paddingLeft="3dp"
-                android:text="￥ 100"
+                android:text="已售 100"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
         </RelativeLayout>

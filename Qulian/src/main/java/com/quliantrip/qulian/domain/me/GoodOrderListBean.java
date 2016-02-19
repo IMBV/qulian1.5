@@ -41,23 +41,6 @@ public class GoodOrderListBean extends BaseJson{
 
     public static class DataEntity {
 
-        /**
-         * id : 73
-         * order_sn : 56a97a89943631.61237090
-         * pay_status : 1
-         * total_price : 11111.0000
-         * order_status : 0
-         * is_use : 1
-         * after_sale : 1
-         * sku_id : 15
-         * num : 3
-         * price : 1111.0000
-         * name : null
-         * img : null
-         * package : 景点门票:儿童票
-         * imgs :
-         */
-
         private String id;
         private String order_sn;
         private String pay_status;

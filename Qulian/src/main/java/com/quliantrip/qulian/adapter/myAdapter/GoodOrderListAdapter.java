@@ -38,6 +38,12 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
         notifyDataSetChanged();
     }
 
+    public void updataList(ArrayList<GoodOrderListBean.DataEntity> list){
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     public void addItem(GoodOrderListBean.DataEntity s) {
         list.add(s);
@@ -78,6 +84,7 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
                     new PacketStringReQuest(HttpConstants.MY_ORDER_GOOD_CANCEL, new HintInfoBean().setTag(GoodOrderFragment.class.getName() + "delOrder"), map);
                 }
             });
+            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.VISIBLE);
         }else {
             holder.stype.setText("已关闭");
             convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.GONE);

@@ -116,8 +116,9 @@ public class MyFragment extends BaseFragment {
     @OnClick(R.id.ll_me_integral)
     void showIntegral() {
         if (QulianApplication.getInstance().isLogin()) {
-            UIHelper.showIntegral(mContext, null);
-            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+            ToastUtil.showToast(mContext,"该功能稍后开放");
+//            UIHelper.showIntegral(mContext, null);
+//            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         } else {
             UIHelper.showMyLogin(this, 41);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
@@ -153,8 +154,9 @@ public class MyFragment extends BaseFragment {
     @OnClick(R.id.ll_me_youhuijuan)
     void showYouhuijuan() {
         if (QulianApplication.getInstance().isLogin()) {
-            UIHelper.showMyDisCount(mContext, null);
-            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+            ToastUtil.showToast(mContext,"该功能稍后开放");
+//            UIHelper.showMyDisCount(mContext, null);
+//            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         } else {
             UIHelper.showMyLogin(this, 41);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);

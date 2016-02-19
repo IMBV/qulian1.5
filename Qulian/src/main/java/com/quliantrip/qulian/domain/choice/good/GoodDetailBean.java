@@ -78,9 +78,13 @@ public class GoodDetailBean extends BaseJson {
             private String pricedesc;
             private String is_res;
             private String featured;
+            private String usenstruct;
+            private String buynum;
             private String sale;
             private String proce;
-            private String agio;
+            private double agio;
+            private String houseid;
+            private boolean is_house;
             private String imgs;
 
             public void setId(String id) {
@@ -115,6 +119,14 @@ public class GoodDetailBean extends BaseJson {
                 this.featured = featured;
             }
 
+            public void setUsenstruct(String usenstruct) {
+                this.usenstruct = usenstruct;
+            }
+
+            public void setBuynum(String buynum) {
+                this.buynum = buynum;
+            }
+
             public void setSale(String sale) {
                 this.sale = sale;
             }
@@ -123,8 +135,16 @@ public class GoodDetailBean extends BaseJson {
                 this.proce = proce;
             }
 
-            public void setAgio(String agio) {
+            public void setAgio(double agio) {
                 this.agio = agio;
+            }
+
+            public void setHouseid(String houseid) {
+                this.houseid = houseid;
+            }
+
+            public void setIs_house(boolean is_house) {
+                this.is_house = is_house;
             }
 
             public void setImgs(String imgs) {
@@ -163,6 +183,14 @@ public class GoodDetailBean extends BaseJson {
                 return featured;
             }
 
+            public String getUsenstruct() {
+                return usenstruct;
+            }
+
+            public String getBuynum() {
+                return buynum;
+            }
+
             public String getSale() {
                 return sale;
             }
@@ -171,8 +199,16 @@ public class GoodDetailBean extends BaseJson {
                 return proce;
             }
 
-            public String getAgio() {
+            public double getAgio() {
                 return agio;
+            }
+
+            public String getHouseid() {
+                return houseid;
+            }
+
+            public boolean isIs_house() {
+                return is_house;
             }
 
             public String getImgs() {

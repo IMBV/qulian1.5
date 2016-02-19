@@ -135,6 +135,7 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
             if (hintInfoBean.getCode() == 200){
                 Bundle bundle =  new Bundle();
                 bundle.putString("totalPrice",totalPrice.getText().toString());
+                bundle.putString("orderId",orderId);
                 UIHelper.showPayMethod(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }else{

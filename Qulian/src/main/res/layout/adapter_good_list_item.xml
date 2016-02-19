@@ -85,7 +85,8 @@
                     android:layout_marginLeft="10dp">
 
                     <View
-                        android:layout_width="45dp"
+                        android:id="@+id/view_hot_good_old_price_line"
+                        android:layout_width="40dp"
                         android:layout_height="1px"
                         android:layout_gravity="center"
                         android:background="@color/app_main_sub_title_text" />

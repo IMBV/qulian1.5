@@ -5,26 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.good.GoodDetailBranchCheckAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.CollectResultBean;
 import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailIntroduceActivity;
-import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
@@ -47,6 +43,8 @@ import butterknife.OnClick;
 public class GoodDetailFragment extends BasePageCheckFragment {
     private View view;
     private String goodDetailDes;
+    private String houseId;
+    private String goodId;
     //收藏
     @Bind(R.id.iv_good_collect_img)
     ImageView collectImg;
@@ -108,9 +106,12 @@ public class GoodDetailFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
+        goodId = ((Activity) mContext).getIntent().getStringExtra("goodId");
         Map<String, String> map = new HashMap<String, String>();
-        System.out.println(((Activity) mContext).getIntent().getStringExtra("goodId") + "数据的id");
         map.put("id", ((Activity) mContext).getIntent().getStringExtra("goodId"));
+        if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null) {
+            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        }
         return new QuestBean(map, new GoodDetailBean().setTag(getClass().getName()), HttpConstants.GOOD_DETAIL);
     }
 
@@ -132,17 +133,78 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 if (detail.getOnline().getPricedesc() != null)
                     goumaInfo.setText(Html.fromHtml(detail.getOnline().getPricedesc()));
                 featured.setText(detail.getOnline().getFeatured());
-                discount.setText(detail.getOnline().getAgio()+"折");
-
+                discount.setText(detail.getOnline().getAgio() + "折");
                 medianCheck.setAdapter(new GoodDetailBranchCheckAdapter((ArrayList<GoodDetailBean.DataEntity.BranchEntity>) detail.getBranch()));
+
+                //初始化收藏的界面
+                isCollect = detail.getOnline().isIs_house();
+                if (detail.getOnline().getHouseid() != null)
+                    houseId = detail.getOnline().getHouseid();
+                if (detail.getOnline().isIs_house()) {
+                    collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+                    collectText.setText("已收藏");
+                } else {
+                    collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+                    collectText.setText("收藏");
+                }
             } else {
                 ((GoodDetailActivity) mContext).showOrHideBack(true);
                 ToastUtil.showToast(mContext, goodDetailBean.getMsg());
             }
         }
-        if (bean.getTag().equals("")) {
-            //这里可以进行请求错误时的取消下载的界面
+
+        if (bean != null && (this.getClass().getName() + "denglu").equals(bean.getTag())) {
+            GoodDetailBean goodDetailBean = (GoodDetailBean) bean;
+            if (goodDetailBean.getCode() == 200) {
+                ((GoodDetailActivity) mContext).showOrHideBack(false);
+                GoodDetailBean.DataEntity detail = goodDetailBean.getData();
+                //初始化收藏的界面
+                isCollect = detail.getOnline().isIs_house();
+                if (detail.getOnline().getHouseid() != null)
+                    houseId = detail.getOnline().getHouseid();
+                if (detail.getOnline().isIs_house()) {
+                    collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+                    collectText.setText("已收藏");
+                } else {
+                    collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+                    collectText.setText("收藏");
+                }
+            } else {
+                ((GoodDetailActivity) mContext).showOrHideBack(true);
+                ToastUtil.showToast(mContext, goodDetailBean.getMsg());
+            }
         }
+
+        if (bean != null && (this.getClass().getName() + "shouchang").equals(bean.getTag())) {
+            CollectResultBean collectResultBean = (CollectResultBean) bean;
+            if (collectResultBean.getCode() == 200) {
+                CollectResultBean.DataEntity dataEntity = collectResultBean.getData();
+                houseId = dataEntity.getId();
+                //更改收藏状态
+                isCollect = !isCollect;
+                collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+                collectText.setText("已收藏");
+                CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
+                collectDialog.setCanceledOnTouchOutside(true);
+                collectDialog.show();
+            } else {
+                ToastUtil.showToast(mContext, collectResultBean.getMsg());
+            }
+        }
+        if (bean != null && (this.getClass().getName() + "cancel").equals(bean.getTag())) {
+            CollectResultBean collectResultBean = (CollectResultBean) bean;
+            if (collectResultBean.getCode() == 200) {
+                CollectResultBean.DataEntity dataEntity = collectResultBean.getData();
+                isCollect = !isCollect;
+                collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+                collectText.setText("收藏");
+            } else {
+                ToastUtil.showToast(mContext, collectResultBean.getMsg());
+            }
+        }
+//        if (bean.getTag().equals("")) {
+//            //这里可以进行请求错误时的取消下载的界面
+//        }
     }
 
     //点击购买
@@ -150,11 +212,11 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     void intoOrder() {
         if (QulianApplication.getInstance().isLogin()) {
             Bundle bundle = new Bundle();
-            bundle.putString("goodId", ((Activity) mContext).getIntent().getStringExtra("goodId"));
+            bundle.putString("goodId", goodId);
             UIHelper.showGoodOrder(mContext, bundle);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         } else {
-            UIHelper.showMyLogin(this, 41);
+            UIHelper.showMyLogin(this, 2110);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         }
     }
@@ -164,32 +226,36 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     void collectGood() {
         if (QulianApplication.getInstance().isLogin()) {
             if (!isCollect) {
-                collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
-                collectText.setText("已收藏");
-                CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
-                collectDialog.setCanceledOnTouchOutside(true);
-                collectDialog.show();
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("House[products_id]", ((Activity) mContext).getIntent().getStringExtra("goodId"));
+                map.put("House[products_id]", goodId);
                 map.put("House[key]", QulianApplication.getInstance().getLoginUser().getAuth_key());
-                map.put("House[type]", "1");
-                new PacketStringReQuest(HttpConstants.GOOD_COLLECT, new GoodDetailBean().setTag(getClass().getName()), map);
+                map.put("House[type]", "0");
+                new PacketStringReQuest(HttpConstants.GOOD_COLLECT, new CollectResultBean().setTag(getClass().getName() + "shouchang"), map);
             } else {
-                collectImg.setImageResource(R.mipmap.icon_x_shoucang);
-                collectText.setText("收藏");
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("House[products_id]", ((Activity) mContext).getIntent().getStringExtra("goodId"));
-//                map.put("House[key]", QulianApplication.getInstance().getLoginUser().getAuth_key());
-//                map.put("House[key]", "1");
-                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new GoodDetailBean().setTag(getClass().getName()), map);
+                map.put("id", houseId);
+                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new CollectResultBean().setTag(getClass().getName() + "cancel"), map);
             }
-            isCollect = !isCollect;
         } else {
-            UIHelper.showMyLogin(this, 41);
+            UIHelper.showMyLogin(this, 2110);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == 2110) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("id", goodId);
+            if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null) {
+                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+            }
+            new PacketStringReQuest(HttpConstants.GOOD_DETAIL, new GoodDetailBean().setTag(getClass().getName() + "denglu"), map);
+        }
+    }
 
     //初始化轮播图
     private void initRollView(String img) {

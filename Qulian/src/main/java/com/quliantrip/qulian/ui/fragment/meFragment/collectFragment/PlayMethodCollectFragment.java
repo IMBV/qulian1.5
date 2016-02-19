@@ -1,13 +1,10 @@
 package com.quliantrip.qulian.ui.fragment.meFragment.collectFragment;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,8 +17,10 @@ import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
 import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 
@@ -38,8 +37,8 @@ import butterknife.ButterKnife;
  */
 public class PlayMethodCollectFragment extends BasePageCheckFragment {
     private View view;
-    private PlayMethodCollectListAdapter test;
-    private ArrayList<com.quliantrip.qulian.domain.Test> list;
+    private PlayMethodCollectListAdapter playMethodCollectListAdapter;
+    private List<PlayCollectListBean.DataEntity> listPlayMethod;
 
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
@@ -55,7 +54,7 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("key","-14KirwNmSQQCMiuYBEXtJBWLllbs7Ma");
+        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
         return new QuestBean(map, new PlayCollectListBean().setTag(getClass().getName()), HttpConstants.ME_COLLECT_PLAY_METHOD_LIST);
     }
 
@@ -64,6 +63,7 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             PlayCollectListBean playCollectListBean = (PlayCollectListBean) bean;
             if (playCollectListBean.getCode() == 200){
+                listPlayMethod = playCollectListBean.getData();
                 initRefreshListView(playCollectListBean.getData());
             }else {
                 ToastUtil.showToast(mContext,playCollectListBean.getMsg());
@@ -72,8 +72,8 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
     }
 
     public void setEdit(boolean b) {
-        test.setEdit(b);
-        test.notifyDataSetChanged();
+        playMethodCollectListAdapter.setEdit(b);
+        playMethodCollectListAdapter.notifyDataSetChanged();
         if (b) {
             //条目单击事件
             listView.setOnItemClickListener(null);
@@ -85,14 +85,12 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //这里下拉刷新头是占一条的
-                    ToastUtil.showToast(mContext, list.get(position - 1).getName());
                 }
             });
             //条目长按事件
             listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    ToastUtil.showToast(mContext, "长按" + list.get(position - 1));
                     return true;
                 }
             });
@@ -102,8 +100,8 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (test != null)
-            test.notifyDataSetChanged();
+        if (playMethodCollectListAdapter != null)
+            playMethodCollectListAdapter.notifyDataSetChanged();
     }
 
     private void initRefreshListView(List<PlayCollectListBean.DataEntity> listBean) {
@@ -111,25 +109,26 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
-        list = new ArrayList<com.quliantrip.qulian.domain.Test>();
-        int i;
-        for (i = 0; i <= 30; i++)
-            list.add(new com.quliantrip.qulian.domain.Test(false, "playMethod" + i));
-        test = new PlayMethodCollectListAdapter((ArrayList<PlayCollectListBean.DataEntity>) listBean, mContext);
-        listView.setAdapter(test);
+        playMethodCollectListAdapter = new PlayMethodCollectListAdapter((ArrayList<PlayCollectListBean.DataEntity>) listBean, mContext);
+        listView.setAdapter(playMethodCollectListAdapter);
         //条目单击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //这里下拉刷新头是占一条的
-                ToastUtil.showToast(mContext, list.get(position - 1).getName());
+                PlayCollectListBean.DataEntity bean = listPlayMethod.get(position - 1);
+                Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
+                intent.putExtra("playMethodId", bean.getId());
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }
         });
+
         //条目长按事件
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.showToast(mContext, "玩法长按" + list.get(position - 1).getName());
+//                ToastUtil.showToast(mContext, "玩法长按" + list.get(position - 1).getName());
                 return true;
             }
         });
@@ -145,7 +144,7 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (Math.abs(getScrollY() - currentItem) > 5 && firstVisibleItem < (totalItemCount - visibleItemCount))
-                    test.notifyDataSetChanged();
+                    playMethodCollectListAdapter.notifyDataSetChanged();
                 currentItem = getScrollY();
             }
 
@@ -173,7 +172,7 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
 
                         @Override
                         public void run() {
-                            test.notifyDataSetChanged();
+                            playMethodCollectListAdapter.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
                     }, 500);
@@ -182,7 +181,7 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
 
                         @Override
                         public void run() {
-                            test.notifyDataSetChanged();
+                            playMethodCollectListAdapter.notifyDataSetChanged();
                             refreshViewList.onRefreshComplete();
                         }
                     }, 500);

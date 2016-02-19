@@ -42,12 +42,16 @@ public class PayCheckstandFragment extends BaseFragment {
         return view;
     }
 
+    private String orderId;
+
+
     @Override
     public void initDate() {
         String totalPrice = getArguments().getString("totalPrice");
         if(!TextUtils.isEmpty(totalPrice)){
             payMoney.setText(totalPrice);
         }
+        orderId = getArguments().getString("orderId");
     }
 
     private int mCurrentPayWay = 0;
@@ -71,7 +75,8 @@ public class PayCheckstandFragment extends BaseFragment {
                 Map<String, String> map = new HashMap<String, String>();
 //                +"&"+"key="+ QulianApplication.getInstance().getLoginUser().getAuth_key()
 //                        +"&order_sn="+
-                new PacketStringReQuest("http://v2.quliantrip.com/index.php?r=site/payorder", new WeiXinRePay().setTag(getClass().getName()));
+                new PacketStringReQuest("http://v2.quliantrip.com/index.php?r=site/payorder"+"&"+"key="+ QulianApplication.getInstance().getLoginUser().getAuth_key()
+                        +"&order_sn="+orderId, new WeiXinRePay().setTag(getClass().getName()));
                 break;
             case 1:
                 showDialog_cancel("支付宝支付中");

@@ -50,8 +50,6 @@ public class DiscountFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-//        map.put("ctl", "tuan");
-//        map.put("r_type", "1");
         return new QuestBean(map, new DiscountBean().setTag(getClass().getName()), HttpConstants.DISCOUNT_LIST);
     }
 
@@ -102,11 +100,6 @@ public class DiscountFragment extends BasePageCheckFragment {
                         mContext.startActivity(intent);
                     }
                 });
-//                Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
-//                intent.putExtra("goodId", bean.getId());
-////                intent.putExtra("isCollect", bean.isIs_house());
-//                mContext.startActivity(intent);
-//                ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             }
         });
 

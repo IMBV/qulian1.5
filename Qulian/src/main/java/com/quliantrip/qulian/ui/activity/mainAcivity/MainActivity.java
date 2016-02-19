@@ -21,6 +21,7 @@ import com.quliantrip.qulian.ui.fragment.mainFragment.HomeFragment;
 import com.quliantrip.qulian.ui.fragment.mainFragment.MyFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -214,7 +215,13 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("resume");
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     //添加数据和对RadioGrope的显示进行监听

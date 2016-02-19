@@ -76,7 +76,7 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
                 }
             }
         }
-
+        point_gray.removeAllViews();
         for (int i = 0; i < list.size(); i++) {
             View view = new View(QulianApplication.getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(CommonHelp.dip2px(QulianApplication.getContext(), 6),

@@ -31,6 +31,7 @@ import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -96,6 +97,13 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             city =CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
             Map<String, String> map = new HashMap<String, String>();
             map.put("city",city);
+            map.put("cate", "");
+            map.put("merchant", "");
+            map.put("bespeak", "");
+            map.put("theme", "");
+            if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null){
+                map.put("key",QulianApplication.getInstance().getLoginUser().getAuth_key());
+            }
             return new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
         } else {
             return questBean;
@@ -116,6 +124,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             map.put("bespeak", bespeak);
         if (theme != null)
             map.put("theme", theme);
+        if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null){
+            map.put("key",QulianApplication.getInstance().getLoginUser().getAuth_key());
+        }
         new PacketStringReQuest(HttpConstants.HOT_GOOD_LIST, new HotGoodBean().setTag(getClass().getName()), map);
     }
 

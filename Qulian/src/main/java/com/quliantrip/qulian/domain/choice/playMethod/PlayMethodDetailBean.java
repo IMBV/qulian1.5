@@ -67,13 +67,13 @@ public class PlayMethodDetailBean extends BaseJson {
             private String img;
             private String desc;
             private String buydesc;
-            private String sequence;
-            private String min_price;
             private String userid;
             private String summary;
             private String experience;
             private String username;
             private String head_img;
+            private String houseid;
+            private boolean is_house;
             private String imgs;
             private String sale;
             private String proce;
@@ -98,14 +98,6 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.buydesc = buydesc;
             }
 
-            public void setSequence(String sequence) {
-                this.sequence = sequence;
-            }
-
-            public void setMin_price(String min_price) {
-                this.min_price = min_price;
-            }
-
             public void setUserid(String userid) {
                 this.userid = userid;
             }
@@ -126,6 +118,14 @@ public class PlayMethodDetailBean extends BaseJson {
                 this.head_img = head_img;
             }
 
+            public void setHouseid(String houseid) {
+                this.houseid = houseid;
+            }
+
+            public void setIs_house(boolean is_house) {
+                this.is_house = is_house;
+            }
+
             public void setImgs(String imgs) {
                 this.imgs = imgs;
             }
@@ -142,7 +142,7 @@ public class PlayMethodDetailBean extends BaseJson {
                 return id;
             }
 
-            public Object getName() {
+            public String getName() {
                 return name;
             }
 
@@ -150,20 +150,12 @@ public class PlayMethodDetailBean extends BaseJson {
                 return img;
             }
 
-            public Object getDesc() {
+            public String getDesc() {
                 return desc;
             }
 
             public String getBuydesc() {
                 return buydesc;
-            }
-
-            public String getSequence() {
-                return sequence;
-            }
-
-            public String getMin_price() {
-                return min_price;
             }
 
             public String getUserid() {
@@ -174,7 +166,7 @@ public class PlayMethodDetailBean extends BaseJson {
                 return summary;
             }
 
-            public Object getExperience() {
+            public String getExperience() {
                 return experience;
             }
 
@@ -184,6 +176,14 @@ public class PlayMethodDetailBean extends BaseJson {
 
             public String getHead_img() {
                 return head_img;
+            }
+
+            public String getHouseid() {
+                return houseid;
+            }
+
+            public boolean isIs_house() {
+                return is_house;
             }
 
             public String getImgs() {

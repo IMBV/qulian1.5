@@ -2,6 +2,7 @@ package com.quliantrip.qulian.adapter.choiceAdapter.good;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
         if (convertView == null) {
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_good_list_item, null);
         }
-        Holder holder = Holder.getHolder(convertView);
+        final Holder holder = Holder.getHolder(convertView);
         final HotGoodBean.DataEntity.OnlineEntity bean = list.get(position);
         ImageLoader.getInstance().displayImage(bean.getImg().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
         if (bean.isIs_house()) {
@@ -46,7 +47,19 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
         holder.name.setText(bean.getName());
         holder.newPrice.setText("￥"+bean.getProce());
         holder.locationDiscount.setText(bean.getChinese_name()+" · "+bean.getMeter());
-        holder.oldPrice.setText(bean.getSale());
+        holder.oldPrice.setText("￥ "+bean.getSale());
+
+        holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                    @Override
+                    public void onGlobalLayout() {
+//                        holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        int oldWidth = holder.oldPrice.getWidth();
+                        ViewGroup.LayoutParams params = holder.oldPriceLine.getLayoutParams();
+                        params.width = oldWidth + 10;
+                        holder.oldPriceLine.setLayoutParams(params);
+                    }
+                });
         return convertView;
     }
 
@@ -63,6 +76,8 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
         TextView newPrice;
         @Bind(R.id.tv_hot_good_old_price)
         TextView oldPrice;
+        @Bind(R.id.view_hot_good_old_price_line)
+        View oldPriceLine;
 
         public Holder(View convertView) {
             super();

@@ -46,11 +46,7 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
         //添加达人头像
         ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
-//        if (bean.isIs_house()) {
-//            holder.isCollect.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.isCollect.setVisibility(View.GONE);
-//        }
+
         holder.dianDisCount.setText(bean.getRegion()+""+"没有距离字段");
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());

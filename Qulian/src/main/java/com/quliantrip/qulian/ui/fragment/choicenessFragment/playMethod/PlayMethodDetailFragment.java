@@ -18,10 +18,13 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodDetailGoodlistAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.CollectResultBean;
+import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
@@ -48,6 +51,7 @@ import butterknife.OnClick;
 public class PlayMethodDetailFragment extends BasePageCheckFragment {
     private View view;
     private String playMethodId;
+    private String houseId;
 
     //滑动的scrollView
     @Bind(R.id.sv_author_play_method_des)
@@ -107,6 +111,9 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
         playMethodId = ((Activity) mContext).getIntent().getStringExtra("playMethodId");
         Map<String, String> map = new HashMap<String, String>();
         map.put("id", playMethodId);
+        if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null) {
+            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        }
         return new QuestBean(map, new PlayMethodDetailBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_DETRAIL);
     }
 
@@ -124,7 +131,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 ImageLoader.getInstance().displayImage(playEntity.getHead_img(), authorImg, ImageLoaderOptions.pager_options);
                 authorName.setText(playEntity.getUsername());
                 totalPrice.setText(playEntity.getProce());
-                oldTotalPeice.setText(playEntity.getSale());
+                oldTotalPeice.setText(playEntity.getSale() + "");
                 authorIntroduce.setText(playEntity.getSummary());
                 //这里是用于显示多于两行时就初始化显示两行
                 authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -162,9 +169,71 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                     }
                 });
+
+                //添加登录状态
+                if (playEntity.getHouseid() != null)
+                    houseId = playEntity.getHouseid();
+                isCollect = playEntity.isIs_house();
+                if (playEntity.isIs_house()) {
+                    collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+                    collectText.setText("已收藏");
+                } else {
+                    collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+                    collectText.setText("收藏");
+                }
+
             } else {
                 ToastUtil.showToast(mContext, playMethodDetailBean.getMsg());
                 ((PlayMethodDetailActivity) mContext).showOrHideBack(true);
+            }
+        }
+
+        if (bean != null && (this.getClass().getName() + "denglu").equals(bean.getTag())) {
+            PlayMethodDetailBean playMethodDetailBean = (PlayMethodDetailBean) bean;
+            PlayMethodDetailBean.DataEntity dataEntity = playMethodDetailBean.getData();
+            if (playMethodDetailBean.getCode() == 200) {
+                PlayMethodDetailBean.DataEntity.PlayEntity playEntity = dataEntity.getPlay();
+                //添加登录状态
+                isCollect = playEntity.isIs_house();
+                if (playEntity.getHouseid() != null)
+                    houseId = playEntity.getHouseid();
+                if (playEntity.isIs_house()) {
+                    collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+                    collectText.setText("已收藏");
+                } else {
+                    collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+                    collectText.setText("收藏");
+                }
+            } else {
+                ToastUtil.showToast(mContext, playMethodDetailBean.getMsg());
+            }
+        }
+
+        if (bean != null && (getClass().getName() + "shouchang").equals(bean.getTag())) {
+            CollectResultBean collectResultBean = (CollectResultBean) bean;
+            if (collectResultBean.getCode() == 200) {
+                CollectResultBean.DataEntity dataEntity = collectResultBean.getData();
+                houseId = dataEntity.getId();
+                //更改收藏状态
+                isCollect = !isCollect;
+                collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
+                collectText.setText("已收藏");
+                CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
+                collectDialog.setCanceledOnTouchOutside(true);
+                collectDialog.show();
+            } else {
+                ToastUtil.showToast(mContext, collectResultBean.getMsg());
+            }
+        }
+        if (bean != null && (getClass().getName() + "cancel").equals(bean.getTag())) {
+            CollectResultBean collectResultBean = (CollectResultBean) bean;
+            if (collectResultBean.getCode() == 200) {
+                CollectResultBean.DataEntity dataEntity = collectResultBean.getData();
+                isCollect = !isCollect;
+                collectImg.setImageResource(R.mipmap.icon_x_shoucang);
+                collectText.setText("收藏");
+            } else {
+                ToastUtil.showToast(mContext, collectResultBean.getMsg());
             }
         }
     }
@@ -209,7 +278,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
             UIHelper.showPlayMethodOrder(mContext, bundle);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         } else {
-            UIHelper.showMyLogin(this, 41);
+            UIHelper.showMyLogin(this, 2010);
             ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         }
     }
@@ -217,17 +286,38 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     //点击收藏
     @OnClick(R.id.ll_good_collect)
     void collectGood() {
-        if (!isCollect) {
-            collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
-            collectText.setText("已收藏");
-            CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
-            collectDialog.setCanceledOnTouchOutside(true);
-            collectDialog.show();
+        if (QulianApplication.getInstance().isLogin()) {
+            if (!isCollect) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("House[products_id]", playMethodId);
+                map.put("House[key]", QulianApplication.getInstance().getLoginUser().getAuth_key());
+                map.put("House[type]", "1");
+                new PacketStringReQuest(HttpConstants.GOOD_COLLECT, new CollectResultBean().setTag(getClass().getName() + "shouchang"), map);
+            } else {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("id", houseId);
+                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new CollectResultBean().setTag(getClass().getName()+"cancel"), map);
+            }
+
         } else {
-            collectImg.setImageResource(R.mipmap.icon_x_shoucang);
-            collectText.setText("收藏");
+            UIHelper.showMyLogin(this, 2010);
+            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
         }
-        isCollect = !isCollect;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == 2010) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("id", playMethodId);
+            if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null) {
+                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+            }
+            new PacketStringReQuest(HttpConstants.PLAY_METHOD_DETRAIL, new PlayMethodDetailBean().setTag(getClass().getName() + "denglu"), map);
+        }
     }
 
     //初始化轮播图
