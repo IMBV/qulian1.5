@@ -39,6 +39,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * 商品提交订单
@@ -86,7 +87,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
 
     @OnClick(R.id.rl_preview_time_data_setting)
     void setPriviewTime() {
-        if (attressList != null) {
+        if (attressList.size() > 0) {
             String[] dateArray = dataString.split("-");
             final int oldYear = Integer.valueOf(dateArray[0]);
             final int month = Integer.valueOf(dateArray[1]) - 1;
@@ -173,10 +174,13 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                 String date = null;
                 String price = "0";
                 if (dataEntity.getAttrss().size() > 0) {
+                    setNumberInfo(dataEntity.getAttrss().get(0).getDate());
                     date = dataEntity.getAttrss().get(0).getDate();//订单的日期
                     dataString = dataEntity.getAttrss().get(0).getDe();//
                     attressList = dataEntity.getAttrss();
                     price = dataEntity.getAttrss().get(0).getProce();//价格
+                } else {
+                    residueNumber.setText("所有日期都没有票");
                 }
                 String num = "1";//购买数量
                 String service = "11:00";//服务时间
@@ -190,42 +194,27 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                 }
 
                 playMethodOrderSubmitItemBean = new PlayMethodOrderSubmitItemBean(playid, sku_id, date, dataString, num, service, store, price);
-
+                if (dataEntity.getAttrss().size() > 0)
+                    setNumberInfo(dataEntity.getAttrss().get(0).getDe());
                 //设置选择日期
                 name.setText(dataEntity.getOnline().getName());
                 dataString = playMethodOrderSubmitItemBean.getDateString();
                 pretime.setText(dataString);
                 totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
                 initListView(dataEntity.getAttribute());
+
             } else {
                 ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
             }
         }
 
-//        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
-//            GoodOrderSubmitCheckBean goodOrserSubmitCheckBean = (GoodOrderSubmitCheckBean) bean;
-//            if (goodOrserSubmitCheckBean.getCode() == 200) {
-//                Map<String, String> map = new HashMap<String, String>();
-//                map.put("proid", "11");
-//                map.put("date", playMethodOrderSubmitItemBean.getDate());
-//                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-//                map.put("total_price", playMethodOrderSubmitItemBean.getPrice());
-//                map.put("num", playMethodOrderSubmitItemBean.getNum());
-//                map.put("type", "1");
-//                map.put("price", playMethodOrderSubmitItemBean.getPrice());
-//                map.put("service", playMethodOrderSubmitItemBean.getService());
-//                map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
-//                new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
-//            } else {
-//                ToastUtil.showToast(mContext, goodOrserSubmitCheckBean.getMsg());
-//            }
-//        }
+        if (bean != null && (this.getClass().getName() + "goodSubmit").equals(bean.getTag())) {
 
-        if (bean != null && (this.getClass().getName() + "submit").equals(bean.getTag())) {
             GoodOrderSubmitBean goodOrderSubmitBean = (GoodOrderSubmitBean) bean;
             if (goodOrderSubmitBean.getCode() == 200) {
                 Bundle bundle = new Bundle();
                 bundle.putString("orderId", goodOrderSubmitBean.getData().getId() + "");
+                bundle.putString("orderSn", goodOrderSubmitBean.getData().getOrder_sn() + "");
                 UIHelper.showOrderConfirm(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
@@ -238,7 +227,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     @OnClick(R.id.bt_order_submi_topay)
     void toConfirmOrder() {
         if (playMethodOrderSubmitItemBean.getDateString().equals("请选择日期")) {
-            ToastUtil.showToast(mContext,"请选择日期");
+            ToastUtil.showToast(mContext, "请选择日期");
         } else {
             Map<String, String> map = new HashMap<String, String>();
             map.put("proid", goodId);
@@ -251,7 +240,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             map.put("service", playMethodOrderSubmitItemBean.getService() == null ? "" : playMethodOrderSubmitItemBean.getService());
             map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id() == null ? "" : playMethodOrderSubmitItemBean.getSku_id());
             map.put("store", playMethodOrderSubmitItemBean.getStore() == null ? "" : playMethodOrderSubmitItemBean.getStore());
-            new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
+            new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "goodSubmit"), map);
         }
     }
 
@@ -324,9 +313,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     //选择门店
     @Bind(R.id.tv_check_store_result_text)
     TextView checkSrore;//选择门店的中文名字
-
     private List<OrderSubmitBean.DataEntity.BranchnameEntity> branchnameList = null;
-
     @OnClick(R.id.rl_check_store_setting)
     void checkStore() {
         if (branchnameList != null) {
@@ -338,4 +325,25 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             ToastUtil.showToast(mContext, "没有可以选门店");
         }
     }
+
 }
+
+//这里是进行票数检验的数据适配对象
+//        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
+//            GoodOrderSubmitCheckBean goodOrserSubmitCheckBean = (GoodOrderSubmitCheckBean) bean;
+//            if (goodOrserSubmitCheckBean.getCode() == 200) {
+//                Map<String, String> map = new HashMap<String, String>();
+//                map.put("proid", "11");
+//                map.put("date", playMethodOrderSubmitItemBean.getDate());
+//                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+//                map.put("total_price", playMethodOrderSubmitItemBean.getPrice());
+//                map.put("num", playMethodOrderSubmitItemBean.getNum());
+//                map.put("type", "1");
+//                map.put("price", playMethodOrderSubmitItemBean.getPrice());
+//                map.put("service", playMethodOrderSubmitItemBean.getService());
+//                map.put("sku_id", playMethodOrderSubmitItemBean.getSku_id());
+//                new PacketStringReQuest(HttpConstants.GOOD_ORDER_SUBMIT, new GoodOrderSubmitBean().setTag(getClass().getName() + "submit"), map);
+//            } else {
+//                ToastUtil.showToast(mContext, goodOrserSubmitCheckBean.getMsg());
+//            }
+//        }

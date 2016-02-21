@@ -84,7 +84,7 @@ public class HttpConstants {
     //删除联系人
     public static final String DELETE_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/dcontacts";
 
-
+    //个人中心的收藏列表页面
     //我的收藏_GOOD
     public static final String ME_COLLECT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "user/house";
     //我的收藏_PLAY_METHOD

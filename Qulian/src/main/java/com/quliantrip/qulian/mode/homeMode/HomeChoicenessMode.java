@@ -28,6 +28,10 @@ public class HomeChoicenessMode extends BaseMode<HomeShowBean.DataEntity.Product
     ImageView icon;
     @Bind(R.id.iv_home_quality_name)
     TextView name;
+    @Bind(R.id.iv_home_quality_meter)
+    TextView meter;
+    @Bind(R.id.tv_home_choice_person_buy)
+    TextView buyNumber;
 
     private String goodId;
     private Context mContext;
@@ -47,6 +51,8 @@ public class HomeChoicenessMode extends BaseMode<HomeShowBean.DataEntity.Product
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], icon, ImageLoaderOptions.options);
         name.setText(bean.getName());
         goodId = bean.getId();
+        buyNumber.setText("已售 "+bean.getBuynum());
+        meter.setText(bean.getMeter());
     }
 
     public void setContext(Context context) {

@@ -26,20 +26,25 @@ import butterknife.ButterKnife;
 /**
  * 收藏数据适配器单品
  */
-public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.DataEntity> {
+public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.DataEntity.HouseEntity> {
     private MyCollectActivity activity;
 
-    public GoodCollectListAdapter(ArrayList<GoodCollectListBean.DataEntity> list, Context context) {
+    public GoodCollectListAdapter(ArrayList<GoodCollectListBean.DataEntity.HouseEntity> list, Context context) {
         super(list);
         activity = (MyCollectActivity) context;
     }
 
-    public void addItem(GoodCollectListBean.DataEntity s) {
+    public void addItem(GoodCollectListBean.DataEntity.HouseEntity s) {
         list.add(s);
     }
 
     private boolean isEdit = false;
 
+    public void updataData(ArrayList<GoodCollectListBean.DataEntity.HouseEntity> list){
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
     public void setEdit(boolean b) {
         isEdit = b;
     }
@@ -51,16 +56,16 @@ public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.Dat
         }
         final Holder holder = Holder.getHolder(convertView);
 
-        final GoodCollectListBean.DataEntity bean = list.get(position);
+        final GoodCollectListBean.DataEntity.HouseEntity bean = list.get(position);
         holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.addOrDelectCollect(bean.ischeck(), "saasdf" + bean.getName());
                 bean.setIscheck(!bean.ischeck());
                 notifyDataSetChanged();
-
             }
         });
+
         if (bean.ischeck())
             holder.state.setImageResource(R.mipmap.cnb_wode_pre);
         else
@@ -74,24 +79,27 @@ public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.Dat
         });
 
         //添加单品的信息
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+        if(ImageLoader.getInstance().getLoadingUriForView(holder.img) == null)
+            ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+
         holder.isCollect.setVisibility(View.GONE);
         holder.name.setText(bean.getName());
-        holder.newPrice.setText("￥"+bean.getProce());
-        holder.locationDiscount.setText("no"+" · "+bean.getMeter());
+        holder.newPrice.setText("￥" + bean.getProce());
+        holder.locationDiscount.setText("no" + " · " + bean.getMeter());
         holder.oldPrice.setText("￥ " + bean.getSale());
 
-        holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        if (holder.oldPriceLine.getWidth() != holder.oldPrice.getWidth() + 10)
+            holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-            @Override
-            public void onGlobalLayout() {
-//                        holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                int oldWidth = holder.oldPrice.getWidth();
-                ViewGroup.LayoutParams params = holder.oldPriceLine.getLayoutParams();
-                params.width = oldWidth + 10;
-                holder.oldPriceLine.setLayoutParams(params);
-            }
-        });
+                @Override
+                public void onGlobalLayout() {
+                    holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    int oldWidth = holder.oldPrice.getWidth();
+                    ViewGroup.LayoutParams params = holder.oldPriceLine.getLayoutParams();
+                    params.width = oldWidth + 10;
+                    holder.oldPriceLine.setLayoutParams(params);
+                }
+            });
         return convertView;
     }
 

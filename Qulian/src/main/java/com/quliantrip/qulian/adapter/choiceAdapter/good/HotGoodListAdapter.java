@@ -49,11 +49,12 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
         holder.locationDiscount.setText(bean.getChinese_name()+" · "+bean.getMeter());
         holder.oldPrice.setText("￥ "+bean.getSale());
 
+        if (holder.oldPriceLine.getWidth() != holder.oldPrice.getWidth() + 10)
         holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
                     @Override
                     public void onGlobalLayout() {
-//                        holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                         int oldWidth = holder.oldPrice.getWidth();
                         ViewGroup.LayoutParams params = holder.oldPriceLine.getLayoutParams();
                         params.width = oldWidth + 10;

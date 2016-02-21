@@ -138,8 +138,7 @@ public class UIHelper {
         context.startActivity(intent);
     }
 
-    public static void showSimpleBack(Context context, SimpleBackPage page,
-                                      Bundle args) {
+    public static void showSimpleBack(Context context, SimpleBackPage page,Bundle args) {
         Intent intent = new Intent(context, SimpleBackActivity.class);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_ARGS, args);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());

@@ -72,7 +72,7 @@
                             android:src="@mipmap/buxing" />
 
                         <TextView
-                            android:id="@+id/iv_home_quality_subNname"
+                            android:id="@+id/iv_home_quality_meter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:maxEms="10"
@@ -92,6 +92,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_home_choice_person_buy"
                 android:layout_width="69dp"
                 android:layout_height="18dp"
                 android:layout_alignBottom="@id/iv_home_quality_icon"

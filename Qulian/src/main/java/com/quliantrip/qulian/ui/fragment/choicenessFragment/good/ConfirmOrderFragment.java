@@ -18,6 +18,7 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
@@ -135,10 +136,10 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200) {
-                Bundle bundle = new Bundle();
-                bundle.putString("totalPrice", price.getText().toString());
-                bundle.putString("orderId",orderId);
-                UIHelper.showPayMethod(mContext, bundle);
+                Intent intent = new Intent(mContext,PayCheckstandFragment.class);
+                intent.putExtra("totalPrice", price.getText().toString());
+                intent.putExtra("orderId",getArguments().getString("orderSn"));
+                mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
                 ToastUtil.showToast(mContext, hintInfoBean.getMsg());

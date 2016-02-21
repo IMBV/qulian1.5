@@ -13,8 +13,7 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.home.HomeShowBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
-import com.quliantrip.qulian.mode.homeMode.FunctionModeFragment.FunctionModeFragmentOne;
-import com.quliantrip.qulian.mode.homeMode.FunctionModeFragment.FunctionModeFragmentSecond;
+import com.quliantrip.qulian.mode.homeMode.FunctionModeFragment.FunctionModeFragment;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 
@@ -63,15 +62,13 @@ public class HomeFunctionMode extends BaseMode<List<HomeShowBean.DataEntity.Menu
 
     private void initDrawe() {
         list = new ArrayList<Fragment>();
-        list.add(new FunctionModeFragmentOne());
-
         //进行数据的适配，动态的添加数据并且进行数据的适配
         List<HomeShowBean.DataEntity.MenuEntity> fourList = new ArrayList<>();
         for (int i = 0; i < listData.size(); i++) {
             fourList.add(listData.get(i));
             if (fourList.size() == 4 || i == listData.size() - 1) {
                 if (fourList.size() > 0) {
-                    list.add(new FunctionModeFragmentSecond((ArrayList<HomeShowBean.DataEntity.MenuEntity>) fourList));
+                    list.add(new com.quliantrip.qulian.mode.homeMode.FunctionModeFragment.FunctionModeFragment((ArrayList<HomeShowBean.DataEntity.MenuEntity>) fourList));
                     fourList.clear();
                 }
             }

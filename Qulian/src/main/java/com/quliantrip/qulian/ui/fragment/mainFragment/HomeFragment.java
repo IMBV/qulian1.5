@@ -14,10 +14,6 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.HomeRecommendAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
-import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
-import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
-import com.quliantrip.qulian.domain.common.ChangeCityBean;
-import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.domain.home.HomeShowBean;
 import com.quliantrip.qulian.mode.homeMode.HomeChoicenessMode;
 import com.quliantrip.qulian.mode.homeMode.HomeFunctionMode;
@@ -176,7 +172,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
                     ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                 }
             });
-        }else{
+        } else {
             homeRecommendAdapter.clearAllData();
         }
     }

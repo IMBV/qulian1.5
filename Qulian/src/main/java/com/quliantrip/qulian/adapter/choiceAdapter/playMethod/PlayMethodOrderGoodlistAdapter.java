@@ -154,7 +154,7 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
         });
 
         holder.pretime.setText(playMethodOrderSubmitItemBean.getDateString());
-        if (attressList != null) {
+        if (attressList.size() > 0) {
             //选择日期
             convertView.findViewById(R.id.rl_preview_time_data_setting).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -273,8 +273,6 @@ public class PlayMethodOrderGoodlistAdapter extends BasicAdapter<PlayMethodOrder
             long l = d.getTime();
             String str = String.valueOf(l);
             re_time = str.substring(0, 10);
-
-
         } catch (ParseException e) {
             e.printStackTrace();
         }

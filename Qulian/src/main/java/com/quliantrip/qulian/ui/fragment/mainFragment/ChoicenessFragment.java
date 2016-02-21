@@ -73,14 +73,15 @@ public class ChoicenessFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initListener();
+        initData();
         if (isShowHotGood) {
             if (hotGoodClassfyId != null)
                 hotGoodsFragment.changeClassify(hotGoodClassfyId);
             viewPager.setCurrentItem(1);
         }
         isShowHotGood = false;
-        initListener();
-        initData();
+
     }
 
     private void initListener() {
@@ -197,26 +198,26 @@ public class ChoicenessFragment extends Fragment {
     }
 
     //切换为热门单品列表
-    public void changeHotGoodFragment() {
+    public void changeHotGoodFragment(String cateId) {
         if (hotGoodsFragment == null) {
             hotGoodsFragment = new HotGoodsFragment();
         }
+        hotGoodClassfyId = cateId;
         hotGoodsFragment.changeClassify(hotGoodClassfyId);
         viewPager.setCurrentItem(1);
     }
 
     //切换当没有显示精选Fragment没有添加时调用
-    public void changeNoHotGoodFragment() {
+    public void changeNoHotGoodFragment(String cateId) {
         if (hotGoodsFragment == null) {
             hotGoodsFragment = new HotGoodsFragment();
         }
         isShowHotGood = true;
-        hotGoodClassfyId = "53";
+        hotGoodClassfyId = cateId;
     }
 
-    private boolean isShowHotGood = false;
+    private boolean isShowHotGood ;
     private String hotGoodClassfyId = null;
-
 
     //切换为玩法显示列表
     public void changePlayMethodFragment() {

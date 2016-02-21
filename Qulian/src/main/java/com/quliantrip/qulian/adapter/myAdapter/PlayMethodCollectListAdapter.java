@@ -78,10 +78,14 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
 
         //添加数据
         //添加玩法图片资源
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        if (ImageLoader.getInstance().getLoadingUriForView(holder.img) == null) {
+            ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        }
+
         //添加达人头像
-        ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
-        holder.dianDisCount.setText(bean.getRegion()+""+"没有距离字段");
+        if (ImageLoader.getInstance().getLoadingUriForView(holder.authoeImg) == null)
+            ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
+        holder.dianDisCount.setText(bean.getRegion() + "" + "没有距离字段");
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
         holder.likeNumber.setText("有" + bean.getBuynum() + "这样玩");

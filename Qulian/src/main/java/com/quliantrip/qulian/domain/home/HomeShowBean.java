@@ -77,13 +77,15 @@ public class HomeShowBean extends BaseJson {
         }
 
         public static class ProductInfoEntity {
+
             private String id;
             private String name;
             private String img;
-            private String desc;
             private String xpoint;
             private String ypoint;
+            private String buynum;
             private String imgs;
+            private String meter;
 
             public void setId(String id) {
                 this.id = id;
@@ -97,10 +99,6 @@ public class HomeShowBean extends BaseJson {
                 this.img = img;
             }
 
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
             public void setXpoint(String xpoint) {
                 this.xpoint = xpoint;
             }
@@ -109,8 +107,16 @@ public class HomeShowBean extends BaseJson {
                 this.ypoint = ypoint;
             }
 
+            public void setBuynum(String buynum) {
+                this.buynum = buynum;
+            }
+
             public void setImgs(String imgs) {
                 this.imgs = imgs;
+            }
+
+            public void setMeter(String meter) {
+                this.meter = meter;
             }
 
             public String getId() {
@@ -125,10 +131,6 @@ public class HomeShowBean extends BaseJson {
                 return img;
             }
 
-            public String getDesc() {
-                return desc;
-            }
-
             public String getXpoint() {
                 return xpoint;
             }
@@ -137,8 +139,16 @@ public class HomeShowBean extends BaseJson {
                 return ypoint;
             }
 
+            public String getBuynum() {
+                return buynum;
+            }
+
             public String getImgs() {
                 return imgs;
+            }
+
+            public String getMeter() {
+                return meter;
             }
         }
 

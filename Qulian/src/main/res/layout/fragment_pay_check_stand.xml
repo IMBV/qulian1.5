@@ -8,6 +8,34 @@
         android:layout_height="match_parent"
         android:background="@color/app_main_bg"
         android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="#ffffff">
+
+            <RelativeLayout
+                android:id="@+id/iv_simple_back"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/nav_back" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_Title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="支付收银台"
+                android:textColor="@color/app_main_title"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
         <View style="@style/dev_all_line" />
 
@@ -109,6 +137,7 @@
                 android:id="@+id/rl_zhifubao_way"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/selector_bg_while_gray">
 
                 <LinearLayout
@@ -147,6 +176,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_pay_stand_youhuiquan"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="10dp"
@@ -170,7 +200,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-5"
                     android:textColor="@color/app_main_price_text"
                     android:textSize="18sp" />
 

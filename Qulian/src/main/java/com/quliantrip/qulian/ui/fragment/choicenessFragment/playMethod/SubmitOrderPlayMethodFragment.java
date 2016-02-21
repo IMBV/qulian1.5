@@ -87,21 +87,13 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
             }
         }
 
-//        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
-//            HintInfoBean hintInfoBean = (HintInfoBean) bean;
-//            if (hintInfoBean.getCode() == 200){
-//
-//            }else {
-//                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
-//            }
-//        }
-
-        //订单提交是否成功
+        //订单提交是否成功进行检验的操作
         if (bean != null && (this.getClass().getName() + "submit").equals(bean.getTag())) {
             OrderSubmitResultBean goodOrderSubmitBean = (OrderSubmitResultBean) bean;
             if (goodOrderSubmitBean.getCode() == 200) {
                 Bundle bundle = new Bundle();
                 bundle.putString("orderId", goodOrderSubmitBean.getData().getId()+"");
+                bundle.putString("orderSn", goodOrderSubmitBean.getData().getOrder_sn() + "");
                 UIHelper.showPlayMethodOrderConfirm(mContext, bundle);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
@@ -145,3 +137,13 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
         return string;
     }
 }
+
+//     这里是进行当天剩余票数的检验的操作
+//        if (bean != null && (this.getClass().getName() + "check").equals(bean.getTag())) {
+//            HintInfoBean hintInfoBean = (HintInfoBean) bean;
+//            if (hintInfoBean.getCode() == 200){
+//
+//            }else {
+//                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
+//            }
+//        }

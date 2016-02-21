@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -29,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-
 public class MainActivity extends FragmentActivity {
 
     private ArrayList<Fragment> listFragment = new ArrayList<Fragment>();
@@ -39,6 +36,7 @@ public class MainActivity extends FragmentActivity {
     private SystemBarTintManager mTintManager;
     private Fragment mTempFragment;
     private ChoicenessFragment choicenessFragment;
+    private FindFragment findFragment;
 
 //    //处理显示的结果
 //    private Handler handler = new Handler(){
@@ -233,7 +231,7 @@ public class MainActivity extends FragmentActivity {
         HomeFragment homeFragment = new HomeFragment();
         mTempFragment = homeFragment;
         getSupportFragmentManager().beginTransaction().add(R.id.fl_content, homeFragment).commit();
-        FindFragment findFragment = new FindFragment();
+        findFragment = new FindFragment();
         final MyFragment myFragment = new MyFragment();
         choicenessFragment = new ChoicenessFragment();
         listFragment.add(homeFragment);
@@ -383,11 +381,11 @@ public class MainActivity extends FragmentActivity {
     }
 
     //加载选着大分类的消费列表并显示，这里进行传递对象
-    public void changeChoicenessContion(String type) {
+    public void changeChoicenessContion(String type, String goodCateId) {
         if (choicenessFragment == null) {
             choicenessFragment = new ChoicenessFragment();
         }
-
+        //0表示商品的分类， 1表示玩法，2表示有优惠券目的
         if (type.equals("1")) {
             if (!choicenessFragment.isAdded()) {
                 switchFragment(choicenessFragment);
@@ -395,13 +393,16 @@ public class MainActivity extends FragmentActivity {
                 switchFragment(choicenessFragment);
                 choicenessFragment.changePlayMethodFragment();
             }
-        }else{
+        } else if (type.equals("2")) {
+            ((RadioButton) findViewById(R.id.rb_find_page)).setChecked(true);
+            return;
+        } else {
             if (!choicenessFragment.isAdded()) {
-                choicenessFragment.changeNoHotGoodFragment();
+                choicenessFragment.changeNoHotGoodFragment(goodCateId);
                 switchFragment(choicenessFragment);
             } else {
                 switchFragment(choicenessFragment);
-                choicenessFragment.changeHotGoodFragment();
+                choicenessFragment.changeHotGoodFragment(goodCateId);
             }
         }
         ((RadioButton) findViewById(R.id.rb_choiceness_page)).setChecked(true);

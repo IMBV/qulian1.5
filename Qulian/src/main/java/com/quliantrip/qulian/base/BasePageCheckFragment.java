@@ -56,6 +56,11 @@ public abstract class BasePageCheckFragment extends Fragment {
         return contentPage;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     protected abstract View getSuccessView();
 
