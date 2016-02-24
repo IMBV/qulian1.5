@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:text="趣连、消灭一切没有准备的旅行。"
+                android:text="趣连、消灭一切没有准备的旅行备的旅行。"
                 android:textColor="@color/app_main_title"
                 android:textSize="14sp" />
 
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_hot_good_name"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center">
 
                 <ImageView

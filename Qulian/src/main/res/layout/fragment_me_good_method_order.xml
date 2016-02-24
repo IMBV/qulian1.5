@@ -22,4 +22,5 @@
     </HorizontalScrollView>
 
     <include layout="@layout/view_pulltorefresh_listview" />
+    <include layout="@layout/view_page_empty" />
 </LinearLayout>

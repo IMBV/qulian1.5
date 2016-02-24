@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -54,12 +55,17 @@ import butterknife.OnClick;
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
     private View bestView;
+
+    //请求的参数
     private String city = CommonHelp.getString(R.string.change_city_tacit_id);
     private String cate;
     private String merchant;
     private String bespeak;
     private String theme;
 
+    private QuestBean questBean;//请求的数据对象
+
+    //界面上的布局显示对向
     @Bind(R.id.ll_route_sift)
     LinearLayout siftCondition;
     @Bind(R.id.tv_recommend_route_text)
@@ -89,19 +95,17 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         return view;
     }
 
-    private QuestBean questBean;
-
     @Override
     protected QuestBean requestData() {
         if (questBean == null) {
             city = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
             Map<String, String> map = new HashMap<String, String>();
             map.put("city", city);
-
             if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null) {
                 map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
             }
-            return new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
+            questBean = new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
+            return questBean;
         } else {
             return questBean;
         }
@@ -203,10 +207,17 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         linearLayout.addView(view);
     }
 
+    private boolean isShowSift = false;
+
     @OnClick(R.id.ll_route_sift)
     void showSiftRoute() {
-        showSiftCondition();
-        bg.setVisibility(View.VISIBLE);
+        if (isShowSift) {
+            hidePopupWindow();
+        } else {
+            showSiftCondition();
+            bg.setVisibility(View.VISIBLE);
+        }
+        isShowSift = !isShowSift;
     }
 
     List<HotGoodBean.DataEntity.ScreenEntity> screenArray;
@@ -236,7 +247,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             childAdapter.notifyDataSetChanged();
             groupAdapter.notifyDataSetChanged();
         }
-
 
         groupListView.setOnItemClickListener(new MyItemClick());
         //筛选二级的分类
@@ -274,7 +284,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         bottomLine.getLocationInWindow(location);
         int x = location[0];
         int y = location[1];
-        siftPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y + 1);
+        siftPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y-1);
     }
 
     Handler handler = new Handler() {
@@ -340,6 +350,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             hotGoodListAdapter.updateListView((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
         }
 
+        //最优的一条数据的数据适配
         if (bestView == null) {
             bestView = View.inflate(mContext, R.layout.layout_hot_good_best_to_me, null);
             ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) bestView.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
@@ -357,6 +368,21 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).setText("￥" + productInfoEntity.getSale());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_newPrice)).setText("￥" + productInfoEntity.getProce());
 
+            ((TextView) bestView.findViewById(R.id.tv_good_best_location_dicount)).setText(productInfoEntity.getChinese_name() + " · " + productInfoEntity.getMeter());
+
+            final View oldLine = ((View) bestView.findViewById(R.id.tv_hot_good_best_oldPrice_line));
+            oldLine.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                @Override
+                public void onGlobalLayout() {
+                    oldLine.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    int oldWidth = ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).getWidth();
+                    ViewGroup.LayoutParams params = oldLine.getLayoutParams();
+                    params.width = oldWidth + (oldWidth / 10) * 2;
+                    oldLine.setLayoutParams(params);
+                }
+            });
+
             listView.addHeaderView(bestView);
         } else {
             ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) bestView.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
@@ -373,7 +399,21 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).setText("￥" + productInfoEntity.getSale());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_newPrice)).setText("￥" + productInfoEntity.getProce());
+
             ((TextView) bestView.findViewById(R.id.tv_good_best_location_dicount)).setText(productInfoEntity.getChinese_name() + " · " + productInfoEntity.getMeter());
+
+            final View oldLine = ((View) bestView.findViewById(R.id.tv_hot_good_best_oldPrice_line));
+            oldLine.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                @Override
+                public void onGlobalLayout() {
+                    oldLine.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    int oldWidth = ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).getWidth();
+                    ViewGroup.LayoutParams params = oldLine.getLayoutParams();
+                    params.width = oldWidth + (oldWidth / 10) * 2;
+                    oldLine.setLayoutParams(params);
+                }
+            });
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -428,12 +468,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void changeClassify(String id) {
+
         classId = id;
-        if (oldCheckedCate > -1) {
-            Button oldButton = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
-            oldButton.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
-            oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
-        }
         Map<String, String> map = new HashMap<String, String>();
         map.put("city", CommonHelp.getStringSp(QulianApplication.getContext(), "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id)));
         map.put("cate", classId);
@@ -441,26 +477,17 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             questBean = new QuestBean(map, new HotGoodBean().setTag(getClass().getName()), HttpConstants.HOT_GOOD_LIST);
         } else {
             new PacketStringReQuest(HttpConstants.HOT_GOOD_LIST, new HotGoodBean().setTag(getClass().getName()), map, null);
-            if (currentCheckedCate != 0) {
-                linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onGlobalLayout() {
-                        linearLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        Button button = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
-                        button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
-                        button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));
-                        scrollView.scrollTo(linearLayout.getChildAt(currentCheckedCate).getLeft(), 0);
-                    }
-                });
-            }
-            currentCheckedCate = this.map.get(classId);
             //这里是进行平滑的移动
             linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                 @Override
                 public void onGlobalLayout() {
                     linearLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    Button oldButton = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
+                    oldButton.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
+                    oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
+                    currentCheckedCate = HotGoodsFragment.this.map.get(classId);
+
                     Button button = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
                     button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
                     button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));

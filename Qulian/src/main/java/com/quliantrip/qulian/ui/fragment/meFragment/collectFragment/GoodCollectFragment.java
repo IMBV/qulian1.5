@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -56,12 +57,15 @@ public class GoodCollectFragment extends BasePageCheckFragment {
     private List<GoodCollectListBean.DataEntity.HouseEntity> listGood;
     private String cate;
 
+    private int currentCheckedCate = 0;//当前选择的类型
+    protected ListView listView;//下来刷新的数据、
+
     @Bind(R.id.hs_my_good_collect_cate_content)
     LinearLayout linearLayout;
-
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
-    protected ListView listView;
+    @Bind(R.id.rl_pager_empty)
+    RelativeLayout empty;//空界面显示的数据
 
     @Override
     protected View getSuccessView() {
@@ -122,8 +126,6 @@ public class GoodCollectFragment extends BasePageCheckFragment {
         }
     }
 
-    private int currentCheckedCate = 0;
-
     //添加选着条件按钮
     private void initRadioButton(final GoodCollectListBean.DataEntity.CateEntity cate, final int i) {
         View view = View.inflate(mContext, R.layout.view_hot_good_classfy_item, null);
@@ -183,95 +185,111 @@ public class GoodCollectFragment extends BasePageCheckFragment {
             goodCollectListAdapter.notifyDataSetChanged();
     }
 
+    //移除删除的集合
+    public void removeAllDeleteList(List<GoodCollectListBean.DataEntity.HouseEntity> list){
+        goodCollectListAdapter.removeAll((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) list);
+    }
+
     private void initRefreshListView(List<GoodCollectListBean.DataEntity.HouseEntity> listBean) {
-        // 设置PullToRresh的mode类型
-        refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
-        listView = refreshViewList.getRefreshableView();
-        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-
-        if (goodCollectListAdapter == null) {
-            goodCollectListAdapter = new GoodCollectListAdapter((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) listBean, mContext);
-            listView.setAdapter(goodCollectListAdapter);
+        if (listBean.size() == 0) {
+            empty.setVisibility(View.VISIBLE);
+            refreshViewList.setVisibility(View.GONE);
         } else {
-            goodCollectListAdapter.updataData((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) listBean);
+            empty.setVisibility(View.GONE);
+            refreshViewList.setVisibility(View.VISIBLE);
+            // 设置PullToRresh的mode类型
+            refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+            listView = refreshViewList.getRefreshableView();
+            listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+
+            if (goodCollectListAdapter == null) {
+                goodCollectListAdapter = new GoodCollectListAdapter((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) listBean, mContext);
+                listView.setAdapter(goodCollectListAdapter);
+            } else {
+                goodCollectListAdapter.updataData((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) listBean);
+            }
+
+            //条目单击事件
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    //这里下拉刷新头是占一条的
+                    if (TDevice.getNetworkType() != 0) {
+                        GoodCollectListBean.DataEntity.HouseEntity bean = listGood.get(position - 1);
+                        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                        intent.putExtra("goodId", bean.getId());
+                        mContext.startActivity(intent);
+                        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                    } else {
+                        ToastUtil.showToast(mContext, "请检查网络设置");
+                    }
+                }
+            });
+            //条目长按事件
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    return true;
+                }
+            });
+
+            //这里是为了让滑动时显示出来数据
+            listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                private int currentItem = 0;
+
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                }
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    if (Math.abs(getScrollY() - currentItem) > 10 && firstVisibleItem < (totalItemCount - visibleItemCount))
+                        goodCollectListAdapter.notifyDataSetChanged();
+                    currentItem = getScrollY();
+//                    if(listView.getLastVisiblePosition() != listGood.size()) {
+//                        listGood.get(listView.getFirstVisiblePosition()).setIsRefresh(true);
+//                        listGood.get(listView.getLastVisiblePosition()).setIsRefresh(true);
+//                    }
+                }
+
+                public int getScrollY() {
+                    View c = listView.getChildAt(0);
+                    if (c == null) {
+                        return 0;
+                    }
+                    int firstVisiblePosition = listView.getFirstVisiblePosition();
+                    int top = c.getTop();
+                    return -top + firstVisiblePosition * c.getHeight();
+                }
+            });
+
+            //进行下来或删除的操作
+            refreshViewList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+
+                @Override
+                public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                    if (refreshViewList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
+                        CommonHelp.runOnUIThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                goodCollectListAdapter.notifyDataSetChanged();
+                                refreshViewList.onRefreshComplete();
+                            }
+                        }, 500);
+                    } else {
+                        CommonHelp.runOnUIThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                goodCollectListAdapter.notifyDataSetChanged();
+                                refreshViewList.onRefreshComplete();
+                            }
+                        }, 500);
+                    }
+                }
+            });
         }
-
-        //条目单击事件
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //这里下拉刷新头是占一条的
-                if (TDevice.getNetworkType() != 0) {
-                    GoodCollectListBean.DataEntity.HouseEntity bean = listGood.get(position - 1);
-                    Intent intent = new Intent(mContext, GoodDetailActivity.class);
-                    intent.putExtra("goodId", bean.getId());
-                    mContext.startActivity(intent);
-                    ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
-                } else {
-                    ToastUtil.showToast(mContext, "请检查网络设置");
-                }
-            }
-        });
-        //条目长按事件
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return true;
-            }
-        });
-
-        //这里是为了让滑动时显示出来数据
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            private int currentItem = 0;
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (Math.abs(getScrollY() - currentItem) > 5 && firstVisibleItem < (totalItemCount - visibleItemCount))
-                    goodCollectListAdapter.notifyDataSetChanged();
-                currentItem = getScrollY();
-            }
-
-            public int getScrollY() {
-                View c = listView.getChildAt(0);
-                if (c == null) {
-                    return 0;
-                }
-                int firstVisiblePosition = listView.getFirstVisiblePosition();
-                int top = c.getTop();
-                return -top + firstVisiblePosition * c.getHeight();
-            }
-        });
-
-        //进行下来或删除的操作
-        refreshViewList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-
-            @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (refreshViewList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
-                    CommonHelp.runOnUIThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            goodCollectListAdapter.notifyDataSetChanged();
-                            refreshViewList.onRefreshComplete();
-                        }
-                    }, 500);
-                } else {
-                    CommonHelp.runOnUIThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            goodCollectListAdapter.notifyDataSetChanged();
-                            refreshViewList.onRefreshComplete();
-                        }
-                    }, 500);
-                }
-            }
-        });
     }
 }
 

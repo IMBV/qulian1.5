@@ -22,9 +22,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by yuly on 2015/11/9.
+ * 个人中心
  */
-
 public class MyFragment extends BaseFragment {
     //用户的头像
     @Bind(R.id.ll_user_loading)
@@ -44,7 +43,6 @@ public class MyFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         return view;
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

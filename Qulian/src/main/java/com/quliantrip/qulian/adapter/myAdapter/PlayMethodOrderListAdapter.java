@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
  * 玩法订单列表页
  */
 public class PlayMethodOrderListAdapter extends BasicAdapter<PlayMethodOrderBean.DataEntity> {
+
     public PlayMethodOrderListAdapter(ArrayList<PlayMethodOrderBean.DataEntity> list) {
         super(list);
     }
-
     public void addItem(PlayMethodOrderBean.DataEntity s) {
         list.add(s);
     }
@@ -38,10 +38,11 @@ public class PlayMethodOrderListAdapter extends BasicAdapter<PlayMethodOrderBean
         PlayMethodOrderBean.DataEntity bean = list.get(position);
         Holder holder = Holder.getHolder(convertView);
 
-        holder.orderNUmber.setText(bean.getOrder_sn());
+        holder.orderNUmber.setText(bean.getOrder_sn());//设置订单编号
+        holder.name.setText(bean.getName());
+
         holder.listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.colorPrimary)));
         holder.listView.setDividerHeight(CommonHelp.dip2px(QulianApplication.getContext(), 15));
-
         holder.listView.setAdapter(new PlayMethodOrderListGoodItemAdapter((ArrayList<PlayMethodOrderBean.DataEntity.PalyEntity>) bean.getPaly()));
         holder.listView.setFocusable(false);
         return convertView;
@@ -68,6 +69,5 @@ public class PlayMethodOrderListAdapter extends BasicAdapter<PlayMethodOrderBean
             }
             return holder;
         }
-
     }
 }

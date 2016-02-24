@@ -3,8 +3,11 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.good;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Html;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,7 +45,6 @@ import butterknife.OnClick;
  */
 public class GoodDetailFragment extends BasePageCheckFragment {
     private View view;
-    private String goodDetailDes;
     private String houseId;
     private String goodId;
     //收藏
@@ -65,6 +67,8 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     TextView newPrice;
     @Bind(R.id.tv_hot_good_old_price)
     TextView oldPrice;
+    @Bind(R.id.v_hot_good_old_price_line)
+    View oldPriceLine;
 
     @Bind(R.id.tv_good_save_number)
     TextView saveNumber;//已售的数量
@@ -76,8 +80,6 @@ public class GoodDetailFragment extends BasePageCheckFragment {
 
     @Bind(R.id.tv_good_detail_taocan_number)
     TextView taocanNmber;//可选套餐的数量
-    //    @Bind(R.id.tv_good_detail_can_check_time)
-//    TextView checkTime;//可选时间
     @Bind(R.id.tv_good_detail_gouma_info)
     TextView goumaInfo;//够吗须知
     @Bind(R.id.mlv_good_detail_can_check_median)
@@ -127,9 +129,21 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 name.setText(detail.getOnline().getName());
                 newPrice.setText("￥" + detail.getOnline().getProce());
                 oldPrice.setText("￥" + detail.getOnline().getSale());
-                saveNumber.setText("已售" + 12);
+                //设置线的长度
+                oldPriceLine.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                    @Override
+                    public void onGlobalLayout() {
+                        oldPriceLine.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        int oldWidth = oldPrice.getWidth();
+                        ViewGroup.LayoutParams params = oldPriceLine.getLayoutParams();
+                        params.width = oldWidth + (oldWidth / 10) * 2;
+                        oldPriceLine.setLayoutParams(params);
+                    }
+                });
+
+                saveNumber.setText("已售" + detail.getOnline().getBuynum());
                 taocanNmber.setText(detail.getNum() + "种");
-                goodDetailDes = detail.getOnline().getDesc();
                 if (detail.getOnline().getPricedesc() != null)
                     goumaInfo.setText(Html.fromHtml(detail.getOnline().getPricedesc()));
                 featured.setText(detail.getOnline().getFeatured());
@@ -184,9 +198,15 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 isCollect = !isCollect;
                 collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
                 collectText.setText("已收藏");
-                CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
+                final CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
                 collectDialog.setCanceledOnTouchOutside(true);
                 collectDialog.show();
+//                new Thread() {
+//                    public void run() {
+//                        SystemClock.sleep(1000);
+//                        collectDialog.cancel();
+//                    };
+//                }.start();
             } else {
                 ToastUtil.showToast(mContext, collectResultBean.getMsg());
             }
@@ -322,7 +342,20 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @OnClick(R.id.rl_good_detail_introduct)
     void intoIntroduce() {
         Intent intent = new Intent(mContext, GoodDetailIntroduceActivity.class);
-        intent.putExtra("goodGes", goodDetailDes);
+        intent.putExtra("goodId", goodId);
+        intent.putExtra("field", "desc");
+        intent.putExtra("type", "1");
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+    }
+
+    //点击进入使用说明界面
+    @OnClick(R.id.rl_good_detail_user_explain)
+    void intoUserexPlain(){
+        Intent intent = new Intent(mContext, GoodDetailIntroduceActivity.class);
+        intent.putExtra("goodId", goodId);
+        intent.putExtra("field", "pricedesc");
+        intent.putExtra("type", "1");
         mContext.startActivity(intent);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }

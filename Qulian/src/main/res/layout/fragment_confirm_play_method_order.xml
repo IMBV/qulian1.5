@@ -201,7 +201,7 @@
                 android:background="@drawable/shape_btn_right_yellow"
                 android:text="支付订单"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>

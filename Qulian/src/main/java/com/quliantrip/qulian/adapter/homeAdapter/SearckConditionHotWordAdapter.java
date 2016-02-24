@@ -1,6 +1,7 @@
 package com.quliantrip.qulian.adapter.homeAdapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,7 +29,8 @@ import butterknife.ButterKnife;
 public class SearckConditionHotWordAdapter extends BasicAdapter<String> {
 
     private Context mContext;
-    public SearckConditionHotWordAdapter(ArrayList<String> list,Context context) {
+
+    public SearckConditionHotWordAdapter(ArrayList<String> list, Context context) {
         super(list);
         mContext = context;
     }
@@ -43,11 +45,32 @@ public class SearckConditionHotWordAdapter extends BasicAdapter<String> {
         convertView.findViewById(R.id.bt_home_hot_word_condition).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonHelp.saveStringSp(mContext, "hotWordString",s + "::" + CommonHelp.getStringSp(mContext, "hotWordString", ""));
+                ArrayList<String> listHistory = new ArrayList<>();
+                String hotWordListString = CommonHelp.getStringSp(mContext, "hotWordString", "");
+                if (!TextUtils.isEmpty(hotWordListString)) {
+                    String[] stringList = hotWordListString.split("::");
+                    for (String string : stringList) {
+                        listHistory.add(string);
+                        if (string.equals(s)) {
+                            listHistory.remove(string);
+                        }
+                    }
+                }
+
+                listHistory.add(0,s);
+                String totalString = null;
+                for (int i = 0; i < listHistory.size(); i++) {
+                    if (i == 0) {
+                        totalString = listHistory.get(i);
+                    } else {
+                        totalString = totalString + "::" + listHistory.get(i);
+                    }
+                }
+                CommonHelp.saveStringSp(mContext, "hotWordString", totalString);
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("title", s);
                 new PacketStringReQuest(HttpConstants.HOME_SECNICPLAY_CONDITION, new SecnicPlayResultBean().setTag(SecnicPlayConditionActivity.class.getName()), map);
-                ((SecnicPlayConditionActivity)mContext).setConditionText(s);
+                ((SecnicPlayConditionActivity) mContext).setConditionText(s);
             }
         });
         holder.bt.setText(s);

@@ -47,7 +47,7 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
         //添加达人头像
         ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
 
-        holder.dianDisCount.setText(bean.getRegion()+""+"没有距离字段");
+        holder.dianDisCount.setText(bean.getRegion());
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
         holder.likeNumber.setText("有"+bean.getBuynum()+"这样玩");

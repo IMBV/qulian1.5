@@ -148,5 +148,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/selector_bg_gray_yellow"
+        android:textColor="@color/login_bg_color"
         android:text="点击注册" />
 </LinearLayout>

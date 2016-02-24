@@ -36,6 +36,20 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
         activity = (MyCollectActivity) context;
     }
 
+    public void removeAll(ArrayList<PlayCollectListBean.DataEntity> list) {
+        for (int i = 0; i < this.list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (this.list.get(i).getId().equals(list.get(j).getId())) {
+                    this.list.remove(this.list.get(i));
+                }
+            }
+        }
+//        for (PlayCollectListBean.DataEntity dataEntity : this.list) {
+//            dataEntity.setIsRefresh(true);
+//        }
+        notifyDataSetChanged();
+    }
+
     public void addItem(PlayCollectListBean.DataEntity dataEntity) {
         list.add(dataEntity);
     }
@@ -63,7 +77,7 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
         holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.addOrDelectCollect(bean.ischeck(), bean.getId());
+                activity.addOrDelectCollect(bean.ischeck(), bean);
                 bean.setIscheck(!bean.ischeck());
                 notifyDataSetChanged();
             }
@@ -78,14 +92,13 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
 
         //添加数据
         //添加玩法图片资源
-        if (ImageLoader.getInstance().getLoadingUriForView(holder.img) == null) {
-            ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
-        }
+//        if (bean.isRefresh()) {
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
+//            bean.setIsRefresh(false);
+//        }
 
-        //添加达人头像
-        if (ImageLoader.getInstance().getLoadingUriForView(holder.authoeImg) == null)
-            ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
-        holder.dianDisCount.setText(bean.getRegion() + "" + "没有距离字段");
+        holder.dianDisCount.setText(bean.getRegion());
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
         holder.likeNumber.setText("有" + bean.getBuynum() + "这样玩");

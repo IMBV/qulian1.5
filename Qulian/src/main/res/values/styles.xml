@@ -199,11 +199,13 @@
 
     <!--首页功能导航样式-->
     <style name="home_function_every">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_marginBottom">31dp</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!--精选样式-->
@@ -331,6 +333,13 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="text_main_sub_title_14">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_main_sub_title_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="text_white_18">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -379,5 +388,5 @@
         <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
-
+    
 </resources>

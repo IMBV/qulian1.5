@@ -37,9 +37,11 @@
 
     <View style="@style/dev_all_line" />
 
-    <TextView
-        android:id="@+id/tv_good_des"
+    <WebView
+        android:id="@+id/tv_good_des_wv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
 </LinearLayout>

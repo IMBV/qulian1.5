@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -19,7 +20,6 @@ import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodDetailGo
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.CollectResultBean;
-import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
@@ -27,6 +27,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailIntroduceActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -77,9 +78,10 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     TextView totalPrice;
     @Bind(R.id.tv_tuan_deal_oldprice)
     TextView oldTotalPeice;
+    @Bind(R.id.v_tuan_deal_oldprice_line)
+    View oldTotalPeiceLine;
     @Bind(R.id.tv_play_method_buy_des)
     TextView buyDes;
-
 
     //收藏
     @Bind(R.id.iv_good_collect_img)
@@ -131,7 +133,20 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 ImageLoader.getInstance().displayImage(playEntity.getHead_img(), authorImg, ImageLoaderOptions.pager_options);
                 authorName.setText(playEntity.getUsername());
                 totalPrice.setText(playEntity.getProce());
-                oldTotalPeice.setText(playEntity.getSale() + "");
+                oldTotalPeice.setText("￥" + playEntity.getSale());
+                //动态添加数据进行数据适配
+                oldTotalPeiceLine.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                    @Override
+                    public void onGlobalLayout() {
+                        oldTotalPeiceLine.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        int oldWidth = oldTotalPeice.getWidth();
+                        ViewGroup.LayoutParams params = oldTotalPeiceLine.getLayoutParams();
+                        params.width = oldWidth + (oldWidth / 10) * 2;
+                        oldTotalPeiceLine.setLayoutParams(params);
+                    }
+                });
+
                 authorIntroduce.setText(playEntity.getSummary());
                 //这里是用于显示多于两行时就初始化显示两行
                 authorIntroduce.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -155,6 +170,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                         });
                     }
                 });
+
                 //填充购买须知数据
                 buyDes.setText(playEntity.getBuydesc());
                 goodsListView.setAdapter(new PlayMethodDetailGoodlistAdapter(listData));
@@ -296,7 +312,7 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
             } else {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("id", houseId);
-                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new CollectResultBean().setTag(getClass().getName()+"cancel"), map);
+                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new CollectResultBean().setTag(getClass().getName() + "cancel"), map);
             }
 
         } else {
@@ -380,5 +396,16 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
     void finishActivity() {
         ((Activity) mContext).finish();
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
+    }
+
+    //达人经验
+    @OnClick(R.id.ll_good_method_exprice_into)
+    void intoExprice() {
+        Intent intent = new Intent(mContext, GoodDetailIntroduceActivity.class);
+        intent.putExtra("goodId", houseId);
+        intent.putExtra("field", "experience");
+        intent.putExtra("type", "2");
+        mContext.startActivity(intent);
+        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
 }

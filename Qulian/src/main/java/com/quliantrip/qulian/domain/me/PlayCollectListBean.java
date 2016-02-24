@@ -38,6 +38,7 @@ public class PlayCollectListBean extends BaseJson{
     }
 
     public static class DataEntity {
+        private String houseid;
         private String id;
         private String type;
         private String is_del;
@@ -56,6 +57,23 @@ public class PlayCollectListBean extends BaseJson{
         private String proce;
         private String imgs;
         private boolean ischeck = false;
+        private boolean isRefresh =  true;
+
+        public boolean isRefresh() {
+            return isRefresh;
+        }
+
+        public void setIsRefresh(boolean isRefresh) {
+            this.isRefresh = isRefresh;
+        }
+
+        public String getHouseid() {
+            return houseid;
+        }
+
+        public void setHouseid(String houseid) {
+            this.houseid = houseid;
+        }
 
         public boolean ischeck() {
             return ischeck;

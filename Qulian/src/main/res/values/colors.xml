@@ -15,6 +15,9 @@
     <color name="main_gray">#9A9A9A</color>
     <color name="black">#000000</color>
 
+    <!--登录按钮背景颜色-->
+    <color name="login_bg_color">#646464</color>
+
     <!--popupwindow弹出后的背景色-->
     <color name="popup_main_background">#b0000000</color>
     <color name="white40">#40FFFFFF</color>

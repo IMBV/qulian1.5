@@ -25,7 +25,6 @@ import butterknife.OnClick;
  */
 public class ChangePasswordFragment extends BaseFragment {
     private View view;
-
     @Bind(R.id.cet_old_password)
     ClearEditText oldPassword;
     @Bind(R.id.cet_new_password)
@@ -56,25 +55,24 @@ public class ChangePasswordFragment extends BaseFragment {
             return;
         }
         if (confirdPas.equals(newPas)) {
-            ToastUtil.showToast(mContext,"这里还不行还没有同步tonkey的值");
 //            //修改密码
-//            Map<String, String> map = new HashMap<String, String>();
-//            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-//            map.put("old_pass", oldPas);
-//            map.put("new_pass", newPas);
-//            map.put("check_pass", confirdPas);
-//            new PacketStringReQuest(HttpConstants.MY_USER_CHANG_PASSWORD, new HintInfoBean().setTag(getClass().getName()), map, null);
+            Map<String, String> map = new HashMap<>();
+            map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+            map.put("old_pass", oldPas);
+            map.put("new_pass", newPas);
+            map.put("check_pass", confirdPas);
+            new PacketStringReQuest(HttpConstants.MY_USER_CHANG_PASSWORD, new HintInfoBean().setTag(getClass().getName()), map, null);
         } else {
             ToastUtil.showToast(mContext, "密码前后输入不一致");
         }
     }
-
     //接收数据
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200){
                 //成果的结果
+                ToastUtil.showToast(mContext,hintInfoBean.getMsg());
             }else{
                 ToastUtil.showToast(mContext,hintInfoBean.getMsg());
             }

@@ -48,9 +48,20 @@ public class PlayMethodOrderDetailBean extends BaseJson{
         private String price;
         private String service;
         private String is_use;
+        private String is_pay;
         private String title;
+        @SerializedName("class")
+        private String classX;
+        private String total_price;
+        private String pay_time;
+        private String isuse_time;
+        private String order_status;
+        private String lxname;
+        private String tel;
+        private String address;
         @SerializedName("package")
         private String packageX;
+        private String isorder;
 
         public void setId(String id) {
             this.id = id;
@@ -84,12 +95,52 @@ public class PlayMethodOrderDetailBean extends BaseJson{
             this.is_use = is_use;
         }
 
+        public void setIs_pay(String is_pay) {
+            this.is_pay = is_pay;
+        }
+
         public void setTitle(String title) {
             this.title = title;
         }
 
+        public void setClassX(String classX) {
+            this.classX = classX;
+        }
+
+        public void setTotal_price(String total_price) {
+            this.total_price = total_price;
+        }
+
+        public void setPay_time(String pay_time) {
+            this.pay_time = pay_time;
+        }
+
+        public void setIsuse_time(String isuse_time) {
+            this.isuse_time = isuse_time;
+        }
+
+        public void setOrder_status(String order_status) {
+            this.order_status = order_status;
+        }
+
+        public void setLxname(String lxname) {
+            this.lxname = lxname;
+        }
+
+        public void setTel(String tel) {
+            this.tel = tel;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
         public void setPackageX(String packageX) {
             this.packageX = packageX;
+        }
+
+        public void setIsorder(String isorder) {
+            this.isorder = isorder;
         }
 
         public String getId() {
@@ -124,12 +175,52 @@ public class PlayMethodOrderDetailBean extends BaseJson{
             return is_use;
         }
 
+        public String getIs_pay() {
+            return is_pay;
+        }
+
         public String getTitle() {
             return title;
         }
 
+        public String getClassX() {
+            return classX;
+        }
+
+        public String getTotal_price() {
+            return total_price;
+        }
+
+        public String getPay_time() {
+            return pay_time;
+        }
+
+        public String getIsuse_time() {
+            return isuse_time;
+        }
+
+        public String getOrder_status() {
+            return order_status;
+        }
+
+        public String getLxname() {
+            return lxname;
+        }
+
+        public String getTel() {
+            return tel;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
         public String getPackageX() {
             return packageX;
+        }
+
+        public String getIsorder() {
+            return isorder;
         }
     }
 }

@@ -35,8 +35,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center">
 
                     <TextView
@@ -70,8 +70,9 @@
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:background="#fbf9f8" />
-    <!--顶部的输入框-->
-    <RelativeLayout
+
+    <!--顶部的输入框样式-->
+    <LinearLayout
         android:id="@+id/ll_home_title"
         android:layout_width="match_parent"
         android:layout_height="28dp"
@@ -79,11 +80,12 @@
         android:background="@android:color/transparent"
         android:gravity="center_horizontal">
         <!--定位地区的图片-->
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl_city_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="20">
 
             <TextView
                 android:id="@+id/iv_home_title_location"
@@ -94,17 +96,15 @@
                 android:id="@+id/iv_home_title_arrow"
                 android:layout_width="11dp"
                 android:layout_height="11dp"
-                android:layout_centerInParent="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/iv_home_title_location"
                 android:src="@mipmap/up_jiantou" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/iv_home_secnic_play_search"
-            android:layout_width="233dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="74dp"
+            android:layout_weight="65"
             android:background="@drawable/shape_oval_corner"
             android:gravity="center_vertical">
 
@@ -124,13 +124,17 @@
                 android:textSize="12sp" />
         </LinearLayout>
         <!--扫码的图片-->
-        <ImageView
-            android:id="@+id/iv_home_title_wifi"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/iv_home_secnic_play_search"
-            android:src="@mipmap/scan_code" />
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_home_title_wifi"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@mipmap/scan_code" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

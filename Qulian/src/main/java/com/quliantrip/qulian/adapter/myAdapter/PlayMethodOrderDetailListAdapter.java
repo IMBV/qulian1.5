@@ -39,6 +39,8 @@ public class PlayMethodOrderDetailListAdapter extends BasicAdapter<PlayMethodOrd
         PlayMethodOrderDetailBean.DataEntity bean = list.get(position);
 
         holder.number.setText(bean.getOrder_code());
+        holder.isOrder.setText(bean.getIsorder());
+
         holder.name.setText(bean.getTitle());
         holder.taocan.setText(bean.getPackageX());
         holder.dataTime.setText(sdf.format(new Date(Integer.valueOf(bean.getDate()) * 1000L)) + " " + bean.getService());
@@ -48,7 +50,10 @@ public class PlayMethodOrderDetailListAdapter extends BasicAdapter<PlayMethodOrd
 
     static class Holder {
         @Bind(R.id.tv_play_method_good_order_number)
-        TextView number;
+        TextView number;//单品的名称
+        @Bind(R.id.iv_play_method_isorder)
+        TextView isOrder;
+
         @Bind(R.id.tv_play_method_order_good_name)
         TextView name;
         @Bind(R.id.tv_play_method_order_good_taocan)
@@ -57,6 +62,7 @@ public class PlayMethodOrderDetailListAdapter extends BasicAdapter<PlayMethodOrd
         TextView dataTime;
         @Bind(R.id.tv_play_method_order_good_num)
         TextView num;
+
 
         public Holder(View convertView) {
             super();

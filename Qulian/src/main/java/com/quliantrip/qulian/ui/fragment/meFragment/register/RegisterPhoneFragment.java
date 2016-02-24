@@ -35,7 +35,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by yuly on 2016/1/5.
  * 手机注册
  */
 public class RegisterPhoneFragment extends BaseDialogFragment {
@@ -89,9 +88,7 @@ public class RegisterPhoneFragment extends BaseDialogFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && (this.getClass().getName() + "mobile").equals(bean.getTag())) {
             MoBileBean moBileBean = (MoBileBean) bean;
-            if (moBileBean.getCode() == 200)
-                checkNum.setText(moBileBean.getData());
-            else
+            if (moBileBean.getCode() != 200)
                 ToastUtil.showToast(mContext, moBileBean.getMsg());
         }
         if (bean != null && (this.getClass().getName() + "psignup").equals(bean.getTag())) {

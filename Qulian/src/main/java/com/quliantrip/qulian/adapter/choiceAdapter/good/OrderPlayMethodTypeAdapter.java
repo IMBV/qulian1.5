@@ -44,7 +44,7 @@ public class OrderPlayMethodTypeAdapter extends BasicAdapter<PlayMethodOrderSubm
         PlayMethodOrderSubmitBean.DataEntity.AttributeEntity bean = list.get(position);
         if (bean.getId().equals(checkedId)) {
             holder.name.setBackground(CommonHelp.getDrawable(R.drawable.cnb_taocan));
-            holder.name.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));
+            holder.name.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
         } else {
             holder.name.setBackground(CommonHelp.getDrawable(R.drawable.shape_text_right_angle));
             holder.name.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));

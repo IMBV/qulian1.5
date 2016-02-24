@@ -29,7 +29,7 @@ public class MyPlaymethodOrderDetailActivity extends SwipeBackActivity {
         Bundle bundle = getIntent().getExtras();
         playMethodOrderDetailFragment.setArguments(bundle);
         playOrdernumber = bundle.getString("playOrdernumber");
-        setTitle(playOrdernumber);
+        setTitle("订单组号："+playOrdernumber);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,playMethodOrderDetailFragment ).commit();
     }
 

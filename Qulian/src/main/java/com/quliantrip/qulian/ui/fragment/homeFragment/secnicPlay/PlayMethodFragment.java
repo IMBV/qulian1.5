@@ -31,6 +31,8 @@ public class PlayMethodFragment extends Fragment {
     private Context mContext;
     private List<SecnicPlayResultBean.DataEntity.RuleEntity> rule;
     private View view;
+    private SearchPlayMethodListAdapter searchPlayMethodListAdapter;
+
     @Bind(R.id.lv_home_play_method_fragment_list)
     ListView listView;
     @Bind(R.id.rl_pager_empty)
@@ -44,7 +46,7 @@ public class PlayMethodFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_home_play_method, null);
         ButterKnife.bind(this, view);
         iniiListView();
@@ -58,7 +60,7 @@ public class PlayMethodFragment extends Fragment {
         } else {
             empty.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
-            SearchPlayMethodListAdapter searchPlayMethodListAdapter = new SearchPlayMethodListAdapter((ArrayList<SecnicPlayResultBean.DataEntity.RuleEntity>) rule);
+            searchPlayMethodListAdapter = new SearchPlayMethodListAdapter((ArrayList<SecnicPlayResultBean.DataEntity.RuleEntity>) rule);
             listView.setAdapter(searchPlayMethodListAdapter);
             listView.setDivider(new ColorDrawable(Color.WHITE));
             listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));

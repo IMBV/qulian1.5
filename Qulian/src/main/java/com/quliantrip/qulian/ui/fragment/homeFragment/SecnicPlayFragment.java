@@ -32,7 +32,7 @@ public class SecnicPlayFragment extends BaseViewPagerFragment {
         // 玩法
         adapter.addTab(title[1], "play_method", PlayMethodFragment.class, getBundle(dataEntity));
         // 景点
-        adapter.addTab(title[0], "secnic", SecnicFragment.class, getBundle(dataEntity));
+//        adapter.addTab(title[0], "secnic", SecnicFragment.class, getBundle(dataEntity));
         //设置选中的条目
         mViewPager.setCurrentItem(1);
     }

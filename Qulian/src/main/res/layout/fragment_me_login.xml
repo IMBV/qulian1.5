@@ -91,6 +91,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="44dp"
+            android:textColor="@color/login_bg_color"
+            android:textSize="18sp"
             android:background="@drawable/selector_bg_gray_yellow"
             android:text="登录" />
 
@@ -110,6 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="35dp"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout

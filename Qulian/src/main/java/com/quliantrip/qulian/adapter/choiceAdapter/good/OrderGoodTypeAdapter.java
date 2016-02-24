@@ -40,13 +40,14 @@ public class OrderGoodTypeAdapter extends BasicAdapter<OrderSubmitBean.DataEntit
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_good_order_type_list_item, null);
         }
         Holder holder = Holder.getHolder(convertView);
+
         OrderSubmitBean.DataEntity.AttributeEntity bean = list.get(position);
         if (bean.getId().equals(checkedId)) {
+            holder.name.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
             holder.name.setBackground(CommonHelp.getDrawable(R.drawable.cnb_taocan));
-            holder.name.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));
         } else {
-            holder.name.setBackground(CommonHelp.getDrawable(R.drawable.shape_text_right_angle));
             holder.name.setTextColor(CommonHelp.getColor(R.color.app_main_sub_title_text));
+            holder.name.setBackground(CommonHelp.getDrawable(R.drawable.shape_text_right_angle));
         }
         holder.name.setText(bean.getPackageX());
         return convertView;

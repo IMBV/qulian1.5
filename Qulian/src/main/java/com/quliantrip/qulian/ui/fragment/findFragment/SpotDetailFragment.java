@@ -2,12 +2,8 @@ package com.quliantrip.qulian.ui.fragment.findFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -21,7 +17,6 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.service.Iservice;
-import com.quliantrip.qulian.service.MusicService;
 import com.quliantrip.qulian.ui.activity.findActivity.SpotDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -38,11 +33,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 玩法详情页
+ * 景点详情页
  */
 public class SpotDetailFragment extends BasePageCheckFragment {
     private View view;
-    private AlertDialog dialog;//
+    private AlertDialog dialog;
+    private SpotDetailVoiceAdapter spotDetailVoiceAdapter;
 
     //轮播图与下面的小点
     private RollViewPage rollViewPage;
@@ -63,7 +59,7 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     private static SeekBar seekBar;
 
     //定义一个handler
-    public static Handler handler = new Handler(){
+    public static Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             //(1)获取我们封装的数据
             Bundle data = msg.getData();
@@ -73,33 +69,34 @@ public class SpotDetailFragment extends BasePageCheckFragment {
             //(2)设置seekbar的最大进度
             seekBar.setMax(duration);
             seekBar.setProgress(currentPosition); //设置当前进度
-        };
+        }
+
+        ;
     };
 
     @Override
     protected View getSuccessView() {
-
         view = View.inflate(mContext, R.layout.fragment_find_spot_method_detail, null);
         seekBar = (SeekBar) view.findViewById(R.id.seekbar_progress);
         ButterKnife.bind(this, view);
-        initRollView();
-
+        listView.setFocusable(false);
+        //添加音频播放时的滑动监听
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             //当拖动停止的时候调用
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //调用播放的指定位置的方法
                 if (iservice == null)
-                    iservice = ((SpotDetailActivity)mContext).getIservice();
+                    iservice = ((SpotDetailActivity) mContext).getIservice();
                 iservice.callSetSeekPosition(seekBar.getProgress());
-
-
             }
+
             //刚开始拖动调用
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
+
             //当进度发生改变的时候调用
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
@@ -109,7 +106,6 @@ public class SpotDetailFragment extends BasePageCheckFragment {
         });
         return view;
     }
-
 
     @Override
     protected QuestBean requestData() {
@@ -125,7 +121,21 @@ public class SpotDetailFragment extends BasePageCheckFragment {
             if (spotDetailBean.getCode() == 200) {
                 SpotDetailBean.DataEntity dataEntity = spotDetailBean.getData();
                 ((SpotDetailActivity) mContext).showOrHideBack(false);
-                listView.setAdapter(new SpotDetailVoiceAdapter((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) dataEntity.getVoicInfo()));
+                //添加基本信息
+                //轮播图
+                initRollView(dataEntity.getAttraction().getImgs());
+
+                //添加附近优惠的条目
+
+
+                //设置该景点的有的可以播放语音内容
+                if (spotDetailVoiceAdapter == null) {
+                    spotDetailVoiceAdapter = new SpotDetailVoiceAdapter((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) dataEntity.getVoicInfo());
+                    listView.setAdapter(spotDetailVoiceAdapter);
+                } else {
+                    spotDetailVoiceAdapter.updataList((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) dataEntity.getVoicInfo());
+                }
+
             } else {
                 ToastUtil.showToast(mContext, spotDetailBean.getMsg());
                 ((SpotDetailActivity) mContext).showOrHideBack(true);
@@ -135,7 +145,7 @@ public class SpotDetailFragment extends BasePageCheckFragment {
 
     //点击显示播放的语音的内容的文字部分
     @OnClick(R.id.iv_spot_detail_voice_text_des)
-    void showSpotDetailText(){
+    void showSpotDetailText() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setCancelable(true);
         View view = View.inflate(mContext, R.layout.layout_find_voice_play_text_content, null);
@@ -145,12 +155,13 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     }
 
     //初始化轮播图
-    private void initRollView() {
+    private void initRollView(String s) {
         imageList.clear();
         dotList.clear();
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed3a64400b.png");
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed3762c8e5.png");
-        imageList.add("http://www.quliantrip.com/public/attachment/201511/20/16/564ed327a6642.png");
+        String[] imges = s.split(",");
+        for (String img : imges) {
+            imageList.add(img);
+        }
         if (imageList.size() > 0) {
             //初始化小点
             initDoc();
@@ -208,7 +219,7 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     @OnClick(R.id.iv_spot_play_detail_anniu)
     void playDetail() {
         if (iservice == null)
-            iservice = ((SpotDetailActivity)mContext).getIservice();
+            iservice = ((SpotDetailActivity) mContext).getIservice();
         iservice.callPlayMusic();
     }
 }

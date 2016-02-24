@@ -1,5 +1,7 @@
 package com.quliantrip.qulian.adapter.myAdapter;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,26 +27,24 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * 玩法订单列表页
+ * 商品订单列表页
  */
 public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEntity> {
-    public GoodOrderListAdapter(ArrayList<GoodOrderListBean.DataEntity> list) {
+    private Context mContext;
+    private AlertDialog dialog;
+
+    public GoodOrderListAdapter(ArrayList<GoodOrderListBean.DataEntity> list,Context context) {
         super(list);
+        this.mContext = context;
     }
 
     private int delPosition;
-    public void remveItem(){
-        this.list.get(delPosition).setAfter_sale("1");
-        notifyDataSetChanged();
-    }
 
     public void updataList(ArrayList<GoodOrderListBean.DataEntity> list){
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
     }
-
-
     public void addItem(GoodOrderListBean.DataEntity s) {
         list.add(s);
     }
@@ -54,6 +54,7 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
         if (convertView == null) {
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_my_good_order_list_item, null);
         }
+
         Holder holder = Holder.getHolder(convertView);
         final GoodOrderListBean.DataEntity bean = list.get(position);
 
@@ -73,8 +74,11 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
                 ToastUtil.showToast(QulianApplication.getContext(), "稍后添加查看优惠券的功能");
             }
         });
-        if (bean.getAfter_sale().equals("0")) {
-            holder.stype.setText("正常");
+
+        if (bean.getPay_status().equals("0")&&bean.getOrder_status().equals("0")&&bean.getIs_use().equals("0")
+                ||bean.getPay_status().equals("1")&&bean.getOrder_status().equals("0")&&bean.getIs_use().equals("0")
+                ||bean.getPay_status().equals("1")&&bean.getOrder_status().equals("1")&&bean.getIs_use().equals("1")){
+            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.VISIBLE);
             convertView.findViewById(R.id.bt_good_order_cancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -84,17 +88,41 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
                     new PacketStringReQuest(HttpConstants.MY_ORDER_GOOD_CANCEL, new HintInfoBean().setTag(GoodOrderFragment.class.getName() + "delOrder"), map);
                 }
             });
-            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.VISIBLE);
-        }else {
+        }else{
             holder.stype.setText("已关闭");
             convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.GONE);
         }
+//        if (bean.getAfter_sale().equals("0")) {
+//            holder.stype.setText("正常");
+//            convertView.findViewById(R.id.bt_good_order_cancel).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Map<String, String> map = new HashMap<String, String>();
+//                    map.put("id", bean.getId());
+//                    delPosition = position;
+//                    new PacketStringReQuest(HttpConstants.MY_ORDER_GOOD_CANCEL, new HintInfoBean().setTag(GoodOrderFragment.class.getName() + "delOrder"), map);
+//                }
+//            });
+//            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.VISIBLE);
+//        }else {
+//            holder.stype.setText("已关闭");
+//            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.GONE);
+//        }
+
+        //设置订单的状态
+        holder.stype.setText(bean.getIsorder());
         convertView.findViewById(R.id.bt_good_order_link_daren).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(QulianApplication.getContext(), "稍后联系达人的功能");
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setCancelable(true);
+                View view = View.inflate(mContext, R.layout.layout_find_into_qun_grounp, null);
+                dialog = builder.create();
+                dialog.setView(view, 0, 0, 0, 0);
+                dialog.show();
             }
         });
+
         return convertView;
     }
 

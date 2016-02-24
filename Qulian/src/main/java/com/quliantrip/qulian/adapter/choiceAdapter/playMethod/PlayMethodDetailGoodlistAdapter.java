@@ -9,9 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodDetailBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.CommonHelp;
 
@@ -60,9 +62,9 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
             holder.taocao.setVisibility(View.VISIBLE);
             holder.taocao.setText("(" + bean.getMerchantname() + ")");
         }
-
+        ImageLoader.getInstance().displayImage(bean.getIcon_img(),holder.packageIcon, ImageLoaderOptions.pager_options);
         holder.des.setText(bean.getReason());
-        holder.price.setText("￥ "+bean.getProce());
+        holder.price.setText("￥"+bean.getProce());
         return convertView;
     }
 
@@ -75,8 +77,8 @@ public class PlayMethodDetailGoodlistAdapter extends BasicAdapter<PlayMethodDeta
         TextView des;
         @Bind(R.id.tv_play_method_detail_price)
         TextView price;
-
-
+        @Bind(R.id.iv_play_method_package_icon)
+        ImageView packageIcon;
         @Bind(R.id.ll_paly_method_good)
         LinearLayout playMethod;
         @Bind(R.id.v_item_line)

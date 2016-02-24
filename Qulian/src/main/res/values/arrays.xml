@@ -28,4 +28,16 @@
         <item>已使用</item>
         <item>已过期</item>
     </string-array>
+
+    <!--选择男女-->
+    <string-array name="my_link_man_sex">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+    <!--选择证件类型-->
+    <string-array name="my_link_man_certificate_type">
+        <item>护照</item>
+        <item>身份证</item>
+    </string-array>
 </resources>

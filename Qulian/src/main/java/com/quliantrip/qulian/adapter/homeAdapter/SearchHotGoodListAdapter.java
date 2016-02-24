@@ -11,6 +11,7 @@ import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.ArrayList;
 
@@ -32,10 +33,11 @@ public class SearchHotGoodListAdapter extends BasicAdapter<SecnicPlayResultBean.
         }
         Holder holder = Holder.getHolder(convertView);
         final SecnicPlayResultBean.DataEntity.WareEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0] , holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0] +"?imageView2/1/w/"+ CommonHelp.dip2px(QulianApplication.getContext(), 280)+"/h/"+
+                CommonHelp.dip2px(QulianApplication.getContext(),188), holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getName());
         holder.isCollect.setVisibility(View.INVISIBLE);
-        holder.newPrice.setText("￥" + bean.getProce());
+        holder.newPrice.setText("￥"+ bean.getProce());
         holder.oldPrice.setText("￥"+bean.getSale());
         holder.locationDiscount.setText(bean.getChinese_name()+" · "+bean.getMeter());
         return convertView;

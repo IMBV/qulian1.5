@@ -60,8 +60,7 @@ public class VoiceSquareBean extends BaseJson {
             private String id;
             private String scenic;
             private String escenic;
-            private String mimg;
-            private String area;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
@@ -75,12 +74,8 @@ public class VoiceSquareBean extends BaseJson {
                 this.escenic = escenic;
             }
 
-            public void setMimg(String mimg) {
-                this.mimg = mimg;
-            }
-
-            public void setArea(String area) {
-                this.area = area;
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
             }
 
             public String getId() {
@@ -95,12 +90,8 @@ public class VoiceSquareBean extends BaseJson {
                 return escenic;
             }
 
-            public String getMimg() {
-                return mimg;
-            }
-
-            public String getArea() {
-                return area;
+            public String getImgs() {
+                return imgs;
             }
         }
     }

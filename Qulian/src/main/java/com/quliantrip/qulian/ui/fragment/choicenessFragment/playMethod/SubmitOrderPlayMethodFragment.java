@@ -75,11 +75,9 @@ public class SubmitOrderPlayMethodFragment extends BasePageCheckFragment {
                 goodList = (ArrayList<PlayMethodOrderSubmitBean.DataEntity>) playMethodOrderSubmitBean.getData();
                 playMethodOrderGoodlistAdapter = new PlayMethodOrderGoodlistAdapter(goodList, mContext,this);
                 listView.setAdapter(playMethodOrderGoodlistAdapter);
-
                 //设置listView之间的间距
                 listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
                 listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
-
                 getTotalPrice();
 
             } else {

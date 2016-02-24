@@ -34,8 +34,7 @@ public class VoiceSquareSecnicGridViewAdapter extends BasicAdapter<VoiceSquareBe
         Holder holder = Holder.getHolder(convertView);
         VoiceSquareBean.DataEntity.ChildEntity bean = list.get(position);
         holder.name.setText(bean.getScenic());
-
-        ImageLoader.getInstance().displayImage(bean.getMimg(), holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
         return convertView;
     }
 

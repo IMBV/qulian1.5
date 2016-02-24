@@ -12,6 +12,7 @@ import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
     public HotGoodListAdapter(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
         super(list);
     }
+
     public void updateListView(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
         this.list.clear();
         this.list.addAll(list);
@@ -38,29 +40,32 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
         }
         final Holder holder = Holder.getHolder(convertView);
         final HotGoodBean.DataEntity.OnlineEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImg().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImg().split(",")[0] + "?imageView2/1/w/" + CommonHelp.dip2px(QulianApplication.getContext(), 280) + "/h/" +
+                CommonHelp.dip2px(QulianApplication.getContext(), 188), holder.img, ImageLoaderOptions.pager_options);
+
         if (bean.isIs_house()) {
             holder.isCollect.setVisibility(View.VISIBLE);
         } else {
             holder.isCollect.setVisibility(View.GONE);
         }
+
         holder.name.setText(bean.getName());
-        holder.newPrice.setText("￥"+bean.getProce());
-        holder.locationDiscount.setText(bean.getChinese_name()+" · "+bean.getMeter());
-        holder.oldPrice.setText("￥ "+bean.getSale());
+        holder.newPrice.setText("￥" + bean.getProce());
+        holder.locationDiscount.setText(bean.getChinese_name() + " · " + bean.getMeter());
+        holder.oldPrice.setText("￥" + bean.getSale());
 
-        if (holder.oldPriceLine.getWidth() != holder.oldPrice.getWidth() + 10)
-        holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        if (holder.oldPriceLine.getWidth() != holder.oldPrice.getWidth() + (holder.oldPrice.getWidth() * 10) * 2)
+            holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-                    @Override
-                    public void onGlobalLayout() {
-                        holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        int oldWidth = holder.oldPrice.getWidth();
-                        ViewGroup.LayoutParams params = holder.oldPriceLine.getLayoutParams();
-                        params.width = oldWidth + 10;
-                        holder.oldPriceLine.setLayoutParams(params);
-                    }
-                });
+                @Override
+                public void onGlobalLayout() {
+                    holder.oldPrice.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    int oldWidth = holder.oldPrice.getWidth();
+                    ViewGroup.LayoutParams params = holder.oldPriceLine.getLayoutParams();
+                    params.width = oldWidth + (oldWidth / 10) * 2;
+                    holder.oldPriceLine.setLayoutParams(params);
+                }
+            });
         return convertView;
     }
 

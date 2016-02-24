@@ -1,6 +1,6 @@
 package com.quliantrip.qulian.ui.fragment.meFragment.orderFragment.good;
 
-import android.content.Context;
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +20,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 订单详情页
@@ -38,9 +39,16 @@ public class GoodOrderDetailFragment extends BasePageCheckFragment {
     TextView buyNumber;
     @Bind(R.id.tv_good_order_evert_price)
     TextView price;
-
     @Bind(R.id.tv_good_order_taocan_name)
     TextView taocanName;
+
+    @Bind(R.id.tv_good_order_detail_num)
+    TextView num;
+
+    @Bind(R.id.tv_order_user_stype)
+    TextView stype;//订单的状态
+    @Bind(R.id.tv_good_order_total_price)
+    TextView totalPrice;//订单总价
 
     @Override
     protected View getSuccessView() {
@@ -67,10 +75,27 @@ public class GoodOrderDetailFragment extends BasePageCheckFragment {
                 name.setText(goodOrderDetailBean.getData().getName());
                 buyNumber.setText("数量：" + goodOrderDetailBean.getData().getNum());
                 price.setText("单价：" + goodOrderDetailBean.getData().getPrice());
+
+                num.setText(goodOrderDetailBean.getData().getNum());
+                orderNumber.setText(goodOrderDetailBean.getData().getNum());//
                 taocanName.setText(goodOrderDetailBean.getData().getPackageX());
+                stype.setText(goodOrderDetailBean.getData().getIsorder());
+                totalPrice.setText(goodOrderDetailBean.getData().getTotal_price());
             } else {
                 ToastUtil.showToast(mContext, goodOrderDetailBean.getMsg());
             }
         }
+    }
+
+    //点击添加联系达人
+    @OnClick(R.id.tv_good_order_detail_link_daren)
+    void linkDaren(){
+        AlertDialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setCancelable(true);
+        View view = View.inflate(mContext, R.layout.layout_find_into_qun_grounp, null);
+        dialog = builder.create();
+        dialog.setView(view, 0, 0, 0, 0);
+        dialog.show();
     }
 }

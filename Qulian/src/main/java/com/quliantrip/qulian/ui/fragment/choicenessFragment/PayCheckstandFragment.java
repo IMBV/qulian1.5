@@ -142,10 +142,15 @@ public class PayCheckstandFragment extends SwipeBackActivity {
             req.packageValue = weiXinRePay.getPackageX();
             req.sign = weiXinRePay.getSign();
             api.sendReq(req);
-            cancelDialog();
         } catch (Exception e) {
             Toast.makeText(mContext, "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cancelDialog();
     }
 
     //进行选择图片的切换

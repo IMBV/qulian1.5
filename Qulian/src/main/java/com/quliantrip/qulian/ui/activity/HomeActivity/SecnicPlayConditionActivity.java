@@ -55,8 +55,7 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         secnicPlayConditionFragment = new SecnicPlayConditionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayConditionFragment).commit();
         initTextListener();
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     //添加数值的监听

@@ -12,7 +12,7 @@
             android:id="@+id/lv_home_function_play_one_img"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_wanfa" />
+            android:src="@mipmap/bg_default_min" />
 
         <TextView
             android:id="@+id/tv_home_function_play_one_name"
@@ -27,14 +27,13 @@
 
     <LinearLayout
         android:id="@+id/ll_home_function_play_two"
-        style="@style/home_function_every"
-        android:layout_marginLeft="45dp">
+        style="@style/home_function_every">
 
         <ImageView
             android:id="@+id/lv_home_function_play_two_img"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_meishi" />
+            android:src="@mipmap/bg_default_min" />
 
         <TextView
             android:id="@+id/tv_home_function_play_two_name"
@@ -49,14 +48,13 @@
 
     <LinearLayout
         android:id="@+id/ll_home_function_play_three"
-        style="@style/home_function_every"
-        android:layout_marginLeft="45dp">
+        style="@style/home_function_every">
 
         <ImageView
             android:id="@+id/lv_home_function_play_three_img"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_menpiao" />
+            android:src="@mipmap/bg_default_min" />
 
         <TextView
             android:id="@+id/tv_home_function_play_three_name"
@@ -71,14 +69,13 @@
 
     <LinearLayout
         android:id="@+id/ll_home_function_play_four"
-        style="@style/home_function_every"
-        android:layout_marginLeft="45dp">
+        style="@style/home_function_every">
 
         <ImageView
             android:id="@+id/lv_home_function_play_four_img"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@mipmap/fenlei_jiaotong" />
+            android:src="@mipmap/bg_default_min" />
 
         <TextView
             android:id="@+id/tv_home_function_play_four_name"

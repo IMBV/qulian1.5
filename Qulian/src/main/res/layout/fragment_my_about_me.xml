@@ -42,7 +42,7 @@
             android:text="官方微信" />
 
         <TextView
-            style="@style/text_main_title_tytle_14"
+            style="@style/text_main_sub_title_14"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:text="qltrip" />
@@ -63,7 +63,7 @@
             android:text="官方微博" />
 
         <TextView
-            style="@style/text_main_title_tytle_14"
+            style="@style/text_main_sub_title_14"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:text="趣连旅行" />
@@ -84,10 +84,10 @@
             android:text="官方网站" />
 
         <TextView
-            style="@style/text_main_title_tytle_14"
+            style="@style/text_main_sub_title_14"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:text="www.about.quliantrip.com" />
+            android:text="about.quliantrip.com" />
     </RelativeLayout>
 
     <View
@@ -105,10 +105,32 @@
             android:text="客服电话" />
 
         <TextView
-            style="@style/text_main_title_tytle_14"
+            style="@style/text_main_sub_title_14"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:text="+86-(0)10-53683169" />
+    </RelativeLayout>
+
+    <View
+        style="@style/dev_all_line"
+        android:layout_marginLeft="15dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_main_app_title_16"
+            android:text="公司邮箱" />
+
+        <TextView
+            style="@style/text_main_sub_title_14"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="company@quliantrip.com" />
     </RelativeLayout>
 
     <View
@@ -122,26 +144,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="15dp"
             android:gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/app_main_sub_title_text"
-                android:textSize="11sp"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="5dp"
-                android:text="北京趣连科技有限公司  版权所有" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/app_main_sub_title_text"
-                android:textSize="10sp"
                 android:layout_alignParentRight="true"
-                android:text="Copyright © 2015-2016 quliantrip.com.All rights reserved" />
+                android:layout_marginBottom="5dp"
+                android:text="北京趣连科技有限公司  版权所有"
+                android:textColor="@color/app_main_sub_title_text"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Copyright © 2015-2016 quliantrip.com.All rights reserved"
+                android:textColor="@color/app_main_sub_title_text"
+                android:textSize="10sp" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

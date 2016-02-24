@@ -2,23 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         android:orientation="vertical">
 
-        <View
-            style="@style/dev_all_line"
-            android:layout_marginLeft="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_marginLeft="15dp"
             android:gravity="center_vertical"
-            android:text="热门城市"
+            android:text="热门搜索"
             android:textColor="@color/app_main_sub_title_text"
             android:textSize="12sp" />
 
@@ -38,7 +34,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="37dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
             android:gravity="center_vertical"
             android:text="历史搜索"
@@ -53,6 +48,8 @@
             android:id="@+id/mlv_secnic_play_hosity_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:dividerHeight="0dp"
+            android:divider="@color/colorPrimary"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp" />
 
@@ -62,6 +59,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="25dp"
             android:text="清除历史记录"/>
     </LinearLayout>
 </ScrollView>

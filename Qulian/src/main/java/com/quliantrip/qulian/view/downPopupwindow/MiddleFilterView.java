@@ -42,7 +42,7 @@ public class MiddleFilterView extends RelativeLayout {
         inflater.inflate(R.layout.view_distance, this, true);
         mListView = (ListView) findViewById(R.id.listView);
         adapter = new TextAdapter(context, items, R.drawable.choose_eara_item_selector);
-        adapter.setTextSize(17);
+        adapter.setTextSize(14);
 
         mListView.setAdapter(adapter);
         adapter.setOnItemClickListener(new TextAdapter.OnItemClickListener() {

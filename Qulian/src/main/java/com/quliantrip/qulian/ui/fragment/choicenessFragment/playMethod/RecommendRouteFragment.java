@@ -231,11 +231,10 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             if (playMethodListAdapter == null) {
                 playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
                 listView.setAdapter(playMethodListAdapter);
-                listView.setDivider(new ColorDrawable(Color.WHITE));
-                listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
+//                listView.setDivider(new ColorDrawable(Color.WHITE));
+//                listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
             } else {
                 playMethodListAdapter.updataListView((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
-
             }
 
             //条目点击事件

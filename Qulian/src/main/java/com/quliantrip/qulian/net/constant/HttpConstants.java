@@ -109,7 +109,4 @@ public class HttpConstants {
     //用户意见反馈
     public static final String MY_USER_FEED_BACK = HOST_ADDR_ROOT_LOCAL_V1 + "user/feedback";
 
-
-
-
 }

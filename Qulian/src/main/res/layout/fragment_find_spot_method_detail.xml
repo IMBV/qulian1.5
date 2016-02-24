@@ -107,8 +107,6 @@
                             android:text="上野浅草情路半日休闲吃喝玩乐游"
                             android:textColor="@color/app_main_title"
                             android:textSize="14sp" />
-
-
                     </LinearLayout>
 
                     <LinearLayout

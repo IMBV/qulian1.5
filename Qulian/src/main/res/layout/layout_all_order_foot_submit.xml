@@ -35,7 +35,7 @@
                 android:layout_marginRight="10dp"
                 android:text="￥446.00"
                 android:textColor="@color/app_main_price_text"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <Button
@@ -45,7 +45,7 @@
             android:background="@drawable/shape_btn_right_yellow"
             android:text="提交订单"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

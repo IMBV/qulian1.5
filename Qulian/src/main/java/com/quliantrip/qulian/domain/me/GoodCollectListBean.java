@@ -80,19 +80,35 @@ public class GoodCollectListBean extends BaseJson{
         }
 
         public static class HouseEntity {
-            private String id;
+            private String houseid;
             private String type;
             private String is_del;
+            private String id;
             private String name;
-            private String img;
-            private String city;
             private String meter;
-            private String chinese_name;
             private String sale;
             private String proce;
             private double agio;
             private String imgs;
+            private String chinese_name;
             private boolean ischeck = false;
+            private boolean isRefresh = true;
+
+            public String getChinese_name() {
+                return chinese_name;
+            }
+
+            public void setChinese_name(String chinese_name) {
+                this.chinese_name = chinese_name;
+            }
+
+            public boolean isRefresh() {
+                return isRefresh;
+            }
+
+            public void setIsRefresh(boolean isRefresh) {
+                this.isRefresh = isRefresh;
+            }
 
             public boolean ischeck() {
                 return ischeck;
@@ -102,8 +118,8 @@ public class GoodCollectListBean extends BaseJson{
                 this.ischeck = ischeck;
             }
 
-            public void setId(String id) {
-                this.id = id;
+            public void setHouseid(String houseid) {
+                this.houseid = houseid;
             }
 
             public void setType(String type) {
@@ -114,24 +130,16 @@ public class GoodCollectListBean extends BaseJson{
                 this.is_del = is_del;
             }
 
+            public void setId(String id) {
+                this.id = id;
+            }
+
             public void setName(String name) {
                 this.name = name;
             }
 
-            public void setImg(String img) {
-                this.img = img;
-            }
-
-            public void setCity(String city) {
-                this.city = city;
-            }
-
             public void setMeter(String meter) {
                 this.meter = meter;
-            }
-
-            public void setChinese_name(String chinese_name) {
-                this.chinese_name = chinese_name;
             }
 
             public void setSale(String sale) {
@@ -150,8 +158,8 @@ public class GoodCollectListBean extends BaseJson{
                 this.imgs = imgs;
             }
 
-            public String getId() {
-                return id;
+            public String getHouseid() {
+                return houseid;
             }
 
             public String getType() {
@@ -162,24 +170,16 @@ public class GoodCollectListBean extends BaseJson{
                 return is_del;
             }
 
+            public String getId() {
+                return id;
+            }
+
             public String getName() {
                 return name;
             }
 
-            public String getImg() {
-                return img;
-            }
-
-            public String getCity() {
-                return city;
-            }
-
             public String getMeter() {
                 return meter;
-            }
-
-            public String getChinese_name() {
-                return chinese_name;
             }
 
             public String getSale() {

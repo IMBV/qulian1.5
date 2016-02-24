@@ -36,11 +36,11 @@ import butterknife.ButterKnife;
  */
 public class PlayMethodOrderFragment extends BasePageCheckFragment {
     private View view;
+    private  PlayMethodOrderListAdapter playMethodOrderListAdapter;
 
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
     protected ListView listView;
-
 
     @Override
     protected View getSuccessView() {
@@ -53,9 +53,6 @@ public class PlayMethodOrderFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
-        map.put("pay_status", "");
-        map.put("order_status", "");
-        map.put("is_use", "");
         return new QuestBean(map, new PlayMethodOrderBean().setTag(getClass().getName()), HttpConstants.ME_ORDER_PLAY_METHOD_LIST);
     }
 
@@ -78,7 +75,7 @@ public class PlayMethodOrderFragment extends BasePageCheckFragment {
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
 
-        final PlayMethodOrderListAdapter playMethodOrderListAdapter = new PlayMethodOrderListAdapter((ArrayList<PlayMethodOrderBean.DataEntity>) list);
+        playMethodOrderListAdapter = new PlayMethodOrderListAdapter((ArrayList<PlayMethodOrderBean.DataEntity>) list);
         listView.setAdapter(playMethodOrderListAdapter);
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.app_main_bg)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));

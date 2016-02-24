@@ -110,7 +110,6 @@ public class ChoicenessFragment extends Fragment {
         lightAndScaleTitle();
     }
 
-
     private void lightAndScaleTitle() {
         final int currentPage = viewPager.getCurrentItem();
         routeText.setTextColor(getResources().getColor(currentPage == 0 ? R.color.app_main_collor : R.color.app_main_title_text));

@@ -185,14 +185,17 @@ public class SecnicPlayResultBean extends BaseJson {
         }
 
         public static class RuleEntity implements Serializable{
-
             private String id;
             private String name;
             private String title;
+            private String img;
             private String summary;
+            private String min_price;
             private String buynum;
+            private String sequence;
             private String username;
             private String head_img;
+            private String region;
             private String sale;
             private String proce;
             private String imgs;
@@ -209,12 +212,24 @@ public class SecnicPlayResultBean extends BaseJson {
                 this.title = title;
             }
 
+            public void setImg(String img) {
+                this.img = img;
+            }
+
             public void setSummary(String summary) {
                 this.summary = summary;
             }
 
+            public void setMin_price(String min_price) {
+                this.min_price = min_price;
+            }
+
             public void setBuynum(String buynum) {
                 this.buynum = buynum;
+            }
+
+            public void setSequence(String sequence) {
+                this.sequence = sequence;
             }
 
             public void setUsername(String username) {
@@ -223,6 +238,10 @@ public class SecnicPlayResultBean extends BaseJson {
 
             public void setHead_img(String head_img) {
                 this.head_img = head_img;
+            }
+
+            public void setRegion(String region) {
+                this.region = region;
             }
 
             public void setSale(String sale) {
@@ -249,12 +268,24 @@ public class SecnicPlayResultBean extends BaseJson {
                 return title;
             }
 
+            public String getImg() {
+                return img;
+            }
+
             public String getSummary() {
                 return summary;
             }
 
+            public String getMin_price() {
+                return min_price;
+            }
+
             public String getBuynum() {
                 return buynum;
+            }
+
+            public String getSequence() {
+                return sequence;
             }
 
             public String getUsername() {
@@ -263,6 +294,10 @@ public class SecnicPlayResultBean extends BaseJson {
 
             public String getHead_img() {
                 return head_img;
+            }
+
+            public String getRegion() {
+                return region;
             }
 
             public String getSale() {

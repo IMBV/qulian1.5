@@ -31,7 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * 优惠券
+ * 主页优惠券展示显示
  */
 public class DiscountFragment extends BasePageCheckFragment {
     private View view;

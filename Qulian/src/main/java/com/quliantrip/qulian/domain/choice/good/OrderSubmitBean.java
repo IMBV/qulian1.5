@@ -130,14 +130,10 @@ public class OrderSubmitBean extends BaseJson {
         }
 
         public static class BranchnameEntity {
-
-            private String address;
             private String id;
             private String name;
-
-            public void setAddress(String address) {
-                this.address = address;
-            }
+            private String images;
+            private String address;
 
             public void setId(String id) {
                 this.id = id;
@@ -147,8 +143,12 @@ public class OrderSubmitBean extends BaseJson {
                 this.name = name;
             }
 
-            public String getAddress() {
-                return address;
+            public void setImages(String images) {
+                this.images = images;
+            }
+
+            public void setAddress(String address) {
+                this.address = address;
             }
 
             public String getId() {
@@ -157,6 +157,14 @@ public class OrderSubmitBean extends BaseJson {
 
             public String getName() {
                 return name;
+            }
+
+            public String getImages() {
+                return images;
+            }
+
+            public String getAddress() {
+                return address;
             }
         }
 

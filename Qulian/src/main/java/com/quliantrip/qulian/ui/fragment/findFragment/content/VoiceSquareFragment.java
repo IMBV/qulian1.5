@@ -27,6 +27,9 @@ import butterknife.ButterKnife;
 public class VoiceSquareFragment extends BasePageCheckFragment {
     private View view;
     private Context mContext;
+    //数据适配对象
+    private VoiceSquareListAdapter voiceSquareListAdapter;
+
     @Bind(R.id.lv_voicequare_list)
     ListView listView;
 
@@ -46,7 +49,7 @@ public class VoiceSquareFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("city", "21000000");
+        map.put("city", "21410000");
         return new QuestBean(map, new VoiceSquareBean().setTag(getClass().getName()), HttpConstants.VOICE_SQUARE_LIST);
     }
 
@@ -55,7 +58,12 @@ public class VoiceSquareFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             VoiceSquareBean voiceSquareBean = (VoiceSquareBean) bean;
             if (((VoiceSquareBean) bean).getCode() == 200) {
-                listView.setAdapter(new VoiceSquareListAdapter((ArrayList<VoiceSquareBean.DataEntity>)voiceSquareBean.getData(),mContext));
+                if (voiceSquareListAdapter == null) {
+                    voiceSquareListAdapter = new VoiceSquareListAdapter((ArrayList<VoiceSquareBean.DataEntity>) voiceSquareBean.getData(), mContext);
+                    listView.setAdapter(voiceSquareListAdapter);
+                } else {
+                    voiceSquareListAdapter.updataList((ArrayList<VoiceSquareBean.DataEntity>) voiceSquareBean.getData());
+                }
             } else {
                 ToastUtil.showToast(mContext, voiceSquareBean.getMsg());
             }

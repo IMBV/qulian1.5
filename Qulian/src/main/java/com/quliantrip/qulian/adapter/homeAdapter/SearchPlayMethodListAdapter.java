@@ -39,8 +39,8 @@ public class SearchPlayMethodListAdapter extends BasicAdapter<SecnicPlayResultBe
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());
         holder.likeNumber.setText("有"+bean.getBuynum()+"这样玩");
-        holder.dianDisCount.setText("暂时该字段");
-        holder.price.setText("￥ "+bean.getProce());
+        holder.dianDisCount.setText(bean.getRegion());
+        holder.price.setText("￥"+bean.getProce());
         return convertView;
      }
 

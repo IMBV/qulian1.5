@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_detail_adv"
         android:layout_marginBottom="49.5dp"
+        android:background="@color/colorPrimary"
         android:scrollbars="none">
 
         <LinearLayout
@@ -109,7 +110,8 @@
                         android:layout_marginLeft="5dp">
 
                         <View
-                            android:layout_width="45dp"
+                            android:id="@+id/v_hot_good_old_price_line"
+                            android:layout_width="35dp"
                             android:layout_height="1px"
                             android:layout_gravity="center"
                             android:background="@color/app_main_sub_title_text" />
@@ -151,7 +153,6 @@
                         android:textSize="12sp" />
                 </RelativeLayout>
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,15 +177,18 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="57dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:background="#FEF7E5"
-                        android:gravity="center">
+                        android:background="#FEF7E5">
 
                         <TextView
                             android:id="@+id/tv_good_detail_featured"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingTop="10dp"
                             android:text="趣连消灭一切没有准备的旅行"
                             android:textColor="@color/app_main_collor"
                             android:textSize="12sp" />
@@ -257,39 +261,6 @@
 
                 <View style="@style/dev_all_line" />
 
-                <!--<RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="49dp"
-                    android:background="@drawable/selector_bg_while_gray">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@mipmap/icon_x_time" />
-
-                        <TextView
-                            style="@style/text_main_title_16"
-                            android:layout_marginLeft="10dp"
-                            android:text="可选时间" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tv_good_detail_can_check_time"
-                        style="@style/text_title_12"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
-                        android:text="11:30-14.45" />
-                </RelativeLayout>
-
-                <View style="@style/dev_all_line" />-->
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
@@ -327,6 +298,37 @@
 
                 <View style="@style/dev_all_line" />
 
+                <RelativeLayout
+                    android:id="@+id/rl_good_detail_user_explain"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:background="@drawable/selector_bg_while_gray">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@mipmap/icon_x_shuoming" />
+
+                        <TextView
+                            style="@style/text_main_title_16"
+                            android:layout_marginLeft="10dp"
+                            android:text="使用说明" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/me_next_img"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/icon_next" />
+                </RelativeLayout>
+
+                <View style="@style/dev_all_line" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
@@ -355,5 +357,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <include layout="@layout/layout_all_detail_foot_buy" />
 </RelativeLayout>

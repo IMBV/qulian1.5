@@ -43,8 +43,10 @@ public class SearckBachEmailFragment extends BaseDialogFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (TextUtils.isEmpty(emailInto.getText())) {
                     button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_sub_bg));
+                    button.setTextColor(CommonHelp.getColor(R.color.login_bg_color));
                 } else {
                     button.setBackgroundColor(CommonHelp.getColor(R.color.app_main_collor));
+                    button.setTextColor(CommonHelp.getColor(R.color.colorPrimary));
                 }
             }
 

@@ -204,6 +204,7 @@ public class PlayMethodDetailBean extends BaseJson {
             private String playitemsid;
             private String title;
             private String type;
+            private String icon_img;
             private String reason;
             private String class_id;
             @SerializedName("class")
@@ -214,6 +215,15 @@ public class PlayMethodDetailBean extends BaseJson {
             private String sale;
             private String proce;
             private String merchantname;
+
+
+            public String getIcon_img() {
+                return icon_img;
+            }
+
+            public void setIcon_img(String icon_img) {
+                this.icon_img = icon_img;
+            }
 
             public void setPlayitemsid(String playitemsid) {
                 this.playitemsid = playitemsid;

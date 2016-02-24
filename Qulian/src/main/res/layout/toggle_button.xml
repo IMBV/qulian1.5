@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:background="@drawable/choose_eara_item_selector"
+    android:background="@color/colorPrimary"
     android:gravity="center"
     android:singleLine="true"
     android:text="ToggleButton"
@@ -11,3 +11,5 @@
     android:textSize="14sp"
     android:textOff="@null"
     android:textOn="@null" />
+    <!--背景选择器-->
+    <!--android:background="@drawable/choose_eara_item_selector"-->

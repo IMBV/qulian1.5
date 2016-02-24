@@ -56,6 +56,15 @@ public class GoodOrderListBean extends BaseJson{
         @SerializedName("package")
         private String packageX;
         private String imgs;
+        private String isorder;
+
+        public String getIsorder() {
+            return isorder;
+        }
+
+        public void setIsorder(String isorder) {
+            this.isorder = isorder;
+        }
 
         public void setId(String id) {
             this.id = id;

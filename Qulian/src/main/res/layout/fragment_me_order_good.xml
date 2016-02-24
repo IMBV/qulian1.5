@@ -5,7 +5,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
     <!--以前的筛选方式-->
-    <!--<RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@color/app_main_bg">
@@ -64,22 +64,17 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:text="已使用" />
-
                     </RadioGroup>
                 </RelativeLayout>
             </HorizontalScrollView>
         </ScrollView>
-    </RelativeLayout>-->
+    </RelativeLayout>
 
     <View style="@style/dev_all_line" />
-
-    <com.quliantrip.qulian.view.downPopupwindow.ExpandAllTabView
-        android:id="@+id/expandtab_view"
-        android:layout_width="fill_parent"
-        android:layout_height="44dp" />
 
     <View style="@style/dev_all_line" />
 
     <include layout="@layout/view_pulltorefresh_listview" />
+
     <include layout="@layout/view_page_empty" />
 </LinearLayout>

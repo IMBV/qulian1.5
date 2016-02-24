@@ -46,6 +46,7 @@
         <TextView
             android:id="@+id/tv_play_method_order_name"
             style="@style/text_main_title_14"
+            android:singleLine="true"
             android:text="趣连，带你去旅行" />
     </LinearLayout>
 

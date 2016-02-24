@@ -13,8 +13,8 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginRight="15dp"
         android:gravity="right|bottom"
         android:orientation="horizontal">
         <!-- 放置图片中选中点的位置 -->
@@ -22,6 +22,7 @@
             android:id="@+id/dots_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
             android:gravity="center"
             android:orientation="horizontal" />

@@ -5,21 +5,35 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.adapter.choiceAdapter.good.GoodDetailBranchCheckAdapter;
 import com.quliantrip.qulian.adapter.myAdapter.RegisterStyleAdapter;
+import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.CollectResultBean;
+import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
+import com.quliantrip.qulian.domain.me.GoodCollectListBean;
+import com.quliantrip.qulian.domain.me.PlayCollectListBean;
+import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.fragment.meFragment.collectFragment.GoodCollectFragment;
 import com.quliantrip.qulian.ui.fragment.meFragment.collectFragment.PlayMethodCollectFragment;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.view.dialog.CollectDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
@@ -59,6 +73,7 @@ public class MyCollectActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mycollect);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         mContext = this;
         playMethodCollectFragment = new PlayMethodCollectFragment();
         goodCollectFragment = new GoodCollectFragment();
@@ -104,11 +119,13 @@ public class MyCollectActivity extends SwipeBackActivity {
     @OnClick(R.id.rl_register_style_phone)
     void showPhoneRegister() {
         viewPager.setCurrentItem(0);
+        currentTab = viewPager.getCurrentItem();
     }
 
     @OnClick(R.id.rl_register_style_email)
     void showEmailRegister() {
         viewPager.setCurrentItem(1);
+        currentTab = viewPager.getCurrentItem();
     }
 
     @OnClick(R.id.iv_icon_back)
@@ -119,42 +136,91 @@ public class MyCollectActivity extends SwipeBackActivity {
 
     private boolean isPlayMethodEdit = true;
     private boolean isHotGoodEdit = true;
+
     //编辑的操作
     @OnClick(R.id.tv_mycolloct_edit)
     void editListColloct() {
+        System.out.println(currentTab +goodTabEditState);
         if (currentTab == 0) {
             if (playMethodDeletelist.size() >= 1)
                 isPlayMethodEdit = !isPlayMethodEdit;
             playMethodCollectFragment.setEdit(isPlayMethodEdit);
             if (playTabEditState == 0) {
                 editText.setText("取消");
-                isPlayMethodEdit = !isPlayMethodEdit;
+                isPlayMethodEdit = false;
                 playTabEditState = 1;
             } else if (playTabEditState == 1) {
                 editText.setText("编辑");
-                isPlayMethodEdit = !isPlayMethodEdit;
+                isPlayMethodEdit = true;
                 playTabEditState = 0;
             } else {
-                ToastUtil.showToast(mContext, "删除操作");
-                editText.setText("取消");
-                playTabEditState = 1;
+                //删除玩法集合
+                String deleteList = "";
+                for (int i = 0; i < playMethodDeletelist.size(); i++) {
+                    if (playMethodDeletelist.size() - 1 == i) {
+                        deleteList = deleteList + playMethodDeletelist.get(i).getHouseid();
+                    } else {
+                        deleteList = deleteList + playMethodDeletelist.get(i).getHouseid() + ",";
+                    }
+                }
+                Map<String, String> map = new HashMap<>();
+                map.put("id", deleteList);
+                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new CollectResultBean().setTag(getClass().getName() + "playmethodListDelete"), map);
             }
         } else {
             if (hotGoodDeletelist.size() >= 1)
                 isHotGoodEdit = !isHotGoodEdit;
             goodCollectFragment.setEdit(isHotGoodEdit);
-            if (playTabEditState == 0) {
+            if (goodTabEditState == 0) {
                 editText.setText("取消");
-                isHotGoodEdit = !isHotGoodEdit;
-                playTabEditState = 1;
-            } else if (playTabEditState == 1) {
+                isHotGoodEdit = false;
+                goodTabEditState = 1;
+            } else if (goodTabEditState == 1) {
                 editText.setText("编辑");
-                isHotGoodEdit = !isHotGoodEdit;
-                playTabEditState = 0;
+                isHotGoodEdit = true;
+                goodTabEditState = 0;
             } else {
-                ToastUtil.showToast(mContext, "删除商品操作");
+                //这里进行删除商品的操作
+                String deleteList = "";
+                for (int i = 0; i < hotGoodDeletelist.size(); i++) {
+                    if (hotGoodDeletelist.size() - 1 == i) {
+                        deleteList = deleteList + hotGoodDeletelist.get(i).getHouseid();
+                    } else {
+                        deleteList = deleteList + hotGoodDeletelist.get(i).getHouseid() + ",";
+                    }
+                }
+                System.out.println("del"+deleteList);
+                Map<String, String> map = new HashMap<>();
+                map.put("id", deleteList);
+                new PacketStringReQuest(HttpConstants.GOOD_CANCEL_COLLECT, new CollectResultBean().setTag(getClass().getName() + "goodListDelete"), map);
+            }
+        }
+    }
+
+    public void onEventMainThread(BaseJson bean) {
+        if (bean != null && (this.getClass().getName() + "playmethodListDelete").equals(bean.getTag())) {
+            CollectResultBean collectResultBean = (CollectResultBean) bean;
+            if (collectResultBean.getCode() == 200) {
+                playMethodCollectFragment.removeAllDelect((ArrayList<PlayCollectListBean.DataEntity>) playMethodDeletelist);
+                playMethodDeletelist.clear();
                 editText.setText("取消");
+                isPlayMethodEdit = false;
                 playTabEditState = 1;
+            } else {
+                ToastUtil.showToast(mContext, collectResultBean.getMsg());
+            }
+        }
+
+        if (bean != null && (this.getClass().getName() + "goodListDelete").equals(bean.getTag())) {
+            CollectResultBean collectResultBean = (CollectResultBean) bean;
+            if (collectResultBean.getCode() == 200) {
+                goodCollectFragment.removeAllDeleteList(hotGoodDeletelist);
+                hotGoodDeletelist.clear();
+                editText.setText("取消");
+                isHotGoodEdit = false;
+                goodTabEditState = 1;
+            } else {
+                ToastUtil.showToast(mContext, collectResultBean.getMsg());
             }
         }
     }
@@ -195,18 +261,18 @@ public class MyCollectActivity extends SwipeBackActivity {
         editText.setText(s);
     }
 
-    List<String> playMethodDeletelist = new ArrayList<String>();
-    List<String> hotGoodDeletelist = new ArrayList<String>();
+    List<PlayCollectListBean.DataEntity> playMethodDeletelist = new ArrayList<PlayCollectListBean.DataEntity>();
+    List<GoodCollectListBean.DataEntity.HouseEntity> hotGoodDeletelist = new ArrayList<GoodCollectListBean.DataEntity.HouseEntity>();
 
     //添加删除的操作
-    public void addOrDelectCollect( boolean b, String s) {
+    public void addOrDelectCollect(boolean b, Object s) {
         if (currentTab == 0) {
             if (b) {
                 //删除
                 playMethodDeletelist.remove(s);
             } else {
                 //添加
-                playMethodDeletelist.add(s);
+                playMethodDeletelist.add((PlayCollectListBean.DataEntity) s);
             }
             if (playMethodDeletelist.size() == 0) {
                 editText.setText("取消");
@@ -215,21 +281,27 @@ public class MyCollectActivity extends SwipeBackActivity {
                 editText.setText("删除");
                 playTabEditState = 3;
             }
-        }else if(currentTab == 1){
+        } else if (currentTab == 1) {
             if (b) {
                 //删除
                 hotGoodDeletelist.remove(s);
             } else {
                 //添加
-                hotGoodDeletelist.add(s);
+                hotGoodDeletelist.add((GoodCollectListBean.DataEntity.HouseEntity) s);
             }
             if (hotGoodDeletelist.size() == 0) {
                 editText.setText("取消");
-                playTabEditState = 1;
+                goodTabEditState = 1;
             } else {
                 editText.setText("删除");
-                playTabEditState = 3;
+                goodTabEditState = 3;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

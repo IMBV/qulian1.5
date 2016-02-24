@@ -70,9 +70,9 @@ public class SpotDetailBean extends BaseJson {
         public static class AttractionEntity {
             private String id;
             private String scenic;
-            private String mimg;
             private String desc;
             private String voice_id;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
@@ -80,10 +80,6 @@ public class SpotDetailBean extends BaseJson {
 
             public void setScenic(String scenic) {
                 this.scenic = scenic;
-            }
-
-            public void setMimg(String mimg) {
-                this.mimg = mimg;
             }
 
             public void setDesc(String desc) {
@@ -94,16 +90,16 @@ public class SpotDetailBean extends BaseJson {
                 this.voice_id = voice_id;
             }
 
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
 
             public String getScenic() {
                 return scenic;
-            }
-
-            public String getMimg() {
-                return mimg;
             }
 
             public String getDesc() {
@@ -113,6 +109,10 @@ public class SpotDetailBean extends BaseJson {
             public String getVoice_id() {
                 return voice_id;
             }
+
+            public String getImgs() {
+                return imgs;
+            }
         }
 
         public static class VoicInfoEntity {
@@ -121,7 +121,7 @@ public class SpotDetailBean extends BaseJson {
             private String upurl;
             private String img_url;
             private String type;
-            private Object desc;
+            private String desc;
 
             public void setId(String id) {
                 this.id = id;
@@ -143,7 +143,7 @@ public class SpotDetailBean extends BaseJson {
                 this.type = type;
             }
 
-            public void setDesc(Object desc) {
+            public void setDesc(String desc) {
                 this.desc = desc;
             }
 
@@ -167,7 +167,7 @@ public class SpotDetailBean extends BaseJson {
                 return type;
             }
 
-            public Object getDesc() {
+            public String getDesc() {
                 return desc;
             }
         }
@@ -176,6 +176,7 @@ public class SpotDetailBean extends BaseJson {
             private String id;
             private String name;
             private String img;
+            private String imgs;
 
             public void setId(String id) {
                 this.id = id;
@@ -189,6 +190,10 @@ public class SpotDetailBean extends BaseJson {
                 this.img = img;
             }
 
+            public void setImgs(String imgs) {
+                this.imgs = imgs;
+            }
+
             public String getId() {
                 return id;
             }
@@ -199,6 +204,10 @@ public class SpotDetailBean extends BaseJson {
 
             public String getImg() {
                 return img;
+            }
+
+            public String getImgs() {
+                return imgs;
             }
         }
     }

@@ -55,15 +55,14 @@ public class SecnicPlayConditionFragment extends BaseFragment {
             String[] stringList = hotWordListString.split("::");
             for (String s : stringList) {
                 listHistory.add(s);
-                history.setText("清空历史记录");
-                history.setClickable(true);
             }
+            history.setText("清空历史记录");
+            history.setClickable(true);
         } else {
             history.setText("没有历史记录");
             history.setClickable(false);
         }
         searchConditionHistoryAdapter = new SearchConditionHistoryAdapter(listHistory, mContext);
-
         myListView.setAdapter(searchConditionHistoryAdapter);
     }
 

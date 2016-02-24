@@ -17,15 +17,12 @@ import com.quliantrip.qulian.adapter.choiceAdapter.good.OrderGoodTypeAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.GoodOrderSubmitBean;
-import com.quliantrip.qulian.domain.choice.good.GoodOrderSubmitCheckBean;
 import com.quliantrip.qulian.domain.choice.good.OrderSubmitBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodOrderSubmitItemBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.scanner.zxing.decoding.Intents;
-import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.MyListView;
@@ -39,7 +36,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 /**
  * 商品提交订单
@@ -168,7 +164,6 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
             OrderSubmitBean orderSubmitBean = (OrderSubmitBean) bean;
             OrderSubmitBean.DataEntity dataEntity = orderSubmitBean.getData();
             if (orderSubmitBean.getCode() == 200) {
-
                 String playid = dataEntity.getOnline().getId();//玩法条目的id
                 String sku_id = dataEntity.getAttribute().get(0).getId();//玩法条目套餐的id
                 String date = null;
@@ -202,14 +197,12 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                 pretime.setText(dataString);
                 totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
                 initListView(dataEntity.getAttribute());
-
             } else {
                 ToastUtil.showToast(mContext, orderSubmitBean.getMsg());
             }
         }
 
         if (bean != null && (this.getClass().getName() + "goodSubmit").equals(bean.getTag())) {
-
             GoodOrderSubmitBean goodOrderSubmitBean = (GoodOrderSubmitBean) bean;
             if (goodOrderSubmitBean.getCode() == 200) {
                 Bundle bundle = new Bundle();
@@ -314,6 +307,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     @Bind(R.id.tv_check_store_result_text)
     TextView checkSrore;//选择门店的中文名字
     private List<OrderSubmitBean.DataEntity.BranchnameEntity> branchnameList = null;
+
     @OnClick(R.id.rl_check_store_setting)
     void checkStore() {
         if (branchnameList != null) {

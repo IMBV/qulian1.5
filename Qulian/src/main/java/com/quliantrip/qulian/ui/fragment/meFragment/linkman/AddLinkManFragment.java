@@ -1,7 +1,11 @@
 package com.quliantrip.qulian.ui.fragment.meFragment.linkman;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
@@ -169,5 +174,74 @@ public class AddLinkManFragment extends Fragment {
         pagerNumberString = num.getText().toString().trim();
         addressString = address.getText().toString().trim();
         phoneString = phone.getText().toString().trim();
+    }
+
+    //设置出生日期，birth
+    @OnClick(R.id.rl_born_data)
+    void checkBorn() {
+
+        DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                String birthBornString = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                birth.setText(birthBornString);
+            }
+        }, 1991, 00, 01);
+        datePicker.show();
+    }
+
+    //弹出选择性别的单选框
+    @OnClick(R.id.ll_me_check_sex)
+    void checkSex() {
+
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
+        //设置对话框的图标
+//        builder.setIcon(R.drawable.header);
+        //设置对话框的标题
+        builder.setTitle("请选着男女");
+        //0: 默认第一个单选按钮被选中
+        builder.setSingleChoiceItems(R.array.my_link_man_sex, 0, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String hoddy = getResources().getStringArray(R.array.my_link_man_sex)[which];
+                sex.setText(hoddy);
+            }
+        });
+
+        //添加一个确定按钮
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        //创建一个单选按钮对话框
+        Dialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //选择证件类型
+    @OnClick(R.id.rl_certificate_type)
+    void checkCertificateType() {
+
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
+        //设置对话框的图标
+//        builder.setIcon(R.drawable.header);
+        //设置对话框的标题
+        builder.setTitle("请选择证件类型");
+        //0: 默认第一个单选按钮被选中
+        builder.setSingleChoiceItems(R.array.my_link_man_certificate_type, 0, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String hoddy = getResources().getStringArray(R.array.my_link_man_certificate_type)[which];
+                type.setText(hoddy);
+            }
+        });
+        //添加一个确定按钮
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 }

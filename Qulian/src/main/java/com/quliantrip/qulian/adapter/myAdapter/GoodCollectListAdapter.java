@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.Test;
 import com.quliantrip.qulian.domain.me.GoodCollectListBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
@@ -28,23 +27,41 @@ import butterknife.ButterKnife;
  */
 public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.DataEntity.HouseEntity> {
     private MyCollectActivity activity;
+    private boolean isEdit = false;//设置是否编辑
 
     public GoodCollectListAdapter(ArrayList<GoodCollectListBean.DataEntity.HouseEntity> list, Context context) {
         super(list);
         activity = (MyCollectActivity) context;
     }
 
+    //添加一个条目
     public void addItem(GoodCollectListBean.DataEntity.HouseEntity s) {
         list.add(s);
     }
 
-    private boolean isEdit = false;
-
-    public void updataData(ArrayList<GoodCollectListBean.DataEntity.HouseEntity> list){
+    //更新数据适配的对象,进行刷新数据
+    public void updataData(ArrayList<GoodCollectListBean.DataEntity.HouseEntity> list) {
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
     }
+
+    //删除选中数据对象，去除删除的数据
+    public void removeAll(ArrayList<GoodCollectListBean.DataEntity.HouseEntity> list) {
+        for (int i = 0; i < this.list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (this.list.get(i).getId().equals(list.get(j).getId())) {
+                    this.list.remove(this.list.get(i));
+                }
+            }
+        }
+//        for (GoodCollectListBean.DataEntity.HouseEntity houseEntity : this.list) {
+//            houseEntity.setIsRefresh(true);
+//        }
+        notifyDataSetChanged();
+    }
+
+    //设置是否编辑
     public void setEdit(boolean b) {
         isEdit = b;
     }
@@ -57,10 +74,12 @@ public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.Dat
         final Holder holder = Holder.getHolder(convertView);
 
         final GoodCollectListBean.DataEntity.HouseEntity bean = list.get(position);
+
+        //选择要进行删除的条目
         holder.checkDeledct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.addOrDelectCollect(bean.ischeck(), "saasdf" + bean.getName());
+                activity.addOrDelectCollect(bean.ischeck(), bean);
                 bean.setIscheck(!bean.ischeck());
                 notifyDataSetChanged();
             }
@@ -77,16 +96,16 @@ public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.Dat
                 holder.slipRihtLayout.layoutContent(isEdit);
             }
         });
-
         //添加单品的信息
-        if(ImageLoader.getInstance().getLoadingUriForView(holder.img) == null)
-            ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
-
+//        if (bean.isRefresh()) {
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+//        bean.setIsRefresh(false);
+//        }
         holder.isCollect.setVisibility(View.GONE);
         holder.name.setText(bean.getName());
         holder.newPrice.setText("￥" + bean.getProce());
-        holder.locationDiscount.setText("no" + " · " + bean.getMeter());
-        holder.oldPrice.setText("￥ " + bean.getSale());
+        holder.locationDiscount.setText(bean.getChinese_name() + " · " + bean.getMeter());
+        holder.oldPrice.setText("￥" + bean.getSale());
 
         if (holder.oldPriceLine.getWidth() != holder.oldPrice.getWidth() + 10)
             holder.oldPrice.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

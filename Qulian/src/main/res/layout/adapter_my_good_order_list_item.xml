@@ -175,6 +175,7 @@
                 android:layout_width="76dp"
                 android:layout_height="24dp"
                 android:layout_marginRight="15dp"
+                android:visibility="gone"
                 android:background="@drawable/selector_btn_choieness"
                 android:text="查看消费券"
                 android:textColor="@color/selector_choiceness_btn_collor"

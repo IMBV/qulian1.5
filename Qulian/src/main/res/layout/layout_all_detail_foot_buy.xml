@@ -43,7 +43,7 @@
             android:background="@drawable/shape_btn_right_yellow"
             android:text="立即购买"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

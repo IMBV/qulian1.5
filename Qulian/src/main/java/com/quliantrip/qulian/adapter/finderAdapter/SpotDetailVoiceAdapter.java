@@ -8,11 +8,9 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.find.DiscountBean;
 import com.quliantrip.qulian.domain.find.SpotDetailBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
-import com.quliantrip.qulian.view.RatioImageView;
 
 import java.util.ArrayList;
 
@@ -30,22 +28,34 @@ public class SpotDetailVoiceAdapter extends BasicAdapter<SpotDetailBean.DataEnti
 
     //设置选中的播放的条目
     private int checkId = -1;
-    public void setCheckId(int id){
+
+    public void setCheckId(int id) {
         checkId = id;
         notifyDataSetChanged();
     }
+
+    public void updataList(ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_spot_detail_voice_play_item, null);
         }
+
+        //获取数据时适配的对象和要添加的控件
         Holder holder = Holder.getHolder(convertView);
         SpotDetailBean.DataEntity.VoicInfoEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImg_url().trim(), holder.img, ImageLoaderOptions.pager_options);
+
+        ImageLoader.getInstance().displayImage(bean.getImg_url().split(",")[0].trim(), holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getName());
-        if(checkId == position){
+
+        if (checkId == position) {
             holder.isPalyImg.setImageResource(R.mipmap.icon_paly);
-        }else{
+        } else {
             holder.isPalyImg.setImageResource(R.mipmap.icon_play_h);
         }
         return convertView;

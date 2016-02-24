@@ -61,6 +61,7 @@
                 android:layout_marginLeft="10dp">
 
                 <View
+                    android:id="@+id/tv_hot_good_best_oldPrice_line"
                     android:layout_width="45dp"
                     android:layout_height="1px"
                     android:layout_gravity="center"

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.quliantrip.qulian.domain.BaseJson;
 
 /**
- * Created by Qulian5 on 2016/2/1.
+ * 我的订单详情页面
  */
 public class GoodOrderDetailBean extends BaseJson{
     private int code;
@@ -45,16 +45,25 @@ public class GoodOrderDetailBean extends BaseJson{
         private String price;
         private String service;
         private String total_price;
-        private Object pay_time;
+        private String pay_time;
         private String isuse_time;
         private String name;
         private String img;
-        private Object lxname;
-        private Object tel;
-        private Object address;
+        private String lxname;
+        private String tel;
+        private String address;
+        private String isorder;
         @SerializedName("package")
         private String packageX;
         private String imgs;
+
+        public String getIsorder() {
+            return isorder;
+        }
+
+        public void setIsorder(String isorder) {
+            this.isorder = isorder;
+        }
 
         public void setId(String id) {
             this.id = id;
@@ -92,7 +101,7 @@ public class GoodOrderDetailBean extends BaseJson{
             this.total_price = total_price;
         }
 
-        public void setPay_time(Object pay_time) {
+        public void setPay_time(String pay_time) {
             this.pay_time = pay_time;
         }
 
@@ -108,15 +117,15 @@ public class GoodOrderDetailBean extends BaseJson{
             this.img = img;
         }
 
-        public void setLxname(Object lxname) {
+        public void setLxname(String lxname) {
             this.lxname = lxname;
         }
 
-        public void setTel(Object tel) {
+        public void setTel(String tel) {
             this.tel = tel;
         }
 
-        public void setAddress(Object address) {
+        public void setAddress(String address) {
             this.address = address;
         }
 
@@ -164,7 +173,7 @@ public class GoodOrderDetailBean extends BaseJson{
             return total_price;
         }
 
-        public Object getPay_time() {
+        public String getPay_time() {
             return pay_time;
         }
 
@@ -180,15 +189,15 @@ public class GoodOrderDetailBean extends BaseJson{
             return img;
         }
 
-        public Object getLxname() {
+        public String getLxname() {
             return lxname;
         }
 
-        public Object getTel() {
+        public String getTel() {
             return tel;
         }
 
-        public Object getAddress() {
+        public String getAddress() {
             return address;
         }
 

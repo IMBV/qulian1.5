@@ -48,7 +48,7 @@ public class HomeChoicenessMode extends BaseMode<HomeShowBean.DataEntity.Product
 
     @Override
     public void setData(HomeShowBean.DataEntity.ProductInfoEntity bean) {
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], icon, ImageLoaderOptions.options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], icon, ImageLoaderOptions.pager_options);
         name.setText(bean.getName());
         goodId = bean.getId();
         buyNumber.setText("已售 "+bean.getBuynum());
