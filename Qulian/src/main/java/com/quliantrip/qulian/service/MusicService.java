@@ -1,9 +1,5 @@
 package com.quliantrip.qulian.service;
 
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -15,6 +11,9 @@ import android.os.IBinder;
 import android.os.Message;
 
 import com.quliantrip.qulian.ui.fragment.findFragment.SpotDetailFragment;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MusicService extends Service {
 
@@ -33,7 +32,6 @@ public class MusicService extends Service {
     public void onCreate() {
         //(1)创建meidaplayer 实例
         player = new MediaPlayer();
-
         super.onCreate();
     }
 
@@ -48,16 +46,9 @@ public class MusicService extends Service {
         try {
             if (player == null)
                 player = new MediaPlayer();
-            //设置mediaplayer 为 初始化的状态
             player.reset();
-
             player.setDataSource("http://192.168.0.192:8080/xpg.mp3");
-            //(3)准备播放
-
             player.prepareAsync();
-//			player.prepare(); //同步准备
-
-            //准备完成的监听
             player.setOnPreparedListener(new OnPreparedListener() {
 
                 @Override
@@ -69,31 +60,16 @@ public class MusicService extends Service {
 
                 }
             });
-//			//(2) 设置播放的资源  路径可以 是本地路径 也可以是网络路径
-//			player.setDataSource("/mnt/sdcard/xpg.mp3");
-//			//(3)准备播放
-//			player.prepare();
-//			//(4)开始播放
-//			player.start();
-//
-            //(5)更新进度条的进度
-
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("chu cuo l ");
         }
-
     }
 
     //更新进度条的逻辑
     private void updateSeekBar() {
         //[1]获取歌曲总时长 和 当前播放的进度
         final int duration = player.getDuration();
-
-        //timer 定时器
-        //[2] 一秒钟获取一次当前进度
-
         timer = new Timer();
         task = new TimerTask() {
 

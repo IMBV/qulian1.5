@@ -14,7 +14,7 @@ public class HttpConstants {
      *线上数据服务器http://rest.v2.quliantrip.com/v1/
      * 线下数据http://192.168.0.155:8089/v1/
      */
-    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "http://rest.v2.quliantrip.com/v1/";
+    public static final String HOST_ADDR_ROOT_LOCAL_V1 = "https://rest.v2.quliantrip.com/v1/";
 
     //热门商品列表
     public static final String   HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";

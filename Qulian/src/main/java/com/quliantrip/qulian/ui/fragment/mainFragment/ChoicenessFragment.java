@@ -213,6 +213,7 @@ public class ChoicenessFragment extends Fragment {
         }
         isShowHotGood = true;
         hotGoodClassfyId = cateId;
+        recommendRouteFragment.playMethodSift();
     }
 
     private boolean isShowHotGood ;
@@ -224,6 +225,7 @@ public class ChoicenessFragment extends Fragment {
             recommendRouteFragment = new RecommendRouteFragment();
         }
         viewPager.setCurrentItem(0);
+        recommendRouteFragment.playMethodSift();
     }
 
     //搜索界面

@@ -226,7 +226,6 @@ public class AddLinkManFragment extends Fragment {
         AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
         //设置对话框的图标
 //        builder.setIcon(R.drawable.header);
-        //设置对话框的标题
         builder.setTitle("请选择证件类型");
         //0: 默认第一个单选按钮被选中
         builder.setSingleChoiceItems(R.array.my_link_man_certificate_type, 0, new DialogInterface.OnClickListener() {

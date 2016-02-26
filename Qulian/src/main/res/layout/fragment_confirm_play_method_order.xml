@@ -124,6 +124,8 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/shape_button_corner_normal"
             android:gravity="top"
             android:hint="请输入"
@@ -131,7 +133,7 @@
             android:lines="2"
             android:textColor="@color/app_main_title_text"
             android:textColorHint="@color/app_main_tag_dec_line"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="match_parent"

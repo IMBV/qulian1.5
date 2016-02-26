@@ -1,8 +1,10 @@
 package com.quliantrip.qulian.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,6 +16,7 @@ import com.quliantrip.qulian.domain.HomeBean;
 import com.quliantrip.qulian.domain.home.HomeShowBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.ArrayList;
 
@@ -25,8 +28,16 @@ import butterknife.ButterKnife;
  */
 public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.PlayEntity> {
 
-    public HomeRecommendAdapter(ArrayList<HomeShowBean.DataEntity.PlayEntity> list) {
+    private Context mContext;
+    private int widthImg;
+    private int heightImg;
+
+    public HomeRecommendAdapter(ArrayList<HomeShowBean.DataEntity.PlayEntity> list, Context context) {
         super(list);
+        this.mContext = context;
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        widthImg = wm.getDefaultDisplay().getWidth() - CommonHelp.dip2px(context, 20);
+        heightImg = widthImg/2;
     }
 
     public void upDataItem(ArrayList<HomeShowBean.DataEntity.PlayEntity> list) {
@@ -35,7 +46,7 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
         notifyDataSetChanged();
     }
 
-    public void clearAllData(){
+    public void clearAllData() {
         this.list.clear();
         notifyDataSetChanged();
     }
@@ -47,7 +58,8 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
         }
         final Holder holder = Holder.getHolder(convertView);
         HomeShowBean.DataEntity.PlayEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.pic, ImageLoaderOptions.pager_options_big);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0]+ "?imageView2/1/w/" + widthImg + "/h/" +
+                heightImg, holder.pic, ImageLoaderOptions.pager_options_big);
 
         holder.preView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -59,6 +71,7 @@ public class HomeRecommendAdapter extends BasicAdapter<HomeShowBean.DataEntity.P
                 holder.preView.setLayoutParams(params);
             }
         });
+
         holder.title.setText(bean.getTitle());
         holder.like.setText(bean.getBuynum());
         return convertView;

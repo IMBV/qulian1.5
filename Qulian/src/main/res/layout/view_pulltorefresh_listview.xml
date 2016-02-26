@@ -14,4 +14,5 @@
     android:footerDividersEnabled="false"
     android:headerDividersEnabled="false"
     android:smoothScrollbar="false"
+    app:ptrHeaderTextAppearance = "@dimen/header_footer_test_size"
     app:ptrHeaderTextColor="@color/app_main_sub_title_text"/>

@@ -67,7 +67,9 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     private HomeSlideImageMode homeSlideImageMode;
     HomeFunctionMode homeFunctionMode;
     HomeChoicenessMode homeChoicenessMode;
+
     private MainActivity activity;
+    private HomeRecommendAdapter homeRecommendAdapter;//首页推荐玩法条目数据数据适配
 
     @Override
     protected View getSuccessView() {
@@ -151,12 +153,10 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
         }
     }
 
-    private HomeRecommendAdapter homeRecommendAdapter;
-
     private void initListIView(final List<HomeShowBean.DataEntity.PlayEntity> dealList) {
         if (dealList.size() > 0) {
             if (homeRecommendAdapter == null) {
-                homeRecommendAdapter = new HomeRecommendAdapter((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList);
+                homeRecommendAdapter = new HomeRecommendAdapter((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList,mContext);
             } else {
                 homeRecommendAdapter.upDataItem((ArrayList<HomeShowBean.DataEntity.PlayEntity>) dealList);
             }

@@ -13,7 +13,6 @@
         android:layout_height="44dp" />
 
     <View style="@style/dev_all_line" />
-
     <include layout="@layout/view_pulltorefresh_listview" />
     <include layout="@layout/view_page_empty" />
 </LinearLayout>

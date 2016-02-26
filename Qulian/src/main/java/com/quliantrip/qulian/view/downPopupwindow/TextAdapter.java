@@ -32,7 +32,6 @@ public class TextAdapter extends ArrayAdapter<String> {
         mContext = context;
         mListData = listData;
         normalDrawbleId = nId;
-
         init();
     }
 
@@ -68,7 +67,6 @@ public class TextAdapter extends ArrayAdapter<String> {
             selectedText = mArrayData[pos];
             notifyDataSetChanged();
         }
-
     }
 
     public void setSelectedPositionNoNotify(int pos) {
@@ -87,7 +85,6 @@ public class TextAdapter extends ArrayAdapter<String> {
         if (mListData != null && selectedPos < mListData.size()) {
             return selectedPos;
         }
-
         return -1;
     }
 
@@ -135,6 +132,12 @@ public class TextAdapter extends ArrayAdapter<String> {
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
+    }
+
+    //设置传递过来数据
+    public void setSelectedText(String selectedText){
+        this.selectedText = selectedText;
+        notifyDataSetChanged();
     }
 
 }

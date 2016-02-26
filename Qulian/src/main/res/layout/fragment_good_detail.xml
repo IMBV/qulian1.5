@@ -81,7 +81,7 @@
                     android:id="@+id/tv_good_detail_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:maxLines="2"
                     android:text="趣连旅行"
                     android:textColor="@color/app_main_title"
@@ -89,7 +89,7 @@
 
                 <LinearLayout
                     style="@style/all_wrap_content"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:id="@+id/tv_hot_good_currentprice"

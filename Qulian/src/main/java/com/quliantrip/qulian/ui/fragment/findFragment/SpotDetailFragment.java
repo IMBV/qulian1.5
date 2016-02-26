@@ -2,6 +2,7 @@ package com.quliantrip.qulian.ui.fragment.findFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -17,9 +18,12 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.service.Iservice;
+import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.findActivity.SpotDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.view.HorizontalScroll.HorizontalScrollViewAdapter;
+import com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView;
 import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.RollViewPage;
 
@@ -33,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 景点详情页
+ * 景点详情页,内部有点击语音的播放
  */
 public class SpotDetailFragment extends BasePageCheckFragment {
     private View view;
@@ -46,6 +50,13 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     LinearLayout top_news_viewpager;//轮播的viewpage
     @Bind(R.id.dots_ll)
     LinearLayout dots_ll;//下面的小点
+
+    //附近实惠
+    @Bind(R.id.id_horizontalScrollView)
+    MyHorizontalScrollView mHorizontalScrollView;
+    private HorizontalScrollViewAdapter mAdapter;
+
+    //音频播放
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
     private List<View> dotList = new ArrayList<View>();
@@ -119,14 +130,31 @@ public class SpotDetailFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             SpotDetailBean spotDetailBean = (SpotDetailBean) bean;
             if (spotDetailBean.getCode() == 200) {
-                SpotDetailBean.DataEntity dataEntity = spotDetailBean.getData();
+                final SpotDetailBean.DataEntity dataEntity = spotDetailBean.getData();
                 ((SpotDetailActivity) mContext).showOrHideBack(false);
                 //添加基本信息
                 //轮播图
                 initRollView(dataEntity.getAttraction().getImgs());
 
                 //添加附近优惠的条目
+                ArrayList<SpotDetailBean.DataEntity.NearPorEntity> listdaasdfasdf = (ArrayList<SpotDetailBean.DataEntity.NearPorEntity>) dataEntity.getNearPor();
+                SpotDetailBean.DataEntity.NearPorEntity nearPorEntity =  new SpotDetailBean.DataEntity.NearPorEntity();
 
+                mAdapter = new HorizontalScrollViewAdapter(mContext, listdaasdfasdf);
+                //横向scrollView的条目点击事件
+                mHorizontalScrollView.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
+
+                    @Override
+                    public void onClick(View view, int position) {
+                        SpotDetailBean.DataEntity.NearPorEntity bean = dataEntity.getNearPor().get(position);
+                        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                        intent.putExtra("goodId", bean.getId());
+                        mContext.startActivity(intent);
+                        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                    }
+                });
+
+                mHorizontalScrollView.initDatas(mAdapter);
 
                 //设置该景点的有的可以播放语音内容
                 if (spotDetailVoiceAdapter == null) {

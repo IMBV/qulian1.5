@@ -11,7 +11,7 @@ import com.quliantrip.qulian.ui.fragment.findFragment.content.VoiceSquareFragmen
 import com.quliantrip.qulian.ui.fragment.findFragment.content.YellowBookFragment;
 
 /**
- * Created by Qulian5 on 2016/1/5.
+ * 发现的模块页面
  */
 public class FindContentFragment extends BaseViewPagerFragment {
     @Override
@@ -41,5 +41,11 @@ public class FindContentFragment extends BaseViewPagerFragment {
     private Bundle getBundle() {
         Bundle bundle = new Bundle();
         return bundle;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setTabStripWidth(getActivity());
     }
 }

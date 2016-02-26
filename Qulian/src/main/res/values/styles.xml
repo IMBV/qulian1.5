@@ -32,10 +32,10 @@
     </style>
     <!--标题文字的颜色-->
     <style name="text_title_style" parent="@style/all_wrap_content">
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/app_main_title</item>
-    </style>
+    <item name="android:singleLine">true</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/app_main_title</item>
+</style>
     <!--副标题的颜色-->
     <style name="text_sub_title_style" parent="@style/all_wrap_content">
         <item name="android:textSize">12sp</item>
@@ -65,7 +65,7 @@
         <item name="android:layout_weight">1.0</item>
     </style>
 
-    
+
     <style name="order_btn_function_selector">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">27dp</item>
@@ -276,12 +276,14 @@
         <item name="android:textColor">@color/app_main_title</item>
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="text_title_12">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/app_main_title_text</item>
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="text_title_sub_12">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -372,8 +374,7 @@
     </style>
 
 
-    <style name="Theme.Base.AppCompat.Dialog.FixedSize" parent="Base.Theme.AppCompat.Dialog.FixedSize">
-    </style>
+    <style name="Theme.Base.AppCompat.Dialog.FixedSize" parent="Base.Theme.AppCompat.Dialog.FixedSize"></style>
 
     <style name="dialog_common" parent="@style/Theme.Base.AppCompat.Dialog.FixedSize">
         <item name="android:windowBackground">@drawable/dialog_background</item>
@@ -384,9 +385,18 @@
         <item name="android:windowAnimationStyle">@style/dialog_animation</item>
     </style>
 
+    <!--选择门店dialog加载的动画-->
     <style name="dialog_animation" parent="android:Animation">
         <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
-    
+
+    <!--支付界面所有显示文字的样式-->
+    <style name="pay_method_sytle_check">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#323232</item>
+    </style>
+
 </resources>

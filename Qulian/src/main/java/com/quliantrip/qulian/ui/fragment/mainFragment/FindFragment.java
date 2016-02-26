@@ -48,11 +48,14 @@ public class FindFragment extends BasePageCheckFragment {
     private String dayString;
     private String monthString;
 
+    private FindContentFragment findContentFragment;
+
     @Override
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_main_find, null);
         ButterKnife.bind(this, view);
-        ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, new FindContentFragment()).commit();
+        findContentFragment = new FindContentFragment();
+        ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fl_find_content_container, findContentFragment).commit();
         homeTitle.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
         return view;
     }
@@ -61,8 +64,9 @@ public class FindFragment extends BasePageCheckFragment {
     protected QuestBean requestData() {
         Time time = new Time();
         time.setToNow();
-        monthString = (time.month+1) + "";
+        monthString = (time.month + 1) + "";
         dayString = time.monthDay + "";
+
         Map<String, String> map = new HashMap<String, String>();
         map.put("ctl", "index");
         map.put("act", "app");
@@ -75,7 +79,7 @@ public class FindFragment extends BasePageCheckFragment {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", CommonHelp.getString(R.string.change_city_tacit_img)), cityImg, ImageLoaderOptions.pager_options);
             weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
-            weatherData.setText(monthString+"/"+dayString);
+            weatherData.setText(monthString + "/" + dayString);
         }
     }
 
@@ -101,9 +105,6 @@ public class FindFragment extends BasePageCheckFragment {
             ImageLoader.getInstance().displayImage(data.getStringExtra("cityImg"), cityImg, ImageLoaderOptions.pager_options);
             weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
             homeTitle.setText(data.getStringExtra("cityName"));
-            //这里是进行添加数据
-//            Map<String, String> map = new HashMap<String, String>();
-//            new PacketStringReQuest(HttpConstants.HOME_MAIN, new HomeShowBean().setTag(HomeFragment.this.getClass().getName()), map, null);
         }
     }
 
@@ -118,7 +119,7 @@ public class FindFragment extends BasePageCheckFragment {
             String cityNameString = CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name));
             homeTitle.setText(cityNameString);
             weatherCity.setText(CommonHelp.getStringSp(mContext, "globalCityName", CommonHelp.getString(R.string.change_city_tacit_name)));
-                    ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", CommonHelp.getString(R.string.change_city_tacit_img)), cityImg, ImageLoaderOptions.pager_options);
+            ImageLoader.getInstance().displayImage(CommonHelp.getStringSp(mContext, "cityImg", CommonHelp.getString(R.string.change_city_tacit_img)), cityImg, ImageLoaderOptions.pager_options);
         }
     }
 

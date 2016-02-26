@@ -30,7 +30,9 @@ import com.quliantrip.qulian.adapter.popAdapter.HotGoodChildAdapter;
 import com.quliantrip.qulian.adapter.popAdapter.HotGoodGroupAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.good.GoodBean;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
+import com.quliantrip.qulian.domain.choice.good.MoreGoodsBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
@@ -62,6 +64,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     private String merchant;
     private String bespeak;
     private String theme;
+    private String page = "2";
 
     private QuestBean questBean;//请求的数据对象
 
@@ -147,6 +150,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                         initRadioButton(hotGoodBean.getData().getCate().get(i), i);
                     }
                 }
+
                 currentCheckedCate = map.get(classId);
                 //这里是进行平滑的移动
                 linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -165,6 +169,26 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 productInfoEntity = hotGoodBean.getData().getProductInfo();
             }
             initRefreshListView(hotGoodBean.getData().getOnline());
+            if (refreshViewList != null)
+                refreshViewList.onRefreshComplete();
+        }
+
+        //下拉加载的操作
+        if (bean != null && (this.getClass().getName() + "moreData").equals(bean.getTag())) {
+            MoreGoodsBean moreGoodsBean = (MoreGoodsBean) bean;
+            if (moreGoodsBean.getCode() == 200) {
+                hotGoodListAdapter.addCollecListView((ArrayList<GoodBean>) moreGoodsBean.getData());
+                if (refreshViewList != null)
+                    refreshViewList.onRefreshComplete();
+                page = (Integer.valueOf(page) + 1) + "";
+                if (moreGoodsBean.getData().size() < 10) {
+                    refreshViewList.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                } else {
+                    refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+                }
+            } else {
+                ToastUtil.showToast(mContext, moreGoodsBean.getMsg());
+            }
         }
     }
 
@@ -284,7 +308,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         bottomLine.getLocationInWindow(location);
         int x = location[0];
         int y = location[1];
-        siftPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y-1);
+        siftPopupWindow.showAtLocation(bottomLine, Gravity.LEFT | Gravity.TOP, x, y - 1);
     }
 
     Handler handler = new Handler() {
@@ -338,16 +362,20 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     //加载显示的列表
     private HotGoodListAdapter hotGoodListAdapter;
 
-    private void initRefreshListView(final List<HotGoodBean.DataEntity.OnlineEntity> listGood) {
-        refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+    private void initRefreshListView(final List<GoodBean> listGood) {
+        if (listGood.size() < 10) {
+            refreshViewList.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        } else {
+            refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+        }
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
 
         if (hotGoodListAdapter == null) {
-            hotGoodListAdapter = new HotGoodListAdapter((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
+            hotGoodListAdapter = new HotGoodListAdapter((ArrayList<GoodBean>) listGood);
             listView.setAdapter(hotGoodListAdapter);
         } else {
-            hotGoodListAdapter.updateListView((ArrayList<HotGoodBean.DataEntity.OnlineEntity>) listGood);
+            hotGoodListAdapter.updateListView((ArrayList<GoodBean>) listGood);
         }
 
         //最优的一条数据的数据适配
@@ -420,7 +448,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (TDevice.getNetworkType() != 0) {
-                    HotGoodBean.DataEntity.OnlineEntity bean = listGood.get(position - 2);
+                    GoodBean bean = listGood.get(position - 2);
                     Intent intent = new Intent(mContext, GoodDetailActivity.class);
                     intent.putExtra("goodId", bean.getId());
                     intent.putExtra("isCollect", bean.isIs_house());
@@ -438,23 +466,26 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 // 根据不同的mode进行操作,mode中有要进行操作的类型的数据
                 if (refreshViewList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
-                    // 这里的请求数据是在子线程中，
-                    CommonHelp.runOnUIThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                            refreshViewList.onRefreshComplete();
-                        }
-                    }, 500);
+                    page = "2";
+                    requestDataForAll();
                 } else {
-                    CommonHelp.runOnUIThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            refreshViewList.onRefreshComplete();
-                        }
-                    }, 500);
+                    Map<String, String> map = new HashMap<String, String>();
+                    city = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+                    if (city != null)
+                        map.put("city", city);
+                    if (cate != null)
+                        map.put("cate", cate);
+                    if (merchant != null)
+                        map.put("merchant", merchant);
+                    if (bespeak != null)
+                        map.put("bespeak", bespeak);
+                    if (theme != null)
+                        map.put("theme", theme);
+                    if (QulianApplication.getInstance().getLoginUser().getAuth_key() != null) {
+                        map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+                    }
+                    map.put("page", page);
+                    new PacketStringReQuest(HttpConstants.HOT_GOOD_LIST, new MoreGoodsBean().setTag(HotGoodsFragment.class.getName() + "moreData"), map);
                 }
             }
         });
@@ -466,9 +497,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         bg.setVisibility(View.GONE);
     }
 
+    //设置默认选中的设置
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void changeClassify(String id) {
-
         classId = id;
         Map<String, String> map = new HashMap<String, String>();
         map.put("city", CommonHelp.getStringSp(QulianApplication.getContext(), "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id)));

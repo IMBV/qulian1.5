@@ -42,7 +42,7 @@ public class PlayMethodOrderListAdapter extends BasicAdapter<PlayMethodOrderBean
         holder.name.setText(bean.getName());
 
         holder.listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.colorPrimary)));
-        holder.listView.setDividerHeight(CommonHelp.dip2px(QulianApplication.getContext(), 15));
+        holder.listView.setDividerHeight(CommonHelp.dip2px(QulianApplication.getContext(), 10));
         holder.listView.setAdapter(new PlayMethodOrderListGoodItemAdapter((ArrayList<PlayMethodOrderBean.DataEntity.PalyEntity>) bean.getPaly()));
         holder.listView.setFocusable(false);
         return convertView;

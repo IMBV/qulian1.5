@@ -63,7 +63,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
     @Override
     protected QuestBean requestData() {
-        city =CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+        city = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
         Map<String, String> map = new HashMap<String, String>();
         map.put("city", city);
         return new QuestBean(map, new PlayMethodBean().setTag(getClass().getName()), HttpConstants.PLAY_METHOD_LIST);
@@ -184,12 +184,12 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     }
 
     private void onRefresh(View view, String showText) {
-
         expandTabView.onPressBack();
         int position = getPositon(view);
         if (position >= 0 && !expandTabView.getTitle(position).equals(showText)) {
             expandTabView.setTitle(showText, position);
         }
+
         switch (position) {
             case 0:
                 String themeid = themeMap.get(showText);
@@ -229,10 +229,8 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             listView = refreshViewList.getRefreshableView();
             listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
             if (playMethodListAdapter == null) {
-                playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
+                playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod, mContext);
                 listView.setAdapter(playMethodListAdapter);
-//                listView.setDivider(new ColorDrawable(Color.WHITE));
-//                listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
             } else {
                 playMethodListAdapter.updataListView((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
             }
@@ -248,13 +246,12 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
                     ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                 }
             });
+
             // 下拉刷新或下拉加载的操作
             refreshViewList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
                 @Override
                 public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-
                     if (refreshViewList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
-
                         CommonHelp.runOnUIThread(new Runnable() {
 
                             @Override
@@ -268,6 +265,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
                             @Override
                             public void run() {
+
                                 refreshViewList.onRefreshComplete();
                             }
                         }, 500);
@@ -275,6 +273,12 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
                 }
             });
         }
+    }
+
+    //进行玩法详情页面的筛选条件的数据选着
+    public void playMethodSift() {
+        expandTabView.setTitle("今日可用", 1);
+        viewLeft.checkItem("浪漫樱花");
     }
 }
 

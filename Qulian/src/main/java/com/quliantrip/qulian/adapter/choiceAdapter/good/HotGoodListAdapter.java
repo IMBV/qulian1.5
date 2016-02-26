@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
+import com.quliantrip.qulian.domain.choice.good.GoodBean;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
@@ -22,13 +23,18 @@ import butterknife.ButterKnife;
 /**
  * 单品玩法列表也的展示
  */
-public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.OnlineEntity> {
-    public HotGoodListAdapter(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
+public class HotGoodListAdapter extends BasicAdapter<GoodBean> {
+    public HotGoodListAdapter(ArrayList<GoodBean> list) {
         super(list);
     }
 
-    public void updateListView(ArrayList<HotGoodBean.DataEntity.OnlineEntity> list) {
+    public void updateListView(ArrayList<GoodBean> list) {
         this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addCollecListView(ArrayList<GoodBean> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -39,9 +45,9 @@ public class HotGoodListAdapter extends BasicAdapter<HotGoodBean.DataEntity.Onli
             convertView = View.inflate(QulianApplication.getContext(), R.layout.adapter_good_list_item, null);
         }
         final Holder holder = Holder.getHolder(convertView);
-        final HotGoodBean.DataEntity.OnlineEntity bean = list.get(position);
-        ImageLoader.getInstance().displayImage(bean.getImg().split(",")[0] + "?imageView2/1/w/" + CommonHelp.dip2px(QulianApplication.getContext(), 280) + "/h/" +
-                CommonHelp.dip2px(QulianApplication.getContext(), 188), holder.img, ImageLoaderOptions.pager_options);
+        final GoodBean bean = list.get(position);
+        ImageLoader.getInstance().displayImage(bean.getImg().split(",")[0] + "?imageView2/1/w/" + CommonHelp.dip2px(QulianApplication.getContext(), 270) + "/h/" +
+                CommonHelp.dip2px(QulianApplication.getContext(), 180), holder.img, ImageLoaderOptions.pager_options);
 
         if (bean.isIs_house()) {
             holder.isCollect.setVisibility(View.VISIBLE);

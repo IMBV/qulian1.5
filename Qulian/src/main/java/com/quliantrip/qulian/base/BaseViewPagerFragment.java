@@ -1,11 +1,14 @@
 package com.quliantrip.qulian.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.ViewPageFragmentAdapter;
@@ -50,10 +53,20 @@ public abstract class BaseViewPagerFragment extends Fragment {
 
         // 通过ViewPageFragmentAdapter设置Tab选项及内容, 抽象方法, 由子类重写进行实现.
         onSetupTabAdapter(mTabsAdapter);
-
     }
 
+    //这里是进行设置距两个tab的宽度的方法
+    public void setTabStripWidth(Context context){
+        WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)mTabStrip.getLayoutParams();
+        layoutParams.setMargins(0,0,width/2,0);
+        mTabStrip.setLayoutParams(layoutParams);
+    }
+
+    //设置viewpage加载的数量
     protected void setScreenPageLimit() {
+
     }
 
     protected abstract void onSetupTabAdapter(ViewPageFragmentAdapter adapter);

@@ -1,7 +1,9 @@
 package com.quliantrip.qulian.adapter.choiceAdapter.playMethod;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import com.quliantrip.qulian.adapter.BasicAdapter;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -23,8 +26,16 @@ import butterknife.ButterKnife;
  */
 public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntity.PlayEntity> {
 
-    public PlayMethodListAdapter(ArrayList<PlayMethodBean.DataEntity.PlayEntity> list) {
+    private Context mContext;
+    private int widthImg;
+    private int heightImg;
+
+    public PlayMethodListAdapter(ArrayList<PlayMethodBean.DataEntity.PlayEntity> list, Context context) {
         super(list);
+        this.mContext = context;
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        widthImg = wm.getDefaultDisplay().getWidth() - CommonHelp.dip2px(context, 20);
+        heightImg = widthImg/2;
     }
 
     public void updataListView(ArrayList<PlayMethodBean.DataEntity.PlayEntity> list){
@@ -43,7 +54,8 @@ public class PlayMethodListAdapter extends BasicAdapter<PlayMethodBean.DataEntit
         //进行数据添加
         PlayMethodBean.DataEntity.PlayEntity bean = list.get(position);
         //添加玩法图片资源
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0]+"?imageView2/1/w/" + widthImg + "/h/" +
+                heightImg, holder.img, ImageLoaderOptions.pager_options_big);
         //添加达人头像
         ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
 

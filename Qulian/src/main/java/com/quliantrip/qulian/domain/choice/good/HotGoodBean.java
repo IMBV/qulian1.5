@@ -42,7 +42,7 @@ public class HotGoodBean extends BaseJson {
         private List<HotGoodCate> cate;
         private List<ScreenEntity> screen;
 
-        private List<OnlineEntity> online;
+        private List<GoodBean> online;
 
         public ProductInfoEntity getProductInfo() {
             return productInfo;
@@ -60,7 +60,7 @@ public class HotGoodBean extends BaseJson {
             this.screen = screen;
         }
 
-        public void setOnline(List<OnlineEntity> online) {
+        public void setOnline(List<GoodBean> online) {
             this.online = online;
         }
 
@@ -72,7 +72,7 @@ public class HotGoodBean extends BaseJson {
             return screen;
         }
 
-        public List<OnlineEntity> getOnline() {
+        public List<GoodBean> getOnline() {
             return online;
         }
 
@@ -253,81 +253,6 @@ public class HotGoodBean extends BaseJson {
                 public List<?> getChild() {
                     return child;
                 }
-            }
-        }
-
-        public static class OnlineEntity {
-            private String id;
-            private String name;
-            private String img;
-            private String meter;
-            private String chinese_name;
-            private String sale;
-            private String proce;
-            private boolean is_house;
-
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public void setImg(String img) {
-                this.img = img;
-            }
-
-            public void setMeter(String meter) {
-                this.meter = meter;
-            }
-
-            public void setChinese_name(String chinese_name) {
-                this.chinese_name = chinese_name;
-            }
-
-            public void setSale(String sale) {
-                this.sale = sale;
-            }
-
-            public void setProce(String proce) {
-                this.proce = proce;
-            }
-
-            public void setIs_house(boolean is_house) {
-                this.is_house = is_house;
-            }
-
-            public String getId() {
-                return id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public String getImg() {
-                return img;
-            }
-
-            public String getMeter() {
-                return meter;
-            }
-
-            public String getChinese_name() {
-                return chinese_name;
-            }
-
-            public String getSale() {
-                return sale;
-            }
-
-            public String getProce() {
-                return proce;
-            }
-
-            public boolean isIs_house() {
-                return is_house;
             }
         }
     }

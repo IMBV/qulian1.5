@@ -45,6 +45,7 @@ public class GoodDetailActivity extends SwipeBackActivity {
     FrameLayout container;
     @Bind(R.id.iv_good_activity_detail_back)
     RelativeLayout back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

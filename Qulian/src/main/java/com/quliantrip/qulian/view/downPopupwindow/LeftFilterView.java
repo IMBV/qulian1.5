@@ -43,10 +43,7 @@ public class LeftFilterView extends RelativeLayout {
 		mListView = (ListView) findViewById(R.id.listView);
 		adapter = new TextAdapter(context, items, R.drawable.choose_eara_item_selector);
 		adapter.setTextSize(14);
-
-
 		mListView.setAdapter(adapter);
-
 		adapter.setOnItemClickListener(new TextAdapter.OnItemClickListener() {
 
 			@Override
@@ -66,5 +63,10 @@ public class LeftFilterView extends RelativeLayout {
 
 	public interface OnSelectListener {
 		public void getValue(String distance, String showText);
+	}
+
+	//通过
+	public void checkItem(String setSelectedText){
+		adapter.setSelectedText(setSelectedText);
 	}
 }

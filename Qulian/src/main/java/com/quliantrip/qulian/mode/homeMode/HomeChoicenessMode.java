@@ -14,6 +14,7 @@ import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.BaseMode;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,7 +49,8 @@ public class HomeChoicenessMode extends BaseMode<HomeShowBean.DataEntity.Product
 
     @Override
     public void setData(HomeShowBean.DataEntity.ProductInfoEntity bean) {
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], icon, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0]+ "?imageView2/1/w/" + CommonHelp.dip2px(QulianApplication.getContext(), 144) + "/h/" +
+                CommonHelp.dip2px(QulianApplication.getContext(), 96), icon, ImageLoaderOptions.pager_options);
         name.setText(bean.getName());
         goodId = bean.getId();
         buyNumber.setText("已售 "+bean.getBuynum());

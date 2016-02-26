@@ -43,6 +43,7 @@ public class PacketStringReQuest extends StringRequest {
 
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {
+
         return map;
     }
 }

@@ -197,7 +197,7 @@ public class LoginFragment extends BaseFragment {
         super.onDestroy();
     }
 
-    //qq登录信息的初始化
+    //qq登录信息的初始化,成功后的获取的登录信息
     private void initData() {
         //初始化qq主操作对象
         mTencent = Tencent.createInstance("1104937113", mContext);
@@ -266,7 +266,6 @@ public class LoginFragment extends BaseFragment {
 
             /**
              * 返回用户信息样例
-             *
              * {"is_yellow_year_vip":"0","ret":0,
              * "figureurl_qq_1":"http:\/\/q.qlogo.cn\/qqapp\/1104732758\/015A22DED93BD15E0E6B0DDB3E59DE2D\/40",
              * "figureurl_qq_2":"http:\/\/q.qlogo.cn\/qqapp\/1104732758\/015A22DED93BD15E0E6B0DDB3E59DE2D\/100",

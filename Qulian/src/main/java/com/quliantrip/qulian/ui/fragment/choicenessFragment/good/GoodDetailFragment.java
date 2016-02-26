@@ -85,7 +85,6 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     @Bind(R.id.mlv_good_detail_can_check_median)
     MyListView medianCheck;
 
-
     //添加图片和小点的集合
     private List<String> imageList = new ArrayList<String>();
     private List<View> dotList = new ArrayList<View>();
@@ -189,6 +188,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
             }
         }
 
+        //添加我的收藏
         if (bean != null && (this.getClass().getName() + "shouchang").equals(bean.getTag())) {
             CollectResultBean collectResultBean = (CollectResultBean) bean;
             if (collectResultBean.getCode() == 200) {
@@ -201,16 +201,18 @@ public class GoodDetailFragment extends BasePageCheckFragment {
                 final CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
                 collectDialog.setCanceledOnTouchOutside(true);
                 collectDialog.show();
-//                new Thread() {
-//                    public void run() {
-//                        SystemClock.sleep(1000);
-//                        collectDialog.cancel();
-//                    };
-//                }.start();
+                new Thread() {
+                    public void run() {
+                        SystemClock.sleep(1000);
+                        collectDialog.cancel();
+                    };
+                }.start();
             } else {
                 ToastUtil.showToast(mContext, collectResultBean.getMsg());
             }
         }
+
+        //取消我的收藏
         if (bean != null && (this.getClass().getName() + "cancel").equals(bean.getTag())) {
             CollectResultBean collectResultBean = (CollectResultBean) bean;
             if (collectResultBean.getCode() == 200) {
@@ -351,7 +353,7 @@ public class GoodDetailFragment extends BasePageCheckFragment {
 
     //点击进入使用说明界面
     @OnClick(R.id.rl_good_detail_user_explain)
-    void intoUserexPlain(){
+    void intoUserexPlain() {
         Intent intent = new Intent(mContext, GoodDetailIntroduceActivity.class);
         intent.putExtra("goodId", goodId);
         intent.putExtra("field", "pricedesc");

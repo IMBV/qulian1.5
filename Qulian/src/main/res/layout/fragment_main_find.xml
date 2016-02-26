@@ -51,6 +51,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -61,7 +62,6 @@
                 <TextView
                     android:id="@+id/tv_find_weather_data"
                     style="@style/text_white_14"
-                    android:layout_marginTop="5dp"
                     android:text="12/5" />
             </LinearLayout>
 
@@ -99,29 +99,32 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="16dp"
-                        android:layout_height="16dp" />
+                        android:layout_height="16dp"
+                        android:src="@mipmap/icon_talk" />
 
                     <TextView
                         style="@style/text_title_12"
                         android:layout_marginLeft="10dp"
                         android:text="乐天的channal可以" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="16dp"
-                        android:layout_height="16dp" />
+                        android:layout_height="16dp"
+                        android:src="@mipmap/icon_talk" />
 
                     <TextView
                         style="@style/text_title_12"
@@ -132,11 +135,13 @@
 
             <Button
                 android:id="@+id/bt_into_flock"
-                android:layout_width="wrap_content"
+                android:layout_width="59dp"
                 android:layout_height="19dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_btn_yellow"
+                android:gravity="center"
                 android:text="进入群"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
         </RelativeLayout>
 

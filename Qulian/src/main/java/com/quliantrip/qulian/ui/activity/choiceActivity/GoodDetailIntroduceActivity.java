@@ -49,18 +49,20 @@ public class GoodDetailIntroduceActivity extends SwipeBackActivity {
                 && getIntent().getStringExtra("type") != null) {
             webView.loadUrl("http://wap.v2.quliantrip.com/index.php?r=index%2Furlxp&id=" + id + "&field=" + field + "&type=" + type);
             webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String url) {
-
-                }
-
-                @Override
-                public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                    super.onPageStarted(view, url, favicon);
-                }
-            });
+            webView.getSettings().setSupportZoom(true);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setBuiltInZoomControls(true);
+//            webView.setWebViewClient(new WebViewClient() {
+//                @Override
+//                public void onPageFinished(WebView view, String url) {
+//
+//                }
+//
+//                @Override
+//                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//                    super.onPageStarted(view, url, favicon);
+//                }
+//            });
         }
     }
 

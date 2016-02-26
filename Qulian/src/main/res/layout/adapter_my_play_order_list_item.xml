@@ -56,15 +56,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp" />
 
-   <com.quliantrip.qulian.view.MyListView
-       android:id="@+id/mlv_play_method_good_list"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="15dp"
-       android:listSelector="@android:color/transparent"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp">
+    <com.quliantrip.qulian.view.MyListView
+        android:id="@+id/mlv_play_method_good_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:listSelector="@android:color/transparent" />
 
-
-   </com.quliantrip.qulian.view.MyListView>
 </LinearLayout>

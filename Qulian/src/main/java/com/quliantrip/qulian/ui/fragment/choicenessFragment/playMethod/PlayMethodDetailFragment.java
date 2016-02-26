@@ -3,6 +3,7 @@ package com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -234,9 +235,15 @@ public class PlayMethodDetailFragment extends BasePageCheckFragment {
                 isCollect = !isCollect;
                 collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
                 collectText.setText("已收藏");
-                CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
+                final CollectDialog collectDialog = new CollectDialog(mContext, "已收藏");
                 collectDialog.setCanceledOnTouchOutside(true);
                 collectDialog.show();
+                new Thread() {
+                    public void run() {
+                        SystemClock.sleep(1000);
+                        collectDialog.cancel();
+                    };
+                }.start();
             } else {
                 ToastUtil.showToast(mContext, collectResultBean.getMsg());
             }

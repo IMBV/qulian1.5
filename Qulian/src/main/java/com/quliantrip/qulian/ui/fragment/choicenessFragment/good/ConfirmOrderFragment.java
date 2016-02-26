@@ -64,15 +64,15 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_confirm_order, null);
         ButterKnife.bind(this, view);
-        LoginDataBean loginDataBean = QulianApplication.getInstance().getLoginUser();
-        name.setText(loginDataBean.getUsername());
-        phone.setText(loginDataBean.getMobile());
-        email.setText(loginDataBean.getEmail());
         return view;
     }
 
     @Override
     protected QuestBean requestData() {
+        //获取当前可以选着的联系人
+        Map<String, String> mapLinkMan = new HashMap<String, String>();
+        mapLinkMan.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+        new PacketStringReQuest(HttpConstants.ALL_LINKMAN, new LinkManBean().setTag(getClass().getName() + "GetLinkMan"), mapLinkMan);
         orderId = getArguments().getString("orderId");
         Map<String, String> map = new HashMap<String, String>();
         map.put("orderid", orderId);
@@ -95,7 +95,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         linkManId = bean.getId();
         name.setText(bean.getName());
         pyName.setText(bean.getPyname());
-        phone.setText(QulianApplication.getInstance().getLoginUser().getUsername());
+        phone.setText(bean.getTel());
         email.setText(QulianApplication.getInstance().getLoginUser().getEmail());
     }
 
@@ -136,13 +136,27 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200) {
-                Intent intent = new Intent(mContext,PayCheckstandFragment.class);
+                Intent intent = new Intent(mContext, PayCheckstandFragment.class);
                 intent.putExtra("totalPrice", price.getText().toString());
-                intent.putExtra("orderId",getArguments().getString("orderSn"));
+                intent.putExtra("orderId", getArguments().getString("orderSn"));
                 mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
             } else {
                 ToastUtil.showToast(mContext, hintInfoBean.getMsg());
+            }
+        }
+
+        if (bean != null && (this.getClass().getName() + "GetLinkMan").equals(bean.getTag())) {
+            LinkManBean linkManBean = (LinkManBean) bean;
+            if (linkManBean.getCode() == 200) {
+                LinkManBean.LinkMan linkMan = linkManBean.getData().get(0);
+                linkManId = linkMan.getId();
+                pyName.setText(linkMan.getPyname());
+                name.setText(linkMan.getName());
+                phone.setText(linkMan.getTel());
+                email.setText(QulianApplication.getInstance().getLoginUser().getEmail());
+            } else {
+                ToastUtil.showToast(mContext, linkManBean.getMsg());
             }
         }
     }

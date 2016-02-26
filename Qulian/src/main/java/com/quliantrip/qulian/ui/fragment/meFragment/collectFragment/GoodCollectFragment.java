@@ -209,6 +209,9 @@ public class GoodCollectFragment extends BasePageCheckFragment {
                 goodCollectListAdapter.updataData((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) listBean);
             }
 
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) refreshViewList.getLayoutParams();
+            params.topMargin = CommonHelp.dip2px(mContext, 10);
+            refreshViewList.setLayoutParams(params);
             //条目单击事件
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

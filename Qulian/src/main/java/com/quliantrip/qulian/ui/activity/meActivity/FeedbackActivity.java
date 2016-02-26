@@ -13,6 +13,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
+import com.quliantrip.qulian.net.volleyManage.HttpsTrustManager;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -70,6 +71,7 @@ public class FeedbackActivity extends SwipeBackActivity {
             ToastUtil.showToast(mContext,"请你填写反馈意见");
             return;
         }
+        HttpsTrustManager.allowAllSSL();
         Map<String, String> map = new HashMap<String, String>();
         map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key() == null?"":QulianApplication.getInstance().getLoginUser().getAuth_key());
         map.put("content", contentString);//内容

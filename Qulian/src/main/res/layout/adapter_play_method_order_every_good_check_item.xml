@@ -8,7 +8,6 @@
         android:id="@+id/tv_good_name"
         style="@style/text_main_title_16"
         android:layout_margin="15dp"
-        android:singleLine="true"
         android:text="趣连消灭一切没有准备的旅行" />
 
     <com.quliantrip.qulian.view.MyListView
