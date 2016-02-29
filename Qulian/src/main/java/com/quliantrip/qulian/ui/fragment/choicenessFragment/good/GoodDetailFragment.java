@@ -22,8 +22,10 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
+import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailIntroduceActivity;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
@@ -93,14 +95,6 @@ public class GoodDetailFragment extends BasePageCheckFragment {
     protected View getSuccessView() {
         view = View.inflate(mContext, R.layout.fragment_good_detail, null);
         ButterKnife.bind(this, view);
-        isCollect = ((Activity) mContext).getIntent().getBooleanExtra("isCollect", false);
-        if (isCollect) {
-            collectImg.setImageResource(R.mipmap.icon_x_yishoucang);
-            collectText.setText("已收藏");
-        } else {
-            collectImg.setImageResource(R.mipmap.icon_x_shoucang);
-            collectText.setText("收藏");
-        }
         medianCheck.setFocusable(false);
         return view;
     }

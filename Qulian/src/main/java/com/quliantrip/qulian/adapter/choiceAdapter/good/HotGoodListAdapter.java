@@ -15,6 +15,7 @@ import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.util.CommonHelp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * 单品玩法列表也的展示
  */
-public class HotGoodListAdapter extends BasicAdapter<GoodBean> {
+public class HotGoodListAdapter extends BasicAdapter<GoodBean> implements Serializable{
     public HotGoodListAdapter(ArrayList<GoodBean> list) {
         super(list);
     }

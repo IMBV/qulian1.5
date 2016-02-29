@@ -11,6 +11,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.find.SpotDetailBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
+import com.quliantrip.qulian.global.QulianApplication;
+import com.quliantrip.qulian.util.CommonHelp;
 
 import java.util.ArrayList;
 
@@ -49,10 +51,13 @@ public class HorizontalScrollViewAdapter {
             convertView = mInflater.inflate(R.layout.view_horizontalscrollview_item, parent, false);
         }
 
+        //获取数据容器，与要进行数据适配的对象
         Holder holder = Holder.getHolder(convertView);
         SpotDetailBean.DataEntity.NearPorEntity bean = mDatas.get(position%mDatas.size());
 
-        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
+        ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0]+"?imageView2/1/w/" + CommonHelp.dip2px(QulianApplication.getContext(), 165) + "/h/" +
+                CommonHelp.dip2px(QulianApplication.getContext(), 110), holder.img, ImageLoaderOptions.pager_options);
+
         holder.name.setText(bean.getName());
         return convertView;
     }

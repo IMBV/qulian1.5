@@ -15,12 +15,15 @@ import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.choiceAdapter.playMethod.PlayMethodListAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.playMethod.MorePlaysBean;
+import com.quliantrip.qulian.domain.choice.playMethod.PlayBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.PlayMethodDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
+import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.downPopupwindow.ExpandTabView;
 import com.quliantrip.qulian.view.downPopupwindow.LeftFilterView;
 import com.quliantrip.qulian.view.downPopupwindow.MiddleFilterView;
@@ -43,6 +46,7 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     private String theme;//特设主题
     private String bespeak;//预约时间
     private String crowd;//使用人群
+    private String page = "1";
 
     @Bind(R.id.expandtab_view)
     ExpandTabView expandTabView;
@@ -53,6 +57,8 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
     protected ListView listView;
+    //添加显示列表对象
+    private PlayMethodListAdapter playMethodListAdapter;
 
     @Override
     protected View getSuccessView() {
@@ -90,6 +96,27 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             if (viewLeft == null)
                 initPlayMethodConditiom(playMethodBean.getData().getScreen());
             initListView(playMethodBean.getData().getPlay());
+            if (refreshViewList != null)
+                refreshViewList.onRefreshComplete();
+        }
+
+        //下拉加载的操作
+        if (bean != null && (this.getClass().getName() + "moreData").equals(bean.getTag())) {
+            MorePlaysBean morePlaysBean = (MorePlaysBean) bean;
+            if (morePlaysBean.getCode() == 200) {
+                playMethodListAdapter.addDataListView((ArrayList<PlayBean>) morePlaysBean.getData());
+                if (refreshViewList != null)
+                    refreshViewList.onRefreshComplete();
+                //改变下一页的数据
+                page = (Integer.valueOf(page) + 1) + "";
+                if (morePlaysBean.getData().size() < 10) {
+                    refreshViewList.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                } else {
+                    refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+                }
+            } else {
+                ToastUtil.showToast(mContext, morePlaysBean.getMsg());
+            }
         }
     }
 
@@ -215,31 +242,32 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
         }
     }
 
-    //添加显示列表对象
-    private PlayMethodListAdapter playMethodListAdapter;
-
-    private void initListView(final List<PlayMethodBean.DataEntity.PlayEntity> listPlayMethod) {
+    private void initListView(final List<PlayBean> listPlayMethod) {
         if (listPlayMethod.size() == 0) {
             empty.setVisibility(View.VISIBLE);
             refreshViewList.setVisibility(View.GONE);
         } else {
             empty.setVisibility(View.GONE);
             refreshViewList.setVisibility(View.VISIBLE);
-            refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+            if (listPlayMethod.size() < 10) {
+                refreshViewList.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+            } else {
+                refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);
+            }
             listView = refreshViewList.getRefreshableView();
             listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
             if (playMethodListAdapter == null) {
-                playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod, mContext);
+                playMethodListAdapter = new PlayMethodListAdapter((ArrayList<PlayBean>) listPlayMethod, mContext);
                 listView.setAdapter(playMethodListAdapter);
             } else {
-                playMethodListAdapter.updataListView((ArrayList<PlayMethodBean.DataEntity.PlayEntity>) listPlayMethod);
+                playMethodListAdapter.updataListView((ArrayList<PlayBean>) listPlayMethod);
             }
 
             //条目点击事件
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    PlayMethodBean.DataEntity.PlayEntity bean = listPlayMethod.get(position - 1);
+                    PlayBean bean = listPlayMethod.get(position - 1);
                     Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
                     intent.putExtra("playMethodId", bean.getId());
                     mContext.startActivity(intent);
@@ -252,23 +280,21 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
                 @Override
                 public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                     if (refreshViewList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
-                        CommonHelp.runOnUIThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                refreshViewList.onRefreshComplete();
-                            }
-                        }, 500);
+                        page = "1";
+                        requestDataForAll();
                     } else {
-                        CommonHelp.runOnUIThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                refreshViewList.onRefreshComplete();
-                            }
-                        }, 500);
+                        Map<String, String> map = new HashMap<String, String>();
+                        city = CommonHelp.getStringSp(mContext, "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+                        if (city != null)
+                            map.put("city", city);
+                        if (bespeak != null)
+                            map.put("bespeak", bespeak);
+                        if (theme != null)
+                            map.put("theme", theme);
+                        if (crowd != null)
+                            map.put("crowd", crowd);
+                        map.put("page", page);
+                        new PacketStringReQuest(HttpConstants.PLAY_METHOD_LIST, new MorePlaysBean().setTag(RecommendRouteFragment.class.getName() + "moreData"), map);
                     }
                 }
             });

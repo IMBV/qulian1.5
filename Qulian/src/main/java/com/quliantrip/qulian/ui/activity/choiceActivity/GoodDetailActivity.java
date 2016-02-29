@@ -1,6 +1,7 @@
 package com.quliantrip.qulian.ui.activity.choiceActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,12 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.adapter.choiceAdapter.good.HotGoodListAdapter;
 import com.quliantrip.qulian.domain.BaseJson;
+import com.quliantrip.qulian.domain.choice.good.GoodBean;
 import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.mode.homeMode.HomeSlideImageMode;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.GoodDetailFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.PlayMethodDetailFragment;
 import com.quliantrip.qulian.util.CommonHelp;
@@ -24,6 +28,7 @@ import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.RollViewPage;
 import com.quliantrip.qulian.view.dialog.CollectDialog;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +45,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  */
 public class GoodDetailActivity extends SwipeBackActivity {
     private Context mContext;
+    private GoodDetailFragment goodDetailFragment;
 
     @Bind(R.id.fl_fargment_container)
     FrameLayout container;
@@ -52,7 +58,8 @@ public class GoodDetailActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_good_detail);
         ButterKnife.bind(this);
         mContext = this;
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fargment_container,new GoodDetailFragment()).commit();
+        goodDetailFragment = new GoodDetailFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fargment_container, goodDetailFragment).commit();
     }
 
     @OnClick(R.id.iv_good_activity_detail_back)
@@ -64,7 +71,7 @@ public class GoodDetailActivity extends SwipeBackActivity {
     public void showOrHideBack(boolean b) {
         if (b) {
             back.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             back.setVisibility(View.GONE);
         }
     }

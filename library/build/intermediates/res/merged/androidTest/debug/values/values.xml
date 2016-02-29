@@ -4,6 +4,7 @@
     <!-- From: file:/D:/workspace/qulian/Android_V1.5/library/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <dimen name="header_footer_left_right_padding">74dp</dimen>
+    <dimen name="header_footer_test_size">14dp</dimen>
     <dimen name="header_footer_top_bottom_padding">12dp</dimen>
     <dimen name="indicator_corner_radius">12dp</dimen>
     <dimen name="indicator_internal_padding">4dp</dimen>

@@ -60,7 +60,6 @@ public class GoodOrderFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
-        System.out.print(QulianApplication.getInstance().getLoginUser().getAuth_key());
         map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
         return new QuestBean(map, new GoodOrderListBean().setTag(getClass().getName()), HttpConstants.ME_ORDER_GOOD_LIST);
     }

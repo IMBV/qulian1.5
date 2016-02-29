@@ -36,7 +36,7 @@
     <!--默认城市的坐标-->
     <string name="change_city_tacit_geographic">""::""</string>
 
-    <string name="load_error">返回首页</string>
+    <string name="load_error">点击刷新</string>
 
     <string name="me_setting">点击登录</string>
 

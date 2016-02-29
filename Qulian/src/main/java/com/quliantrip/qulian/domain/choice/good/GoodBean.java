@@ -1,9 +1,11 @@
 package com.quliantrip.qulian.domain.choice.good;
 
+import java.io.Serializable;
+
 /**
  *  商品展示页
  */
-public class GoodBean {
+public class GoodBean implements Serializable{
     private String id;
     private String name;
     private String img;
@@ -11,7 +13,7 @@ public class GoodBean {
     private String chinese_name;
     private String sale;
     private String proce;
-    private boolean is_house;
+    private boolean is_house = false;
 
     public void setId(String id) {
         this.id = id;

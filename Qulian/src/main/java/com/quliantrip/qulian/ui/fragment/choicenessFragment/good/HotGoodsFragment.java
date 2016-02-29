@@ -31,6 +31,7 @@ import com.quliantrip.qulian.adapter.popAdapter.HotGoodGroupAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.GoodBean;
+import com.quliantrip.qulian.domain.choice.good.GoodDetailBean;
 import com.quliantrip.qulian.domain.choice.good.HotGoodBean;
 import com.quliantrip.qulian.domain.choice.good.MoreGoodsBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
@@ -39,6 +40,7 @@ import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
 import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
+import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.TDevice;
 import com.quliantrip.qulian.util.ToastUtil;
@@ -57,7 +59,6 @@ import butterknife.OnClick;
  */
 public class HotGoodsFragment extends BasePageCheckFragment {
     private View bestView;
-
     //请求的参数
     private String city = CommonHelp.getString(R.string.change_city_tacit_id);
     private String cate;
@@ -65,9 +66,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     private String bespeak;
     private String theme;
     private String page = "2";
-
     private QuestBean questBean;//请求的数据对象
-
     //界面上的布局显示对向
     @Bind(R.id.ll_route_sift)
     LinearLayout siftCondition;
@@ -83,12 +82,10 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     LinearLayout linearLayout;
     @Bind(R.id.overlay)
     ImageView bg;
-
     //下拉刷新
     @Bind(R.id.pull_refresh_list)
     PullToRefreshListView refreshViewList;
     protected ListView listView;
-
     private HotGoodBean.DataEntity.ProductInfoEntity productInfoEntity;
 
     @Override
@@ -150,7 +147,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                         initRadioButton(hotGoodBean.getData().getCate().get(i), i);
                     }
                 }
-
                 currentCheckedCate = map.get(classId);
                 //这里是进行平滑的移动
                 linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -162,7 +158,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                         button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
                         button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));
                         scrollView.scrollBy(linearLayout.getChildAt(currentCheckedCate).getLeft(), 0);
-
                     }
                 });
                 screenArray = hotGoodBean.getData().getScreen();
@@ -172,7 +167,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             if (refreshViewList != null)
                 refreshViewList.onRefreshComplete();
         }
-
         //下拉加载的操作
         if (bean != null && (this.getClass().getName() + "moreData").equals(bean.getTag())) {
             MoreGoodsBean moreGoodsBean = (MoreGoodsBean) bean;
@@ -251,7 +245,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     HotGoodGroupAdapter groupAdapter = null;
     HotGoodChildAdapter childAdapter = null;
     private PopupWindow siftPopupWindow;
-
     private String sreenGigId = "0";
 
     //显示筛选条件
@@ -271,11 +264,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             childAdapter.notifyDataSetChanged();
             groupAdapter.notifyDataSetChanged();
         }
-
         groupListView.setOnItemClickListener(new MyItemClick());
         //筛选二级的分类
         childListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HotGoodBean.DataEntity.ScreenEntity.ChildEntity bean = (HotGoodBean.DataEntity.ScreenEntity.ChildEntity) parent.getAdapter().getItem(position);
@@ -328,7 +319,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     };
 
     class MyItemClick implements AdapterView.OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             groupAdapter.setSelectedPosition(position);
@@ -370,14 +360,12 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         }
         listView = refreshViewList.getRefreshableView();
         listView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 给listView添加一个设置透明背景。
-
         if (hotGoodListAdapter == null) {
             hotGoodListAdapter = new HotGoodListAdapter((ArrayList<GoodBean>) listGood);
             listView.setAdapter(hotGoodListAdapter);
         } else {
             hotGoodListAdapter.updateListView((ArrayList<GoodBean>) listGood);
         }
-
         //最优的一条数据的数据适配
         if (bestView == null) {
             bestView = View.inflate(mContext, R.layout.layout_hot_good_best_to_me, null);
@@ -395,12 +383,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).setText("￥" + productInfoEntity.getSale());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_newPrice)).setText("￥" + productInfoEntity.getProce());
-
             ((TextView) bestView.findViewById(R.id.tv_good_best_location_dicount)).setText(productInfoEntity.getChinese_name() + " · " + productInfoEntity.getMeter());
-
             final View oldLine = ((View) bestView.findViewById(R.id.tv_hot_good_best_oldPrice_line));
             oldLine.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
                 @Override
                 public void onGlobalLayout() {
                     oldLine.getViewTreeObserver().removeGlobalOnLayoutListener(this);
@@ -410,7 +395,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     oldLine.setLayoutParams(params);
                 }
             });
-
             listView.addHeaderView(bestView);
         } else {
             ImageLoader.getInstance().displayImage(productInfoEntity.getImgs().split(",")[0], (ImageView) bestView.findViewById(R.id.iv_choice_hot_good_best_pic), ImageLoaderOptions.pager_options);
@@ -427,12 +411,9 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             ((TextView) bestView.findViewById(R.id.tv_choice_hot_good_best_name)).setText(productInfoEntity.getName());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_oldPrice)).setText("￥" + productInfoEntity.getSale());
             ((TextView) bestView.findViewById(R.id.tv_hot_good_best_newPrice)).setText("￥" + productInfoEntity.getProce());
-
             ((TextView) bestView.findViewById(R.id.tv_good_best_location_dicount)).setText(productInfoEntity.getChinese_name() + " · " + productInfoEntity.getMeter());
-
             final View oldLine = ((View) bestView.findViewById(R.id.tv_hot_good_best_oldPrice_line));
             oldLine.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
                 @Override
                 public void onGlobalLayout() {
                     oldLine.getViewTreeObserver().removeGlobalOnLayoutListener(this);
@@ -449,19 +430,19 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (TDevice.getNetworkType() != 0) {
                     GoodBean bean = listGood.get(position - 2);
-                    Intent intent = new Intent(mContext, GoodDetailActivity.class);
+                    Intent intent = new Intent(HotGoodsFragment.this.getActivity(), GoodDetailActivity.class);
                     intent.putExtra("goodId", bean.getId());
-                    intent.putExtra("isCollect", bean.isIs_house());
                     mContext.startActivity(intent);
+//                    HotGoodsFragment.this.startActivityForResult(intent, 2205);
                     ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                 } else {
                     ToastUtil.showToast(mContext, "请检查网络设置");
                 }
             }
         });
+
         // 进行数据时的适配和是上啦还是下拉的操作
         refreshViewList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 // 根据不同的mode进行操作,mode中有要进行操作的类型的数据
@@ -518,7 +499,6 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     oldButton.setTextColor(CommonHelp.getColor(R.color.app_main_title_text));
                     oldButton.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_normal));
                     currentCheckedCate = HotGoodsFragment.this.map.get(classId);
-
                     Button button = (Button) linearLayout.getChildAt(currentCheckedCate).findViewById(R.id.rb_hot_good_classfy_item);
                     button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
                     button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));
@@ -526,5 +506,11 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestDataForAll();
     }
 }

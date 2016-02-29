@@ -97,7 +97,6 @@ public class HttpConstants {
     //订单订单_GOOD
     public static final String ME_ORDER_GOOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/orderxq";
 
-
     //我的订单列表_PLAY_METHOD
     public static final String ME_ORDER_PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/playorder";
     //订单详情_PLAY_METHOD
