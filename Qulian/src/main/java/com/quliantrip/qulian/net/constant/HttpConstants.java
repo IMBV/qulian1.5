@@ -11,13 +11,13 @@ public class HttpConstants {
 
     public static final String HOST_ADDR_ROOT_NET = "http://www.quliantrip.com/mapi/index.php";
     /**
-     *线上数据服务器http://rest.v2.quliantrip.com/v1/
+     * 线上数据服务器http://rest.v2.quliantrip.com/v1/
      * 线下数据http://192.168.0.155:8089/v1/
      */
     public static final String HOST_ADDR_ROOT_LOCAL_V1 = "https://rest.v2.quliantrip.com/v1/";
 
     //热门商品列表
-    public static final String   HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";
+    public static final String HOT_GOOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "product/prolist";
     //切换城市
     public static final String CHANGE_CITY = HOST_ADDR_ROOT_LOCAL_V1 + "product/areas";
 
@@ -75,6 +75,13 @@ public class HttpConstants {
     public static final String EMAIL_REGISTER = HOST_ADDR_ROOT_LOCAL_V1 + "user/signup";
     //用户登录
     public static final String USER_LOGON = HOST_ADDR_ROOT_LOCAL_V1 + "user/login";
+    //手机找回密码
+    public static final String USER_BACK_PAS_PHONE = HOST_ADDR_ROOT_LOCAL_V1 + "user/tel";
+    //手机找回密码验证
+    public static final String USER_BACK_PAS_PHONE_CHECK = HOST_ADDR_ROOT_LOCAL_V1 + "user/checktel";
+    //手机从新设置密码
+    public static final String USER_BACK_PAS_PHONE_SUBMIT = HOST_ADDR_ROOT_LOCAL_V1 + "user/telpass";
+
     //查询联系人
     public static final String ALL_LINKMAN = HOST_ADDR_ROOT_LOCAL_V1 + "user/contacts";
     //修改联系人

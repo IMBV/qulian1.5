@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.finderAdapter.SpotDetailVoiceAdapter;
 import com.quliantrip.qulian.base.BasePageCheckFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.find.SpotDetailBean;
+import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -22,6 +27,7 @@ import com.quliantrip.qulian.ui.activity.choiceActivity.GoodDetailActivity;
 import com.quliantrip.qulian.ui.activity.findActivity.SpotDetailActivity;
 import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
+import com.quliantrip.qulian.view.CircleImageView;
 import com.quliantrip.qulian.view.HorizontalScroll.HorizontalScrollViewAdapter;
 import com.quliantrip.qulian.view.HorizontalScroll.MyHorizontalScrollView;
 import com.quliantrip.qulian.view.MyListView;
@@ -43,13 +49,19 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     private View view;
     private AlertDialog dialog;
     private SpotDetailVoiceAdapter spotDetailVoiceAdapter;
+    private List<SpotDetailBean.DataEntity.VoicInfoEntity> voiceList;
+    private Boolean isPlayMusic;
 
     //轮播图与下面的小点
     private RollViewPage rollViewPage;
     @Bind(R.id.top_news_viewpager)
     LinearLayout top_news_viewpager;//轮播的viewpage
+    //下面的小点
     @Bind(R.id.dots_ll)
-    LinearLayout dots_ll;//下面的小点
+    LinearLayout dots_ll;
+    //添加图片和小点的集合
+    private List<String> imageList = new ArrayList<String>();
+    private List<View> dotList = new ArrayList<View>();
 
     //附近实惠
     @Bind(R.id.id_horizontalScrollView)
@@ -57,13 +69,16 @@ public class SpotDetailFragment extends BasePageCheckFragment {
     private HorizontalScrollViewAdapter mAdapter;
 
     //音频播放
-    //添加图片和小点的集合
-    private List<String> imageList = new ArrayList<String>();
-    private List<View> dotList = new ArrayList<View>();
+    @Bind(R.id.civ_spot_voice_item_img)
+    CircleImageView voiceImg;
+    @Bind(R.id.tv_spot_voice_item_name)
+    TextView voiceName;
 
     //景点语音的列表
     @Bind(R.id.spot_introduct_voice)
     MyListView listView;
+    @Bind(R.id.iv_spot_play_detail_munic)
+    ImageView municImg;
 
     //音乐有关的数据
     private Iservice iservice;//就是我们的中间人对象的实现
@@ -81,8 +96,6 @@ public class SpotDetailFragment extends BasePageCheckFragment {
             seekBar.setMax(duration);
             seekBar.setProgress(currentPosition); //设置当前进度
         }
-
-        ;
     };
 
     @Override
@@ -132,14 +145,12 @@ public class SpotDetailFragment extends BasePageCheckFragment {
             if (spotDetailBean.getCode() == 200) {
                 final SpotDetailBean.DataEntity dataEntity = spotDetailBean.getData();
                 ((SpotDetailActivity) mContext).showOrHideBack(false);
-                //添加基本信息
                 //轮播图
                 initRollView(dataEntity.getAttraction().getImgs());
 
                 //添加附近优惠的条目
                 ArrayList<SpotDetailBean.DataEntity.NearPorEntity> listdaasdfasdf = (ArrayList<SpotDetailBean.DataEntity.NearPorEntity>) dataEntity.getNearPor();
-                SpotDetailBean.DataEntity.NearPorEntity nearPorEntity =  new SpotDetailBean.DataEntity.NearPorEntity();
-
+                SpotDetailBean.DataEntity.NearPorEntity nearPorEntity = new SpotDetailBean.DataEntity.NearPorEntity();
                 mAdapter = new HorizontalScrollViewAdapter(mContext, listdaasdfasdf);
                 //横向scrollView的条目点击事件
                 mHorizontalScrollView.setOnItemClickListener(new MyHorizontalScrollView.OnItemClickListener() {
@@ -153,17 +164,39 @@ public class SpotDetailFragment extends BasePageCheckFragment {
                         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                     }
                 });
-
                 mHorizontalScrollView.initDatas(mAdapter);
 
-                //设置该景点的有的可以播放语音内容
+                //可以播放语音的列表
+                voiceList = dataEntity.getVoicInfo();
                 if (spotDetailVoiceAdapter == null) {
-                    spotDetailVoiceAdapter = new SpotDetailVoiceAdapter((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) dataEntity.getVoicInfo());
+                    spotDetailVoiceAdapter = new SpotDetailVoiceAdapter((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) voiceList);
                     listView.setAdapter(spotDetailVoiceAdapter);
                 } else {
-                    spotDetailVoiceAdapter.updataList((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) dataEntity.getVoicInfo());
+                    spotDetailVoiceAdapter.updataList((ArrayList<SpotDetailBean.DataEntity.VoicInfoEntity>) voiceList);
                 }
 
+                //初始化播放的第一条数据
+                spotDetailVoiceAdapter.setCheckId(0);
+                SpotDetailBean.DataEntity.VoicInfoEntity voicInfoEntity = voiceList.get(0);
+                ImageLoader.getInstance().displayImage(voicInfoEntity.getImg_url().split(",")[0].trim(), voiceImg, ImageLoaderOptions.pager_options);
+                voiceName.setText(voicInfoEntity.getName());
+                if (iservice == null)
+                    iservice = ((SpotDetailActivity) mContext).getIservice();
+                iservice.callPlayMusic(voicInfoEntity.getUpurl());
+                iservice.callPauseMusic();
+                isPlayMusic = false;
+                municImg.setImageResource(R.mipmap.icon_play_bofang);
+                //添加点击事件
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        spotDetailVoiceAdapter.setCheckId(position);
+                        SpotDetailBean.DataEntity.VoicInfoEntity voicInfoEntity = voiceList.get(position);
+                        ImageLoader.getInstance().displayImage(voicInfoEntity.getImg_url().split(",")[0].trim(), voiceImg, ImageLoaderOptions.pager_options);
+                        voiceName.setText(voicInfoEntity.getName());
+                        iservice.callPlayMusic(voicInfoEntity.getUpurl());
+                    }
+                });
             } else {
                 ToastUtil.showToast(mContext, spotDetailBean.getMsg());
                 ((SpotDetailActivity) mContext).showOrHideBack(true);
@@ -244,10 +277,19 @@ public class SpotDetailFragment extends BasePageCheckFragment {
 
 
     //点击播放音乐的操作
-    @OnClick(R.id.iv_spot_play_detail_anniu)
+    @OnClick(R.id.iv_spot_play_detail_munic)
     void playDetail() {
-        if (iservice == null)
-            iservice = ((SpotDetailActivity) mContext).getIservice();
-        iservice.callPlayMusic();
+        if (!isPlayMusic) {
+            if (iservice == null)
+                iservice = ((SpotDetailActivity) mContext).getIservice();
+            iservice.callPauseMusic();
+            municImg.setImageResource(R.mipmap.icon_play_zanting);
+        }else{
+            if (iservice == null)
+                iservice = ((SpotDetailActivity) mContext).getIservice();
+            iservice.callPlayMusic();
+            municImg.setImageResource(R.mipmap.icon_play_bofang);
+        }
+        isPlayMusic = !isPlayMusic;
     }
 }

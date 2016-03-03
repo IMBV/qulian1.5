@@ -69,6 +69,9 @@ public class SearckConditionHotWordAdapter extends BasicAdapter<String> {
                 CommonHelp.saveStringSp(mContext, "hotWordString", totalString);
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("title", s);
+                if (QulianApplication.getInstance().getLoginUser() != null) {
+                    map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+                }
                 new PacketStringReQuest(HttpConstants.HOME_SECNICPLAY_CONDITION, new SecnicPlayResultBean().setTag(SecnicPlayConditionActivity.class.getName()), map);
                 ((SecnicPlayConditionActivity) mContext).setConditionText(s);
             }

@@ -82,6 +82,11 @@ public class ChoicenessFragment extends Fragment {
         }
         isShowHotGood = false;
 
+        if (isPlayMethod){
+            if(recommendRouteFragment != null)
+                recommendRouteFragment.changeCondition();
+        }
+        isPlayMethod = false;
     }
 
     private void initListener() {
@@ -213,19 +218,28 @@ public class ChoicenessFragment extends Fragment {
         }
         isShowHotGood = true;
         hotGoodClassfyId = cateId;
-        recommendRouteFragment.playMethodSift();
     }
 
-    private boolean isShowHotGood ;
+    private boolean isShowHotGood;
+    private boolean isPlayMethod;
     private String hotGoodClassfyId = null;
 
-    //切换为玩法显示列表
+    //切换为玩法显示列表没有
+    public void changeNoPlayMethodFragment() {
+        if (recommendRouteFragment == null) {
+            recommendRouteFragment = new RecommendRouteFragment();
+        }
+        isPlayMethod = true;
+        //这里也已进行分类参数的的添加后再进行数据的显示
+    }
+
+    //已经建立的时候
     public void changePlayMethodFragment() {
         if (recommendRouteFragment == null) {
             recommendRouteFragment = new RecommendRouteFragment();
         }
         viewPager.setCurrentItem(0);
-        recommendRouteFragment.playMethodSift();
+        recommendRouteFragment.changeCondition();
     }
 
     //搜索界面

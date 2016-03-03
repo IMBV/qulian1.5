@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_main_bg">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_dialog_upload_img_tuku"
+            android:layout_width="150dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_bg_white_angle"
+            android:text="图库上传"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/bt_dialog_upload_img_camera"
+            android:layout_width="150dp"
+            android:layout_height="44dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bg_white_angle"
+            android:text="拍照上传"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</RelativeLayout>

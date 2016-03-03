@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.adapter.BasicAdapter;
-import com.quliantrip.qulian.domain.Test;
 import com.quliantrip.qulian.domain.me.PlayCollectListBean;
 import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.global.QulianApplication;
@@ -44,9 +43,9 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
                 }
             }
         }
-//        for (PlayCollectListBean.DataEntity dataEntity : this.list) {
-//            dataEntity.setIsRefresh(true);
-//        }
+        for (PlayCollectListBean.DataEntity dataEntity : this.list) {
+            dataEntity.setIsRefresh(true);
+        }
         notifyDataSetChanged();
     }
 
@@ -92,12 +91,11 @@ public class PlayMethodCollectListAdapter extends BasicAdapter<PlayCollectListBe
 
         //添加数据
         //添加玩法图片资源
-//        if (bean.isRefresh()) {
+        if (bean.isRefresh()) {
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options_big);
         ImageLoader.getInstance().displayImage(bean.getHead_img(), holder.authoeImg, ImageLoaderOptions.pager_options);
-//            bean.setIsRefresh(false);
-//        }
-
+            bean.setIsRefresh(false);
+        }
         holder.dianDisCount.setText(bean.getRegion());
         holder.title.setText(bean.getTitle());
         holder.des.setText(bean.getSummary());

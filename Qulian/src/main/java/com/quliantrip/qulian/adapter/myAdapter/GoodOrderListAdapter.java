@@ -67,13 +67,19 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
         holder.taocan.setText(bean.getPackageX());//套餐
         holder.num.setText("×" + bean.getNum());//数量
         holder.orderNumber.setText(bean.getOrder_sn());//编号
+
         //设置点击事件
-        convertView.findViewById(R.id.bt_good_order_see_consume).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtil.showToast(QulianApplication.getContext(), "稍后添加查看优惠券的功能");
-            }
-        });
+        if(bean.getPay_status().equals("0")&&bean.getOrder_status().equals("0")&&bean.getIs_use().equals("0")){
+            convertView.findViewById(R.id.bt_good_order_to_pay).setVisibility(View.VISIBLE);
+            convertView.findViewById(R.id.bt_good_order_to_pay).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.showToast(QulianApplication.getContext(), "稍后开通去支付的操作");
+                }
+            });
+        }else{
+            convertView.findViewById(R.id.bt_good_order_to_pay).setVisibility(View.GONE);
+        }
 
         if (bean.getPay_status().equals("0")&&bean.getOrder_status().equals("0")&&bean.getIs_use().equals("0")
                 ||bean.getPay_status().equals("1")&&bean.getOrder_status().equals("0")&&bean.getIs_use().equals("0")
@@ -92,22 +98,7 @@ public class GoodOrderListAdapter extends BasicAdapter<GoodOrderListBean.DataEnt
             holder.stype.setText("已关闭");
             convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.GONE);
         }
-//        if (bean.getAfter_sale().equals("0")) {
-//            holder.stype.setText("正常");
-//            convertView.findViewById(R.id.bt_good_order_cancel).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Map<String, String> map = new HashMap<String, String>();
-//                    map.put("id", bean.getId());
-//                    delPosition = position;
-//                    new PacketStringReQuest(HttpConstants.MY_ORDER_GOOD_CANCEL, new HintInfoBean().setTag(GoodOrderFragment.class.getName() + "delOrder"), map);
-//                }
-//            });
-//            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.VISIBLE);
-//        }else {
-//            holder.stype.setText("已关闭");
-//            convertView.findViewById(R.id.bt_good_order_cancel).setVisibility(View.GONE);
-//        }
+
 
         //设置订单的状态
         holder.stype.setText(bean.getIsorder());

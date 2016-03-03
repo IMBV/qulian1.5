@@ -11,4 +11,6 @@ public interface Iservice {
 	
 	public void callSetSeekPosition(int position);
 
+	public void callPlayMusic(String url);
+
 }

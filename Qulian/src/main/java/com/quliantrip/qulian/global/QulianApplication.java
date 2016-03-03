@@ -14,6 +14,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.quliantrip.qulian.domain.me.LoginDataBean;
+import com.quliantrip.qulian.net.constant.CommonConstants;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.util.Properties;
 import java.util.UUID;
@@ -32,6 +35,7 @@ public class QulianApplication extends Application {
     private LoginDataBean user;
 
     private static QulianApplication instance;
+    public static IWXAPI api;
 
     @Override
     public void onCreate() {
@@ -43,6 +47,9 @@ public class QulianApplication extends Application {
         mainHandler = new Handler();
         initImageLoader(getContext());
         initLogin();
+
+        api = WXAPIFactory.createWXAPI(this, CommonConstants.WENXI_APP_ID, false);
+        api.registerApp(CommonConstants.WENXI_APP_ID);
     }
 
     public static QulianApplication getInstance() {

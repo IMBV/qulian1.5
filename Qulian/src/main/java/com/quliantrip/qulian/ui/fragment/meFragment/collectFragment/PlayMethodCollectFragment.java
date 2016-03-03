@@ -67,11 +67,11 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
     public void onEventMainThread(BaseJson bean) {
         if (bean != null && this.getClass().getName().equals(bean.getTag())) {
             PlayCollectListBean playCollectListBean = (PlayCollectListBean) bean;
-            if (playCollectListBean.getCode() == 200){
+            if (playCollectListBean.getCode() == 200) {
                 listPlayMethod = playCollectListBean.getData();
                 initRefreshListView(playCollectListBean.getData());
-            }else {
-                ToastUtil.showToast(mContext,playCollectListBean.getMsg());
+            } else {
+                ToastUtil.showToast(mContext, playCollectListBean.getMsg());
             }
         }
     }
@@ -110,7 +110,7 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
     }
 
 
-    public void removeAllDelect(ArrayList<PlayCollectListBean.DataEntity> list){
+    public void removeAllDelect(ArrayList<PlayCollectListBean.DataEntity> list) {
         playMethodCollectListAdapter.removeAll(list);
     }
 
@@ -161,6 +161,12 @@ public class PlayMethodCollectFragment extends BasePageCheckFragment {
                 public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                     if (Math.abs(getScrollY() - currentItem) > 10 && firstVisibleItem < (totalItemCount - visibleItemCount))
                         playMethodCollectListAdapter.notifyDataSetChanged();
+                    if ((getScrollY() - currentItem) < 0)
+                        if (listView.getFirstVisiblePosition() >= 1)
+                            listPlayMethod.get(listView.getFirstVisiblePosition() - 1).setIsRefresh(true);
+                    if ((getScrollY() - currentItem) > 0)
+                        if (listView.getLastVisiblePosition() < listView.getCount() - 1)
+                            listPlayMethod.get(listView.getLastVisiblePosition() - 1).setIsRefresh(true);
                     currentItem = getScrollY();
                 }
 

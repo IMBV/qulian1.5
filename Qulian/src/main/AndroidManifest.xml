@@ -134,6 +134,7 @@
             android:name=".ui.activity.SimpleBackActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/SwipeBackActivity" />
 
         <!--图片的-->
@@ -175,9 +176,21 @@
 
         <!--支付的activity-->
         <activity
-            android:name="com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sdksample" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:launchMode="singleInstance"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
 
         //这里可以适应application
         <receiver android:name=".broadcast.WeixinRegister">
@@ -191,7 +204,11 @@
 
         <!--关于友盟的数据统计-->
 
-        <meta-data android:value="56c67379e0f55a1198000a18" android:name="UMENG_APPKEY"></meta-data>
-        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="56c67379e0f55a1198000a18"></meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Wandoujia" />
     </application>
 </manifest>

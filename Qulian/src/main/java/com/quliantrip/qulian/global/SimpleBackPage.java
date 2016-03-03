@@ -2,7 +2,6 @@ package com.quliantrip.qulian.global;
 
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.ConfirmOrderFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.SubmitOrderGoodFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.PlayMethodConfirmOrderFragment;
@@ -29,7 +28,6 @@ public enum SimpleBackPage {
     MY_REGISTER(5, R.string.actionbar_me_register, RegisterFragment.class),
     MY_INTEGRAL(6, R.string.actionbar_me_integral, IntegralFragment.class),
     GOOD_ORDER(7, R.string.actionbar_good_order, SubmitOrderGoodFragment.class),
-    PAY_METHOD(8, R.string.actionbar_pay_method, PayCheckstandFragment.class),
     MY_DISCOUNT(9, R.string.actionbar_me_discount, MyDiscountFragment.class),
     MY_CHANGE_PASSWORD(11, R.string.actionbar_me_change_password, ChangePasswordFragment.class),
     MY_ADD_LINKMAN(12, R.string.actionbar_me_add_link_man, AddLinkManFragment.class),

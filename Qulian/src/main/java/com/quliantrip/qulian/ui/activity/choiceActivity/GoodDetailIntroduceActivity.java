@@ -1,16 +1,11 @@
 package com.quliantrip.qulian.ui.activity.choiceActivity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Html;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.net.constant.HttpConstants;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,7 +42,7 @@ public class GoodDetailIntroduceActivity extends SwipeBackActivity {
         }
         if (getIntent().getStringExtra("goodId") != null && getIntent().getStringExtra("field") != null
                 && getIntent().getStringExtra("type") != null) {
-            webView.loadUrl("http://wap.v2.quliantrip.com/index.php?r=index%2Furlxp&id=" + id + "&field=" + field + "&type=" + type);
+            webView.loadUrl("http://wap.v2.quliantrip.com/index/urlxp?id=" + id + "&field=" + field + "&type=" + type);
             webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
             webView.getSettings().setSupportZoom(true);
             webView.getSettings().setUseWideViewPort(true);

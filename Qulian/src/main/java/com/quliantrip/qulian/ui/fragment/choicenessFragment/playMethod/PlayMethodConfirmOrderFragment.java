@@ -16,12 +16,11 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMehtodOrderConfirmBean;
 import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.domain.me.LinkManBean;
-import com.quliantrip.qulian.domain.me.LoginDataBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
+import com.quliantrip.qulian.wxapi.WXPayEntryActivity;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
@@ -135,7 +134,7 @@ public class PlayMethodConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200){
-                Intent intent = new Intent(mContext,PayCheckstandFragment.class);
+                Intent intent = new Intent(mContext,WXPayEntryActivity.class);
                 intent.putExtra("totalPrice",totalPrice.getText().toString());
                 intent.putExtra("orderId",getArguments().getString("orderSn"));
                 mContext.startActivity(intent);

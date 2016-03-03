@@ -58,6 +58,8 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
     ImageView arrow;
     @Bind(R.id.iv_home_title_wifi)
     ImageView connectWifi;
+    @Bind(R.id.iv_home_secnic_play_search)
+    LinearLayout searckBack;//首页搜索的背景
 
     @Bind(R.id.ll_model_container)
     LinearLayout modelContainer;
@@ -179,7 +181,7 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
 
     private boolean isShang = true;
 
-    //srcollView的滑动监听事件
+    //srcollView的滑动监听事件,主要是头部内容的头
     @Override
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
         float percent = (float) y / (float) CommonHelp.dip2px(mContext, 231);
@@ -188,12 +190,15 @@ public class HomeFragment extends BasePageCheckFragment implements ScrollViewLis
             homeTitle.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
             arrow.setImageResource(R.mipmap.up_jiantou_c);
             connectWifi.setImageResource(R.mipmap.scan_code_c);
+            searckBack.setBackgroundResource(R.drawable.bg_edittext);
             isShang = !isShang;
         }
+
         if (EvaluateUtil.evaluateFloat(percent, 0.0f, 1.0f) <= 0.5f && !isShang) {
             homeTitle.setTextColor(CommonHelp.getColor(R.color.colorPrimary));
             arrow.setImageResource(R.mipmap.up_jiantou);
             connectWifi.setImageResource(R.mipmap.scan_code);
+            searckBack.setBackgroundResource(R.drawable.shape_oval_corner);
             isShang = !isShang;
         }
     }

@@ -1,6 +1,5 @@
 package com.quliantrip.qulian.mode.homeMode.FunctionModeFragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import com.quliantrip.qulian.global.ImageLoaderOptions;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,6 +54,9 @@ public class FunctionModeFragment extends Fragment {
     TextView threeName;
     @Bind(R.id.tv_home_function_play_four_name)
     TextView fourName;
+
+    public FunctionModeFragment() {
+    }
 
     public FunctionModeFragment(ArrayList<HomeShowBean.DataEntity.MenuEntity> fourList) {
         this.fourList.clear();

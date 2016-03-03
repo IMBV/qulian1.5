@@ -135,7 +135,6 @@ public class GoodCollectFragment extends BasePageCheckFragment {
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
-
                 if (currentCheckedCate != i) {
                     button.setTextColor(CommonHelp.getColor(R.color.app_main_collor));
                     button.setBackground(CommonHelp.getDrawable(R.drawable.shape_button_corner_press));
@@ -186,7 +185,7 @@ public class GoodCollectFragment extends BasePageCheckFragment {
     }
 
     //移除删除的集合
-    public void removeAllDeleteList(List<GoodCollectListBean.DataEntity.HouseEntity> list){
+    public void removeAllDeleteList(List<GoodCollectListBean.DataEntity.HouseEntity> list) {
         goodCollectListAdapter.removeAll((ArrayList<GoodCollectListBean.DataEntity.HouseEntity>) list);
     }
 
@@ -246,13 +245,15 @@ public class GoodCollectFragment extends BasePageCheckFragment {
 
                 @Override
                 public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                    if (Math.abs(getScrollY() - currentItem) > 10 && firstVisibleItem < (totalItemCount - visibleItemCount))
+                    if (Math.abs(getScrollY() - currentItem) > 5 && firstVisibleItem < (totalItemCount - visibleItemCount))
                         goodCollectListAdapter.notifyDataSetChanged();
+                    if ((getScrollY() - currentItem) < 0)
+                        if (listView.getFirstVisiblePosition() >= 1)
+                            listGood.get(listView.getFirstVisiblePosition() - 1).setIsRefresh(true);
+                    if ((getScrollY() - currentItem) > 0)
+                        if (listView.getLastVisiblePosition() < listView.getCount() - 1)
+                            listGood.get(listView.getLastVisiblePosition() - 1).setIsRefresh(true);
                     currentItem = getScrollY();
-//                    if(listView.getLastVisiblePosition() != listGood.size()) {
-//                        listGood.get(listView.getFirstVisiblePosition()).setIsRefresh(true);
-//                        listGood.get(listView.getLastVisiblePosition()).setIsRefresh(true);
-//                    }
                 }
 
                 public int getScrollY() {

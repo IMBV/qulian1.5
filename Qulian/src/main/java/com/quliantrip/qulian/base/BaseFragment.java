@@ -12,7 +12,7 @@ import com.quliantrip.qulian.view.dialog.LoadingDialog;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by yuly on 2015/11/26.
+ * 基础setrData的基本的fragment
  */
 public abstract class BaseFragment extends Fragment {
 

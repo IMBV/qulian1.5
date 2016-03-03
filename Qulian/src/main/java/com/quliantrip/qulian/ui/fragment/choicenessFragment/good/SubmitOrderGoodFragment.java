@@ -29,6 +29,7 @@ import com.quliantrip.qulian.view.MyListView;
 import com.quliantrip.qulian.view.dialog.SubBranchCheckDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,23 +44,19 @@ import butterknife.OnClick;
 public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     //提交订单的信息
     private PlayMethodOrderSubmitItemBean playMethodOrderSubmitItemBean;
-    //单品的id
-    private String goodId;
+    private String goodId;//单品的id
+    private List<OrderSubmitBean.DataEntity.AttrssEntity> attressList;//有票的日期集合
 
     @Bind(R.id.tv_good_name)
     TextView name;//商品的名称
     @Bind(R.id.mlv_good_taocan_type)
     MyListView typeListView;//套餐的类型的列表
-
     @Bind(R.id.tv_good_check_person_number)
     TextView number;//选着的数量
     @Bind(R.id.tv_order_buy_number_text)
     TextView residueNumber;
-
     @Bind(R.id.iv_good_collect_text)
     TextView totalPrice;
-
-    private List<OrderSubmitBean.DataEntity.AttrssEntity> attressList;//有票的日期集合
 
     @Override
     protected View getSuccessView() {
@@ -85,9 +82,13 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     void setPriviewTime() {
         if (attressList.size() > 0) {
             String[] dateArray = dataString.split("-");
+            Calendar now = Calendar.getInstance();
             final int oldYear = Integer.valueOf(dateArray[0]);
             final int month = Integer.valueOf(dateArray[1]) - 1;
             final int day = Integer.valueOf(dateArray[2]);
+//            final int oldYear = now.get(Calendar.YEAR);
+//            final int month = now.get(Calendar.MONTH);
+//            final int day = now.get(Calendar.DAY_OF_MONTH);
             DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
 
                 @Override

@@ -25,6 +25,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  */
 public class SpotDetailActivity extends SwipeBackActivity {
     private Context mContext;
+    private SpotDetailFragment spotDetailFragment;
 
     @Bind(R.id.fl_fargment_container)
     FrameLayout container;
@@ -41,7 +42,8 @@ public class SpotDetailActivity extends SwipeBackActivity {
         initMusic();
         ButterKnife.bind(this);
         mContext = this;
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fargment_container, new SpotDetailFragment()).commit();
+        spotDetailFragment = new SpotDetailFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fargment_container,spotDetailFragment).commit();
     }
 
     private void initMusic() {
@@ -54,9 +56,6 @@ public class SpotDetailActivity extends SwipeBackActivity {
     public Iservice getIservice() {
         return iservice;
     }
-
-    ;
-
 
     //未加载完成的显示界面
     @OnClick(R.id.iv_spot_activity_detail_back)

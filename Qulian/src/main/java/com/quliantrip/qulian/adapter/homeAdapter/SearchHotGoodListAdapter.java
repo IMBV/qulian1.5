@@ -36,7 +36,13 @@ public class SearchHotGoodListAdapter extends BasicAdapter<SecnicPlayResultBean.
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0] +"?imageView2/1/w/"+ CommonHelp.dip2px(QulianApplication.getContext(), 280)+"/h/"+
                 CommonHelp.dip2px(QulianApplication.getContext(),188), holder.img, ImageLoaderOptions.pager_options);
         holder.name.setText(bean.getName());
-        holder.isCollect.setVisibility(View.INVISIBLE);
+        //设置是否收藏
+        System.out.println(bean.getIs_house());
+        if (bean.getIs_house()) {
+            holder.isCollect.setVisibility(View.VISIBLE);
+        } else {
+            holder.isCollect.setVisibility(View.GONE);
+        }
         holder.newPrice.setText("￥"+ bean.getProce());
         holder.oldPrice.setText("￥"+bean.getSale());
         holder.locationDiscount.setText(bean.getChinese_name()+" · "+bean.getMeter());

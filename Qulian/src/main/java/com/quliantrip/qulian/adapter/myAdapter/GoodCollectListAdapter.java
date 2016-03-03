@@ -55,9 +55,9 @@ public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.Dat
                 }
             }
         }
-//        for (GoodCollectListBean.DataEntity.HouseEntity houseEntity : this.list) {
-//            houseEntity.setIsRefresh(true);
-//        }
+        for (GoodCollectListBean.DataEntity.HouseEntity houseEntity : this.list) {
+            houseEntity.setIsRefresh(true);
+        }
         notifyDataSetChanged();
     }
 
@@ -97,10 +97,10 @@ public class GoodCollectListAdapter extends BasicAdapter<GoodCollectListBean.Dat
             }
         });
         //添加单品的信息
-//        if (bean.isRefresh()) {
+        if (bean.isRefresh()) {
         ImageLoader.getInstance().displayImage(bean.getImgs().split(",")[0], holder.img, ImageLoaderOptions.pager_options);
-//        bean.setIsRefresh(false);
-//        }
+        bean.setIsRefresh(false);
+        }
         holder.isCollect.setVisibility(View.GONE);
         holder.name.setText(bean.getName());
         holder.newPrice.setText("￥" + bean.getProce());

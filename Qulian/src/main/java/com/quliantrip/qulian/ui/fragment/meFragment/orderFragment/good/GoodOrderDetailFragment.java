@@ -77,10 +77,9 @@ public class GoodOrderDetailFragment extends BasePageCheckFragment {
                 price.setText("单价：" + goodOrderDetailBean.getData().getPrice());
 
                 num.setText(goodOrderDetailBean.getData().getNum());
-                orderNumber.setText(goodOrderDetailBean.getData().getNum());//
                 taocanName.setText(goodOrderDetailBean.getData().getPackageX());
                 stype.setText(goodOrderDetailBean.getData().getIsorder());
-                totalPrice.setText(goodOrderDetailBean.getData().getTotal_price());
+                totalPrice.setText("￥"+goodOrderDetailBean.getData().getTotal_price());
             } else {
                 ToastUtil.showToast(mContext, goodOrderDetailBean.getMsg());
             }

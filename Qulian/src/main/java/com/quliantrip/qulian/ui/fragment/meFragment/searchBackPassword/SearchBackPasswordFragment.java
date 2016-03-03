@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Qulian5 on 2016/1/9.
+ * 找回密码操作的界面
  */
 public class SearchBackPasswordFragment extends Fragment {
     private Context mContext;
@@ -43,8 +43,7 @@ public class SearchBackPasswordFragment extends Fragment {
         mContext = (Context) getActivity();
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = View.inflate(mContext, R.layout.fragment_me_search_password, null);
         ButterKnife.bind(this, view);
         return view;

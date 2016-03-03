@@ -73,12 +73,9 @@ public class SecnicPlayResultBean extends BaseJson {
         }
 
         public static class WareEntity implements Serializable{
-
             private String id;
             private String name;
             private String img;
-            private String xpoint;
-            private String ypoint;
             private String city;
             private String sale;
             private String proce;
@@ -86,6 +83,15 @@ public class SecnicPlayResultBean extends BaseJson {
             private String imgs;
             private String meter;
             private String chinese_name;
+            private boolean is_house;
+
+            public boolean getIs_house() {
+                return is_house;
+            }
+
+            public void setIs_house(boolean is_house) {
+                this.is_house = is_house;
+            }
 
             public void setId(String id) {
                 this.id = id;
@@ -97,14 +103,6 @@ public class SecnicPlayResultBean extends BaseJson {
 
             public void setImg(String img) {
                 this.img = img;
-            }
-
-            public void setXpoint(String xpoint) {
-                this.xpoint = xpoint;
-            }
-
-            public void setYpoint(String ypoint) {
-                this.ypoint = ypoint;
             }
 
             public void setCity(String city) {
@@ -145,14 +143,6 @@ public class SecnicPlayResultBean extends BaseJson {
 
             public String getImg() {
                 return img;
-            }
-
-            public String getXpoint() {
-                return xpoint;
-            }
-
-            public String getYpoint() {
-                return ypoint;
             }
 
             public String getCity() {

@@ -21,7 +21,6 @@ public class MusicService extends Service {
     private Timer timer;
     private TimerTask task;
 
-    //(2)把我们定义的中间人对象在这里返回
     @Override
     public IBinder onBind(Intent intent) {
         return new MyBinder();
@@ -42,7 +41,6 @@ public class MusicService extends Service {
 
     // 播放音乐的方法
     public void playMusic() {
-        System.out.println("音乐播放了 ...");
         try {
             if (player == null)
                 player = new MediaPlayer();
@@ -56,13 +54,32 @@ public class MusicService extends Service {
                     //(4)开始播放
                     player.start();
                     updateSeekBar();
-                    System.out.println("wo bei zhi xing le");
-
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("chu cuo l ");
+        }
+    }
+
+    // 播放音乐的方法,改变路径
+    public void playMusic(String url) {
+        try {
+            if (player == null)
+                player = new MediaPlayer();
+            player.reset();
+            player.setDataSource(url);
+            player.prepareAsync();
+            player.setOnPreparedListener(new OnPreparedListener() {
+
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    //(4)开始播放
+                    player.start();
+                    updateSeekBar();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -99,33 +116,23 @@ public class MusicService extends Service {
                 System.out.println("歌曲播放完了");
                 timer.cancel(); //取消任务
                 task.cancel();
-
-
             }
         });
-
-
     }
 
     // 暂停音乐的方法
     public void pauseMusic() {
-        System.out.println("音乐暂停了 ...");
         player.pause(); //音乐暂停了
-
-
     }
 
     // 继续播放音乐的方法
     public void replayMusic() {
-        System.out.println("音乐继续播放了 ...");
         player.start();
-
     }
 
     //设置音乐播放指定位置的方法
     public void setSeekPosition(int position) {
         player.seekTo(position);
-
     }
 
     //(1)定义中间人对象
@@ -135,7 +142,6 @@ public class MusicService extends Service {
         public void callPlayMusic() {
             //调用播放音乐的方法
             playMusic();
-
         }
 
         @Override
@@ -153,10 +159,11 @@ public class MusicService extends Service {
         @Override
         public void callSetSeekPosition(int position) {
             setSeekPosition(position);
-
         }
 
+        @Override
+        public void callPlayMusic(String url) {
+            playMusic(url);
+        }
     }
-
-
 }

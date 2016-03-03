@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.home.SecnicPlayResultBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.fragment.homeFragment.SecnicPlayConditionFragment;
@@ -32,7 +33,10 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * 首页搜索的界面
  */
 public class SecnicPlayConditionActivity extends SwipeBackActivity {
+    //显示结果的fragment
+    private SecnicPlayFragment secnicPlayFragment;
     private Context mContext;
+    private SecnicPlayConditionFragment secnicPlayConditionFragment;
 
     //查询输入的文字
     @Bind(R.id.cet_home_search_text)
@@ -40,10 +44,6 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
 
     @Bind(R.id.tv_home_search_hint)
     TextView hintText;
-
-    //显示结果的fragment
-    private SecnicPlayFragment secnicPlayFragment;
-    private SecnicPlayConditionFragment secnicPlayConditionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,14 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-    //添加数值的监听
+    //添加输入搜索内容的显示的监听
     private void initTextListener() {
         //添加文职改变事件
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (TextUtils.isEmpty(searchText.getText())) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fl_secnic_container, secnicPlayConditionFragment).commit();
                     hintText.setText("取消");
                 } else {
                     hintText.setText("搜索");
@@ -94,6 +95,9 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         } else {
             Map<String, String> map = new HashMap<String, String>();
             map.put("title", condition);
+            if (QulianApplication.getInstance().getLoginUser() != null) {
+                map.put("key", QulianApplication.getInstance().getLoginUser().getAuth_key());
+            }
             new PacketStringReQuest(HttpConstants.HOME_SECNICPLAY_CONDITION, new SecnicPlayResultBean().setTag(getClass().getName()), map);
         }
     }
@@ -130,7 +134,7 @@ public class SecnicPlayConditionActivity extends SwipeBackActivity {
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
 
-    public void setConditionText(String s){
+    public void setConditionText(String s) {
         searchText.setText(s);
         searchText.setFocusable(true);
     }

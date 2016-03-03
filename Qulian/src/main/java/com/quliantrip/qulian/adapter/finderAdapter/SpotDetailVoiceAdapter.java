@@ -49,10 +49,13 @@ public class SpotDetailVoiceAdapter extends BasicAdapter<SpotDetailBean.DataEnti
         //获取数据时适配的对象和要添加的控件
         Holder holder = Holder.getHolder(convertView);
         SpotDetailBean.DataEntity.VoicInfoEntity bean = list.get(position);
+//
+//        if (ImageLoader.getInstance().getLoadingUriForView(holder.img) != null)
+//            if (!ImageLoader.getInstance().getLoadingUriForView(holder.img).equals(bean.getImg_url().split(",")[0].trim()))
+                ImageLoader.getInstance().displayImage(bean.getImg_url().split(",")[0].trim(), holder.img, ImageLoaderOptions.pager_options);
 
-        ImageLoader.getInstance().displayImage(bean.getImg_url().split(",")[0].trim(), holder.img, ImageLoaderOptions.pager_options);
+        //添加数据
         holder.name.setText(bean.getName());
-
         if (checkId == position) {
             holder.isPalyImg.setImageResource(R.mipmap.icon_paly);
         } else {

@@ -13,12 +13,10 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.good.GoodOrderConfirmBean;
 import com.quliantrip.qulian.domain.common.HintInfoBean;
 import com.quliantrip.qulian.domain.me.LinkManBean;
-import com.quliantrip.qulian.domain.me.LoginDataBean;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
-import com.quliantrip.qulian.ui.fragment.choicenessFragment.PayCheckstandFragment;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 
@@ -136,7 +134,7 @@ public class ConfirmOrderFragment extends BasePageCheckFragment {
         if (bean != null && (this.getClass().getName() + "topay").equals(bean.getTag())) {
             HintInfoBean hintInfoBean = (HintInfoBean) bean;
             if (hintInfoBean.getCode() == 200) {
-                Intent intent = new Intent(mContext, PayCheckstandFragment.class);
+                Intent intent = new Intent(mContext, com.quliantrip.qulian.wxapi.WXPayEntryActivity.class);
                 intent.putExtra("totalPrice", price.getText().toString());
                 intent.putExtra("orderId", getArguments().getString("orderSn"));
                 mContext.startActivity(intent);

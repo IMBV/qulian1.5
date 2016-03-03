@@ -12,7 +12,7 @@ import com.quliantrip.qulian.view.dialog.LoadingDialog;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by yuly on 2015/11/26.
+ *  有弹框提示和注册eventbus的基础的fragment
  */
 public abstract class BaseDialogFragment extends Fragment {
 
@@ -31,13 +31,13 @@ public abstract class BaseDialogFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    private LoadingDialog progressDialog;
-
     /**
      * 显示提示框
      *
      * @param title
      */
+    private LoadingDialog progressDialog;
+
     public void showDialog(String title) {
         cancelDialog();
         progressDialog = new LoadingDialog(mContext, title);

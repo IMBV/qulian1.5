@@ -66,7 +66,6 @@ public class LocalPlayFragment extends Fragment {
                     SecnicPlayResultBean.DataEntity.WareEntity bean = ware.get(position);
                     Intent intent = new Intent(mContext, GoodDetailActivity.class);
                     intent.putExtra("goodId", bean.getId());
-                    intent.putExtra("isCollect", false);
                     mContext.startActivity(intent);
                     ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
                 }

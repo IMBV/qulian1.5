@@ -1,30 +1,21 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.quliantrip.qulian.R;
-import com.quliantrip.qulian.base.BaseFragment;
 import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.WeiXinRePay;
 import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.dialog.LoadingDialog;
-import com.tencent.mm.sdk.constants.ConstantsAPI;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
@@ -39,19 +30,15 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 /**
  * 支付收银台
  */
-
 public class PayCheckstandFragment extends SwipeBackActivity {
     private Context mContext;
-
     //注册微信支付平台
     private static final String WENXI_APP_ID = "wxfc835c6ebff9d032";
     private IWXAPI api;
-
     private String orderId;//商品的订单编号
     private String totalPrice;//商品的价格
     private int mCurrentPayWay = 0;//当前的支付方式的 1代表着微信支付 2代表着支付宝支付
     private int oldCheckId = R.id.iv_pay_method_weixin;//支付方式以前选中的id
-
     //付款的钱的数量
     @Bind(R.id.tv_pay_money_amount)
     TextView payMoney;
@@ -89,13 +76,11 @@ public class PayCheckstandFragment extends SwipeBackActivity {
                 if (api == null) {
                     api = WXAPIFactory.createWXAPI(mContext, WENXI_APP_ID, false);
                 }
-
                 if (!api.isWXAppInstalled()) {
                     //提醒用户没有按照微信
                     ToastUtil.showToast(mContext, "你没有安装微信");
                     return;
                 }
-
                 if (!api.isWXAppSupportAPI()) {
                     ToastUtil.showToast(mContext, "请先更新微信应用");
                     return;
@@ -112,8 +97,9 @@ public class PayCheckstandFragment extends SwipeBackActivity {
                 break;
         }
     }
+
     @OnClick(R.id.iv_simple_back)
-    void back(){
+    void back() {
         finish();
         overridePendingTransition(R.anim.setup_enter_pre, R.anim.setup_exit_pre);
     }
@@ -126,7 +112,7 @@ public class PayCheckstandFragment extends SwipeBackActivity {
         }
     }
 
-    private void regToWx(){
+    private void regToWx() {
         api = WXAPIFactory.createWXAPI(mContext, WENXI_APP_ID, false);
         api.registerApp(WENXI_APP_ID);
     }
@@ -174,33 +160,11 @@ public class PayCheckstandFragment extends SwipeBackActivity {
         oldCheckId = id;
     }
 
+    //选择使用优惠券
     @OnClick(R.id.rl_pay_stand_youhuiquan)
     void getYouhuiquan() {
         ToastUtil.showToast(mContext, "暂不支持，稍后开通");
     }
-
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        setIntent(intent);
-//        api.handleIntent(intent, this);
-//    }
-//
-//    @Override
-//    public void onReq(BaseReq req) {
-//
-//    }
-
-//    @Override
-//    public void onResp(BaseResp resp) {
-//        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setTitle("支付结果");
-//            builder.setMessage("支付结果" + String.valueOf(resp.errCode));
-//            builder.show();
-//        }
-//        ToastUtil.showToast(mContext,"jieguo");
-//    }
 
     private LoadingDialog progressDialog;
 

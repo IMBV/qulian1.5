@@ -38,8 +38,9 @@ import butterknife.OnClick;
  */
 public class GoodOrderFragment extends BasePageCheckFragment {
     private View view;
+
     //请求筛选的参数
-    private String type;
+    private String type;//商品的分类
 
     //下来刷新的列表页
     @Bind(R.id.pull_refresh_list)
@@ -48,7 +49,8 @@ public class GoodOrderFragment extends BasePageCheckFragment {
     @Bind(R.id.rl_pager_empty)
     RelativeLayout empty;//为空时显示的界面
 
-    private GoodOrderListAdapter goodOrderListAdapter;
+    private GoodOrderListAdapter goodOrderListAdapter;//我的单品订单的数据适配器
+    private ArrayList<GoodOrderListBean.DataEntity> dataEntity;
 
     @Override
     protected View getSuccessView() {
@@ -72,7 +74,6 @@ public class GoodOrderFragment extends BasePageCheckFragment {
             map.put("type", type);
         new PacketStringReQuest(HttpConstants.ME_ORDER_GOOD_LIST, new GoodOrderListBean().setTag(GoodOrderFragment.this.getClass().getName()), map);
     }
-    private ArrayList<GoodOrderListBean.DataEntity> dataEntity;
 
     @Override
     public void onEventMainThread(BaseJson bean) {

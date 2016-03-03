@@ -55,10 +55,6 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.PLAY_METHOD_ORDER, bundle);
     }
 
-    public static void showPayMethod(Context context, Bundle bundle) {
-        showSimpleBack(context, SimpleBackPage.PAY_METHOD, bundle);
-    }
-
     public static void showMyCommonInfo(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.MY_COMMON_INFO, bundle);
     }

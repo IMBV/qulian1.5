@@ -388,6 +388,7 @@ public class MainActivity extends FragmentActivity {
         //0表示商品的分类， 1表示玩法，2表示有优惠券目的
         if (type.equals("1")) {
             if (!choicenessFragment.isAdded()) {
+//                choicenessFragment.changeNoPlayMethodFragment();
                 switchFragment(choicenessFragment);
             } else {
                 switchFragment(choicenessFragment);

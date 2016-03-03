@@ -1,10 +1,13 @@
 package com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -18,6 +21,7 @@ import com.quliantrip.qulian.domain.BaseJson;
 import com.quliantrip.qulian.domain.choice.playMethod.MorePlaysBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayBean;
 import com.quliantrip.qulian.domain.choice.playMethod.PlayMethodBean;
+import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.net.volleyManage.QuestBean;
@@ -303,8 +307,31 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
 
     //进行玩法详情页面的筛选条件的数据选着
     public void playMethodSift() {
-        expandTabView.setTitle("今日可用", 1);
+        expandTabView.setTitle("浪漫樱花", 0);
+        //设置listView选中的数据
         viewLeft.checkItem("浪漫樱花");
+    }
+
+    public void changeCondition() {
+//        private String theme;//特设主题
+//        private String bespeak;//预约时间
+//        private String crowd;
+
+        Map<String, String> map = new HashMap<String, String>();
+        city = CommonHelp.getStringSp(QulianApplication.getContext(), "globalCityId", CommonHelp.getString(R.string.change_city_tacit_id));
+        map.put("city", city);
+        map.put("theme", "4");
+        new PacketStringReQuest(HttpConstants.PLAY_METHOD_LIST, new PlayMethodBean().setTag(getClass().getName()), map);
+//        expandTabView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//            @Override
+//            public void onGlobalLayout() {
+//                expandTabView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                expandTabView.setTitle("浪漫樱花", 0);
+//                //设置listView选中的数据
+//                viewLeft.checkItem("浪漫樱花");
+//            }
+//        });
     }
 }
 

@@ -22,13 +22,11 @@ import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.util.UIHelper;
 import com.quliantrip.qulian.view.ClearEditText;
 import com.tencent.connect.UserInfo;
+import com.tencent.connect.common.Constants;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
-import com.tencent.connect.common.Constants;
 
 import org.json.JSONObject;
 
@@ -41,9 +39,6 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 public class LoginFragment extends BaseFragment {
-    private static final String WEIXIN_APP_ID = "WX API KEY";
-    private IWXAPI mWeixinAPI;
-
     @Bind(R.id.ct_userinfo_name)
     ClearEditText name;
     @Bind(R.id.ct_userinfo_password)
@@ -70,6 +65,7 @@ public class LoginFragment extends BaseFragment {
         initData();
         return view;
     }
+
     private void initListener() {
         name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,11 +119,11 @@ public class LoginFragment extends BaseFragment {
             ToastUtil.showToast(mContext, "请输入用户名");
             return;
         }
+
         if (TextUtils.isEmpty(inPassword)) {
             ToastUtil.showToast(mContext, "请输入密码");
             return;
         }
-
         showDialog("正在登录...");
         Map<String, String> map = new HashMap<String, String>();
         map.put("LoginForm[username]", inName);
@@ -145,7 +141,7 @@ public class LoginFragment extends BaseFragment {
 
     //找回密码
     @OnClick(R.id.tv_me_search_back_password)
-    void searchPassword(){
+    void searchPassword() {
         UIHelper.showSearchBackPassword(mContext, null);
         ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
     }
@@ -166,26 +162,26 @@ public class LoginFragment extends BaseFragment {
     @OnClick(R.id.iv_third_weixi)
     void weixinLogin() {
         showDialog_cancel("微信登录中");
-        if (mWeixinAPI == null) {
-            mWeixinAPI = WXAPIFactory.createWXAPI(mContext, WEIXIN_APP_ID, false);
-        }
-
-        if (!mWeixinAPI.isWXAppInstalled()) {
-            //提醒用户没有按照微信
+        if (!QulianApplication.api.isWXAppInstalled()) {
             ToastUtil.showToast(mContext, "你没有安装微信");
             return;
         }
 
-        if (!mWeixinAPI.isWXAppSupportAPI()) {
+        if (!QulianApplication.api.isWXAppSupportAPI()) {
             ToastUtil.showToast(mContext, "请先更新微信应用");
             return;
         }
-        mWeixinAPI.registerApp(WEIXIN_APP_ID);
 
-        SendAuth.Req req = new SendAuth.Req();
-        req.scope = "snsapi_userinfo";//"snsapi_base"
-        req.state = "req.state";
-        mWeixinAPI.sendReq(req);
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat_sdk_demo_test";
+        QulianApplication.api.sendReq(req);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cancelDialog();
     }
 
     @Override
@@ -246,7 +242,6 @@ public class LoginFragment extends BaseFragment {
                         mTencent.setOpenId(openID);
                         mTencent.setAccessToken(accessToken, expires);
                     }
-
                 } catch (Exception e) {
                 }
             }
@@ -262,6 +257,7 @@ public class LoginFragment extends BaseFragment {
 
             @Override
             public void onError(UiError arg0) {
+                ToastUtil.showToast(mContext, "登录错误");
             }
 
             /**
@@ -280,7 +276,7 @@ public class LoginFragment extends BaseFragment {
              */
             @Override
             public void onComplete(Object arg0) {
-                ToastUtil.showToast(mContext, "登录成功020");
+                ToastUtil.showToast(mContext, "登录成功");
                 if (arg0 == null) {
                     return;
                 }
@@ -299,7 +295,7 @@ public class LoginFragment extends BaseFragment {
 
             @Override
             public void onCancel() {
-
+                ToastUtil.showToast(mContext, "取消登录");
             }
         };
     }
@@ -312,5 +308,4 @@ public class LoginFragment extends BaseFragment {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
 }
