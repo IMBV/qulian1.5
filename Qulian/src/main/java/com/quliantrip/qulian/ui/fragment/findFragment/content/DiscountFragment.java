@@ -50,6 +50,7 @@ public class DiscountFragment extends BasePageCheckFragment {
     @Override
     protected QuestBean requestData() {
         Map<String, String> map = new HashMap<String, String>();
+        map.put("city","21000000");
         return new QuestBean(map, new DiscountBean().setTag(getClass().getName()), HttpConstants.DISCOUNT_LIST);
     }
 
@@ -75,8 +76,6 @@ public class DiscountFragment extends BasePageCheckFragment {
 
         discountListAdapter = new DisCountListAdapter((ArrayList<DiscountBean.DataEntity>) listDiscount);
         listView.setAdapter(discountListAdapter);
-
-
         listView.setDivider(new ColorDrawable(CommonHelp.getColor(R.color.colorPrimary)));
         listView.setDividerHeight(CommonHelp.dip2px(mContext, 10));
 

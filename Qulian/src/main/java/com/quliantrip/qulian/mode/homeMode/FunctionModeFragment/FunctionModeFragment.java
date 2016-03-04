@@ -55,9 +55,6 @@ public class FunctionModeFragment extends Fragment {
     @Bind(R.id.tv_home_function_play_four_name)
     TextView fourName;
 
-    public FunctionModeFragment() {
-    }
-
     public FunctionModeFragment(ArrayList<HomeShowBean.DataEntity.MenuEntity> fourList) {
         this.fourList.clear();
         this.fourList.addAll(fourList);

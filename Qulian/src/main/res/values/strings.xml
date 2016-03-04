@@ -26,6 +26,7 @@
     <string name="actionbar_my_about">关于我们</string>
     <string name="actionbar_my_user_procel">用户协议</string>
     <string name="actionbar_my_order_good_detail">订单详情</string>
+    <string name="actionbar_my_edit_personal_information">个人信息</string>
 
     <!--默认城市的名称-->
     <string name="change_city_tacit_name">东京</string>

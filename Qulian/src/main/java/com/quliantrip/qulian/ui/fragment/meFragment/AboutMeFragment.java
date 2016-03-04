@@ -19,7 +19,7 @@ public class AboutMeFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.fragment_my_about_me, null);
+        View view = View.inflate(mContext, R.layout.fragment_me_about_me, null);
         ButterKnife.bind(this, view);
         return view;
     }

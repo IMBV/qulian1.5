@@ -12,8 +12,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.quliantrip.qulian.R;
@@ -24,6 +27,7 @@ import com.quliantrip.qulian.global.QulianApplication;
 import com.quliantrip.qulian.net.constant.HttpConstants;
 import com.quliantrip.qulian.net.volleyManage.PacketStringReQuest;
 import com.quliantrip.qulian.ui.activity.SimpleBackActivity;
+import com.quliantrip.qulian.util.CommonHelp;
 import com.quliantrip.qulian.util.ToastUtil;
 import com.quliantrip.qulian.view.ClearEditText;
 
@@ -63,7 +67,6 @@ public class AddLinkManFragment extends Fragment {
     @Bind(R.id.cet_linkman_number)
     ClearEditText phone;
 
-
     @Bind(R.id.bt_save_link_man)
     Button button;
 
@@ -89,6 +92,7 @@ public class AddLinkManFragment extends Fragment {
             linkMan = (LinkManBean.LinkMan) bundle.getSerializable("linkMan");
             intidate(linkMan);
         }
+        ((SimpleBackActivity)mContext).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     public void onEventMainThread(BaseJson bean) {
@@ -164,6 +168,7 @@ public class AddLinkManFragment extends Fragment {
     private String addressString;
     private String phoneString;
 
+    //检验提交数据是否合理
     public void checkData() {
         nameString = name.getText().toString().trim();
         xingString = xing.getText().toString().trim();
@@ -174,12 +179,15 @@ public class AddLinkManFragment extends Fragment {
         pagerNumberString = num.getText().toString().trim();
         addressString = address.getText().toString().trim();
         phoneString = phone.getText().toString().trim();
+        if (!CommonHelp.isMobileNO(phoneString)){
+            ToastUtil.showToast(mContext,"请输入正确的手机号");
+            return;
+        }
     }
 
     //设置出生日期，birth
     @OnClick(R.id.rl_born_data)
     void checkBorn() {
-
         DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -191,56 +199,79 @@ public class AddLinkManFragment extends Fragment {
         datePicker.show();
     }
 
+    private AlertDialog dialog;
+
     //弹出选择性别的单选框
     @OnClick(R.id.ll_me_check_sex)
     void checkSex() {
-
+        //建立弹出对话框
         AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
-        //设置对话框的图标
-//        builder.setIcon(R.drawable.header);
-        //设置对话框的标题
-        builder.setTitle("请选着男女");
-        //0: 默认第一个单选按钮被选中
-        builder.setSingleChoiceItems(R.array.my_link_man_sex, 0, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                String hoddy = getResources().getStringArray(R.array.my_link_man_sex)[which];
-                sex.setText(hoddy);
+        builder.setCancelable(false);
+        View view = View.inflate(mContext, R.layout.dialog_me_set_sex, null);
+        final ImageView checkBoy = (ImageView) view.findViewById(R.id.iv_me_check_sex_boy);
+        final ImageView checkGirl = (ImageView) view.findViewById(R.id.iv_me_check_sex_girl);
+        ((LinearLayout) view.findViewById(R.id.ll_me_check_sex_boy)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sex.setText("男");
+                dialog.dismiss();
             }
         });
 
-        //添加一个确定按钮
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-
+        ((LinearLayout) view.findViewById(R.id.ll_me_check_sex_girl)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sex.setText("女");
+                dialog.dismiss();
             }
         });
-        //创建一个单选按钮对话框
-        Dialog dialog = builder.create();
+
+        if (sex.getText().equals("男")) {
+            checkBoy.setImageResource(R.mipmap.cnb_wode_pre);
+            checkGirl.setImageResource(R.mipmap.cnb_wode_nor);
+        } else {
+            checkGirl.setImageResource(R.mipmap.cnb_wode_pre);
+            checkBoy.setImageResource(R.mipmap.cnb_wode_nor);
+        }
+        dialog = builder.create();
+        dialog.setView(view, 0, 0, 0, 0);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.show();
     }
 
     //选择证件类型
     @OnClick(R.id.rl_certificate_type)
     void checkCertificateType() {
-
+        //建立弹出对话框
         AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
-        //设置对话框的图标
-//        builder.setIcon(R.drawable.header);
-        builder.setTitle("请选择证件类型");
-        //0: 默认第一个单选按钮被选中
-        builder.setSingleChoiceItems(R.array.my_link_man_certificate_type, 0, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                String hoddy = getResources().getStringArray(R.array.my_link_man_certificate_type)[which];
-                type.setText(hoddy);
+        builder.setCancelable(false);
+        View view = View.inflate(mContext, R.layout.dialog_me_set_paper_type, null);
+        ((LinearLayout) view.findViewById(R.id.ll_me_check_paper_hz)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type.setText("护照");
+                dialog.dismiss();
             }
         });
-        //添加一个确定按钮
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
 
+        ((LinearLayout) view.findViewById(R.id.ll_me_check_paper_sf)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type.setText("身份证");
+                dialog.dismiss();
             }
         });
-        Dialog dialog = builder.create();
+
+        if (type.getText().toString().trim().equals("护照")) {
+            ((ImageView) view.findViewById(R.id.iv_me_check_paper_hz)).setImageResource(R.mipmap.cnb_wode_pre);
+            ((ImageView) view.findViewById(R.id.iv_me_check_paper_sf)).setImageResource(R.mipmap.cnb_wode_nor);
+        } else {
+            ((ImageView) view.findViewById(R.id.iv_me_check_paper_sf)).setImageResource(R.mipmap.cnb_wode_pre);
+            ((ImageView) view.findViewById(R.id.iv_me_check_paper_hz)).setImageResource(R.mipmap.cnb_wode_nor);
+        }
+        dialog = builder.create();
+        dialog.setView(view, 0, 0, 0, 0);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.show();
     }
 }

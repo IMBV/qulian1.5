@@ -50,6 +50,11 @@ public class UIHelper {
         showSimpleBack(context, SimpleBackPage.GOOD_ORDER, bundle);
     }
 
+    //修改个人信息
+    public static void showEditPersonalInformation(Context context, Bundle bundle) {
+        showSimpleBack(context, SimpleBackPage.ME_EDIT_PERSON_INFORMATION, bundle);
+    }
+
     //提交玩法订单详情
     public static void showPlayMethodOrder(Context context, Bundle bundle) {
         showSimpleBack(context, SimpleBackPage.PLAY_METHOD_ORDER, bundle);

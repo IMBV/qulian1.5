@@ -19,6 +19,7 @@ import android.widget.Button;
 
 import com.quliantrip.qulian.R;
 import com.quliantrip.qulian.ui.activity.mainAcivity.MainActivity;
+import com.quliantrip.qulian.ui.fragment.EditPersonalInformationFragment;
 import com.quliantrip.qulian.ui.fragment.mainFragment.MyFragment;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class UploadHeadImgDialog extends Dialog {
                  */
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                fragment.startActivityForResult(intent, MyFragment.PHOTO_REQUEST_GALLERY);
+                fragment.startActivityForResult(intent, EditPersonalInformationFragment.PHOTO_REQUEST_GALLERY);
                 dismiss();
             }
         });
@@ -61,9 +62,9 @@ public class UploadHeadImgDialog extends Dialog {
                 if (hasSdcard()) {
                     intent.putExtra(MediaStore.EXTRA_OUTPUT,
                             Uri.fromFile(new File(Environment
-                                    .getExternalStorageDirectory(), MyFragment.PHOTO_FILE_NAME)));
+                                    .getExternalStorageDirectory(), EditPersonalInformationFragment.PHOTO_FILE_NAME)));
                 }
-                fragment.startActivityForResult(intent, MyFragment.PHOTO_REQUEST_CAMERA);
+                fragment.startActivityForResult(intent, EditPersonalInformationFragment.PHOTO_REQUEST_CAMERA);
                 dismiss();
             }
         });

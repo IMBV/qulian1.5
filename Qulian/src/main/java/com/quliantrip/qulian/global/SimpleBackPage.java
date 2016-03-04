@@ -2,6 +2,7 @@ package com.quliantrip.qulian.global;
 
 
 import com.quliantrip.qulian.R;
+import com.quliantrip.qulian.ui.fragment.EditPersonalInformationFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.ConfirmOrderFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.good.SubmitOrderGoodFragment;
 import com.quliantrip.qulian.ui.fragment.choicenessFragment.playMethod.PlayMethodConfirmOrderFragment;
@@ -37,7 +38,8 @@ public enum SimpleBackPage {
     PLAY_METHOD_ORDER(16, R.string.actionbar_good_order, SubmitOrderPlayMethodFragment.class),
     PLAY_METHOD_ORDER_CONFIRM(17, R.string.actionbar_order_confirm, PlayMethodConfirmOrderFragment.class),
     ME_USER_PROTOCEL(18, R.string.actionbar_my_user_procel, UserProtocolFragment.class),
-    ME_GOOD_ORDER_DETAIL(19, R.string.actionbar_my_order_good_detail, GoodOrderDetailFragment.class);
+    ME_GOOD_ORDER_DETAIL(19, R.string.actionbar_my_order_good_detail, GoodOrderDetailFragment.class),
+    ME_EDIT_PERSON_INFORMATION(20, R.string.actionbar_my_edit_personal_information, EditPersonalInformationFragment.class);
 
     private int title;
     private Class<?> clz;

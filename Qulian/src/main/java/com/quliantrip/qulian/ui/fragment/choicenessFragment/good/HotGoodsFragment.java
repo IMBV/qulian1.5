@@ -161,8 +161,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
                     }
                 });
                 screenArray = hotGoodBean.getData().getScreen();
-                productInfoEntity = hotGoodBean.getData().getProductInfo();
             }
+            productInfoEntity = hotGoodBean.getData().getProductInfo();
             initRefreshListView(hotGoodBean.getData().getOnline());
             if (refreshViewList != null)
                 refreshViewList.onRefreshComplete();
