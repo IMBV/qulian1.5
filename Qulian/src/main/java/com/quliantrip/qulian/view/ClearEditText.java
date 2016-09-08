@@ -52,8 +52,6 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
         // 设置输入框里面内容发生改变的监听
         addTextChangedListener(this);
     }
-
-
     /**
      * 因为我们不能直接给EditText设置点击事件，所以我们用记住我们按下的位置来模拟点击事件 当我们按下的位置 在 EditText的宽度 -
      * 图标到控件右边的间距 - 图标的宽度 和 EditText的宽度 - 图标到控件右边的间距之间我们就算点击了图标，竖直方向就没有考虑
@@ -112,7 +110,6 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count,
                                   int after) {
-
     }
 
     @Override
@@ -142,7 +139,6 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
         return super.dispatchTouchEvent(event);
     }
 

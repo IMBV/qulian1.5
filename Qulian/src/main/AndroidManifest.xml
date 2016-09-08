@@ -5,6 +5,7 @@
     //微信支付的权限
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    //提交测试
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <!--网络连接权限-->
     <uses-permission android:name="android.permission.INTERNET" />

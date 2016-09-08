@@ -1,10 +1,26 @@
 [
     {
-        "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\layout\\pull_to_refresh_header_vertical.xml"
+        "merged": "I:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "I:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\layout\\pull_to_refresh_header_vertical.xml"
     },
     {
         "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_horizontal.xml",
         "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "D:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "D:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "I:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "I:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "D:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\release\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "D:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     }
 ]

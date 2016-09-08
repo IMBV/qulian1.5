@@ -35,6 +35,7 @@ public class SpotDetailActivity extends SwipeBackActivity {
     private Iservice iservice;//就是我们的中间人对象的实现
     private MyConn conn;
 
+    //测试
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

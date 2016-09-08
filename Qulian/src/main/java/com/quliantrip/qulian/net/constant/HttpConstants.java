@@ -108,11 +108,15 @@ public class HttpConstants {
     public static final String ME_ORDER_PLAY_METHOD_LIST = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/playorder";
     //订单详情_PLAY_METHOD
     public static final String ME_ORDER_PLAY_METHOD_DETAIL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/playorderxq";
+    //取消订单_PLAY_METHOD
+    public static final String ME_ORDER_PLAY_METHOD_CANCEL = HOST_ADDR_ROOT_LOCAL_V1 + "userorder/delorderwf";
 
     //用户登录后修改密码
     public static final String MY_USER_CHANG_PASSWORD = HOST_ADDR_ROOT_LOCAL_V1 + "user/respass";
 
     //用户意见反馈
     public static final String MY_USER_FEED_BACK = HOST_ADDR_ROOT_LOCAL_V1 + "user/feedback";
+
+    //
 
 }

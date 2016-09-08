@@ -1,14 +1,38 @@
 [
     {
-        "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
-        "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_rotate.png"
-    },
-    {
         "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
         "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_flip.png"
     },
     {
+        "merged": "I:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
+        "source": "I:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_flip.png"
+    },
+    {
+        "merged": "D:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
+        "source": "D:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\drawable-mdpi\\indicator_arrow.png"
+    },
+    {
+        "merged": "D:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_rotate.png"
+    },
+    {
         "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
         "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\drawable-mdpi\\indicator_arrow.png"
+    },
+    {
+        "merged": "I:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
+        "source": "I:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "D:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
+        "source": "D:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_flip.png"
+    },
+    {
+        "merged": "I:\\workspace\\qulian\\Android_V1.5\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
+        "source": "I:\\workspace\\qulian\\Android_V1.5\\library\\src\\main\\res\\drawable-mdpi\\indicator_arrow.png"
+    },
+    {
+        "merged": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\workspace\\workspace_studio\\qulianAndroid0.1\\library\\src\\main\\res\\drawable-mdpi\\default_ptr_rotate.png"
     }
 ]

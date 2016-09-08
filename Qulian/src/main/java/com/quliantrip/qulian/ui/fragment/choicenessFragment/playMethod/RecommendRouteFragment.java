@@ -109,6 +109,17 @@ public class RecommendRouteFragment extends BasePageCheckFragment {
             MorePlaysBean morePlaysBean = (MorePlaysBean) bean;
             if (morePlaysBean.getCode() == 200) {
                 playMethodListAdapter.addDataListView((ArrayList<PlayBean>) morePlaysBean.getData());
+                //条目点击事件
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PlayBean bean = (PlayBean) parent.getAdapter().getItem(position);
+                        Intent intent = new Intent(mContext, PlayMethodDetailActivity.class);
+                        intent.putExtra("playMethodId", bean.getId());
+                        mContext.startActivity(intent);
+                        ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                    }
+                });
                 if (refreshViewList != null)
                     refreshViewList.onRefreshComplete();
                 //改变下一页的数据

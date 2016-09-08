@@ -68,7 +68,6 @@ public class PlayMethodOrderFragment extends BasePageCheckFragment {
         }
     }
 
-
     private void initRefreshListView(final List<PlayMethodOrderBean.DataEntity> list) {
         // 设置PullToRefu的mode
         refreshViewList.setMode(PullToRefreshBase.Mode.BOTH);

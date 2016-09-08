@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 我的订单详情页
+ * 我的玩法订单详情页
  */
 public class PlayMethodOrderDetailFragment extends BasePageCheckFragment {
     private View view;

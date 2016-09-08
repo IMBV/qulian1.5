@@ -80,58 +80,62 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
 
     @OnClick(R.id.rl_preview_time_data_setting)
     void setPriviewTime() {
-        if (attressList.size() > 0) {
-            String[] dateArray = dataString.split("-");
-            Calendar now = Calendar.getInstance();
-            final int oldYear = Integer.valueOf(dateArray[0]);
-            final int month = Integer.valueOf(dateArray[1]) - 1;
-            final int day = Integer.valueOf(dateArray[2]);
+        if (attressList != null) {
+            if (attressList.size() > 0) {
+                String[] dateArray = dataString.split("-");
+                Calendar now = Calendar.getInstance();
+                final int oldYear = Integer.valueOf(dateArray[0]);
+                final int month = Integer.valueOf(dateArray[1]) - 1;
+                final int day = Integer.valueOf(dateArray[2]);
 //            final int oldYear = now.get(Calendar.YEAR);
 //            final int month = now.get(Calendar.MONTH);
 //            final int day = now.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
 
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    residueNumber.setText("");
-                    //点击日期与现在时间对比
-                    String monthString = monthOfYear + "";
-                    String dayString = dayOfMonth + "";
-                    if ((monthOfYear + 1) < 10)
-                        monthString = "0" + (monthOfYear + 1);
-                    if (dayOfMonth < 10)
-                        dayString = "0" + dayOfMonth;
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        residueNumber.setText("");
+                        //点击日期与现在时间对比
+                        String monthString = monthOfYear + "";
+                        String dayString = dayOfMonth + "";
+                        if ((monthOfYear + 1) < 10)
+                            monthString = "0" + (monthOfYear + 1);
+                        if (dayOfMonth < 10)
+                            dayString = "0" + dayOfMonth;
 
-                    String checkData = year + "-" + monthString + "-" + dayString;
-                    String oldData = dataString;
-                    if (oldYear > year) {
-                        ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                        pretime.setText(oldData);
-                    } else {
-                        if (oldYear == year) {
-                            if (month > monthOfYear) {
-                                ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                                pretime.setText(oldData);
-                            } else {
-                                if (month == monthOfYear) {
-                                    if (day > dayOfMonth) {
-                                        ToastUtil.showToast(mContext, "选择时间不能是今天之前");
-                                        pretime.setText(oldData);
+                        String checkData = year + "-" + monthString + "-" + dayString;
+                        String oldData = dataString;
+                        if (oldYear > year) {
+                            ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                            pretime.setText(oldData);
+                        } else {
+                            if (oldYear == year) {
+                                if (month > monthOfYear) {
+                                    ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                    pretime.setText(oldData);
+                                } else {
+                                    if (month == monthOfYear) {
+                                        if (day > dayOfMonth) {
+                                            ToastUtil.showToast(mContext, "选择时间不能是今天之前");
+                                            pretime.setText(oldData);
+                                        } else {
+                                            setNumberInfo(checkData);
+                                        }
                                     } else {
                                         setNumberInfo(checkData);
                                     }
-                                } else {
-                                    setNumberInfo(checkData);
                                 }
+                            } else {
+                                setNumberInfo(checkData);
                             }
-                        } else {
-                            setNumberInfo(checkData);
                         }
                     }
-                }
-            }, oldYear, month, day);
-            datePicker.show();
-        } else {
+                }, oldYear, month, day);
+                datePicker.show();
+            } else {
+                ToastUtil.showToast(mContext, "所有时间都无票");
+            }
+        }else{
             ToastUtil.showToast(mContext, "所有时间都无票");
         }
     }
@@ -139,6 +143,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
     //设置票数的集合选取数量
     private void setNumberInfo(String checkData) {
         pretime.setText(checkData);
+
         if (attressList != null) {
             for (OrderSubmitBean.DataEntity.AttrssEntity attress : attressList) {
                 if (attress.getDe().equals(checkData)) {
@@ -173,6 +178,7 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
                     setNumberInfo(dataEntity.getAttrss().get(0).getDate());
                     date = dataEntity.getAttrss().get(0).getDate();//订单的日期
                     dataString = dataEntity.getAttrss().get(0).getDe();//
+                    attressList = null;
                     attressList = dataEntity.getAttrss();
                     price = dataEntity.getAttrss().get(0).getProce();//价格
                 } else {
@@ -276,7 +282,6 @@ public class SubmitOrderGoodFragment extends BasePageCheckFragment {
         playMethodOrderSubmitItemBean.setNum(newNumber + "");
         totalPrice.setText("￥" + playMethodOrderSubmitItemBean.getTotalPrice());
     }
-
 
     @Bind(R.id.tv_serve_time_text)
     TextView serveTime;

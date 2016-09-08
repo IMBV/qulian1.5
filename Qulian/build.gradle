@@ -27,7 +27,7 @@ dependencies {
     //下拉刷新
     compile project(':library')
     compile files('libs/universal-image-loader-1.9.4-with-sources.jar')
-    //添加注解类的方法
+    //添加注解类的方法 你
     /*QQ登录*/
     compile files('libs/open_sdk_r5509_lite.jar')
     /*微信登录*/

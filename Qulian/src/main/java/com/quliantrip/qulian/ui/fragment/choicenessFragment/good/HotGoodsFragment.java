@@ -172,6 +172,21 @@ public class HotGoodsFragment extends BasePageCheckFragment {
             MoreGoodsBean moreGoodsBean = (MoreGoodsBean) bean;
             if (moreGoodsBean.getCode() == 200) {
                 hotGoodListAdapter.addCollecListView((ArrayList<GoodBean>) moreGoodsBean.getData());
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        if (TDevice.getNetworkType() != 0) {
+                            GoodBean bean = (GoodBean) parent.getAdapter().getItem(position);
+                            Intent intent = new Intent(HotGoodsFragment.this.getActivity(), GoodDetailActivity.class);
+                            intent.putExtra("goodId", bean.getId());
+                            mContext.startActivity(intent);
+//                    HotGoodsFragment.this.startActivityForResult(intent, 2205);
+                            ((Activity) mContext).overridePendingTransition(R.anim.setup_enter_next, R.anim.setup_exit_next);
+                        } else {
+                            ToastUtil.showToast(mContext, "请检查网络设置");
+                        }
+                    }
+                });
                 if (refreshViewList != null)
                     refreshViewList.onRefreshComplete();
                 page = (Integer.valueOf(page) + 1) + "";
@@ -234,8 +249,8 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         } else {
             showSiftCondition();
             bg.setVisibility(View.VISIBLE);
+            isShowSift = !isShowSift;
         }
-        isShowSift = !isShowSift;
     }
 
     List<HotGoodBean.DataEntity.ScreenEntity> screenArray;
@@ -342,6 +357,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         //在onsrcll中的方法在oncreate会调用,所以判断是否为空
         if (siftPopupWindow != null) {
             siftPopupWindow.dismiss();
+            isShowSift = false;
             siftPopupWindow = null;
             bg.setVisibility(View.GONE);
         }
@@ -475,7 +491,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
     //设置背景取消
     @OnClick(R.id.overlay)
     void hideBg() {
-        bg.setVisibility(View.GONE);
+        hidePopupWindow();
     }
 
     //设置默认选中的设置
@@ -508,6 +524,7 @@ public class HotGoodsFragment extends BasePageCheckFragment {
         }
     }
 
+    //这里是为了加载是否收藏来进行设定的
     @Override
     public void onResume() {
         super.onResume();
